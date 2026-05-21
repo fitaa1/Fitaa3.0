@@ -27,7 +27,6 @@
   --color-destructive-foreground: hsl(var(--destructive-foreground));
   --color-ruby:     hsl(var(--ruby));
   --color-gold:     hsl(var(--gold));
-  --color-cyan:     hsl(var(--ruby));
   --color-charcoal: hsl(var(--charcoal));
   --font-sans:  var(--app-font-sans);
   --font-serif: var(--app-font-serif);
@@ -38,51 +37,79 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
+/* ─── Light Mode (default) ─────────────────────────────────────────────── */
 :root {
-  --background: 214 60% 7%;
-  --foreground: 27  46% 97%;
-  --border:     220 18% 16%;
-  --input:      220 18% 16%;
-  --ring:       349 79% 34%;
-  --card:             219 14% 12%;
-  --card-foreground:  27  46% 97%;
-  --popover:            219 14% 12%;
-  --popover-foreground: 27  46% 97%;
+  --background:         27 46% 97%;
+  --foreground:         214 60% 9%;
+  --border:             27 20% 87%;
+  --input:              27 20% 87%;
+  --ring:               349 79% 34%;
+  --card:               0 0% 100%;
+  --card-foreground:    214 60% 9%;
+  --popover:            0 0% 100%;
+  --popover-foreground: 214 60% 9%;
   --primary:            349 79% 34%;
-  --primary-foreground: 27  46% 97%;
-  --secondary:            46 65% 52%;
+  --primary-foreground: 27 46% 97%;
+  --secondary:          46 65% 52%;
   --secondary-foreground: 214 60% 7%;
-  --muted:            220 14% 16%;
-  --muted-foreground: 220  8% 58%;
-  --accent:            220 14% 16%;
-  --accent-foreground: 27  46% 97%;
-  --destructive:            0 84% 60%;
+  --muted:              27 30% 93%;
+  --muted-foreground:   20 12% 48%;
+  --accent:             27 30% 93%;
+  --accent-foreground:  214 60% 9%;
+  --destructive:        0 84% 60%;
   --destructive-foreground: 27 46% 97%;
   --ruby:     349 79% 34%;
-  --gold:     46  65% 52%;
-  --charcoal: 219 14% 12%;
+  --gold:     46  65% 42%;
+  --charcoal: 214 60% 9%;
   --app-font-sans:  'Satoshi', sans-serif;
   --app-font-serif: 'Playfair Display', serif;
   --app-font-mono:  Menlo, monospace;
   --radius: 0.25rem;
 }
+
+/* ─── Dark Mode ─────────────────────────────────────────────────────────── */
 .dark {
-  --background: 214 60% 7%; --foreground: 27 46% 97%;
-  --border: 220 18% 16%; --input: 220 18% 16%; --ring: 349 79% 34%;
-  --card: 219 14% 12%; --card-foreground: 27 46% 97%;
-  --primary: 349 79% 34%; --primary-foreground: 27 46% 97%;
-  --secondary: 46 65% 52%; --secondary-foreground: 214 60% 7%;
-  --muted: 220 14% 16%; --muted-foreground: 220 8% 58%;
-  --accent: 220 14% 16%; --accent-foreground: 27 46% 97%;
-  --destructive: 0 84% 60%; --destructive-foreground: 27 46% 97%;
+  --background:         214 60% 7%;
+  --foreground:         27 46% 97%;
+  --border:             220 18% 16%;
+  --input:              220 18% 16%;
+  --ring:               349 79% 34%;
+  --card:               219 14% 12%;
+  --card-foreground:    27 46% 97%;
+  --popover:            219 14% 12%;
+  --popover-foreground: 27 46% 97%;
+  --primary:            349 79% 34%;
+  --primary-foreground: 27 46% 97%;
+  --secondary:          46 65% 52%;
+  --secondary-foreground: 214 60% 7%;
+  --muted:              220 14% 16%;
+  --muted-foreground:   220  8% 58%;
+  --accent:             220 14% 16%;
+  --accent-foreground:  27 46% 97%;
+  --destructive:        0 84% 60%;
+  --destructive-foreground: 27 46% 97%;
+  --gold: 46 65% 52%;
 }
+
 html { scroll-behavior: smooth; }
+
 @layer base {
   * { @apply border-border; }
-  body { @apply font-sans antialiased bg-background text-foreground selection:bg-ruby/25 selection:text-foreground; }
+  body { @apply font-sans antialiased bg-background text-foreground selection:bg-ruby/20 selection:text-foreground; }
   h1 { @apply font-serif font-bold tracking-[-0.01em] leading-[1.1]; }
   h2 { @apply font-serif font-semibold tracking-[-0.005em] leading-[1.2]; }
   h3 { @apply font-serif font-medium leading-[1.3]; }
   h4, h5, h6 { @apply font-serif tracking-tight; }
   .divider { @apply w-12 h-px bg-gradient-to-r from-ruby/60 to-transparent mb-6; }
+}
+
+/* Subtle animated gradient for mobile hero background */
+@keyframes bg-shift {
+  0%   { background-position: 0% 50%;   }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%;   }
+}
+.mobile-hero-bg {
+  background: radial-gradient(ellipse at top left, rgba(155,18,44,0.18) 0%, transparent 55%),
+              radial-gradient(ellipse at bottom right, rgba(212,175,55,0.10) 0%, transparent 55%);
 }

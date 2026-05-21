@@ -1,0 +1,56 @@
+Here is my personal access token so you can directly make changes : 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
+
+Attached, please find my logo, my brand style guide and a screen shot how i want the app to look
+
+I’ve also provided some links of the people I’ve worked for for the case study as well as the company social links. Maybe you can go through my instagram for testimonials otherwise come up with attractive copy for places we can’t populate for me in Accra.Please let me know if you need anymore information. Ill also add a brief on the services I currently offer and they are four for now
+
+Case studies
+Tinkertresses (Social media collateral: Posts and videos )- https://www.instagram.com/tinkertresses?igsh=MTR2cmZ6eXUxYnlxMQ==
+Mummy Day Care Centre (Social media collateral: Posts and videos ) https://www.instagram.com/mummy.day.care.centre?igsh=a2EzbWo3MDA5b2s4
+Hydra Offshore (Oil and gas magazine)
+Women of Sol (NFT mint site) https://www.instagram.com/womenofsolnft?igsh=MTdvN3VpYm54dWZiMw==
+
+Social links
+Behance https://www.behance.net/crea8
+Instagram https://www.instagram.com/fitaacreative?igsh=cXZrYmU0eDQ0NTFm
+
+Services 
+
+1.  LED Billboard Campaigns Turn high-traffic views into real customers with dynamic LED advertising.
+2.  Graphic & Digital Design Professional visuals and creatives that grab attention and work across billboards and online.
+3.  Campaign Landing Pages Fast, high-converting websites built specifically to turn billboard viewers into buyers.
+4.  Digital Marketing & Web Presence Complete online setup (websites, SEO basics, Google Business, social) that supports your advertising.
+
+Please also
+
+1. Replace the gradient placeholders in Featured Work with real case study photos
+2. Optionally connect the contact form to a real email endpoint
+3. Animated particle background doesn’t look good on mobile, replace with something else
+4. Lightweight and performant. No bloat
+5. Make it as readable as possible for Ai SEO
+6. Change aesthetics to match brand style guide
+7. Light and dark modes if its possible while keeping the site lightweight and performant
+8. Working contact form
+9. Logo placed
+
+
+And please improve these areas
+
+1.  README.md — currently very minimal. Expand it with:
+	•  Tech stack table
+	•  Local setup instructions (npm install && npm run dev)
+	•  How to customize (colors, content, sections)
+	•  Deployment guide (Vercel + self-hosting)
+	•  License (MIT recommended for templates)
+2.  Performance & SEO:
+	•  Add meta tags, Open Graph, Twitter cards in index.html
+	•  Consider React Helmet Async or Vite plugin for better SEO if needed
+	•  Optimize images (use WebP + lazy loading)
+3.  Accessibility & Polish:
+	•  Ensure good contrast and focus states
+	•  Add aria-labels where needed
+	•  Test with Lighthouse
+4.  Template Readiness:
+	•  Make content (texts, colors, logos) easily configurable via the config/site.ts
+	•  Add clear comments or a CUSTOMIZE.md file
+	•  Consider environment variables for analytics (Google, Meta, etc.)

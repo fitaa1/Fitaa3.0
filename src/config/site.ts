@@ -1,8 +1,12 @@
-import { Activity, BarChart, Globe, Megaphone, Target, Zap } from "lucide-react";
+import { Monitor, Palette, Globe, BarChart2 } from "lucide-react";
+
 export const siteConfig = {
   name: "Fitaa Digital",
-  tagline: "Turn ambition into market dominance.",
-  description: "Elite strategy meets cutting-edge execution. We don't just run campaigns — we transform brands into category leaders.",
+  tagline: "Pure. Strategic. Impactful.",
+  description:
+    "We turn billboard views and digital impressions into real customers. LED campaigns, striking visuals, and high-converting web experiences — built for brands in Accra and beyond.",
+  url: "https://fitaa.digital",
+
   nav: [
     { label: "Home",     href: "#home"     },
     { label: "Services", href: "#services" },
@@ -10,33 +14,106 @@ export const siteConfig = {
     { label: "Why Us",   href: "#why-us"   },
     { label: "Contact",  href: "#contact"  },
   ],
+
   services: [
-    { title: "Brand Strategy",        description: "Position your brand to command premium pricing and unshakeable loyalty.",     icon: Target    },
-    { title: "Performance Marketing", description: "Data-driven acquisition engines that scale revenue predictably.",              icon: Zap       },
-    { title: "Digital Experience",    description: "Immersive web and mobile properties that convert visitors into buyers.",       icon: Globe     },
-    { title: "Content & Creative",    description: "High-end visual and written assets that capture attention instantly.",         icon: Megaphone },
-    { title: "SEO & Growth",          description: "Dominate search results and capture high-intent organic demand.",             icon: Activity  },
-    { title: "Analytics & Insights",  description: "Deep attribution models to understand exactly what drives growth.",           icon: BarChart  },
+    {
+      title: "LED Billboard Campaigns",
+      description:
+        "Turn high-traffic views into real customers with dynamic, eye-catching LED advertising that commands attention day and night.",
+      icon: Monitor,
+    },
+    {
+      title: "Graphic & Digital Design",
+      description:
+        "Professional visuals and creatives that grab attention instantly — crafted to work across billboards, social media, and every digital surface.",
+      icon: Palette,
+    },
+    {
+      title: "Campaign Landing Pages",
+      description:
+        "Fast, high-converting websites built specifically to turn billboard viewers and ad clicks into paying customers.",
+      icon: Globe,
+    },
+    {
+      title: "Digital Marketing & Web Presence",
+      description:
+        "Complete online setup — websites, SEO basics, Google Business, and social presence — that amplifies every advertising effort.",
+      icon: BarChart2,
+    },
   ],
+
   stats: [
-    { value: 127, suffix: "+",  label: "Brands Transformed"  },
-    { prefix: "$", value: 2.4, suffix: "B", label: "Revenue Generated" },
-    { value: 94,  suffix: "%", label: "Client Retention"     },
-    { value: 12,  suffix: "",  label: "Industry Awards"      },
+    { value: 50,  suffix: "+",  label: "Brands Elevated"       },
+    { value: 4,   suffix: "",   label: "Core Specialisations"  },
+    { value: 100, suffix: "%",  label: "Client Dedication"     },
+    { value: 3,   suffix: "+",  label: "Years of Excellence"   },
   ],
+
   caseStudies: [
-    { client: "Aura Fintech", industry: "Financial Services", result: "+450% User Acquisition", bg: "from-[#9B122C]/25 via-[#9B122C]/10 to-transparent" },
-    { client: "Vellure",      industry: "Luxury Retail",      result: "$12M Q4 Revenue",        bg: "from-[#D4AF37]/20 via-[#D4AF37]/8  to-transparent" },
-    { client: "Nexus Health", industry: "HealthTech",         result: "Category Leadership",     bg: "from-[#9B122C]/20 via-[#D4AF37]/8  to-transparent" },
+    {
+      client: "Tinkertresses",
+      industry: "Beauty & Hair",
+      result: "Social Media Growth",
+      description: "Social media collateral — scroll-stopping posts and videos that built a loyal community.",
+      link: "https://www.instagram.com/tinkertresses",
+      bg: "from-[#9B122C]/30 via-[#9B122C]/10 to-transparent",
+      imagePath: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=700&q=80&auto=format&fit=crop",
+    },
+    {
+      client: "Mummy Day Care Centre",
+      industry: "Early Childhood",
+      result: "Community Engagement",
+      description: "Warm, trustworthy social media content that brought families through the door.",
+      link: "https://www.instagram.com/mummy.day.care.centre",
+      bg: "from-[#D4AF37]/25 via-[#D4AF37]/8 to-transparent",
+      imagePath: "https://images.unsplash.com/photo-1587654780291-39c9404d746b?w=700&q=80&auto=format&fit=crop",
+    },
+    {
+      client: "Hydra Offshore",
+      industry: "Oil & Gas",
+      result: "Industry Publication",
+      description: "A polished oil and gas magazine that positioned Hydra as an authority in the sector.",
+      link: "#work",
+      bg: "from-[#9B122C]/20 via-[#D4AF37]/8 to-transparent",
+      imagePath: "https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=700&q=80&auto=format&fit=crop",
+    },
+    {
+      client: "Women of Sol",
+      industry: "Web3 / NFT",
+      result: "Mint Site Launch",
+      description: "A high-impact NFT mint site that brought an empowering digital art collection to life.",
+      link: "https://www.instagram.com/womenofsolnft",
+      bg: "from-[#D4AF37]/20 via-[#9B122C]/10 to-transparent",
+      imagePath: "https://images.unsplash.com/photo-1639762681057-408e52192e55?w=700&q=80&auto=format&fit=crop",
+    },
   ],
+
   testimonials: [
-    { quote: "Fitaa Digital doesn't just execute; they completely re-engineered our market positioning. The results were immediate and staggering.", author: "Elena Rostova", title: "CMO",           company: "Aura Fintech" },
-    { quote: "Working with them feels like having an unfair advantage. They operate at a level of precision I've rarely seen in this industry.",       author: "Marcus Vance",  title: "Founder & CEO", company: "Vellure"      },
+    {
+      quote:
+        "Fitaa Digital gave our brand the identity it deserved. The content they created for us was fresh, professional, and our audience loved it from day one.",
+      author: "Abena Mensah",
+      title: "Founder",
+      company: "Tinkertresses",
+    },
+    {
+      quote:
+        "Working with Fitaa has been seamless. They understood exactly what we needed for our centre and delivered designs that felt warm and trustworthy.",
+      author: "Akosua Darko",
+      title: "Director",
+      company: "Mummy Day Care Centre",
+    },
   ],
+
   contact: {
     email:   "hello@fitaa.digital",
-    address: "100 Elite Way, Suite 400\nSan Francisco, CA 94105",
-    phone:   "+1 (800) 555-0199",
+    address: "Accra, Ghana",
+    phone:   "+233 (0) 000 000 000",
+    formspreeId: "",
   },
-  social: { linkedin: "https://linkedin.com", twitter: "https://twitter.com", instagram: "https://instagram.com" },
+
+  social: {
+    behance:   "https://www.behance.net/crea8",
+    instagram: "https://www.instagram.com/fitaacreative",
+  },
 };
