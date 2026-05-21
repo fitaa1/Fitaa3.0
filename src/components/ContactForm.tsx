@@ -166,10 +166,10 @@ export function ContactForm() {
         <button
           type="submit"
           disabled={state === "submitting"}
-          className="w-full bg-ruby text-white py-4 font-sans font-medium hover:bg-ruby/85 transition-colors uppercase tracking-widest text-sm disabled:opacity-60 disabled:cursor-not-allowed"
+          className="btn-gold w-full py-4 font-sans uppercase tracking-widest text-sm disabled:opacity-50 disabled:cursor-not-allowed"
           aria-label="Submit your project enquiry"
         >
-          {state === "submitting" ? "Sending…" : "Send Enquiry"}
+          {state === "submitting" ? "Sending…" : "Send Enquiry →"}
         </button>
       </form>
     </Form>

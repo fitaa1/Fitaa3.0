@@ -1,0 +1,8 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "s2m5c7wpnx4ElSBOhsNg-"
+uri = "file://public/og-image.png"
+type = "image"
+title = "Fitaa Digital — Social Share / OG Image (1200×630)"

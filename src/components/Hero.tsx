@@ -74,10 +74,10 @@ export function Hero() {
           >
             <a
               href="#contact"
-              className="btn-primary group relative inline-flex items-center justify-center px-10 py-4 bg-ruby text-white font-sans font-medium text-[0.72rem] tracking-[0.22em] uppercase overflow-hidden w-full sm:w-auto"
+              className="btn-gold group inline-flex items-center justify-center px-10 py-4 font-sans text-[0.72rem] tracking-[0.22em] uppercase w-full sm:w-auto"
               aria-label="Start your project with Fitaa Digital"
             >
-              <span className="relative z-10 flex items-center gap-2.5">
+              <span className="flex items-center gap-2.5">
                 Start Your Project
                 <ArrowRight
                   size={14}
@@ -85,16 +85,11 @@ export function Hero() {
                   aria-hidden="true"
                 />
               </span>
-              {/* Sweep hover fill */}
-              <span
-                className="absolute inset-0 w-0 bg-white/10 transition-all duration-500 ease-out group-hover:w-full z-0"
-                aria-hidden="true"
-              />
             </a>
 
             <a
               href="#work"
-              className="btn-outline inline-flex items-center justify-center px-10 py-4 border border-gold/45 text-gold hover:bg-gold/6 hover:border-gold/75 font-sans font-light text-[0.72rem] tracking-[0.22em] uppercase w-full sm:w-auto"
+              className="btn-outline inline-flex items-center justify-center px-10 py-4 border border-gold/40 text-gold hover:bg-gold/8 hover:border-gold/70 font-sans font-light text-[0.72rem] tracking-[0.22em] uppercase w-full sm:w-auto"
               aria-label="View Fitaa Digital's case studies"
             >
               View Our Work

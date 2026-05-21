@@ -104,7 +104,7 @@ export function Navbar() {
             {/* CTA — desktop only */}
             <a
               href="#contact"
-              className="btn-primary hidden md:inline-flex items-center px-6 py-2.5 bg-ruby text-white font-sans text-[0.68rem] font-medium uppercase tracking-[0.2em] hover:bg-ruby/88 ml-2"
+              className="btn-gold hidden md:inline-flex items-center px-6 py-2.5 font-sans text-[0.68rem] uppercase tracking-[0.2em] ml-2"
               aria-label="Contact Fitaa Digital"
             >
               Get in Touch
