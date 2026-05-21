@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Mail, MapPin } from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import { ContactForm } from "./ContactForm";
 import { fadeInLeft, fadeInUp, sectionViewport } from "@/lib/animations";
@@ -68,6 +68,24 @@ export function FinalCTA() {
                   </a>
                 </div>
               </div>
+
+              {siteConfig.contact.phone && (
+                <div className="flex items-start gap-4">
+                  <Phone size={15} className="text-gold mt-1 shrink-0" strokeWidth={1.5} aria-hidden="true" />
+                  <div>
+                    <p className="text-[0.65rem] font-sans uppercase tracking-[0.22em] text-muted-foreground mb-1">
+                      Phone
+                    </p>
+                    <a
+                      href={`tel:${siteConfig.contact.phone.replace(/\s/g, "")}`}
+                      className="text-foreground font-serif text-[1.125rem] hover:text-ruby transition-colors duration-300"
+                      aria-label={`Call us at ${siteConfig.contact.phone}`}
+                    >
+                      {siteConfig.contact.phone}
+                    </a>
+                  </div>
+                </div>
+              )}
 
               <div className="flex items-start gap-4">
                 <MapPin size={15} className="text-gold mt-1 shrink-0" strokeWidth={1.5} aria-hidden="true" />

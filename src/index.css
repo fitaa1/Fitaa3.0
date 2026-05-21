@@ -80,25 +80,35 @@
   --radius: 0.5rem;
 }
 
-/* ─── Dark Mode — Deep Warm Black ───────────────────────────────────────── */
+/*
+ * ─── Dark Mode — Deep Warm Black ─────────────────────────────────────────
+ * To manually adjust the background:
+ *   --background: 350 28% [LIGHTNESS]%;
+ *   Lightness guide: 4% = near-black | 6% = current | 10% = dark | 14% = mid-dark
+ *   Keep it between 4-12% for the premium dark look.
+ * To adjust body/paragraph text brightness:
+ *   --muted-foreground: 27 14% [LIGHTNESS]%;
+ *   Lightness guide: 50% = dim | 65% = current | 75% = bright
+ * ─────────────────────────────────────────────────────────────────────────
+ */
 .dark {
-  --background:         350 28% 4%;
-  --foreground:         27 46% 97%;
-  --border:             350 18% 13%;
-  --input:              350 18% 13%;
+  --background:         350 28% 6%;
+  --foreground:         27 46% 98%;
+  --border:             350 18% 15%;
+  --input:              350 18% 15%;
   --ring:               349 79% 34%;
-  --card:               350 22% 7%;
-  --card-foreground:    27 46% 97%;
-  --popover:            350 22% 7%;
-  --popover-foreground: 27 46% 97%;
+  --card:               350 22% 9%;
+  --card-foreground:    27 46% 98%;
+  --popover:            350 22% 9%;
+  --popover-foreground: 27 46% 98%;
   --primary:            349 79% 34%;
   --primary-foreground: 27 46% 97%;
   --secondary:          46 65% 52%;
-  --secondary-foreground: 350 28% 4%;
-  --muted:              350 18% 11%;
-  --muted-foreground:   27 10% 50%;
-  --accent:             350 18% 11%;
-  --accent-foreground:  27 46% 97%;
+  --secondary-foreground: 350 28% 6%;
+  --muted:              350 18% 13%;
+  --muted-foreground:   27 14% 65%;
+  --accent:             350 18% 13%;
+  --accent-foreground:  27 46% 98%;
   --destructive:        0 84% 60%;
   --destructive-foreground: 27 46% 97%;
   --gold: 46 68% 54%;

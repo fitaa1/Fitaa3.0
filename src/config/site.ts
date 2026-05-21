@@ -76,7 +76,7 @@ export const siteConfig = {
        * Add screenshot from @mummy.day.care.centre to /public/work/mummy-daycare.jpg
        * then change imagePath to: "/work/mummy-daycare.jpg"
        */
-      imagePath: "https://images.unsplash.com/photo-1503454537195-1dabb4ba1952?w=720&q=85&auto=format&fit=crop",
+      imagePath: "https://images.unsplash.com/photo-1587654780291-39c9404d746b?w=720&q=85&auto=format&fit=crop&crop=faces,center",
     },
     {
       client: "Hydra Offshore",
@@ -124,9 +124,9 @@ export const siteConfig = {
   ],
 
   contact: {
-    email:       "hello@fitaa.digital",
+    email:       "fitaaba@gmail.com",
     address:     "Accra, Ghana",
-    phone:       "",
+    phone:       "+233 24 280 5256",
     formspreeId: "xdajglpn",
   },
 
