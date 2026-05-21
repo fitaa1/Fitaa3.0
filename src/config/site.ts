@@ -43,10 +43,10 @@ export const siteConfig = {
   ],
 
   stats: [
-    { value: 50,  suffix: "+",  label: "Brands Elevated"       },
-    { value: 4,   suffix: "",   label: "Core Specialisations"  },
-    { value: 100, suffix: "%",  label: "Client Dedication"     },
-    { value: 3,   suffix: "+",  label: "Years of Excellence"   },
+    { value: 50,  suffix: "+", label: "Brands Elevated"      },
+    { value: 4,   suffix: "",  label: "Core Specialisations" },
+    { value: 100, suffix: "%", label: "Client Dedication"    },
+    { value: 3,   suffix: "+", label: "Years of Excellence"  },
   ],
 
   caseStudies: [
@@ -54,19 +54,29 @@ export const siteConfig = {
       client: "Tinkertresses",
       industry: "Beauty & Hair",
       result: "Social Media Growth",
-      description: "Social media collateral — scroll-stopping posts and videos that built a loyal community.",
+      description: "Scroll-stopping posts and videos that built a loyal, engaged community from scratch.",
       link: "https://www.instagram.com/tinkertresses",
-      bg: "from-[#9B122C]/30 via-[#9B122C]/10 to-transparent",
-      imagePath: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=700&q=80&auto=format&fit=crop",
+      bg: "from-[#9B122C]/40 via-[#9B122C]/15 to-transparent",
+      /*
+       * REAL CLIENT PHOTO:
+       * Add a screenshot from @tinkertresses Instagram to /public/work/tinkertresses.jpg
+       * then change imagePath to: "/work/tinkertresses.jpg"
+       */
+      imagePath: "https://images.unsplash.com/photo-1519699047748-de8e457a634e?w=720&q=85&auto=format&fit=crop",
     },
     {
       client: "Mummy Day Care Centre",
-      industry: "Early Childhood",
+      industry: "Early Childhood Education",
       result: "Community Engagement",
-      description: "Warm, trustworthy social media content that brought families through the door.",
+      description: "Warm, trustworthy social content that brought families through the door.",
       link: "https://www.instagram.com/mummy.day.care.centre",
-      bg: "from-[#D4AF37]/25 via-[#D4AF37]/8 to-transparent",
-      imagePath: "https://images.unsplash.com/photo-1587654780291-39c9404d746b?w=700&q=80&auto=format&fit=crop",
+      bg: "from-[#D4AF37]/30 via-[#D4AF37]/10 to-transparent",
+      /*
+       * REAL CLIENT PHOTO:
+       * Add screenshot from @mummy.day.care.centre to /public/work/mummy-daycare.jpg
+       * then change imagePath to: "/work/mummy-daycare.jpg"
+       */
+      imagePath: "https://images.unsplash.com/photo-1503454537195-1dabb4ba1952?w=720&q=85&auto=format&fit=crop",
     },
     {
       client: "Hydra Offshore",
@@ -74,31 +84,39 @@ export const siteConfig = {
       result: "Industry Publication",
       description: "A polished oil and gas magazine that positioned Hydra as an authority in the sector.",
       link: "#work",
-      bg: "from-[#9B122C]/20 via-[#D4AF37]/8 to-transparent",
-      imagePath: "https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=700&q=80&auto=format&fit=crop",
+      bg: "from-[#9B122C]/30 via-[#D4AF37]/10 to-transparent",
+      /*
+       * REAL CLIENT PHOTO: Add Hydra Offshore asset to /public/work/hydra-offshore.jpg
+       */
+      imagePath: "https://images.unsplash.com/photo-1542744173-05336fcc7ad4?w=720&q=85&auto=format&fit=crop",
     },
     {
       client: "Women of Sol",
       industry: "Web3 / NFT",
-      result: "Mint Site Launch",
-      description: "A high-impact NFT mint site that brought an empowering digital art collection to life.",
+      result: "NFT Mint Site Launch",
+      description: "A high-impact mint site that brought an empowering digital art collection to life.",
       link: "https://www.instagram.com/womenofsolnft",
-      bg: "from-[#D4AF37]/20 via-[#9B122C]/10 to-transparent",
-      imagePath: "https://images.unsplash.com/photo-1639762681057-408e52192e55?w=700&q=80&auto=format&fit=crop",
+      bg: "from-[#D4AF37]/25 via-[#9B122C]/12 to-transparent",
+      /*
+       * REAL CLIENT PHOTO:
+       * Add screenshot from @womenofsolnft to /public/work/women-of-sol.jpg
+       * then change imagePath to: "/work/women-of-sol.jpg"
+       */
+      imagePath: "https://images.unsplash.com/photo-1535303311164-664fc9ec6532?w=720&q=85&auto=format&fit=crop",
     },
   ],
 
   testimonials: [
     {
       quote:
-        "Fitaa Digital gave our brand the identity it deserved. The content they created for us was fresh, professional, and our audience loved it from day one.",
+        "Fitaa Digital gave our brand the identity it deserved. The content they created was fresh, professional, and our audience loved it from day one.",
       author: "Abena Mensah",
       title: "Founder",
       company: "Tinkertresses",
     },
     {
       quote:
-        "Working with Fitaa has been seamless. They understood exactly what we needed for our centre and delivered designs that felt warm and trustworthy.",
+        "Working with Fitaa has been seamless. They understood exactly what we needed and delivered designs that felt warm and completely trustworthy.",
       author: "Akosua Darko",
       title: "Director",
       company: "Mummy Day Care Centre",
@@ -106,10 +124,10 @@ export const siteConfig = {
   ],
 
   contact: {
-    email:   "hello@fitaa.digital",
-    address: "Accra, Ghana",
-    phone:   "+233 (0) 000 000 000",
-    formspreeId: "",
+    email:       "hello@fitaa.digital",
+    address:     "Accra, Ghana",
+    phone:       "",
+    formspreeId: "xdajglpn",
   },
 
   social: {

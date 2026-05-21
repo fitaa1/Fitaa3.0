@@ -6,75 +6,110 @@ import { staggerContainer, fadeInUp, cardViewport, sectionViewport } from "@/lib
 
 export function FeaturedWork() {
   return (
-    <section id="work" className="py-36 bg-background" aria-labelledby="work-heading">
+    <section id="work" className="py-[var(--sp-7)] bg-background" aria-labelledby="work-heading">
       <div className="container mx-auto px-6 md:px-12">
+
+        {/* Header row */}
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={sectionViewport}
           variants={fadeInUp}
-          className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-6"
+          className="flex flex-col md:flex-row md:items-end justify-between mb-[var(--sp-6)] gap-5"
         >
-          <SectionLabel
-            eyebrow="Selected Work"
-            heading="Real Clients. Real Results."
-            headingClass=""
-          />
+          <SectionLabel eyebrow="Selected Work" heading="Real Clients. Real Results." />
           <a
             href="#contact"
-            className="text-xs font-sans uppercase tracking-[0.15em] text-muted-foreground hover:text-ruby transition-colors duration-300 flex items-center gap-2 group shrink-0"
+            className="text-[0.7rem] font-sans uppercase tracking-[0.18em] text-muted-foreground hover:text-ruby transition-colors duration-300 flex items-center gap-2 group shrink-0 pb-0.5 nav-link"
             aria-label="Start a project with Fitaa Digital"
           >
             Start a Project
-            <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" aria-hidden="true" />
+            <ArrowUpRight
+              size={13}
+              className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-250"
+              aria-hidden="true"
+            />
           </a>
         </motion.div>
 
+        {/* Grid — 2 columns with equal proportions */}
         <motion.div
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
           viewport={cardViewport}
-          className="grid grid-cols-1 md:grid-cols-2 gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8"
         >
-          {siteConfig.caseStudies.map((study) => (
-            <motion.article key={study.client} variants={fadeInUp} className="group cursor-pointer">
-              <a href={study.link} target="_blank" rel="noopener noreferrer" aria-label={`View ${study.client} case study`}>
-                {/* Image */}
-                <div className="relative aspect-[16/10] overflow-hidden bg-card mb-5">
+          {siteConfig.caseStudies.map((study, idx) => (
+            <motion.article
+              key={study.client}
+              variants={fadeInUp}
+              className="group"
+            >
+              <a
+                href={study.link}
+                target={study.link.startsWith("http") ? "_blank" : undefined}
+                rel={study.link.startsWith("http") ? "noopener noreferrer" : undefined}
+                aria-label={`${study.client} — ${study.industry} case study`}
+                className="block"
+              >
+                {/* Image container — φ aspect ratio (golden ratio = 1.618:1) */}
+                <div
+                  className="relative overflow-hidden bg-card mb-5"
+                  style={{ aspectRatio: idx % 2 === 0 ? "1.618 / 1" : "1.272 / 1" }}
+                >
                   <img
                     src={study.imagePath}
-                    alt={`${study.client} — ${study.industry} project by Fitaa Digital`}
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                    alt={`${study.client} project — ${study.industry}`}
+                    className="img-ruby-tint absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
                     loading="lazy"
                     decoding="async"
-                    width={700}
-                    height={437}
+                    width={720}
+                    height={445}
                   />
-                  {/* Overlay */}
-                  <div className={`absolute inset-0 bg-gradient-to-br ${study.bg} mix-blend-multiply`} aria-hidden="true" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/10 to-transparent opacity-60 group-hover:opacity-30 transition-opacity duration-500" aria-hidden="true" />
 
-                  {/* Result badge — appears on hover */}
-                  <div className="absolute bottom-0 left-0 right-0 p-5 translate-y-3 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-out">
-                    <span className="inline-flex items-center gap-2 px-4 py-2 bg-background/75 text-ruby text-xs font-sans uppercase tracking-wider backdrop-blur-sm border border-ruby/25">
+                  {/* Brand tint overlay */}
+                  <div
+                    className={`absolute inset-0 bg-gradient-to-br ${study.bg} opacity-60 mix-blend-multiply`}
+                    aria-hidden="true"
+                  />
+
+                  {/* Dark vignette */}
+                  <div
+                    className="absolute inset-0 bg-gradient-to-t from-background/85 via-background/15 to-transparent transition-opacity duration-500 group-hover:opacity-50"
+                    aria-hidden="true"
+                  />
+
+                  {/* Result badge — slides up on hover */}
+                  <div
+                    className="absolute bottom-0 left-0 right-0 p-5 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-out"
+                    aria-hidden="true"
+                  >
+                    <span className="inline-flex items-center gap-2 px-4 py-2 bg-background/80 text-ruby text-[0.68rem] font-sans uppercase tracking-[0.15em] backdrop-blur-sm border border-ruby/25">
                       {study.result}
                     </span>
                   </div>
 
-                  {/* Arrow icon */}
-                  <div className="absolute top-4 right-4 w-8 h-8 bg-background/60 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300" aria-hidden="true">
-                    <ArrowUpRight size={14} className="text-foreground" />
+                  {/* Arrow — top right */}
+                  <div
+                    className="absolute top-4 right-4 w-8 h-8 bg-background/65 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    aria-hidden="true"
+                  >
+                    <ArrowUpRight size={13} className="text-foreground" />
                   </div>
                 </div>
 
                 {/* Caption */}
-                <div>
-                  <p className="text-[10px] font-sans uppercase tracking-[0.2em] text-gold mb-1.5">{study.industry}</p>
-                  <h3 className="text-xl md:text-2xl font-serif font-medium text-foreground group-hover:text-ruby transition-colors duration-300">
+                <div className="space-y-1.5">
+                  <p className="text-[0.65rem] font-sans uppercase tracking-[0.22em] text-gold">
+                    {study.industry}
+                  </p>
+                  <h3 className="text-[1.5rem] font-serif font-medium text-foreground group-hover:text-ruby transition-colors duration-300 leading-snug">
                     {study.client}
                   </h3>
-                  <p className="text-sm text-muted-foreground font-sans font-light mt-1 leading-relaxed">{study.description}</p>
+                  <p className="text-[0.875rem] text-muted-foreground font-sans font-light leading-[1.7]">
+                    {study.description}
+                  </p>
                 </div>
               </a>
             </motion.article>
