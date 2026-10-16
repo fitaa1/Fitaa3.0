@@ -174,7 +174,7 @@ export function FinalCTA() {
       <div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[65vw] h-[65vw] max-w-[650px] max-h-[650px] pointer-events-none"
         style={{
-          background: "radial-gradient(circle, rgba(155,18,44,0.14) 0%, transparent 70%)",
+          background: "radial-gradient(circle, hsl(var(--ruby) / 0.14) 0%, transparent 70%)",
           opacity: 0.55,
         }}
         aria-hidden="true"

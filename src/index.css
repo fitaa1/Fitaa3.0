@@ -50,30 +50,45 @@
   --radius-xl: 0.75rem;
 }
 
+/*
+ * ─── Brand palette — Blue (community poll winner) ─────────────────────────
+ * --ruby keeps its old name so every existing `text-ruby` / `bg-ruby` class
+ * keeps working; it now holds the brand BLUE. Change the brand colour here
+ * and the whole site (including the hero aurora) follows.
+ * --aurora-1/2/3 are the three light pools behind the hero.
+ * --aurora-strength sets how bright the pools are; --aurora-grain the film grain.
+ * ─────────────────────────────────────────────────────────────────────────
+ */
+
 /* ─── Light Mode ─────────────────────────────────────────────────────────── */
 :root {
-  --background:         27 46% 97%;
-  --foreground:         214 60% 9%;
-  --border:             27 20% 87%;
-  --input:              27 20% 87%;
-  --ring:               349 79% 34%;
+  --background:         210 40% 98%;
+  --foreground:         222 47% 11%;
+  --border:             214 32% 88%;
+  --input:              214 32% 88%;
+  --ring:               221 83% 45%;
   --card:               0 0% 100%;
-  --card-foreground:    214 60% 9%;
+  --card-foreground:    222 47% 11%;
   --popover:            0 0% 100%;
-  --popover-foreground: 214 60% 9%;
-  --primary:            349 79% 34%;
-  --primary-foreground: 27 46% 97%;
-  --secondary:          46 55% 42%;
-  --secondary-foreground: 214 60% 7%;
-  --muted:              27 30% 93%;
-  --muted-foreground:   20 12% 48%;
-  --accent:             27 30% 93%;
-  --accent-foreground:  214 60% 9%;
+  --popover-foreground: 222 47% 11%;
+  --primary:            221 83% 45%;
+  --primary-foreground: 210 40% 98%;
+  --secondary:          43 70% 40%;
+  --secondary-foreground: 222 47% 8%;
+  --muted:              214 32% 94%;
+  --muted-foreground:   215 16% 40%;
+  --accent:             214 32% 94%;
+  --accent-foreground:  222 47% 11%;
   --destructive:        0 84% 60%;
-  --destructive-foreground: 27 46% 97%;
-  --ruby:     349 79% 34%;
-  --gold:     46  55% 40%;
-  --charcoal: 214 60% 9%;
+  --destructive-foreground: 210 40% 98%;
+  --ruby:     221 83% 45%;
+  --gold:     43  70% 40%;
+  --charcoal: 222 47% 11%;
+  --aurora-1: 221 83% 55%;
+  --aurora-2: 192 85% 50%;
+  --aurora-3: 248 75% 62%;
+  --aurora-strength: 0.32;
+  --aurora-grain: 0.05;
   --app-font-sans:  'Satoshi', sans-serif;
   --app-font-serif: 'Playfair Display', serif;
   --app-font-mono:  Menlo, monospace;
@@ -81,37 +96,42 @@
 }
 
 /*
- * ─── Dark Mode — Deep Warm Black ─────────────────────────────────────────
+ * ─── Dark Mode — Deep Midnight Blue ──────────────────────────────────────
  * To manually adjust the background:
- *   --background: 350 28% [LIGHTNESS]%;
- *   Lightness guide: 4% = near-black | 6% = current | 10% = dark | 14% = mid-dark
- *   Keep it between 4-12% for the premium dark look.
+ *   --background: 224 50% [LIGHTNESS]%;
+ *   Lightness guide: 3% = near-black | 5% = current | 9% = dark | 13% = mid-dark
  * To adjust body/paragraph text brightness:
- *   --muted-foreground: 27 14% [LIGHTNESS]%;
- *   Lightness guide: 50% = dim | 65% = current | 75% = bright
+ *   --muted-foreground: 215 22% [LIGHTNESS]%;
+ *   Lightness guide: 55% = dim | 70% = current | 80% = bright
  * ─────────────────────────────────────────────────────────────────────────
  */
 .dark {
-  --background:         350 28% 6%;
-  --foreground:         27 46% 98%;
-  --border:             350 18% 15%;
-  --input:              350 18% 15%;
-  --ring:               349 79% 34%;
-  --card:               350 22% 9%;
-  --card-foreground:    27 46% 98%;
-  --popover:            350 22% 9%;
-  --popover-foreground: 27 46% 98%;
-  --primary:            349 79% 34%;
-  --primary-foreground: 27 46% 97%;
-  --secondary:          46 65% 52%;
-  --secondary-foreground: 350 28% 6%;
-  --muted:              350 18% 13%;
-  --muted-foreground:   27 14% 65%;
-  --accent:             350 18% 13%;
-  --accent-foreground:  27 46% 98%;
+  --background:         224 50% 5%;
+  --foreground:         210 40% 98%;
+  --border:             222 30% 15%;
+  --input:              222 30% 15%;
+  --ring:               217 91% 60%;
+  --card:               223 42% 8%;
+  --card-foreground:    210 40% 98%;
+  --popover:            223 42% 8%;
+  --popover-foreground: 210 40% 98%;
+  --primary:            217 91% 60%;
+  --primary-foreground: 224 50% 5%;
+  --secondary:          43 74% 56%;
+  --secondary-foreground: 224 50% 5%;
+  --muted:              222 30% 12%;
+  --muted-foreground:   215 22% 70%;
+  --accent:             222 30% 12%;
+  --accent-foreground:  210 40% 98%;
   --destructive:        0 84% 60%;
-  --destructive-foreground: 27 46% 97%;
-  --gold: 46 68% 54%;
+  --destructive-foreground: 210 40% 98%;
+  --ruby: 217 91% 60%;
+  --gold: 43 74% 56%;
+  --aurora-1: 221 90% 52%;
+  --aurora-2: 193 92% 48%;
+  --aurora-3: 250 82% 60%;
+  --aurora-strength: 0.55;
+  --aurora-grain: 0.08;
 }
 
 html { scroll-behavior: smooth; }
@@ -155,8 +175,8 @@ html { scroll-behavior: smooth; }
 
 /* Subtle breathing glow for ruby accent dot */
 @keyframes ruby-breathe {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(155,18,44,0); }
-  50%       { box-shadow: 0 0 0 4px rgba(155,18,44,0.18); }
+  0%, 100% { box-shadow: 0 0 0 0 hsl(var(--ruby) / 0); }
+  50%       { box-shadow: 0 0 0 4px hsl(var(--ruby) / 0.18); }
 }
 
 /* Elegant fade-up reveal (used in CSS-only animations) */
@@ -247,14 +267,125 @@ html { scroll-behavior: smooth; }
   animation: gold-sheen 1.8s linear;
 }
 
-/* ─── Mobile hero background ─────────────────────────────────────────────── */
-.mobile-hero-bg {
-  background:
-    radial-gradient(ellipse 80% 60% at 20% 20%, rgba(155,18,44,0.18) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 50% at 80% 80%, rgba(212,175,55,0.08) 0%, transparent 55%);
-}
-
 /* ─── Image tint overlay for case studies ─────────────────────────────────── */
 .img-ruby-tint {
   filter: saturate(0.9) contrast(1.05);
+}
+
+/* ─── Aurora mesh hero backdrop ─────────────────────────────────────────────
+ * Pure CSS. Sized in vmax so it looks the same on phone, tablet and desktop,
+ * in portrait or landscape. Colours come from theme variables
+ * (--aurora-1..4, --background, --foreground), so a palette change in one
+ * place recolours it. Only transform is animated (GPU-cheap, no blur filters),
+ * and motion stops for visitors who ask for reduced motion.
+ * ─────────────────────────────────────────────────────────────────────────── */
+.aurora {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  isolation: isolate;
+  pointer-events: none;
+  background: hsl(var(--background));
+}
+
+.aurora__blob {
+  position: absolute;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(
+    closest-side,
+    hsl(var(--blob-color) / calc(var(--aurora-strength) * var(--blob-weight, 1))) 0%,
+    hsl(var(--blob-color) / calc(var(--aurora-strength) * var(--blob-weight, 1) * 0.45)) 45%,
+    transparent 100%
+  );
+  will-change: transform;
+  animation: aurora-drift var(--blob-duration) ease-in-out infinite alternate;
+  animation-delay: var(--blob-delay, 0s);
+}
+
+.aurora__blob--1 {
+  --blob-color: var(--aurora-1);
+  --blob-duration: 26s;
+  --drift-x: 8vmax;
+  --drift-y: 6vmax;
+  width: 78vmax;
+  top: -34vmax;
+  left: -26vmax;
+}
+.aurora__blob--2 {
+  --blob-color: var(--aurora-2);
+  --blob-duration: 32s;
+  --blob-delay: -8s;
+  --blob-weight: 0.85;
+  --drift-x: -9vmax;
+  --drift-y: 7vmax;
+  width: 62vmax;
+  top: -8vmax;
+  right: -30vmax;
+}
+.aurora__blob--3 {
+  --blob-color: var(--aurora-3);
+  --blob-duration: 38s;
+  --blob-delay: -14s;
+  --blob-weight: 0.8;
+  --drift-x: 7vmax;
+  --drift-y: -8vmax;
+  width: 72vmax;
+  bottom: -30vmax;
+  left: -6vmax;
+}
+.aurora__blob--4 {
+  /* Halo — lifts the area behind the headline */
+  --blob-color: var(--aurora-1);
+  --blob-duration: 30s;
+  --blob-delay: -20s;
+  --blob-weight: 0.38;
+  --drift-x: -4vmax;
+  --drift-y: 3vmax;
+  width: 56vmax;
+  top: calc(44% - 28vmax);
+  left: calc(50% - 28vmax);
+}
+
+@keyframes aurora-drift {
+  0%   { transform: translate3d(0, 0, 0) scale(1); }
+  50%  { transform: translate3d(var(--drift-x), var(--drift-y), 0) scale(1.12); }
+  100% { transform: translate3d(calc(var(--drift-x) * -0.6), calc(var(--drift-y) * 0.7), 0) scale(0.94); }
+}
+
+/* Fine engineering grid that fades out from the centre */
+.aurora__grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(hsl(var(--foreground) / 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(var(--foreground) / 0.045) 1px, transparent 1px);
+  background-size: clamp(40px, 6vmin, 72px) clamp(40px, 6vmin, 72px);
+  background-position: center center;
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 42%, #000 0%, transparent 72%);
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 42%, #000 0%, transparent 72%);
+}
+
+/* Film grain — breaks up gradient banding on cheap screens */
+.aurora__grain {
+  position: absolute;
+  inset: -50%;
+  opacity: var(--aurora-grain);
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.9 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  background-size: 180px 180px;
+}
+
+/* Soft hand-off into the next section — no hard seam */
+.aurora__fade {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 32%;
+  background: linear-gradient(to bottom, transparent, hsl(var(--background)));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aurora__blob { animation: none; }
 }

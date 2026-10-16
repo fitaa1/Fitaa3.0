@@ -14,7 +14,7 @@ export function Testimonials() {
         className="absolute inset-0 pointer-events-none opacity-[0.03] dark:opacity-[0.04]"
         style={{
           backgroundImage:
-            "radial-gradient(circle at 20% 50%, rgba(155,18,44,1) 0%, transparent 50%), radial-gradient(circle at 80% 50%, rgba(212,175,55,1) 0%, transparent 50%)",
+            "radial-gradient(circle at 20% 50%, hsl(var(--ruby) / 1) 0%, transparent 50%), radial-gradient(circle at 80% 50%, hsl(var(--gold) / 1) 0%, transparent 50%)",
         }}
         aria-hidden="true"
       />

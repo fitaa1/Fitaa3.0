@@ -45,7 +45,7 @@ export function WhyUs() {
       <div
         className="absolute top-1/2 right-0 w-[45vw] h-[45vw] max-w-[480px] max-h-[480px] -translate-y-1/2 pointer-events-none"
         style={{
-          background: "radial-gradient(circle, rgba(155,18,44,0.12) 0%, transparent 70%)",
+          background: "radial-gradient(circle, hsl(var(--ruby) / 0.12) 0%, transparent 70%)",
           opacity: 0.6,
         }}
         aria-hidden="true"
