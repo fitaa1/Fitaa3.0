@@ -9,14 +9,22 @@ const ThemeContext = createContext<ThemeContextValue>({ isDark: true, toggle: ()
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [isDark, setIsDark] = useState<boolean>(() => {
-    const saved = localStorage.getItem("fitaa-theme");
-    if (saved) return saved === "dark";
+    try {
+      const saved = localStorage.getItem("fitaa-theme");
+      if (saved) return saved === "dark";
+    } catch {
+      /* storage blocked (private mode): fall back to dark */
+    }
     return true;
   });
 
   useEffect(() => {
     document.documentElement.classList.toggle("dark", isDark);
-    localStorage.setItem("fitaa-theme", isDark ? "dark" : "light");
+    try {
+      localStorage.setItem("fitaa-theme", isDark ? "dark" : "light");
+    } catch {
+      /* storage blocked: theme still applies for this visit */
+    }
   }, [isDark]);
 
   const toggle = () => setIsDark((prev) => !prev);

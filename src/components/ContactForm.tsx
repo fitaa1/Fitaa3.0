@@ -13,7 +13,7 @@ const formSchema = z.object({
   name:    z.string().min(2,  { message: "Name must be at least 2 characters." }),
   email:   z.string().email({ message: "Please enter a valid email address."  }),
   company: z.string().min(2,  { message: "Please tell us your company or project name." }),
-  message: z.string().min(10, { message: "Tell us a little more — at least 10 characters." }),
+  message: z.string().min(10, { message: "Tell us a little more (at least 10 characters)." }),
 });
 type FormValues = z.infer<typeof formSchema>;
 

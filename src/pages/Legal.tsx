@@ -107,16 +107,18 @@ export default function Legal({ page }: { page: "privacy" | "terms" }) {
   const doc = page === "privacy" ? privacy : terms;
 
   useEffect(() => {
-    document.title = `${doc.title} — ${siteConfig.name}`;
+    document.title = `${doc.title} | ${siteConfig.name}`;
+    document.querySelector('meta[name="description"]')?.setAttribute("content", doc.intro);
+    document.querySelector('link[rel="canonical"]')?.setAttribute("href", `${siteConfig.url}/${page}`);
     window.scrollTo(0, 0);
-  }, [doc.title]);
+  }, [doc.title, doc.intro, page]);
 
   return (
     <main className="min-h-screen bg-background text-foreground">
       <header className="border-b border-border/30">
         <div className="container mx-auto px-6 md:px-12 h-20 flex items-center justify-between">
           <a href="/" className="flex items-center gap-3" aria-label="Fitaa Digital home">
-            <img src="/logo.png" alt="" width={36} height={36} className="h-9 w-9 rounded-sm" />
+            <img src="/logo-160.webp" alt="" width={36} height={36} className="h-9 w-9 rounded-sm" />
             <span className="font-serif font-semibold tracking-[0.15em] text-[1.05rem]">FITAA</span>
           </a>
           <a

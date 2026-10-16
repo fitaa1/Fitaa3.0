@@ -4,14 +4,14 @@ export const siteConfig = {
   name: "Fitaa Digital",
   tagline: "Pure. Strategic. Impactful.",
   description:
-    "We turn billboard views and digital impressions into real customers. LED campaigns, striking visuals, and high-converting web experiences — built for brands in Accra and beyond.",
+    "We turn billboard views and digital impressions into real customers. LED campaigns, striking visuals, and high-converting web experiences built for brands in Accra and beyond.",
   url: "https://fitaadigital.vercel.app",
 
   nav: [
     { label: "Home",     href: "#home"     },
     { label: "Services", href: "#services" },
-    { label: "Work",     href: "#work"     },
     { label: "Why Us",   href: "#why-us"   },
+    { label: "Work",     href: "#work"     },
     { label: "Contact",  href: "#contact"  },
   ],
 
@@ -26,7 +26,7 @@ export const siteConfig = {
     {
       title: "Graphic & Digital Design",
       description:
-        "Professional visuals and creatives that grab attention instantly — crafted to work across billboards, social media, and every digital surface.",
+        "Professional visuals and creatives that grab attention instantly, crafted to work across billboards, social media, and every digital surface.",
       icon: Palette,
       deliverables: ["Logos & brand identity", "Flyers, brochures & magazines", "Social graphics & animated posts", "Print-ready files"],
     },
@@ -40,7 +40,7 @@ export const siteConfig = {
     {
       title: "Digital Marketing & Web Presence",
       description:
-        "Complete online setup — websites, SEO basics, Google Business, and social presence — that amplifies every advertising effort.",
+        "Complete online setup: websites, SEO basics, Google Business and social presence that amplify every advertising effort.",
       icon: BarChart2,
       deliverables: ["Business websites", "Google Business Profile setup", "SEO basics", "Social media content"],
     },
@@ -57,7 +57,7 @@ export const siteConfig = {
     {
       client: "Hydra Offshore",
       industry: "Oil & Gas",
-      year: "2013 – 2014",
+      year: "2013–2014",
       result: "Every Page Designed",
       description:
         "Designed every page of Offshore Ghana, Hydra's oil and gas magazine with 20,000 readers across West Africa, plus its advertising rate card and corporate brochure.",
@@ -69,7 +69,7 @@ export const siteConfig = {
     {
       client: "Mummy Day Care Centre",
       industry: "Early Childhood Education",
-      year: "2018 – 2021",
+      year: "2018–2021",
       result: "3 Years of Marketing",
       description:
         "Three years leading marketing for an Accra day care, designing almost everything the brand put out: admissions campaigns like the 50%-off September intake, flyers, social content and a video ad.",
@@ -81,10 +81,10 @@ export const siteConfig = {
     {
       client: "Tinkertresses",
       industry: "Beauty & Hair",
-      year: "Oct 2019 – Jan 2020",
+      year: "Oct 2019–Jan 2020",
       result: "Scroll-Stopping Promos",
       description:
-        "Animated product promos for a hair-care brand's Instagram — restocks, bundle deals and price drops, built to sell in the scroll. One bundle promo pulled 719 views.",
+        "Animated product promos for a hair-care brand's Instagram: restocks, bundle deals and price drops, built to sell in the scroll. One bundle promo pulled 719 views.",
       deliverables: ["Animated posts", "Promo campaigns", "Social content"],
       link: "https://www.instagram.com/tinkertresses",
       imagePath: "/work/tinkertresses.webp",
@@ -96,7 +96,7 @@ export const siteConfig = {
       year: "2022",
       result: "10,000-Piece Mint",
       description:
-        "The mint site for a Ghanaian, women-led collection of 10,000 hand-drawn avatars on Solana — a project giving 20% of mint sales to women's health and education.",
+        "The mint site for a Ghanaian, women-led collection of 10,000 hand-drawn avatars on Solana, a project giving 20% of mint sales to women's health and education.",
       deliverables: ["Mint website", "Web3 integration"],
       link: "https://www.instagram.com/womenofsolnft",
       imagePath: "/work/women-of-sol.webp",

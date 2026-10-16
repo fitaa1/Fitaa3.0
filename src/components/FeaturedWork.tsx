@@ -50,7 +50,7 @@ export function FeaturedWork() {
                 href={study.link}
                 target={study.link.startsWith("http") ? "_blank" : undefined}
                 rel={study.link.startsWith("http") ? "noopener noreferrer" : undefined}
-                aria-label={`${study.client} — ${study.industry} case study`}
+                aria-label={`${study.client}, ${study.industry} case study`}
                 className="flex flex-col h-full"
               >
                 {/* Image container — identical ratio on every tile */}
