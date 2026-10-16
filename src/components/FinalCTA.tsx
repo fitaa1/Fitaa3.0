@@ -136,7 +136,7 @@ function ContactCard() {
               <p className="text-muted-foreground font-sans font-light text-[0.9375rem] max-w-xs leading-[1.72] mb-2">
                 Message us directly on WhatsApp. We typically reply within the hour.
               </p>
-              <p className="text-gold font-serif text-[1.0625rem] mb-10 tracking-wide">
+              <p className="text-gold font-sans font-medium tabular-nums text-[1.0625rem] mb-10 tracking-wide">
                 {siteConfig.contact.phone}
               </p>
 
@@ -228,7 +228,7 @@ export function FinalCTA() {
                     <p className="text-[0.65rem] font-sans uppercase tracking-[0.22em] text-muted-foreground mb-1">Phone</p>
                     <a
                       href={`tel:${siteConfig.contact.phone.replace(/\s/g, "")}`}
-                      className="text-foreground font-serif text-[1.125rem] hover:text-ruby transition-colors duration-300"
+                      className="text-foreground font-sans font-medium tabular-nums text-[1.0625rem] hover:text-ruby transition-colors duration-300"
                     >
                       {siteConfig.contact.phone}
                     </a>

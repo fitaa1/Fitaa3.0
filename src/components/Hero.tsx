@@ -8,7 +8,7 @@ export function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-[100dvh] flex items-center justify-center overflow-hidden pt-24 pb-16 md:pb-28"
+      className="relative min-h-[100svh] flex items-start md:items-center justify-center overflow-hidden pt-28 sm:pt-32 md:pt-24 pb-24 md:pb-28"
     >
       <AuroraBackground />
 

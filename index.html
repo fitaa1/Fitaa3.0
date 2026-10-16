@@ -64,8 +64,26 @@
       ]
     }
     </script>
+    <!-- Splash: shown once per visit, ~0.6s, skipped for reduced motion -->
+    <style>
+      #splash{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;background:#090e12;transition:opacity .32s ease,visibility .32s}
+      #splash.out{opacity:0;visibility:hidden}
+      .no-splash #splash{display:none}
+      .sp-mark{position:relative;width:76px;height:76px;animation:sp-in .55s cubic-bezier(.22,1,.36,1) both}
+      .sp-mark img{width:100%;height:100%;border-radius:14px;display:block}
+      .sp-ring{position:absolute;inset:-14px;border-radius:24px;padding:1.5px;background:conic-gradient(from 0deg,transparent 0 55%,#00ddff 78%,#e8be62 92%,transparent);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:sp-spin .9s linear infinite}
+      .sp-glow{position:absolute;inset:-40px;border-radius:50%;background:radial-gradient(closest-side,rgba(0,221,255,.28),transparent);animation:sp-in .6s ease both}
+      @keyframes sp-in{from{opacity:0;transform:scale(.86)}to{opacity:1;transform:none}}
+      @keyframes sp-spin{to{transform:rotate(1turn)}}
+    </style>
+    <script>
+      (function(){var d=document.documentElement;try{if(sessionStorage.getItem("fitaa-splash")||matchMedia("(prefers-reduced-motion: reduce)").matches||/^\/(privacy|terms)/.test(location.pathname)){d.classList.add("no-splash")}else{sessionStorage.setItem("fitaa-splash","1")}}catch(e){d.classList.add("no-splash")}
+      window.__hideSplash=function(){var el=document.getElementById("splash");if(!el||el.classList.contains("out"))return;var wait=Math.max(0,600-performance.now());setTimeout(function(){el.classList.add("out");setTimeout(function(){el.remove()},400)},wait)};
+      setTimeout(function(){window.__hideSplash()},2500);})();
+    </script>
   </head>
   <body>
+    <div id="splash" aria-hidden="true"><div class="sp-mark"><span class="sp-glow"></span><span class="sp-ring"></span><img src="/logo.png" alt="" width="76" height="76" /></div></div>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

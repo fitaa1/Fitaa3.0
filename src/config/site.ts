@@ -21,24 +21,28 @@ export const siteConfig = {
       description:
         "Turn high-traffic views into real customers with dynamic, eye-catching LED advertising that commands attention day and night.",
       icon: Monitor,
+      deliverables: ["Campaign concept & messaging", "Static and animated LED creatives", "Artwork sized for every screen", "QR / landing page follow-through"],
     },
     {
       title: "Graphic & Digital Design",
       description:
         "Professional visuals and creatives that grab attention instantly — crafted to work across billboards, social media, and every digital surface.",
       icon: Palette,
+      deliverables: ["Logos & brand identity", "Flyers, brochures & magazines", "Social graphics & animated posts", "Print-ready files"],
     },
     {
       title: "Campaign Landing Pages",
       description:
         "Fast, high-converting websites built specifically to turn billboard viewers and ad clicks into paying customers.",
       icon: Globe,
+      deliverables: ["Single-page campaign sites", "Mobile-first and fast-loading", "WhatsApp & enquiry forms", "Web3 / NFT mint sites"],
     },
     {
       title: "Digital Marketing & Web Presence",
       description:
         "Complete online setup — websites, SEO basics, Google Business, and social presence — that amplifies every advertising effort.",
       icon: BarChart2,
+      deliverables: ["Business websites", "Google Business Profile setup", "SEO basics", "Social media content"],
     },
   ],
 
@@ -51,60 +55,57 @@ export const siteConfig = {
 
   caseStudies: [
     {
-      client: "Tinkertresses",
-      industry: "Beauty & Hair",
-      result: "Social Media Growth",
-      description: "Scroll-stopping posts and videos that built a loyal, engaged community from scratch.",
-      link: "https://www.instagram.com/tinkertresses",
-      bg: "from-[#00ddff]/40 via-[#00ddff]/15 to-transparent",
-      /*
-       * REAL CLIENT PHOTO:
-       * Add a screenshot from @tinkertresses Instagram to /public/work/tinkertresses.jpg
-       * then change imagePath to: "/work/tinkertresses.jpg"
-       */
-      imagePath: "https://images.unsplash.com/photo-1519699047748-de8e457a634e?w=720&q=85&auto=format&fit=crop",
+      client: "Hydra Offshore",
+      industry: "Oil & Gas",
+      year: "2013 – 2014",
+      result: "Every Page Designed",
+      description:
+        "An oil and gas services firm needed print that matched the seriousness of its sector. We designed every page of the company magazine, plus its advertising rate card and corporate brochure.",
+      deliverables: ["Magazine", "Rate card", "Brochure"],
+      link: "#work",
+      imagePath: "/work/hydra-offshore.webp",
+      imageAlt: "Hydra Offshore magazine cover and advertising rate card designed by Fitaa",
     },
     {
       client: "Mummy Day Care Centre",
       industry: "Early Childhood Education",
-      result: "Community Engagement",
-      description: "Warm, trustworthy social content that brought families through the door.",
+      year: "2018 – 2021",
+      result: "3 Years of Marketing",
+      description:
+        "Three years running marketing for an Accra day care — admissions campaigns like the 50%-off September intake, social content and a video ad that kept enrolment conversations going.",
+      deliverables: ["Admissions flyers", "Social content", "Video ad"],
       link: "https://www.instagram.com/mummy.day.care.centre",
-      bg: "from-[#e8be62]/30 via-[#e8be62]/10 to-transparent",
-      /*
-       * REAL CLIENT PHOTO:
-       * Add screenshot from @mummy.day.care.centre to /public/work/mummy-daycare.jpg
-       * then change imagePath to: "/work/mummy-daycare.jpg"
-       */
-      imagePath: "https://images.unsplash.com/photo-1587654780291-39c9404d746b?w=720&q=85&auto=format&fit=crop&crop=faces,center",
+      imagePath: "/work/mummy-day-care.webp",
+      imageAlt: "Mummy Day Care Centre admissions flyer and crest",
     },
     {
-      client: "Hydra Offshore",
-      industry: "Oil & Gas",
-      result: "Industry Publication",
-      description: "A polished oil and gas magazine that positioned Hydra as an authority in the sector.",
-      link: "#work",
-      bg: "from-[#00ddff]/30 via-[#e8be62]/10 to-transparent",
-      /*
-       * REAL CLIENT PHOTO: Add Hydra Offshore asset to /public/work/hydra-offshore.jpg
-       */
-      imagePath: "https://images.unsplash.com/photo-1542744173-05336fcc7ad4?w=720&q=85&auto=format&fit=crop",
+      client: "Tinkertresses",
+      industry: "Beauty & Hair",
+      year: "Oct 2019 – Jan 2020",
+      result: "Scroll-Stopping Promos",
+      description:
+        "Animated product promos for a hair-care brand's Instagram — restocks, bundle deals and price drops, built to sell in the scroll. One bundle promo pulled 719 views.",
+      deliverables: ["Animated posts", "Promo campaigns", "Social content"],
+      link: "https://www.instagram.com/tinkertresses",
+      imagePath: "/work/tinkertresses.webp",
+      imageAlt: "Tinker Hair Care Instagram promos: bestseller restock and bundle deal",
     },
     {
-      client: "Women of Sol",
+      client: "Women of SOL",
       industry: "Web3 / NFT",
-      result: "NFT Mint Site Launch",
-      description: "A high-impact mint site that brought an empowering digital art collection to life.",
+      year: "2022",
+      result: "10,000-Piece Mint",
+      description:
+        "The mint site for a Ghanaian, women-led collection of 10,000 hand-drawn avatars on Solana — a project giving 20% of mint sales to women's health and education.",
+      deliverables: ["Mint website", "Web3 integration"],
       link: "https://www.instagram.com/womenofsolnft",
-      bg: "from-[#e8be62]/25 via-[#00ddff]/12 to-transparent",
-      /*
-       * REAL CLIENT PHOTO:
-       * Add screenshot from @womenofsolnft to /public/work/women-of-sol.jpg
-       * then change imagePath to: "/work/women-of-sol.jpg"
-       */
-      imagePath: "https://images.unsplash.com/photo-1535303311164-664fc9ec6532?w=720&q=85&auto=format&fit=crop",
+      imagePath: "/work/women-of-sol.webp",
+      imageAlt: "Two Women of SOL NFT avatars from the collection",
     },
   ],
+
+  /** Smaller clients shown in the "Also worked with" strip under Selected Work. */
+  alsoWorkedWith: ["ChicKing!", "Liberty Hands Foundation", "502", "2nd Generation IT Group"],
 
   testimonials: [
     {
