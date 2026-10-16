@@ -60,11 +60,11 @@ export const siteConfig = {
       year: "2013 – 2014",
       result: "Every Page Designed",
       description:
-        "An oil and gas services firm needed print that matched the seriousness of its sector. We designed every page of the company magazine, plus its advertising rate card and corporate brochure.",
-      deliverables: ["Magazine", "Rate card", "Brochure"],
+        "Designed every page of Offshore Ghana, Hydra's oil and gas magazine with 20,000 readers across West Africa, plus its advertising rate card and corporate brochure.",
+      deliverables: ["Offshore Ghana magazine", "Rate card", "Brochure"],
       link: "#work",
       imagePath: "/work/hydra-offshore.webp",
-      imageAlt: "Hydra Offshore magazine cover and advertising rate card designed by Fitaa",
+      imageAlt: "Offshore Ghana magazine cover and advertising rate card designed for Hydra Offshore",
     },
     {
       client: "Mummy Day Care Centre",
@@ -72,8 +72,8 @@ export const siteConfig = {
       year: "2018 – 2021",
       result: "3 Years of Marketing",
       description:
-        "Three years running marketing for an Accra day care — admissions campaigns like the 50%-off September intake, social content and a video ad that kept enrolment conversations going.",
-      deliverables: ["Admissions flyers", "Social content", "Video ad"],
+        "Three years leading marketing for an Accra day care, designing almost everything the brand put out: admissions campaigns like the 50%-off September intake, flyers, social content and a video ad.",
+      deliverables: ["Marketing lead", "Admissions campaigns", "Social content", "Video ad"],
       link: "https://www.instagram.com/mummy.day.care.centre",
       imagePath: "/work/mummy-day-care.webp",
       imageAlt: "Mummy Day Care Centre admissions flyer and crest",
