@@ -71,7 +71,7 @@ export function Navbar() {
           </a>
 
           {/* Desktop nav — evenly spaced */}
-          <nav className="hidden md:flex items-center gap-9" aria-label="Site sections">
+          <nav className="hidden lg:flex items-center gap-9" aria-label="Site sections">
             {siteConfig.nav.map((item) => (
               <a
                 key={item.href}
@@ -104,7 +104,7 @@ export function Navbar() {
             {/* CTA — desktop only */}
             <a
               href="#contact"
-              className="btn-gold hidden md:inline-flex items-center px-6 py-2.5 font-sans text-[0.68rem] uppercase tracking-[0.2em] ml-2"
+              className="btn-gold hidden lg:inline-flex whitespace-nowrap items-center px-6 py-2.5 font-sans text-[0.68rem] uppercase tracking-[0.2em] ml-2"
               aria-label="Contact Fitaa Digital"
             >
               Get in Touch
@@ -113,7 +113,7 @@ export function Navbar() {
             {/* Hamburger — mobile */}
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="md:hidden p-2 -mr-2 text-foreground hover:text-ruby transition-colors duration-200"
+              className="lg:hidden p-2 -mr-2 text-foreground hover:text-ruby transition-colors duration-200"
               aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
               aria-expanded={isOpen}
               aria-controls="mobile-menu"
@@ -147,7 +147,7 @@ export function Navbar() {
             {/* Ambient glow */}
             <div
               className="absolute inset-0 pointer-events-none"
-              style={{ background: "radial-gradient(ellipse 60% 40% at 50% 50%, rgba(155,18,44,0.07), transparent)" }}
+              style={{ background: "radial-gradient(ellipse 60% 40% at 50% 50%, hsl(var(--ruby) / 0.07), transparent)" }}
               aria-hidden="true"
             />
 
