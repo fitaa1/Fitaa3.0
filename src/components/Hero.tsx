@@ -1,38 +1,16 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { siteConfig } from "@/config/site";
-import { ParticleBackground } from "./ParticleBackground";
+import { AuroraBackground } from "./AuroraBackground";
 import { heroStagger, heroItem, EASE_CURVE } from "@/lib/animations";
 
 export function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-[100dvh] flex items-center justify-center overflow-hidden pt-24"
+      className="relative min-h-[100dvh] flex items-center justify-center overflow-hidden pt-24 pb-16 md:pb-28"
     >
-      <ParticleBackground />
-
-      {/* Ambient light pools — golden ratio placement */}
-      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-        {/* Primary — large, top-left at 1/φ from top */}
-        <div
-          className="absolute w-[55vw] h-[55vw] max-w-[580px] max-h-[580px] rounded-full blur-[160px]"
-          style={{
-            top: "18%", left: "8%",
-            background: "radial-gradient(circle, rgba(155,18,44,0.22) 0%, transparent 70%)",
-            opacity: 0.45,
-          }}
-        />
-        {/* Secondary — smaller, bottom-right */}
-        <div
-          className="absolute w-[34vw] h-[34vw] max-w-[420px] max-h-[420px] rounded-full blur-[130px]"
-          style={{
-            bottom: "14%", right: "6%",
-            background: "radial-gradient(circle, rgba(212,175,55,0.18) 0%, transparent 70%)",
-            opacity: 0.35,
-          }}
-        />
-      </div>
+      <AuroraBackground />
 
       {/* Content — centred, max-w follows golden ratio (text at 62% of container) */}
       <div className="container mx-auto px-6 md:px-12 relative z-10 flex flex-col items-center text-center">
@@ -44,9 +22,9 @@ export function Hero() {
         >
           {/* Eyebrow badge */}
           <motion.div variants={heroItem} className="mb-[2.125rem]">
-            <span className="inline-flex items-center gap-2.5 px-5 py-2 border border-border/35 bg-card/40 backdrop-blur-md text-[0.65rem] font-sans uppercase tracking-[0.28em] text-muted-foreground">
-              <span className="w-1.5 h-1.5 bg-ruby inline-block animate-pulse" style={{ animationDuration: "2.4s" }} aria-hidden="true" />
-              Premium Creative Agency · Accra, Ghana
+            <span className="inline-flex items-center gap-2.5 px-4 sm:px-5 py-2 border border-border/50 bg-card/40 backdrop-blur-md text-[0.62rem] sm:text-[0.65rem] font-sans uppercase tracking-[0.2em] sm:tracking-[0.28em] text-muted-foreground whitespace-nowrap">
+              <span className="w-1.5 h-1.5 bg-ruby inline-block animate-pulse shrink-0" style={{ animationDuration: "2.4s" }} aria-hidden="true" />
+              <span><span className="hidden sm:inline">Premium </span>Creative Agency · Accra, Ghana</span>
             </span>
           </motion.div>
 
@@ -103,7 +81,7 @@ export function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.6, duration: 1.2, ease: EASE_CURVE }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:flex [@media(max-height:760px)]:hidden flex-col items-center gap-2"
         aria-hidden="true"
       >
         <span className="text-[0.55rem] font-sans uppercase tracking-[0.35em] text-muted-foreground/45">

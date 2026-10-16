@@ -25,7 +25,7 @@ function BehanceIcon({ size = 18 }: { size?: number }) {
 export function Footer() {
   const year = new Date().getFullYear();
   return (
-    <footer className="bg-card border-t border-border/20 py-14">
+    <footer className="bg-card border-t border-border/20 pt-14 pb-24 lg:pb-14">
       <div className="container mx-auto px-6 md:px-12">
         <div className="flex flex-col md:flex-row justify-between items-center gap-8 pb-10 border-b border-border/20">
 

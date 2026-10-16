@@ -45,7 +45,7 @@ export function WhyUs() {
       <div
         className="absolute top-1/2 right-0 w-[45vw] h-[45vw] max-w-[480px] max-h-[480px] -translate-y-1/2 pointer-events-none"
         style={{
-          background: "radial-gradient(circle, rgba(155,18,44,0.12) 0%, transparent 70%)",
+          background: "radial-gradient(circle, hsl(var(--ruby) / 0.12) 0%, transparent 70%)",
           opacity: 0.6,
         }}
         aria-hidden="true"
@@ -88,7 +88,7 @@ export function WhyUs() {
           </motion.div>
 
           {/* Right stats — 7/12 */}
-          <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-10 lg:pl-14">
+          <div className="lg:col-span-7 grid grid-cols-2 gap-x-5 sm:gap-x-8 gap-y-10 lg:pl-14">
             {siteConfig.stats.map((stat, index) => (
               <StatItem key={stat.label} stat={stat} index={index} />
             ))}
