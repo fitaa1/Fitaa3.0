@@ -23,7 +23,6 @@ function StatItem({ stat, index }: { stat: Stat; index: number }) {
     >
       {/* Number — golden type scale: 4rem (closest φ step from 1rem) */}
       <div className="text-[clamp(2.8rem,5vw,4rem)] font-serif font-bold text-ruby leading-none mb-2 tracking-tight tabular-nums">
-        {stat.prefix && <span>{stat.prefix}</span>}
         <span>{count}</span>
         {stat.suffix && <span>{stat.suffix}</span>}
       </div>
@@ -73,7 +72,7 @@ export function WhyUs() {
               className="mb-[2.125rem]"
             />
             <p className="text-muted-foreground font-sans font-light text-[1.0625rem] leading-[1.75] max-w-md">
-              We don't just create pretty visuals. Every billboard, every post, every landing page is engineered to move people — and drive real business results in Accra and across Ghana.
+              We don't just create pretty visuals. Every billboard, every post, every landing page is engineered to move people and drive real business results in Accra and across Ghana.
             </p>
 
             {/* Animated gold line */}

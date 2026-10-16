@@ -17,10 +17,31 @@ const linkVariants = {
   }),
 };
 
+/** Tracks which page section sits under the middle of the screen. */
+function useActiveSection(ids: string[]) {
+  const [active, setActive] = useState(ids[0]);
+  useEffect(() => {
+    const els = ids.map((id) => document.getElementById(id)).filter(Boolean) as HTMLElement[];
+    if (!("IntersectionObserver" in window) || !els.length) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) if (e.isIntersecting) setActive(e.target.id);
+      },
+      { rootMargin: "-45% 0px -54% 0px" },
+    );
+    els.forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, [ids]);
+  return active;
+}
+
+const sectionIds = siteConfig.nav.map((n) => n.href.slice(1));
+
 export function Navbar() {
   const [isOpen,   setIsOpen]   = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { isDark, toggle } = useTheme();
+  const active = useActiveSection(sectionIds);
 
   useEffect(() => {
     const h = () => setScrolled(window.scrollY > 60);
@@ -51,10 +72,10 @@ export function Navbar() {
           <a
             href="#home"
             className="flex items-center gap-3.5 z-50 relative shrink-0 group"
-            aria-label="Fitaa Digital — home"
+            aria-label="Fitaa Digital home"
           >
             <img
-              src="/logo.png"
+              src="/logo-160.webp"
               alt="Fitaa Digital Adinkra logo mark"
               className="h-9 w-9 object-cover rounded-sm transition-transform duration-400 group-hover:scale-105"
               width={36}
@@ -76,7 +97,8 @@ export function Navbar() {
               <a
                 key={item.href}
                 href={item.href}
-                className="nav-link text-[0.7rem] font-sans uppercase tracking-[0.18em] text-muted-foreground hover:text-foreground transition-colors duration-250 pb-0.5"
+                aria-current={active === item.href.slice(1) ? "location" : undefined}
+                className="nav-link text-[0.7rem] font-sans uppercase tracking-[0.18em] text-muted-foreground hover:text-foreground aria-[current=location]:text-foreground transition-colors duration-250 pb-0.5"
               >
                 {item.label}
               </a>
@@ -139,7 +161,7 @@ export function Navbar() {
             animate="visible"
             exit="exit"
             variants={overlayVariants}
-            className="fixed inset-0 z-40 bg-background/98 backdrop-blur-2xl flex flex-col items-center justify-center"
+            className="fixed inset-0 z-[45] bg-background/98 backdrop-blur-2xl flex flex-col items-center justify-center"
             role="dialog"
             aria-modal="true"
             aria-label="Navigation"
@@ -159,10 +181,11 @@ export function Navbar() {
                   custom={i}
                   variants={linkVariants}
                   onClick={close}
-                  className="group flex items-center gap-5 text-[2.8rem] font-serif font-light text-foreground/60 hover:text-foreground transition-colors duration-300"
+                  aria-current={active === item.href.slice(1) ? "location" : undefined}
+                  className="group flex items-center gap-5 text-[2.8rem] font-serif font-light text-foreground/60 hover:text-foreground aria-[current=location]:text-foreground transition-colors duration-300"
                 >
                   <span
-                    className="w-0 h-px bg-ruby group-hover:w-7 transition-all duration-500 ease-out"
+                    className="w-0 h-px bg-ruby group-hover:w-7 group-aria-[current=location]:w-7 transition-all duration-500 ease-out"
                     aria-hidden="true"
                   />
                   {item.label}

@@ -33,10 +33,10 @@ export function Footer() {
           <a
             href="#home"
             className="flex items-center gap-3.5 group"
-            aria-label="Fitaa Digital — back to top"
+            aria-label="Fitaa Digital, back to top"
           >
             <img
-              src="/logo.png"
+              src="/logo-160.webp"
               alt="Fitaa Digital logo"
               className="h-10 w-10 object-cover rounded-sm transition-transform duration-350 group-hover:scale-105"
               width={40}
@@ -78,10 +78,10 @@ export function Footer() {
 
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 pt-7 text-[0.66rem] font-sans uppercase tracking-[0.15em] text-muted-foreground">
           <div className="flex gap-6">
-            <a href="#" className="hover:text-foreground/55 transition-colors duration-250">Privacy Policy</a>
-            <a href="#" className="hover:text-foreground/55 transition-colors duration-250">Terms of Service</a>
+            <a href="/privacy" className="hover:text-foreground/55 transition-colors duration-250">Privacy Policy</a>
+            <a href="/terms" className="hover:text-foreground/55 transition-colors duration-250">Terms of Service</a>
           </div>
-          <p className="opacity-55">&copy; {year} {siteConfig.name}. All rights reserved.</p>
+          <p className="opacity-80">&copy; {year} {siteConfig.name}. All rights reserved.</p>
         </div>
       </div>
     </footer>

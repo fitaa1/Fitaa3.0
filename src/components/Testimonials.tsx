@@ -28,7 +28,6 @@ export function Testimonials() {
           whileInView="visible"
           viewport={cardViewport}
           className={`grid grid-cols-1 ${siteConfig.testimonials.length > 1 ? "md:grid-cols-2" : ""} gap-12 lg:gap-[5.5rem]`}
-          role="list"
           aria-label="Client testimonials"
         >
           {siteConfig.testimonials.map((t) => (
@@ -36,7 +35,6 @@ export function Testimonials() {
               key={t.company}
               variants={fadeInUp}
               className="relative flex flex-col"
-              role="listitem"
             >
               {/* Large decorative quotation mark */}
               <div

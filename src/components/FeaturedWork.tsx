@@ -50,30 +50,24 @@ export function FeaturedWork() {
                 href={study.link}
                 target={study.link.startsWith("http") ? "_blank" : undefined}
                 rel={study.link.startsWith("http") ? "noopener noreferrer" : undefined}
-                aria-label={`${study.client} — ${study.industry} case study`}
+                aria-label={`${study.client}, ${study.industry} case study`}
                 className="flex flex-col h-full"
               >
                 {/* Image container — identical ratio on every tile */}
                 <div className="relative overflow-hidden bg-card mb-5 aspect-[4/3]">
                   <img
                     src={study.imagePath}
-                    alt={`${study.client} project — ${study.industry}`}
-                    className="img-ruby-tint absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                    alt={study.imageAlt}
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
                     loading="lazy"
                     decoding="async"
                     width={720}
                     height={540}
                   />
 
-                  {/* Brand tint overlay */}
-                  <div
-                    className={`absolute inset-0 bg-gradient-to-br ${study.bg} opacity-60 mix-blend-multiply`}
-                    aria-hidden="true"
-                  />
-
                   {/* Dark vignette */}
                   <div
-                    className="absolute inset-0 bg-gradient-to-t from-background/85 via-background/15 to-transparent transition-opacity duration-500 group-hover:opacity-50"
+                    className="absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-transparent transition-opacity duration-500 group-hover:opacity-50"
                     aria-hidden="true"
                   />
 
@@ -100,6 +94,7 @@ export function FeaturedWork() {
                 <div className="space-y-1.5 flex-1">
                   <p className="text-[0.65rem] font-sans uppercase tracking-[0.22em] text-gold">
                     {study.industry}
+                    <span className="text-muted-foreground/70"> · {study.year}</span>
                   </p>
                   <h3 className="text-[1.5rem] font-serif font-normal text-foreground group-hover:text-ruby transition-colors duration-300 leading-snug">
                     {study.client}
@@ -107,10 +102,40 @@ export function FeaturedWork() {
                   <p className="text-[0.875rem] text-muted-foreground font-sans font-light leading-[1.7]">
                     {study.description}
                   </p>
+                  <ul className="flex flex-wrap gap-2 pt-2" aria-label="What we delivered">
+                    {study.deliverables.map((d) => (
+                      <li
+                        key={d}
+                        className="px-2.5 py-1 border border-border/60 text-[0.62rem] font-sans uppercase tracking-[0.14em] text-muted-foreground"
+                      >
+                        {d}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </a>
             </motion.article>
           ))}
+        </motion.div>
+
+        {/* Also worked with */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={sectionViewport}
+          variants={fadeInUp}
+          className="mt-[var(--sp-6)] pt-8 border-t border-border/30 flex flex-col md:flex-row md:items-center gap-5 md:gap-10"
+        >
+          <p className="text-[0.65rem] font-sans uppercase tracking-[0.22em] text-muted-foreground shrink-0">
+            Also worked with
+          </p>
+          <ul className="flex flex-wrap gap-x-8 gap-y-3">
+            {siteConfig.alsoWorkedWith.map((name) => (
+              <li key={name} className="font-serif text-[1.15rem] text-foreground/75">
+                {name}
+              </li>
+            ))}
+          </ul>
         </motion.div>
       </div>
     </section>

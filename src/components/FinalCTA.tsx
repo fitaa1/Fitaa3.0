@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { siteConfig } from "@/config/site";
-import { ContactForm } from "./ContactForm";
+const loadForm = () => import("./ContactForm");
+const ContactForm = lazy(() => loadForm().then((m) => ({ default: m.ContactForm })));
 import { fadeInLeft, fadeInUp, sectionViewport } from "@/lib/animations";
 
 function WhatsAppIcon({ size = 20 }: { size?: number }) {
@@ -29,6 +30,13 @@ type Tab = "form" | "whatsapp";
 
 function ContactCard() {
   const [tab, setTab] = useState<Tab>("whatsapp");
+
+  /* Fetch the enquiry form in the background once the page is idle. */
+  useEffect(() => {
+    const w = window as Window & { requestIdleCallback?: (cb: () => void) => number };
+    if (w.requestIdleCallback) w.requestIdleCallback(() => void loadForm());
+    else setTimeout(() => void loadForm(), 2500);
+  }, []);
 
   const waNumber = siteConfig.contact.phone.replace(/\D/g, "").replace(/^0/, "233");
   const waMessage = encodeURIComponent("Hi Fitaa Digital! I'd like to discuss a project with you.");
@@ -104,7 +112,9 @@ function ContactCard() {
               animate="visible"
               exit="exit"
             >
-              <ContactForm />
+              <Suspense fallback={<div className="min-h-[30rem]" aria-busy="true" />}>
+                <ContactForm />
+              </Suspense>
             </motion.div>
           ) : (
             <motion.div
@@ -130,13 +140,13 @@ function ContactCard() {
                 </div>
               </div>
 
-              <h4 className="font-serif text-[1.5rem] font-medium text-foreground mb-3 leading-snug">
+              <h3 className="font-serif text-[1.5rem] font-medium text-foreground mb-3 leading-snug">
                 Prefer a quick conversation?
-              </h4>
+              </h3>
               <p className="text-muted-foreground font-sans font-light text-[0.9375rem] max-w-xs leading-[1.72] mb-2">
                 Message us directly on WhatsApp. We typically reply within the hour.
               </p>
-              <p className="text-gold font-serif text-[1.0625rem] mb-10 tracking-wide">
+              <p className="text-gold font-sans font-medium tabular-nums text-[1.0625rem] mb-10 tracking-wide">
                 {siteConfig.contact.phone}
               </p>
 
@@ -153,7 +163,7 @@ function ContactCard() {
               </a>
 
               <p className="text-[0.65rem] font-sans uppercase tracking-[0.18em] text-muted-foreground/50">
-                Opens WhatsApp — mobile or desktop
+                Opens WhatsApp on mobile or desktop
               </p>
             </motion.div>
           )}
@@ -203,7 +213,7 @@ export function FinalCTA() {
             </h2>
 
             <p className="text-muted-foreground font-sans font-light text-[1.0625rem] mb-[3.4375rem] max-w-sm leading-[1.75]">
-              Whether it's a billboard campaign, a striking new identity, or a complete digital presence — let's make it happen.
+              Whether it's a billboard campaign, a striking new identity, or a complete digital presence, let's make it happen.
             </p>
 
             {/* Contact details */}
@@ -228,7 +238,7 @@ export function FinalCTA() {
                     <p className="text-[0.65rem] font-sans uppercase tracking-[0.22em] text-muted-foreground mb-1">Phone</p>
                     <a
                       href={`tel:${siteConfig.contact.phone.replace(/\s/g, "")}`}
-                      className="text-foreground font-serif text-[1.125rem] hover:text-ruby transition-colors duration-300"
+                      className="text-foreground font-sans font-medium tabular-nums text-[1.0625rem] hover:text-ruby transition-colors duration-300"
                     >
                       {siteConfig.contact.phone}
                     </a>
