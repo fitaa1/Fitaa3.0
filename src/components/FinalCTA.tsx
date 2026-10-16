@@ -2,9 +2,11 @@ import { useState, useEffect, lazy, Suspense } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { siteConfig } from "@/config/site";
+import { fadeInLeft, fadeInUp, sectionViewport } from "@/lib/animations";
+
+/* The enquiry form (and its validation libraries) loads separately to keep the first load small. */
 const loadForm = () => import("./ContactForm");
 const ContactForm = lazy(() => loadForm().then((m) => ({ default: m.ContactForm })));
-import { fadeInLeft, fadeInUp, sectionViewport } from "@/lib/animations";
 
 /** All wording for this section lives in siteConfig.contactSection. */
 const copy = siteConfig.contactSection;

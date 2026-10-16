@@ -29,6 +29,10 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     const root = document.documentElement;
     root.classList.toggle("dark", isDark);
     root.style.colorScheme = isDark ? "dark" : "light";
+    /* Phone browser bar follows the theme actually shown, including after a toggle. */
+    document
+      .querySelectorAll('meta[name="theme-color"]')
+      .forEach((m) => m.setAttribute("content", isDark ? "#090e12" : "#f7f9fb"));
   }, [isDark]);
 
   /* Follow the device setting live, until the visitor picks a theme themselves. */

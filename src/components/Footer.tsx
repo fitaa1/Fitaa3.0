@@ -78,8 +78,8 @@ export function Footer() {
 
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 pt-7 text-[0.66rem] font-sans uppercase tracking-[0.15em] text-muted-foreground">
           <div className="flex gap-6">
-            <a href="/privacy" className="hover:text-foreground/55 transition-colors duration-250">Privacy Policy</a>
-            <a href="/terms" className="hover:text-foreground/55 transition-colors duration-250">Terms of Service</a>
+            <a href="/privacy" className="hover:text-foreground transition-colors duration-250">Privacy Policy</a>
+            <a href="/terms" className="hover:text-foreground transition-colors duration-250">Terms of Service</a>
           </div>
           <p>&copy; {year} {siteConfig.name}. All rights reserved.</p>
         </div>

@@ -133,7 +133,7 @@
       var dark=t?t==="dark":window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches;
       if(dark)d.classList.add("dark");d.style.colorScheme=dark?"dark":"light";})();
     </script>
-    <!-- Splash: shown once per visit, ~0.6s, skipped for reduced motion -->
+    <!-- Splash: logo for 1s on the first visit of a session; skipped for reduced motion and on /privacy, /terms -->
     <style>
       #splash{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;background:hsl(210 30% 98%);transition:opacity .32s ease,visibility .32s}
       #splash.out{opacity:0;visibility:hidden}
