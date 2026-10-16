@@ -40,24 +40,21 @@ export function FeaturedWork() {
           viewport={cardViewport}
           className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8"
         >
-          {siteConfig.caseStudies.map((study, idx) => (
+          {siteConfig.caseStudies.map((study) => (
             <motion.article
               key={study.client}
               variants={fadeInUp}
-              className="group"
+              className="group h-full"
             >
               <a
                 href={study.link}
                 target={study.link.startsWith("http") ? "_blank" : undefined}
                 rel={study.link.startsWith("http") ? "noopener noreferrer" : undefined}
                 aria-label={`${study.client} — ${study.industry} case study`}
-                className="block"
+                className="flex flex-col h-full"
               >
-                {/* Image container — φ aspect ratio (golden ratio = 1.618:1) */}
-                <div
-                  className="relative overflow-hidden bg-card mb-5"
-                  style={{ aspectRatio: idx % 2 === 0 ? "1.618 / 1" : "1.272 / 1" }}
-                >
+                {/* Image container — identical ratio on every tile */}
+                <div className="relative overflow-hidden bg-card mb-5 aspect-[4/3]">
                   <img
                     src={study.imagePath}
                     alt={`${study.client} project — ${study.industry}`}
@@ -65,7 +62,7 @@ export function FeaturedWork() {
                     loading="lazy"
                     decoding="async"
                     width={720}
-                    height={445}
+                    height={540}
                   />
 
                   {/* Brand tint overlay */}
@@ -82,7 +79,7 @@ export function FeaturedWork() {
 
                   {/* Result badge — slides up on hover */}
                   <div
-                    className="absolute bottom-0 left-0 right-0 p-5 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-out"
+                    className="absolute bottom-0 left-0 right-0 p-5 transition-all duration-500 ease-out [@media(hover:hover)]:translate-y-2 [@media(hover:hover)]:opacity-0 group-hover:translate-y-0 group-hover:opacity-100"
                     aria-hidden="true"
                   >
                     <span className="inline-flex items-center gap-2 px-4 py-2 bg-background/80 text-ruby text-[0.68rem] font-sans uppercase tracking-[0.15em] backdrop-blur-sm border border-ruby/25">
@@ -100,11 +97,11 @@ export function FeaturedWork() {
                 </div>
 
                 {/* Caption */}
-                <div className="space-y-1.5">
+                <div className="space-y-1.5 flex-1">
                   <p className="text-[0.65rem] font-sans uppercase tracking-[0.22em] text-gold">
                     {study.industry}
                   </p>
-                  <h3 className="text-[1.5rem] font-serif font-medium text-foreground group-hover:text-ruby transition-colors duration-300 leading-snug">
+                  <h3 className="text-[1.5rem] font-serif font-normal text-foreground group-hover:text-ruby transition-colors duration-300 leading-snug">
                     {study.client}
                   </h3>
                   <p className="text-[0.875rem] text-muted-foreground font-sans font-light leading-[1.7]">

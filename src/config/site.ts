@@ -5,7 +5,7 @@ export const siteConfig = {
   tagline: "Pure. Strategic. Impactful.",
   description:
     "We turn billboard views and digital impressions into real customers. LED campaigns, striking visuals, and high-converting web experiences — built for brands in Accra and beyond.",
-  url: "https://fitaa.digital",
+  url: "https://fitaadigital.vercel.app",
 
   nav: [
     { label: "Home",     href: "#home"     },
@@ -56,7 +56,7 @@ export const siteConfig = {
       result: "Social Media Growth",
       description: "Scroll-stopping posts and videos that built a loyal, engaged community from scratch.",
       link: "https://www.instagram.com/tinkertresses",
-      bg: "from-[#9B122C]/40 via-[#9B122C]/15 to-transparent",
+      bg: "from-[#00ddff]/40 via-[#00ddff]/15 to-transparent",
       /*
        * REAL CLIENT PHOTO:
        * Add a screenshot from @tinkertresses Instagram to /public/work/tinkertresses.jpg
@@ -70,7 +70,7 @@ export const siteConfig = {
       result: "Community Engagement",
       description: "Warm, trustworthy social content that brought families through the door.",
       link: "https://www.instagram.com/mummy.day.care.centre",
-      bg: "from-[#D4AF37]/30 via-[#D4AF37]/10 to-transparent",
+      bg: "from-[#e8be62]/30 via-[#e8be62]/10 to-transparent",
       /*
        * REAL CLIENT PHOTO:
        * Add screenshot from @mummy.day.care.centre to /public/work/mummy-daycare.jpg
@@ -84,7 +84,7 @@ export const siteConfig = {
       result: "Industry Publication",
       description: "A polished oil and gas magazine that positioned Hydra as an authority in the sector.",
       link: "#work",
-      bg: "from-[#9B122C]/30 via-[#D4AF37]/10 to-transparent",
+      bg: "from-[#00ddff]/30 via-[#e8be62]/10 to-transparent",
       /*
        * REAL CLIENT PHOTO: Add Hydra Offshore asset to /public/work/hydra-offshore.jpg
        */
@@ -96,7 +96,7 @@ export const siteConfig = {
       result: "NFT Mint Site Launch",
       description: "A high-impact mint site that brought an empowering digital art collection to life.",
       link: "https://www.instagram.com/womenofsolnft",
-      bg: "from-[#D4AF37]/25 via-[#9B122C]/12 to-transparent",
+      bg: "from-[#e8be62]/25 via-[#00ddff]/12 to-transparent",
       /*
        * REAL CLIENT PHOTO:
        * Add screenshot from @womenofsolnft to /public/work/women-of-sol.jpg
