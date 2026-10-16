@@ -62,33 +62,33 @@
 
 /* ─── Light Mode ─────────────────────────────────────────────────────────── */
 :root {
-  --background:         210 40% 98%;
-  --foreground:         222 47% 11%;
-  --border:             214 32% 88%;
-  --input:              214 32% 88%;
-  --ring:               221 83% 45%;
+  --background:         210 30% 98%;
+  --foreground:         211 36% 10%;
+  --border:             211 20% 88%;
+  --input:              211 20% 88%;
+  --ring:               192 95% 34%;
   --card:               0 0% 100%;
-  --card-foreground:    222 47% 11%;
+  --card-foreground:    211 36% 10%;
   --popover:            0 0% 100%;
-  --popover-foreground: 222 47% 11%;
-  --primary:            221 83% 45%;
-  --primary-foreground: 210 40% 98%;
-  --secondary:          43 70% 40%;
-  --secondary-foreground: 222 47% 8%;
-  --muted:              214 32% 94%;
-  --muted-foreground:   215 16% 40%;
-  --accent:             214 32% 94%;
-  --accent-foreground:  222 47% 11%;
+  --popover-foreground: 211 36% 10%;
+  --primary:            192 95% 34%;
+  --primary-foreground: 210 30% 98%;
+  --secondary:          38 70% 40%;
+  --secondary-foreground: 211 36% 8%;
+  --muted:              211 20% 94%;
+  --muted-foreground:   211 10% 40%;
+  --accent:             211 20% 94%;
+  --accent-foreground:  211 36% 10%;
   --destructive:        0 84% 60%;
-  --destructive-foreground: 210 40% 98%;
-  --ruby:     221 83% 45%;
-  --gold:     43  70% 40%;
-  --charcoal: 222 47% 11%;
-  --aurora-1: 221 83% 55%;
-  --aurora-2: 192 85% 50%;
-  --aurora-3: 248 75% 62%;
-  --aurora-strength: 0.32;
-  --aurora-grain: 0.05;
+  --destructive-foreground: 210 30% 98%;
+  --ruby:     192 95% 34%;   /* brand accent — deep cyan for contrast on light */
+  --gold:     38  72% 40%;
+  --charcoal: 211 32% 5%;
+  --aurora-1: 217 95% 55%;
+  --aurora-2: 188 100% 50%;
+  --aurora-3: 226 80% 60%;
+  --aurora-strength: 0.28;
+  --aurora-grain: 0.04;
   --app-font-sans:  'Satoshi', sans-serif;
   --app-font-serif: 'Playfair Display', serif;
   --app-font-mono:  Menlo, monospace;
@@ -96,41 +96,41 @@
 }
 
 /*
- * ─── Dark Mode — Deep Midnight Blue ──────────────────────────────────────
+ * ─── Dark Mode — Apex charcoal + electric cyan (from apex-aura-template) ──
  * To manually adjust the background:
- *   --background: 224 50% [LIGHTNESS]%;
+ *   --background: 211 32% [LIGHTNESS]%;
  *   Lightness guide: 3% = near-black | 5% = current | 9% = dark | 13% = mid-dark
  * To adjust body/paragraph text brightness:
- *   --muted-foreground: 215 22% [LIGHTNESS]%;
- *   Lightness guide: 55% = dim | 70% = current | 80% = bright
+ *   --muted-foreground: 211 8% [LIGHTNESS]%;
+ *   Lightness guide: 55% = dim | 64% = current | 75% = bright
  * ─────────────────────────────────────────────────────────────────────────
  */
 .dark {
-  --background:         224 50% 5%;
-  --foreground:         210 40% 98%;
-  --border:             222 30% 15%;
-  --input:              222 30% 15%;
-  --ring:               217 91% 60%;
-  --card:               223 42% 8%;
-  --card-foreground:    210 40% 98%;
-  --popover:            223 42% 8%;
-  --popover-foreground: 210 40% 98%;
-  --primary:            217 91% 60%;
-  --primary-foreground: 224 50% 5%;
-  --secondary:          43 74% 56%;
-  --secondary-foreground: 224 50% 5%;
-  --muted:              222 30% 12%;
-  --muted-foreground:   215 22% 70%;
-  --accent:             222 30% 12%;
-  --accent-foreground:  210 40% 98%;
+  --background:         211 32% 5%;
+  --foreground:         211 30% 96%;
+  --border:             211 16% 14%;
+  --input:              211 16% 16%;
+  --ring:               188 100% 50%;
+  --card:               211 24% 9%;
+  --card-foreground:    211 30% 96%;
+  --popover:            211 24% 9%;
+  --popover-foreground: 211 30% 96%;
+  --primary:            188 100% 50%;
+  --primary-foreground: 212 36% 5%;
+  --secondary:          41 74% 65%;
+  --secondary-foreground: 212 36% 5%;
+  --muted:              211 18% 13%;
+  --muted-foreground:   211 8% 64%;
+  --accent:             211 13% 18%;
+  --accent-foreground:  211 30% 96%;
   --destructive:        0 84% 60%;
-  --destructive-foreground: 210 40% 98%;
-  --ruby: 217 91% 60%;
-  --gold: 43 74% 56%;
-  --aurora-1: 221 90% 52%;
-  --aurora-2: 193 92% 48%;
-  --aurora-3: 250 82% 60%;
-  --aurora-strength: 0.55;
+  --destructive-foreground: 211 30% 96%;
+  --ruby: 188 100% 50%;      /* brand accent — electric cyan */
+  --gold: 41 74% 65%;        /* champagne gold */
+  --aurora-1: 217 95% 50%;   /* logo blue */
+  --aurora-2: 188 100% 48%;  /* electric cyan */
+  --aurora-3: 226 85% 52%;   /* deep sapphire */
+  --aurora-strength: 0.5;
   --aurora-grain: 0.08;
 }
 
@@ -204,16 +204,16 @@ html { scroll-behavior: smooth; }
   position: relative;
   overflow: hidden;
   border-radius: var(--radius-lg);
-  background: linear-gradient(135deg, #c49a2a 0%, #e8c94a 45%, #b8891e 100%);
-  color: #1a0f04;
+  background: linear-gradient(135deg, #ffd16b 0%, #e8be62 50%, #e38d3d 100%);
+  color: #080c10;
   font-weight: 500;
-  border: 1px solid rgba(232,201,74,0.35);
+  border: 1px solid hsl(var(--gold) / 0.35);
   transition: filter 0.25s ease, transform 0.12s ease, box-shadow 0.25s ease;
-  box-shadow: 0 1px 12px rgba(212,175,55,0.15);
+  box-shadow: 0 1px 12px hsl(var(--gold) / 0.15);
 }
 .btn-gold:hover {
   filter: brightness(1.1);
-  box-shadow: 0 4px 24px rgba(212,175,55,0.28);
+  box-shadow: 0 4px 24px hsl(var(--gold) / 0.3);
 }
 .btn-gold:active { transform: scale(0.985); }
 
