@@ -12,8 +12,8 @@
   --sp-3: 1.3125rem; /* 21px */
   --sp-4: 2.125rem;  /* 34px */
   --sp-5: 3.4375rem; /* 55px */
-  --sp-6: 5.5rem;    /* 88px ≈ 89 */
-  --sp-7: 9rem;      /* 144px */
+  --sp-6: clamp(3.5rem, 7vw, 5.5rem); /* 56px phone → 88px desktop */
+  --sp-7: clamp(5rem, 11vw, 9rem);    /* 80px phone → 144px desktop */
   --sp-8: 14.5rem;   /* 232px ≈ 233 */
 }
 

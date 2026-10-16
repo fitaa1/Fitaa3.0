@@ -57,7 +57,7 @@ export function ContactForm() {
   }
 
   const inputClass =
-    "bg-transparent border-border/40 focus-visible:ring-ruby rounded-none h-12 font-sans text-sm placeholder:text-muted-foreground/50";
+    "bg-transparent border-border focus-visible:ring-ruby rounded-none h-12 font-sans text-sm placeholder:text-muted-foreground/70";
 
   if (state === "success")
     return (
@@ -155,7 +155,7 @@ export function ContactForm() {
               <FormControl>
                 <Textarea
                   placeholder="What are you looking to achieve? Billboard campaign, website, branding...?"
-                  className="min-h-[120px] bg-transparent border-border/40 focus-visible:ring-ruby rounded-none resize-none font-sans text-sm placeholder:text-muted-foreground/50"
+                  className="min-h-[120px] bg-transparent border-border focus-visible:ring-ruby rounded-none resize-none font-sans text-sm placeholder:text-muted-foreground/70"
                   {...field}
                 />
               </FormControl>

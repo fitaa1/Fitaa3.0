@@ -61,12 +61,6 @@ export function Services() {
               <p className="text-muted-foreground font-sans font-light text-[0.9rem] leading-[1.72]">
                 {service.description}
               </p>
-
-              {/* Corner accent */}
-              <div
-                className="absolute bottom-4 right-4 w-1 h-1 bg-border group-hover:bg-ruby/45 transition-colors duration-500"
-                aria-hidden="true"
-              />
             </motion.li>
           ))}
         </motion.ul>
