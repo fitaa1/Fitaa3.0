@@ -66,13 +66,14 @@ export function WhyUs() {
             className="lg:col-span-5 flex flex-col"
           >
             <SectionLabel
-              eyebrow={`Why ${siteConfig.name}`}
-              heading="Pure craft. Measurable results."
+              id="whyus-heading"
+              eyebrow={siteConfig.whyUsSection.eyebrow}
+              heading={siteConfig.whyUsSection.heading}
               eyebrowColor="gold"
               className="mb-[2.125rem]"
             />
             <p className="text-muted-foreground font-sans font-light text-[1.0625rem] leading-[1.75] max-w-md">
-              We don't just create pretty visuals. Every billboard, every post, every landing page is engineered to move people and drive real business results in Accra and across Ghana.
+              {siteConfig.whyUsSection.body}
             </p>
 
             {/* Animated gold line */}

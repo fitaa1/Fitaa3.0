@@ -1,130 +1,51 @@
-# Fitaa Digital — Agency Website
+# Fitaa Digital: Agency Website
 
-**Pure. Strategic. Impactful.**
+Single-page site for Fitaa Digital (formerly Fitaa Creative), a creative and digital marketing agency in Accra, Ghana.
 
-A premium, high-performance marketing agency landing page for [Fitaa Digital](https://fitaa.digital) — built in Accra, Ghana. LED billboard campaigns, graphic design, campaign landing pages, and full digital marketing.
+**Live:** https://fitaadigital.vercel.app
 
----
+## Stack
 
-## Tech Stack
-
-| Technology | Role |
+| Tool | Role |
 |---|---|
-| [React 18](https://react.dev) | UI framework |
-| [TypeScript 5](https://www.typescriptlang.org) | Type safety |
-| [Vite 6](https://vitejs.dev) | Build tool & dev server |
-| [Tailwind CSS v4](https://tailwindcss.com) | Utility-first styling |
-| [Framer Motion](https://www.framer.com/motion/) | Animations |
-| [Radix UI](https://www.radix-ui.com) | Accessible UI primitives |
-| [React Hook Form + Zod](https://react-hook-form.com) | Form validation |
-| [Lucide React](https://lucide.dev) | Icons |
-| [Formspree](https://formspree.io) | Contact form backend (optional) |
+| React 18 + TypeScript | UI |
+| Vite 6 | Build and dev server |
+| Tailwind CSS v4 | Styling |
+| Framer Motion | Animations |
+| React Hook Form + Zod | Enquiry form (loaded only when needed) |
+| Formspree | Delivers enquiry form messages |
+| Lucide | Icons |
+| Vercel | Hosting; every branch gets a preview link |
 
----
+## Where things are
 
-## Local Setup
+| File | What it controls |
+|---|---|
+| `src/config/site.ts` | **All words, links, images and lists on the page** |
+| `src/index.css` | Colours (light and dark), fonts, spacing, effects |
+| `index.html` | SEO title and description, link previews, Google business data, favicon, splash screen |
+| `public/work/` | Case study images (4:3 WebP) |
+| `public/sitemap.xml`, `public/robots.txt` | Search engine files |
+| `src/pages/Legal.tsx` | Privacy Policy and Terms text (`/privacy`, `/terms`) |
+| `src/components/` | One file per section: `Hero`, `Services`, `WhyUs`, `FeaturedWork`, `Testimonials`, `FinalCTA` (contact), `Navbar`, `Footer` |
+
+Editing guide: see **CUSTOMIZE.md**.
+
+## Run locally
 
 ```bash
-# 1. Clone the repo
-git clone <your-repo-url>
-cd fitaa-digital
-
-# 2. Install dependencies
 npm install
-
-# 3. Start the dev server
-npm run dev
+npm run dev        # http://localhost:5000
+npm run build      # production build in dist/
 ```
 
-Open [http://localhost:5173](http://localhost:5173) in your browser (or port 5000 on Replit).
+## Deploy
 
----
+Push a branch to GitHub and Vercel builds a preview automatically. Merging into `main` updates the live site. Work happens on branches with a pull request; nothing is pushed straight to `main`.
 
-## How to Customise
+## Built-in behaviour worth knowing
 
-All site content is centralised in **`src/config/site.ts`**. No need to hunt through individual components. See `CUSTOMIZE.md` for a full guide.
-
-### Colors & Fonts
-
-Edit **`src/index.css`** — CSS variables in `:root` (light mode) and `.dark` (dark mode):
-
-```css
-:root {
-  --ruby: 349 79% 34%;   /* #9B122C — Ruby Red */
-  --gold: 46 65% 42%;    /* #D4AF37 — Royal Gold */
-}
-```
-
-### Content Sections
-
-| Section | Component | Config key in `site.ts` |
-|---|---|---|
-| Navigation | `Navbar.tsx` | `nav` |
-| Hero | `Hero.tsx` | `tagline`, `description` |
-| Services | `Services.tsx` | `services` |
-| Case Studies | `FeaturedWork.tsx` | `caseStudies` |
-| Stats | `WhyUs.tsx` | `stats` |
-| Testimonials | `Testimonials.tsx` | `testimonials` |
-| Contact | `FinalCTA.tsx` | `contact` |
-| Social Links | `Footer.tsx` | `social` |
-
----
-
-## Contact Form Setup
-
-The form uses [Formspree](https://formspree.io) for zero-backend email delivery.
-
-1. Create a free account at [formspree.io](https://formspree.io)
-2. Create a new form and copy your **form ID** (e.g. `xrgvwkzb`)
-3. Paste it into `src/config/site.ts`:
-
-```ts
-contact: {
-  formspreeId: "xrgvwkzb",
-}
-```
-
-> If `formspreeId` is left empty the form simulates success locally — useful for development.
-
----
-
-## Deployment
-
-### Vercel (Recommended)
-
-Connect your GitHub repo in the [Vercel dashboard](https://vercel.com/new).
-
-**Build settings** (Vercel auto-detects these from the project):
-- Framework Preset: **Vite**
-- Build Command: `npm run build`
-- Output Directory: `dist`
-
-The included `vercel.json` handles SPA client-side routing automatically.
-
-### Netlify / Cloudflare Pages / GitHub Pages
-
-```bash
-npm run build
-```
-
-Serve the `dist/` folder. Configure your host to redirect all routes to `index.html` for client-side routing.
-
-### Replit
-
-The dev server uses `host: "0.0.0.0"` and `allowedHosts: true` — these are **development-only** settings inside the `server` block and have zero effect on `vite build`. Vercel and all other production builds are unaffected.
-
----
-
-## Theme
-
-Dark mode is the default. Users toggle with the sun/moon button in the navbar. Preference is saved to `localStorage`.
-
----
-
-## License
-
-MIT — free to use, modify, and distribute.
-
----
-
-*Built with care in Accra, Ghana*
+- **Theme** follows the visitor's device (light or dark) until they tap the toggle; their choice is then remembered.
+- **Splash** shows the logo for 1 second on the first visit of a session, and is skipped for visitors with reduced motion turned on.
+- **Menu highlight** follows the section on screen.
+- **Speed:** the enquiry form and legal pages load separately, so the first load stays small.

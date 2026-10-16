@@ -2,9 +2,14 @@ import { useState, useEffect, lazy, Suspense } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { siteConfig } from "@/config/site";
+import { fadeInLeft, fadeInUp, sectionViewport } from "@/lib/animations";
+
+/* The enquiry form (and its validation libraries) loads separately to keep the first load small. */
 const loadForm = () => import("./ContactForm");
 const ContactForm = lazy(() => loadForm().then((m) => ({ default: m.ContactForm })));
-import { fadeInLeft, fadeInUp, sectionViewport } from "@/lib/animations";
+
+/** All wording for this section lives in siteConfig.contactSection. */
+const copy = siteConfig.contactSection;
 
 function WhatsAppIcon({ size = 20 }: { size?: number }) {
   return (
@@ -66,6 +71,7 @@ function ContactCard() {
           return (
             <button
               key={t}
+              id={`tab-${t}`}
               role="tab"
               aria-selected={active}
               aria-controls={`tabpanel-${t}`}
@@ -82,7 +88,7 @@ function ContactCard() {
                 ? <Mail size={13} strokeWidth={1.5} aria-hidden="true" />
                 : <WhatsAppIcon size={13} />
               }
-              {t === "form" ? "Send Enquiry" : "WhatsApp"}
+              {t === "form" ? copy.formTab : copy.whatsappTab}
 
               {/* Active underline */}
               {active && (
@@ -141,10 +147,10 @@ function ContactCard() {
               </div>
 
               <h3 className="font-serif text-[1.5rem] font-medium text-foreground mb-3 leading-snug">
-                Prefer a quick conversation?
+                {copy.whatsappHeading}
               </h3>
               <p className="text-muted-foreground font-sans font-light text-[0.9375rem] max-w-xs leading-[1.72] mb-2">
-                Message us directly on WhatsApp. We typically reply within the hour.
+                {copy.whatsappBody}
               </p>
               <p className="text-gold font-sans font-medium tabular-nums text-[1.0625rem] mb-10 tracking-wide">
                 {siteConfig.contact.phone}
@@ -159,11 +165,11 @@ function ContactCard() {
                 aria-label="Open WhatsApp chat with Fitaa Digital"
               >
                 <WhatsAppIcon size={15} />
-                Chat on WhatsApp
+                {copy.whatsappButton}
               </a>
 
               <p className="text-[0.65rem] font-sans uppercase tracking-[0.18em] text-muted-foreground/50">
-                Opens WhatsApp on mobile or desktop
+                {copy.whatsappNote}
               </p>
             </motion.div>
           )}
@@ -202,18 +208,18 @@ export function FinalCTA() {
             className="lg:col-span-5 flex flex-col justify-center"
           >
             <span className="text-[0.68rem] font-sans uppercase tracking-[0.28em] text-ruby mb-5">
-              Start the Conversation
+              {copy.eyebrow}
             </span>
 
             <h2
               id="contact-heading"
               className="text-[clamp(2.2rem,5vw,3.5rem)] font-serif font-bold text-foreground leading-[1.08] tracking-[-0.012em] mb-[1.3125rem]"
             >
-              Ready to Elevate<br />Your Brand?
+              {copy.heading[0]}<br />{copy.heading[1]}
             </h2>
 
             <p className="text-muted-foreground font-sans font-light text-[1.0625rem] mb-[3.4375rem] max-w-sm leading-[1.75]">
-              Whether it's a billboard campaign, a striking new identity, or a complete digital presence, let's make it happen.
+              {copy.body}
             </p>
 
             {/* Contact details */}

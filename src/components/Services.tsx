@@ -124,8 +124,9 @@ export function Services() {
 
       <div className="container mx-auto px-6 md:px-12">
         <SectionLabel
-          eyebrow="What We Do"
-          heading="Services Built to Perform."
+          id="services-heading"
+          eyebrow={siteConfig.servicesSection.eyebrow}
+          heading={siteConfig.servicesSection.heading}
           className="mb-[var(--sp-6)] md:max-w-[38rem]"
         />
 

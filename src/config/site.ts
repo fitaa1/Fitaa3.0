@@ -1,12 +1,32 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+ * SITE CONTENT: every word, link and image on the page lives in this file.
+ *
+ * How to edit
+ *   • Change the text between the quotes. Keep the quotes and the commas.
+ *   • To add an item to a list (a service, case study, stat…), copy one
+ *     whole { … } block, paste it below, and edit it.
+ *   • Images go in /public (e.g. /public/work/my-image.webp) and are
+ *     referenced from here as "/work/my-image.webp".
+ *   • Colours and fonts live in src/index.css. SEO text for Google and link
+ *     previews lives in index.html.
+ * ═══════════════════════════════════════════════════════════════════════════ */
+
 import { Monitor, Palette, Globe, BarChart2 } from "lucide-react";
 
 export const siteConfig = {
+  /* ── Brand ─────────────────────────────────────────────────────────────── */
   name: "Fitaa Digital",
   tagline: "Pure. Strategic. Impactful.",
+  /** Shown under the hero headline. */
   description:
     "We turn billboard views and digital impressions into real customers. LED campaigns, striking visuals, and high-converting web experiences built for brands in Accra and beyond.",
+  /** Live site address, no trailing slash. Used for the legal pages' canonical links. */
   url: "https://fitaadigital.vercel.app",
 
+  /* ── Top menu ──────────────────────────────────────────────────────────────
+   * href must match a section id: #home #services #why-us #work #contact.
+   * Keep the order the same as the page so the active-section highlight reads
+   * naturally. */
   nav: [
     { label: "Home",     href: "#home"     },
     { label: "Services", href: "#services" },
@@ -15,6 +35,24 @@ export const siteConfig = {
     { label: "Contact",  href: "#contact"  },
   ],
 
+  /* ── 1. Hero (first screen) ────────────────────────────────────────────── */
+  hero: {
+    /** Small pill above the headline. The prefix only shows on wider screens. */
+    eyebrow: "Creative Agency · Accra, Ghana",
+    eyebrowWidePrefix: "Premium ",
+    /** Two lines: the second line is coloured with the accent colour. */
+    headline: ["Turn Eyeballs", "Into Revenue."],
+    primaryButton: "Start Your Project",
+    secondaryButton: "View Our Work",
+  },
+
+  /* ── 2. Services ───────────────────────────────────────────────────────────
+   * icon: any icon from lucide.dev, imported at the top of this file.
+   * deliverables: shown when a visitor taps the card ("What's included"). */
+  servicesSection: {
+    eyebrow: "What We Do",
+    heading: "Services Built to Perform.",
+  },
   services: [
     {
       title: "LED Billboard Campaigns",
@@ -46,6 +84,13 @@ export const siteConfig = {
     },
   ],
 
+  /* ── 3. Why Us + stats ─────────────────────────────────────────────────────
+   * Stats count up from 0 when they scroll into view. */
+  whyUsSection: {
+    eyebrow: "Why Fitaa Digital",
+    heading: "Pure craft. Measurable results.",
+    body: "We don't just create pretty visuals. Every billboard, every post, every landing page is engineered to move people and drive real business results in Accra and across Ghana.",
+  },
   stats: [
     { value: 50,  suffix: "+", label: "Brands Elevated"      },
     { value: 4,   suffix: "",  label: "Core Specialisations" },
@@ -53,6 +98,16 @@ export const siteConfig = {
     { value: 10,  suffix: "+", label: "Years of Excellence"  },
   ],
 
+  /* ── 4. Selected Work (case studies) ───────────────────────────────────────
+   * Images: 4:3 ratio, about 1440×1080, WebP, under ~150 KB each.
+   * result: the small label on the image. link: leave "" if there's no page
+   * to send visitors to; the tile then shows without an arrow. */
+  workSection: {
+    eyebrow: "Selected Work",
+    heading: "Real Clients. Real Results.",
+    headerLink: "Start a Project",
+    alsoWorkedWithLabel: "Also worked with",
+  },
   caseStudies: [
     {
       client: "Hydra Offshore",
@@ -62,7 +117,7 @@ export const siteConfig = {
       description:
         "Designed every page of Offshore Ghana, Hydra's oil and gas magazine with 20,000 readers across West Africa, plus its advertising rate card and corporate brochure.",
       deliverables: ["Offshore Ghana magazine", "Rate card", "Brochure"],
-      link: "#work",
+      link: "",
       imagePath: "/work/hydra-offshore.webp",
       imageAlt: "Offshore Ghana magazine cover and advertising rate card designed for Hydra Offshore",
     },
@@ -103,10 +158,14 @@ export const siteConfig = {
       imageAlt: "Two Women of SOL NFT avatars from the collection",
     },
   ],
-
-  /** Smaller clients shown in the "Also worked with" strip under Selected Work. */
+  /** Names shown in the "Also worked with" row under the case studies. */
   alsoWorkedWith: ["ChicKing!", "Liberty Hands Foundation", "502", "2nd Generation IT Group"],
 
+  /* ── 5. Testimonials ───────────────────────────────────────────────────── */
+  testimonialsSection: {
+    eyebrow: "Client Voices",
+    heading: "What our clients say.",
+  },
   testimonials: [
     {
       quote:
@@ -122,6 +181,21 @@ export const siteConfig = {
     },
   ],
 
+  /* ── 6. Contact ────────────────────────────────────────────────────────────
+   * The WhatsApp link is built from `phone` automatically.
+   * formspreeId: the enquiry form's inbox at formspree.io. */
+  contactSection: {
+    eyebrow: "Start the Conversation",
+    /** Two lines, shown one under the other. */
+    heading: ["Ready to Elevate", "Your Brand?"],
+    body: "Whether it's a billboard campaign, a striking new identity, or a complete digital presence, let's make it happen.",
+    whatsappTab: "WhatsApp",
+    formTab: "Send Enquiry",
+    whatsappHeading: "Prefer a quick conversation?",
+    whatsappBody: "Message us directly on WhatsApp. We typically reply within the hour.",
+    whatsappButton: "Chat on WhatsApp",
+    whatsappNote: "Opens WhatsApp on mobile or desktop",
+  },
   contact: {
     email:       "fitaaba@gmail.com",
     address:     "Accra, Ghana",
@@ -129,6 +203,7 @@ export const siteConfig = {
     formspreeId: "xdajglpn",
   },
 
+  /* ── Footer social links ───────────────────────────────────────────────── */
   social: {
     behance:   "https://www.behance.net/crea8",
     instagram: "https://www.instagram.com/fitaacreative",

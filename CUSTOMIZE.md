@@ -1,199 +1,46 @@
-# Customising Fitaa Digital
+# Editing the site
 
-Everything you need to personalise this site is in two files:
+Almost everything is in **one file: `src/config/site.ts`**. Each section of the page has a labelled block there, in page order.
 
-1. **`src/config/site.ts`** — all text content, links, and data
-2. **`src/index.css`** — colors, fonts, and spacing
+## Text
 
----
+| On the page | In `site.ts` |
+|---|---|
+| Hero pill, headline, buttons | `hero` |
+| Line under the headline | `description` |
+| Menu | `nav` |
+| Services heading and cards | `servicesSection`, `services` |
+| Why Us heading, paragraph, numbers | `whyUsSection`, `stats` |
+| Work heading, case studies, "Also worked with" | `workSection`, `caseStudies`, `alsoWorkedWith` |
+| Testimonials | `testimonialsSection`, `testimonials` |
+| Contact heading, WhatsApp wording | `contactSection` |
+| Email, phone, form inbox | `contact` |
+| Footer social links | `social` |
 
-## 1. Site Content (`src/config/site.ts`)
+Rules: change only the text between the quotes, keep the commas. To add a card, copy a whole `{ … }` block and edit the copy.
 
-### Agency Name & Tagline
-```ts
-name: "Fitaa Digital",
-tagline: "Pure. Strategic. Impactful.",
-description: "Your short elevator pitch goes here...",
-url: "https://yourdomain.com",
-```
+## Case study images
 
-### Navigation
-```ts
-nav: [
-  { label: "Home",     href: "#home"     },
-  { label: "Services", href: "#services" },
-  // add or remove items here
-],
-```
+1. Make a **4:3** image, about **1440 × 1080**, saved as **WebP** under ~150 KB.
+2. Put it in `public/work/`.
+3. In `site.ts`, set `imagePath: "/work/your-file.webp"` and write a short `imageAlt` describing it.
+4. `link`: the client's page (opens in a new tab). Use `""` if there isn't one.
 
-### Services (up to 6 recommended)
-```ts
-services: [
-  {
-    title: "Your Service Title",
-    description: "One or two sentences describing what you do.",
-    icon: Monitor, // any Lucide icon
-  },
-],
-```
+## Colours and fonts
 
-Available icons to import from `lucide-react`: `Monitor`, `Palette`, `Globe`, `BarChart2`, `Target`, `Zap`, `Megaphone`, `Activity`, `Camera`, `Code`, `Layout`, etc.
+Open `src/index.css`; the guide at the top lists every setting.
 
-### Stats
-```ts
-stats: [
-  { value: 50,  suffix: "+", label: "Brands Elevated" },
-  { prefix: "$", value: 2.4, suffix: "M", label: "Revenue Generated" },
-],
-```
+- **Colours:** the `LIGHT MODE` and `DARK MODE` blocks. `--ruby` is the main accent, `--gold` the second.
+- **Fonts:** change `--app-font-sans` / `--app-font-serif` **and** the Google Fonts link in `index.html`.
 
-### Case Studies
-```ts
-caseStudies: [
-  {
-    client: "Client Name",
-    industry: "Industry",
-    result: "Key Result",
-    description: "One sentence summary.",
-    link: "https://...",
-    bg: "from-[#9B122C]/30 via-[#9B122C]/10 to-transparent", // overlay gradient
-    imagePath: "https://...", // use a real image URL or put image in /public
-  },
-],
-```
+## SEO and link previews
 
-**To use a local image:** put the file in `/public/` (e.g. `/public/work/tinkertresses.jpg`) and set `imagePath: "/work/tinkertresses.jpg"`.
+In `index.html`: `<title>`, `description`, the `og:` and `twitter:` tags, and the business details in the `application/ld+json` block. If the domain changes, update it there, in `site.ts` (`url`), and in `public/sitemap.xml` and `public/robots.txt`.
 
-### Testimonials
-```ts
-testimonials: [
-  {
-    quote: "The testimonial text...",
-    author: "Full Name",
-    title: "Job Title",
-    company: "Company Name",
-  },
-],
-```
+## Enquiry form
 
-### Contact
-```ts
-contact: {
-  email:       "hello@yourdomain.com",
-  address:     "Your City, Country",
-  phone:       "+1 000 000 0000",
-  formspreeId: "YOUR_FORM_ID", // from formspree.io — leave empty to disable
-},
-```
+Messages go to Formspree. To change the inbox, create a form at formspree.io and paste its ID into `contact.formspreeId`.
 
-### Social Links
-```ts
-social: {
-  behance:   "https://www.behance.net/yourhandle",
-  instagram: "https://www.instagram.com/yourhandle",
-},
-```
+## Before publishing a change
 
----
-
-## 2. Colors & Fonts (`src/index.css`)
-
-### Brand Colors
-
-Change the HSL values to match your brand:
-
-```css
-:root {
-  /* Light mode */
-  --ruby: 349 79% 34%;   /* Primary accent — default Ruby Red #9B122C */
-  --gold: 46 65% 42%;    /* Secondary accent — default Royal Gold #D4AF37 */
-}
-.dark {
-  --gold: 46 65% 52%;    /* Gold is slightly brighter in dark mode */
-}
-```
-
-**HSL converter:** [hslpicker.com](https://hslpicker.com) or use VS Code's color picker.
-
-### Background & Text Colors
-
-```css
-:root {
-  --background: 27 46% 97%;  /* Light mode page background */
-  --foreground: 214 60% 9%;  /* Light mode text */
-  --card: 0 0% 100%;         /* Light mode card background */
-}
-.dark {
-  --background: 214 60% 7%;  /* Dark mode page background */
-  --foreground: 27 46% 97%;  /* Dark mode text */
-  --card: 219 14% 12%;       /* Dark mode card background */
-}
-```
-
-### Fonts
-
-The project uses:
-- **Playfair Display** (headings) — loaded from Google Fonts
-- **Satoshi** (body) — loaded from Fontshare
-
-To change fonts, update the `@import` at the top of `src/index.css` and the `--app-font-*` variables:
-
-```css
---app-font-sans:  'Your Body Font', sans-serif;
---app-font-serif: 'Your Heading Font', serif;
-```
-
----
-
-## 3. Logo
-
-The logo is at `/public/logo.png`. Replace it with your own file — same filename, same folder.
-
-It's used in:
-- `src/components/Navbar.tsx`
-- `src/components/Footer.tsx`
-- `index.html` (favicon)
-
----
-
-## 4. SEO (`index.html`)
-
-Update the meta tags at the top of `index.html`:
-
-```html
-<title>Your Agency — Your Tagline</title>
-<meta name="description" content="Your description..." />
-<meta property="og:url" content="https://yourdomain.com/" />
-<meta property="og:image" content="https://yourdomain.com/og-image.png" />
-```
-
-Place your Open Graph image (1200×630px recommended) at `/public/og-image.png`.
-
----
-
-## 5. Analytics (Optional)
-
-Add your analytics snippet before `</head>` in `index.html`. No extra packages needed.
-
-**Google Analytics:**
-```html
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-XXXXXXXXXX');
-</script>
-```
-
-**Meta Pixel:**
-```html
-<!-- Meta Pixel Code -->
-<script>!function(f,b,e,...){...}(window,document,'script')</script>
-```
-
----
-
-## 6. Contact Form
-
-See [README.md](./README.md#contact-form-setup) for Formspree setup instructions.
+Run `npm run build`. If it finishes without errors, push to a branch and check the Vercel preview on a phone before merging.
