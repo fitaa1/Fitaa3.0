@@ -20,7 +20,7 @@ export function Testimonials() {
       />
 
       <div className="container mx-auto px-6 md:px-12 relative z-10">
-        <SectionLabel eyebrow="Client Voices" heading="What our clients say." className="mb-[var(--sp-6)]" />
+        <SectionLabel id="testimonials-heading" eyebrow={siteConfig.testimonialsSection.eyebrow} heading={siteConfig.testimonialsSection.heading} className="mb-[var(--sp-6)]" />
 
         <motion.div
           variants={staggerContainerSlow}
@@ -28,7 +28,6 @@ export function Testimonials() {
           whileInView="visible"
           viewport={cardViewport}
           className={`grid grid-cols-1 ${siteConfig.testimonials.length > 1 ? "md:grid-cols-2" : ""} gap-12 lg:gap-[5.5rem]`}
-          aria-label="Client testimonials"
         >
           {siteConfig.testimonials.map((t) => (
             <motion.figure

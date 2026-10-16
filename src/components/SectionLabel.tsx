@@ -2,6 +2,8 @@ import { motion } from "framer-motion";
 import { sectionViewport, fadeInUp } from "@/lib/animations";
 
 interface SectionLabelProps {
+  /** id for the <h2>, so the section can point to it with aria-labelledby */
+  id?: string;
   eyebrow: string;
   heading: string;
   eyebrowColor?: "ruby" | "gold";
@@ -11,6 +13,7 @@ interface SectionLabelProps {
 }
 
 export function SectionLabel({
+  id,
   eyebrow,
   heading,
   eyebrowColor = "ruby",
@@ -36,6 +39,7 @@ export function SectionLabel({
 
       {/* Heading — type scale: 4.2rem ≈ 6.8rem / φ */}
       <h2
+        id={id}
         className={`text-[clamp(2.2rem,4.5vw,4.2rem)] font-serif font-semibold text-foreground leading-[1.1] tracking-[-0.008em] ${headingClass}`}
       >
         {heading}

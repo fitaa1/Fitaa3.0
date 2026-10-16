@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Sun, Moon } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import { useTheme } from "@/contexts/ThemeContext";
+import { useScrolledPast } from "@/hooks/useScrolledPast";
 
 const overlayVariants = {
   hidden:  { opacity: 0, y: "-100%" },
@@ -39,15 +40,9 @@ const sectionIds = siteConfig.nav.map((n) => n.href.slice(1));
 
 export function Navbar() {
   const [isOpen,   setIsOpen]   = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const scrolled = useScrolledPast(60);
   const { isDark, toggle } = useTheme();
   const active = useActiveSection(sectionIds);
-
-  useEffect(() => {
-    const h = () => setScrolled(window.scrollY > 60);
-    window.addEventListener("scroll", h, { passive: true });
-    return () => window.removeEventListener("scroll", h);
-  }, []);
 
   useEffect(() => {
     document.body.style.overflow = isOpen ? "hidden" : "";

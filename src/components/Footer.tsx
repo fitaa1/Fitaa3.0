@@ -81,7 +81,7 @@ export function Footer() {
             <a href="/privacy" className="hover:text-foreground/55 transition-colors duration-250">Privacy Policy</a>
             <a href="/terms" className="hover:text-foreground/55 transition-colors duration-250">Terms of Service</a>
           </div>
-          <p className="opacity-80">&copy; {year} {siteConfig.name}. All rights reserved.</p>
+          <p>&copy; {year} {siteConfig.name}. All rights reserved.</p>
         </div>
       </div>
     </footer>
