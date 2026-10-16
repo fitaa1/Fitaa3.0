@@ -28,7 +28,7 @@ const tabVariants = {
 type Tab = "form" | "whatsapp";
 
 function ContactCard() {
-  const [tab, setTab] = useState<Tab>("form");
+  const [tab, setTab] = useState<Tab>("whatsapp");
 
   const waNumber = siteConfig.contact.phone.replace(/\D/g, "").replace(/^0/, "233");
   const waMessage = encodeURIComponent("Hi Fitaa Digital! I'd like to discuss a project with you.");
@@ -53,7 +53,7 @@ function ContactCard() {
         role="tablist"
         aria-label="Contact options"
       >
-        {(["form", "whatsapp"] as Tab[]).map((t) => {
+        {(["whatsapp", "form"] as Tab[]).map((t) => {
           const active = tab === t;
           return (
             <button
@@ -145,7 +145,7 @@ function ContactCard() {
                 href={waLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-gold inline-flex items-center gap-3 px-10 py-4 font-sans text-[0.72rem] uppercase tracking-[0.22em] mb-6"
+                className="btn-gold inline-flex items-center justify-center gap-3 px-7 sm:px-10 py-4 font-sans text-[0.72rem] uppercase tracking-[0.18em] sm:tracking-[0.22em] whitespace-nowrap mb-6"
                 aria-label="Open WhatsApp chat with Fitaa Digital"
               >
                 <WhatsAppIcon size={15} />

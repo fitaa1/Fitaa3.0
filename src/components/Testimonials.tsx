@@ -33,7 +33,7 @@ export function Testimonials() {
         >
           {siteConfig.testimonials.map((t) => (
             <motion.figure
-              key={t.author}
+              key={t.company}
               variants={fadeInUp}
               className="relative flex flex-col"
               role="listitem"
@@ -59,12 +59,12 @@ export function Testimonials() {
                   className="w-10 h-10 border border-ruby/25 bg-background flex items-center justify-center text-ruby font-serif text-base shrink-0"
                   aria-hidden="true"
                 >
-                  {t.author.charAt(0)}
+                  {t.company.charAt(0)}
                 </div>
                 <div>
-                  <p className="font-sans font-medium text-foreground text-[0.875rem]">{t.author}</p>
+                  <p className="font-sans font-medium text-foreground text-[0.875rem]">{t.company}</p>
                   <p className="text-[0.7rem] text-muted-foreground font-sans uppercase tracking-[0.16em] mt-0.5">
-                    {t.title} — {t.company}
+                    {t.title}
                   </p>
                 </div>
                 <div className="flex-1 h-px bg-border/25 hidden md:block" aria-hidden="true" />

@@ -46,7 +46,7 @@ export const siteConfig = {
     { value: 50,  suffix: "+", label: "Brands Elevated"      },
     { value: 4,   suffix: "",  label: "Core Specialisations" },
     { value: 100, suffix: "%", label: "Client Dedication"    },
-    { value: 3,   suffix: "+", label: "Years of Excellence"  },
+    { value: 10,  suffix: "+", label: "Years of Excellence"  },
   ],
 
   caseStudies: [
@@ -110,14 +110,12 @@ export const siteConfig = {
     {
       quote:
         "Fitaa Digital gave our brand the identity it deserved. The content they created was fresh, professional, and our audience loved it from day one.",
-      author: "Abena Mensah",
       title: "Founder",
       company: "Tinkertresses",
     },
     {
       quote:
         "Working with Fitaa has been seamless. They understood exactly what we needed and delivered designs that felt warm and completely trustworthy.",
-      author: "Akosua Darko",
       title: "Director",
       company: "Mummy Day Care Centre",
     },
