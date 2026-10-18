@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--
+  DEMO: beauty studio booking page (Fully Booked by Fitaa, Get Chosen tier)
+  One self-contained file. Export: download it and drop it on any host, or open it in a browser.
+  For a client copy: change SETTINGS at the bottom (WhatsApp number, studio name, services,
+  opening hours), replace the [bracketed] text and the photo placeholders, and remove the demo bar.
+-->
+<title>Maison Adwoa (demo) | Fully Booked by Fitaa</title>
+<meta name="description" content="Demo booking page for a fictional beauty studio in East Legon, Accra. Built by Fitaa Digital.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#FBF6F2">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;500;600;700&display=swap">
+<style>
+/* ── Edit the look here ── */
+:root{
+  --ground:#FBF6F2; --paper:#FFFFFF; --blush:#F3E7E1; --photo:#F1E4DD;
+  --line:#E7D9D0; --line-strong:#D2B8AD;
+  --ink:#2A1E22; --muted:#6B5A5F; --soft:#86757A;
+  --rose:#8E4352; --rose-deep:#74323F; --on-rose:#FFF7F3; --gold:#B88A4A;
+  --display:'Cormorant Garamond',Georgia,serif; --body:Manrope,'Segoe UI',sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--body);-webkit-font-smoothing:antialiased;line-height:1.55}
+h1,h2,h3{font-family:var(--display);font-weight:600;margin:0;letter-spacing:-.005em}
+p{margin:0}
+a{color:var(--rose)}
+:focus-visible{outline:2px solid var(--rose);outline-offset:3px}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+.eyebrow{font-size:12px;letter-spacing:2.4px;text-transform:uppercase;color:var(--rose);font-weight:700;margin:0 0 12px}
+.cta{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 28px;border-radius:999px;background:var(--rose);color:var(--on-rose);font-weight:700;text-decoration:none;font-size:15px;border:0;font-family:inherit;cursor:pointer;transition:background .2s,transform .12s}
+.cta:hover{background:var(--rose-deep)}
+.cta:active{transform:scale(.985)}
+.ghost{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 26px;border-radius:999px;border:1px solid var(--line-strong);color:var(--ink);text-decoration:none;font-weight:600;font-size:15px;background:transparent;transition:border-color .2s}
+.ghost:hover{border-color:var(--rose)}
+.photo{background:var(--photo);border:1px dashed var(--line-strong);display:flex;align-items:center;justify-content:center;text-align:center;color:var(--soft);font-size:13px;padding:12px}
+
+.demo-bar{background:var(--ink);color:#F6EDE8;text-align:center;padding:10px 16px;font-size:14px;font-weight:600}
+.demo-bar a{color:#F3C9BE}
+header.top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:22px;padding-bottom:22px}
+.brand{text-decoration:none;color:var(--ink);line-height:1}
+.brand b{display:block;font-family:var(--display);font-size:28px;font-weight:600;letter-spacing:.5px}
+.brand small{display:block;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--soft);margin-top:4px}
+nav.links{display:flex;gap:28px;font-size:15px}
+nav.links a{color:var(--muted);text-decoration:none}
+nav.links a:hover{color:var(--ink)}
+.header-cta{min-height:44px;padding:0 22px}
+
+.hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:center;padding-top:32px;padding-bottom:80px}
+.hero h1{font-size:68px;line-height:1.02;margin-bottom:22px}
+.hero h1 em{font-style:italic;color:var(--rose)}
+.hero .lead{font-size:18px;color:var(--muted);max-width:500px}
+.hero .actions{display:flex;gap:12px;flex-wrap:wrap;margin:30px 0 22px}
+.hero .trust{display:flex;gap:18px;flex-wrap:wrap;font-size:14px;color:var(--soft)}
+.hero .trust span::before{content:"✦ ";color:var(--gold)}
+.hero-art{display:grid;grid-template-columns:1.2fr .8fr;gap:14px;height:560px}
+.hero-art .photo{border-radius:28px}
+.hero-art .stack{display:grid;gap:14px}
+
+.band{background:var(--blush);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.band .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;padding-top:30px;padding-bottom:30px}
+.band strong{display:block;font-family:var(--display);font-size:22px;margin-bottom:4px}
+.band span{font-size:13px;color:var(--muted)}
+
+section.block{padding-top:88px;padding-bottom:24px}
+.head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:28px}
+.head h2{font-size:48px;line-height:1.05}
+.tabs{display:inline-flex;gap:6px;padding:5px;background:var(--paper);border:1px solid var(--line);border-radius:999px;flex-wrap:wrap}
+.tabs button{min-height:44px;padding:0 20px;border:0;border-radius:999px;background:transparent;color:var(--muted);font:inherit;font-weight:600;font-size:14px;cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--ink);color:#FFF7F3}
+.menu{background:var(--paper);border:1px solid var(--line);border-radius:24px;padding:8px 28px}
+.item{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:20px;align-items:center;padding:20px 0;border-bottom:1px solid var(--line)}
+.item:last-child{border-bottom:0}
+.item b{display:block;font-family:var(--display);font-size:24px;font-weight:600}
+.item small{color:var(--soft);font-size:13px}
+.item .price{font-weight:700;color:var(--rose);white-space:nowrap}
+.item button{min-height:44px;padding:0 18px;border-radius:999px;border:1px solid var(--line-strong);background:transparent;color:var(--ink);font:inherit;font-weight:600;font-size:14px;cursor:pointer}
+.item button:hover{border-color:var(--rose);color:var(--rose)}
+
+.team{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.member .photo{aspect-ratio:4/5;border-radius:22px;margin-bottom:14px}
+.member b{display:block;font-family:var(--display);font-size:26px}
+.member span{color:var(--muted);font-size:14px}
+
+.gallery{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.gallery .photo{aspect-ratio:1/1;border-radius:16px}
+.gallery .tall{grid-row:span 2;aspect-ratio:auto}
+
+.book{padding-top:88px;padding-bottom:88px}
+.book .card{background:var(--paper);border:1px solid var(--line);border-radius:28px;padding:44px;display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:44px}
+.book h2{font-size:46px;line-height:1.05;margin-bottom:14px}
+.book .aside p{color:var(--muted)}
+.book ul{list-style:none;padding:0;margin:22px 0 0;display:flex;flex-direction:column;gap:10px;font-size:14px;color:var(--muted)}
+.book ul li::before{content:"✦ ";color:var(--gold)}
+form .fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.field{display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:600;color:var(--muted)}
+.field.full{grid-column:1/-1}
+.field input,.field select{height:52px;border-radius:14px;border:1px solid var(--line-strong);background:var(--ground);color:var(--ink);padding:0 14px;font:inherit;font-size:16px;font-weight:500}
+.slots{display:flex;flex-wrap:wrap;gap:8px}
+.slots button{min-height:44px;padding:0 14px;border-radius:999px;border:1px solid var(--line-strong);background:var(--ground);color:var(--ink);font:inherit;font-size:14px;font-weight:600;cursor:pointer}
+.slots button[aria-pressed="true"]{background:var(--rose);border-color:var(--rose);color:var(--on-rose)}
+.send{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-top:22px}
+.summary{font-size:14px;color:var(--soft)}
+
+.visit{background:var(--blush);border-top:1px solid var(--line)}
+.visit .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:40px;align-items:center;padding-top:80px;padding-bottom:80px}
+.visit h2{font-size:44px;margin-bottom:14px}
+.visit p{color:var(--muted)}
+.hours{margin-top:20px;display:grid;grid-template-columns:auto 1fr;gap:6px 24px;font-size:15px}
+.hours dt{font-weight:700}.hours dd{margin:0;color:var(--muted)}
+.visit .photo{aspect-ratio:4/3;border-radius:24px}
+
+.reviews{padding-top:80px;padding-bottom:80px;text-align:center}
+.reviews h2{font-size:44px;margin-bottom:10px}
+.reviews p{color:var(--soft)}
+
+footer.foot{border-top:1px solid var(--line)}
+footer.foot .wrap{padding-top:28px;padding-bottom:40px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:14px;color:var(--soft)}
+.sticky-book{display:none}
+
+@media (max-width:900px){
+  nav.links,.header-cta{display:none}
+  .hero{grid-template-columns:minmax(0,1fr);gap:36px;padding-top:12px}
+  .hero h1{font-size:48px}
+  .hero-art{height:380px}
+  .band .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .head h2,.book h2{font-size:38px}
+  .item{grid-template-columns:minmax(0,1fr) auto;row-gap:10px}
+  .item button{grid-column:1/-1;justify-self:start}
+  .team{grid-template-columns:minmax(0,1fr)}
+  .member .photo{aspect-ratio:4/3}
+  .gallery{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .book .card{grid-template-columns:minmax(0,1fr);padding:26px;gap:28px}
+  form .fields{grid-template-columns:minmax(0,1fr)}
+  .visit .grid{grid-template-columns:minmax(0,1fr)}
+  .menu{padding:4px 20px}
+  .tabs{flex-wrap:nowrap;max-width:100%;overflow-x:auto}
+  .tabs button{padding:0 14px;flex:none}
+  .sticky-book{display:flex;position:fixed;left:16px;right:16px;bottom:16px;z-index:20;box-shadow:0 14px 30px rgba(42,30,34,.28)}
+  footer.foot .wrap{padding-bottom:96px}
+}
+</style>
+</head>
+<body>
+
+<div class="demo-bar">Demo by <a href="https://fitaadigital.vercel.app/fully-booked?studio">Fitaa Digital</a>. Your studio name, photos and prices go here, live in 7 days.</div>
+
+<header class="wrap top">
+  <a class="brand" href="#top" id="top"><b>Maison Adwoa</b><small>Hair · Nails · Lashes</small></a>
+  <nav class="links" aria-label="Page sections">
+    <a href="#menu">Menu</a><a href="#team">Stylists</a><a href="#work">Our work</a><a href="#visit">Visit</a>
+  </nav>
+  <a class="cta header-cta" href="#book">Book your slot</a>
+</header>
+
+<main>
+<section class="wrap hero">
+  <div>
+    <p class="eyebrow">Beauty studio · East Legon, Accra</p>
+    <h1>Leave looking like the <em>best day</em> of your year.</h1>
+    <p class="lead">Braids, silk presses, nails and lashes by stylists who take their time. See the menu and prices, pick your slot, and confirm on WhatsApp in under a minute.</p>
+    <div class="actions">
+      <a class="cta" href="#book">Book your slot</a>
+      <a class="ghost" href="#menu">See the menu</a>
+    </div>
+    <div class="trust"><span>Rated [X.X] on Google</span><span>[N] happy clients</span><span>Deposit secures your slot</span></div>
+  </div>
+  <div class="hero-art" aria-hidden="true">
+    <div class="photo">[Signature photo: finished knotless braids]</div>
+    <div class="stack"><div class="photo">[Nail art close-up]</div><div class="photo">[Lash set close-up]</div></div>
+  </div>
+</section>
+
+<section class="band" aria-label="Why clients choose us">
+  <div class="wrap grid">
+    <div><strong>On time</strong><span>Your slot is yours. We start when you arrive.</span></div>
+    <div><strong>Clear prices</strong><span>Every service priced up front. No surprises.</span></div>
+    <div><strong>Hygiene first</strong><span>Sterilised tools and fresh linen for every client.</span></div>
+    <div><strong>Easy booking</strong><span>Choose online, confirm on WhatsApp.</span></div>
+  </div>
+</section>
+
+<section id="menu" class="wrap block">
+  <div class="head">
+    <div><p class="eyebrow">The menu</p><h2>Services and prices</h2></div>
+    <div class="tabs" role="tablist" aria-label="Service categories" id="tabs"></div>
+  </div>
+  <div class="menu" id="menu-list" role="tabpanel" aria-live="polite"></div>
+</section>
+
+<section id="team" class="wrap block">
+  <div class="head"><div><p class="eyebrow">The stylists</p><h2>Hands you can trust</h2></div></div>
+  <div class="team">
+    <div class="member"><div class="photo">[Stylist photo]</div><b>[Stylist name]</b><span>Braids and protective styles · [X] years</span></div>
+    <div class="member"><div class="photo">[Stylist photo]</div><b>[Stylist name]</b><span>Silk press and wig installs · [X] years</span></div>
+    <div class="member"><div class="photo">[Stylist photo]</div><b>[Stylist name]</b><span>Nails and lashes · [X] years</span></div>
+  </div>
+</section>
+
+<section id="work" class="wrap block">
+  <div class="head"><div><p class="eyebrow">Our work</p><h2>Fresh from the chair</h2></div></div>
+  <div class="gallery">
+    <div class="photo tall">[Braids, full length]</div><div class="photo">[Silk press]</div><div class="photo">[Gel manicure]</div><div class="photo tall">[Bridal look]</div>
+    <div class="photo">[Lash set]</div><div class="photo">[Acrylic set]</div>
+  </div>
+</section>
+
+<section id="book" class="book">
+  <div class="wrap">
+    <div class="card">
+      <div class="aside">
+        <p class="eyebrow">Book your slot</p>
+        <h2>Pick it here, confirm on WhatsApp.</h2>
+        <p>Choose your service, day and time. WhatsApp opens with your booking written out, and the studio confirms with the deposit details.</p>
+        <ul>
+          <li>Deposit of [amount] secures your slot</li>
+          <li>Please arrive [10] minutes early</li>
+          <li>Reschedule free up to [24] hours before</li>
+        </ul>
+      </div>
+      <form id="book-form" novalidate>
+        <div class="fields">
+          <label class="field full">Service<select id="service" required></select></label>
+          <label class="field">Day<input type="date" id="day" required></label>
+          <label class="field">Your name<input type="text" id="name" autocomplete="given-name" placeholder="First name"></label>
+          <div class="field full"><span id="slots-label">Time</span><div class="slots" id="slots" role="group" aria-labelledby="slots-label"></div></div>
+        </div>
+        <div class="send">
+          <button class="cta" type="submit">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91A9.85 9.85 0 0 0 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.22 8.22 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24a8.2 8.2 0 0 1 8.24 8.25c0 4.54-3.7 8.23-8.24 8.23Z"/></svg>
+            Book on WhatsApp
+          </button>
+          <span class="summary" id="summary" aria-live="polite">Choose a service, day and time.</span>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section id="visit" class="visit">
+  <div class="wrap grid">
+    <div>
+      <p class="eyebrow">Visit</p>
+      <h2>East Legon, Accra</h2>
+      <p>[Street name, landmark]. Parking on site. Exact directions sent with your booking.</p>
+      <dl class="hours" id="hours"></dl>
+    </div>
+    <div class="photo">[Google map of the studio]</div>
+  </div>
+</section>
+
+<section class="wrap reviews">
+  <h2>What clients say</h2>
+  <p>[Real reviews from Google go here, with the client's first name and service.]</p>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div>© Maison Adwoa (demo). East Legon, Accra.</div>
+    <div>Page by <a href="https://fitaadigital.vercel.app/fully-booked?studio">Fitaa Digital</a>. Want one for your studio? Live in 7 days or half your fee back.</div>
+  </div>
+</footer>
+
+<a class="cta sticky-book" href="#book">Book your slot</a>
+
+<script>
+/* ── SETTINGS: edit these for a client copy ── */
+var SETTINGS = {
+  studio: 'Maison Adwoa',
+  whatsapp: '233242805256',                       // the studio's number, digits only
+  prefix: '[Demo from the Fully Booked page] ',   // remove for a real client: ''
+  // Opening hours: day number (0 = Sunday) → [open, close] in 24h, or null when closed
+  hours: { 0: null, 1: [9, 19], 2: [9, 19], 3: [9, 19], 4: [9, 19], 5: [9, 20], 6: [8, 20] },
+  services: {
+    'Braids': [
+      ['Knotless braids, medium', '5 to 6 hours'],
+      ['Boho knotless braids', '6 to 7 hours'],
+      ['Cornrows', '1 to 2 hours']
+    ],
+    'Hair': [
+      ['Silk press', '2 hours'],
+      ['Wig install and styling', '2 to 3 hours'],
+      ['Wash and treatment', '1 hour']
+    ],
+    'Nails': [
+      ['Gel manicure', '1 hour'],
+      ['Acrylic full set', '1.5 to 2 hours'],
+      ['Spa pedicure', '1 hour']
+    ],
+    'Lashes': [
+      ['Classic lash set', '1.5 hours'],
+      ['Hybrid lash set', '2 hours'],
+      ['Brow shape and tint', '45 minutes']
+    ]
+  }
+};
+
+var $ = function (id) { return document.getElementById(id); };
+var cats = Object.keys(SETTINGS.services);
+var current = cats[0];
+var chosenTime = '';
+
+/* Menu tabs and items */
+function renderTabs() {
+  $('tabs').innerHTML = '';
+  cats.forEach(function (c) {
+    var b = document.createElement('button');
+    b.type = 'button'; b.setAttribute('role', 'tab'); b.textContent = c;
+    b.setAttribute('aria-selected', c === current);
+    b.addEventListener('click', function () { current = c; renderTabs(); renderMenu(); });
+    $('tabs').appendChild(b);
+  });
+}
+function renderMenu() {
+  $('menu-list').innerHTML = '';
+  SETTINGS.services[current].forEach(function (s) {
+    var row = document.createElement('div'); row.className = 'item';
+    var info = document.createElement('div');
+    var name = document.createElement('b'); name.textContent = s[0];
+    var dur = document.createElement('small'); dur.textContent = s[1];
+    info.appendChild(name); info.appendChild(dur);
+    var price = document.createElement('span'); price.className = 'price'; price.textContent = 'GHS [price]';
+    var btn = document.createElement('button'); btn.type = 'button'; btn.textContent = 'Book this';
+    btn.addEventListener('click', function () {
+      $('service').value = s[0]; update();
+      $('book').scrollIntoView({ behavior: 'smooth' });
+    });
+    row.appendChild(info); row.appendChild(price); row.appendChild(btn);
+    $('menu-list').appendChild(row);
+  });
+}
+
+/* Booking form */
+function fillServices() {
+  var sel = $('service');
+  var first = document.createElement('option'); first.value = ''; first.textContent = 'Choose a service'; sel.appendChild(first);
+  cats.forEach(function (c) {
+    var g = document.createElement('optgroup'); g.label = c;
+    SETTINGS.services[c].forEach(function (s) { var o = document.createElement('option'); o.value = s[0]; o.textContent = s[0] + ' (' + s[1] + ')'; g.appendChild(o); });
+    sel.appendChild(g);
+  });
+}
+function renderSlots() {
+  var box = $('slots'); box.innerHTML = ''; chosenTime = '';
+  var d = $('day').value ? new Date($('day').value + 'T12:00:00') : null;
+  var h = d ? SETTINGS.hours[d.getDay()] : null;
+  if (!d) { box.textContent = 'Pick a day to see times.'; return; }
+  if (!h) { box.textContent = 'Closed that day. Please pick another.'; return; }
+  for (var t = h[0]; t < h[1] - 1; t++) {
+    (function (hour) {
+      var label = (hour % 12 || 12) + (hour < 12 ? ' am' : ' pm');
+      var b = document.createElement('button'); b.type = 'button'; b.textContent = label; b.setAttribute('aria-pressed', 'false');
+      b.addEventListener('click', function () {
+        box.querySelectorAll('button').forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
+        b.setAttribute('aria-pressed', 'true'); chosenTime = label; update();
+      });
+      box.appendChild(b);
+    })(t);
+  }
+}
+function pretty(v) { return new Date(v + 'T12:00:00').toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' }); }
+function update() {
+  var s = $('service').value, d = $('day').value;
+  $('summary').textContent = s && d && chosenTime ? s + ', ' + pretty(d) + ' at ' + chosenTime : 'Choose a service, day and time.';
+}
+function renderHours() {
+  var names = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  var fmt = function (h) { return (h % 12 || 12) + (h < 12 ? ' am' : ' pm'); };
+  [1, 2, 3, 4, 5, 6, 0].forEach(function (i) {
+    var dt = document.createElement('dt'); dt.textContent = names[i];
+    var dd = document.createElement('dd'); dd.textContent = SETTINGS.hours[i] ? fmt(SETTINGS.hours[i][0]) + ' to ' + fmt(SETTINGS.hours[i][1]) : 'Closed';
+    $('hours').appendChild(dt); $('hours').appendChild(dd);
+  });
+}
+
+$('day').min = new Date().toISOString().slice(0, 10);
+$('day').addEventListener('input', function () { renderSlots(); update(); });
+$('service').addEventListener('change', update);
+$('book-form').addEventListener('submit', function (e) {
+  e.preventDefault();
+  if (!$('service').value) { $('summary').textContent = 'Please choose a service.'; $('service').focus(); return; }
+  if (!$('day').value) { $('summary').textContent = 'Please pick a day.'; $('day').focus(); return; }
+  if (!chosenTime) { $('summary').textContent = 'Please pick a time.'; return; }
+  var name = $('name').value.trim();
+  var msg = SETTINGS.prefix + 'Hello ' + SETTINGS.studio + (name ? ', this is ' + name : '') + '. I would like to book:\n' +
+    'Service: ' + $('service').value + '\nDay: ' + pretty($('day').value) + '\nTime: ' + chosenTime;
+  window.open('https://wa.me/' + SETTINGS.whatsapp + '?text=' + encodeURIComponent(msg), '_blank', 'noopener');
+});
+
+fillServices(); renderTabs(); renderMenu(); renderSlots(); renderHours();
+</script>
+</body>
+</html>

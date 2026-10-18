@@ -27,12 +27,20 @@ Single-page site for Fitaa Digital (formerly Fitaa Creative), a creative and dig
 | `public/work/` | Case study images (4:3 WebP) |
 | `public/sitemap.xml`, `public/robots.txt` | Search engine files |
 | `src/pages/Legal.tsx` | Privacy Policy and Terms text (`/privacy`, `/terms`) |
-| `src/config/fullyBooked.ts` | **All words on the Fully Booked offer page** (`/fully-booked`) |
-| `src/pages/FullyBooked.tsx` | Layout of the Fully Booked page |
-| `public/demo/ridge-house/index.html` | Demo host booking page (`/demo/ridge-house/`), one self-contained file to copy per client |
+| `public/fully-booked/index.html` | **Fully Booked offer page** (`/fully-booked`): one self-contained file (styles, script and logo inside). WhatsApp number and messages in `SETTINGS` at the bottom |
+| `public/demo/ridge-house/index.html` | Demo short-let host page (`/demo/ridge-house`), one self-contained file |
+| `public/demo/studio/index.html` | Demo beauty studio page (`/demo/studio`), one self-contained file; services, hours and number in `SETTINGS` |
 | `src/components/` | One file per section: `Hero`, `Services`, `WhyUs`, `FeaturedWork`, `Testimonials`, `FinalCTA` (contact), `Navbar`, `Footer` |
 
 Editing guide: see **CUSTOMIZE.md**.
+
+## Standalone pages: export or copy for a client
+
+The three pages under `public/` (Fully Booked and the two demos) need nothing else from this repo.
+
+1. **Export:** open the file on GitHub, tap **Download raw file**, and drop it on [Netlify Drop](https://app.netlify.com/drop) or Cloudflare Pages, or open it in a browser.
+2. **Client copy:** copy the demo folder (for example `public/demo/studio/` to `public/clients/<client-name>/`), change `SETTINGS` at the bottom of the file (WhatsApp number, name, services or prices), replace the `[bracketed]` text and photo placeholders, set `prefix` to `''` and delete the demo bar.
+3. **Client hosting:** client sites go on Cloudflare Pages or Netlify (both free for commercial use). Vercel's free plan is for non-commercial use.
 
 ## Run locally
 
