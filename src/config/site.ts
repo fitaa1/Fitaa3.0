@@ -24,7 +24,8 @@ export const siteConfig = {
   url: "https://fitaadigital.vercel.app",
 
   /* ── Top menu ──────────────────────────────────────────────────────────────
-   * href must match a section id: #home #services #why-us #work #contact.
+   * href must match a section id: #home #services #why-us #work #contact,
+   * or be a page path such as "/fully-booked".
    * Keep the order the same as the page so the active-section highlight reads
    * naturally. */
   nav: [
@@ -32,6 +33,7 @@ export const siteConfig = {
     { label: "Services", href: "#services" },
     { label: "Why Us",   href: "#why-us"   },
     { label: "Work",     href: "#work"     },
+    { label: "Fully Booked", href: "/fully-booked" },
     { label: "Contact",  href: "#contact"  },
   ],
 

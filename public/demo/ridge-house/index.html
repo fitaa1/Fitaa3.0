@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ridge House Residences (demo) | Fully Booked by Fitaa</title>
+<meta name="description" content="Demo booking page for a fictional serviced apartment in Airport Residential, Accra. Built by Fitaa Digital.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0E1B17">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Manrope:wght@400;500;600;700&display=swap">
+<style>
+/* ── Edit the look here: colours and fonts for the whole page ── */
+:root{
+  --ground:#0E1B17; --band:#13241E; --surface:#15261F; --photo:#1A2E26;
+  --line:#22382F; --line-strong:#4A6358;
+  --text:#F2EBDD; --muted:#C9C1B2; --soft:#B9B1A2;
+  --accent:#D4A85A; --accent-hover:#E8C27E; --on-accent:#14130F;
+  --display:'DM Serif Display',Georgia,serif; --body:Manrope,'Segoe UI',sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--ground);color:var(--text);font-family:var(--body);-webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+img{max-width:100%;display:block}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+.eyebrow{font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);font-weight:700;margin:0}
+h1,h2,h3{font-family:var(--display);font-weight:400;margin:0}
+p{margin:0}
+.cta{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 26px;border-radius:999px;background:var(--accent);color:var(--on-accent);font-weight:700;text-decoration:none;font-size:16px;border:0;font-family:inherit;cursor:pointer;transition:background .2s,transform .12s}
+.cta:hover{background:var(--accent-hover)}
+.cta:active{transform:scale(.985)}
+.ghost{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 24px;border-radius:999px;border:1px solid var(--line-strong);color:var(--text);text-decoration:none;font-weight:600;transition:border-color .2s}
+.ghost:hover{border-color:var(--accent)}
+.photo{background:var(--photo);border:1px dashed var(--line-strong);display:flex;align-items:center;justify-content:center;text-align:center;color:var(--soft);font-size:14px;padding:12px}
+
+.demo-bar{background:var(--accent);color:var(--on-accent);text-align:center;padding:10px 16px;font-size:14px;font-weight:600}
+.demo-bar a{color:var(--on-accent)}
+header.top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:22px;padding-bottom:22px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--text)}
+.brand span{font-family:var(--display);font-size:22px}
+nav.links{display:flex;gap:28px;font-size:15px}
+nav.links a{color:var(--muted);text-decoration:none}
+nav.links a:hover{color:var(--text)}
+
+.hero{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:48px;align-items:center;padding-top:40px;padding-bottom:72px}
+.hero h1{font-size:62px;line-height:1.04;margin:22px 0}
+.hero .lead{font-size:18px;line-height:1.6;color:var(--muted);max-width:520px}
+.hero .actions{display:flex;gap:12px;flex-wrap:wrap;margin:28px 0 22px}
+.hero .trust{display:flex;gap:14px;flex-wrap:wrap;font-size:14px;color:var(--muted)}
+.hero .photo{aspect-ratio:4/5;border-radius:22px;align-items:flex-end;justify-content:flex-start;padding:22px}
+.hero .photo span{background:rgba(14,27,23,.85);border-radius:12px;padding:12px 16px}
+
+.amenities{background:var(--band);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.amenities .grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:20px;padding-top:28px;padding-bottom:28px}
+.amenity strong{display:block;font-size:15px;margin:8px 0 4px}
+.amenity span{font-size:13px;color:var(--soft);line-height:1.5}
+
+section.block{padding-top:80px;padding-bottom:40px}
+.section-head{display:flex;flex-direction:column;gap:10px;margin-bottom:32px}
+.section-head h2{font-size:42px}
+.units{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.unit{background:var(--surface);border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column}
+.unit .photo{aspect-ratio:4/3;border:0;border-bottom:1px dashed var(--line-strong)}
+.unit .body{padding:22px;display:flex;flex-direction:column;gap:10px;flex-grow:1}
+.unit h3{font-size:26px}
+.unit .specs{font-size:14px;color:var(--soft)}
+.unit .rate{font-size:15px;margin-top:auto;padding-top:8px}
+.unit .rate strong{color:var(--accent)}
+.unit .ghost{min-height:44px}
+
+.gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.gallery .photo{aspect-ratio:1/1;border-radius:14px}
+
+.request{padding-top:72px;padding-bottom:72px}
+.request .card{background:var(--surface);border:1px solid #2E473D;border-radius:24px;padding:40px;display:flex;flex-direction:column;gap:24px}
+.request h2{font-size:38px}
+.request .card > div > p{color:var(--muted);font-size:16px;line-height:1.6;margin-top:8px}
+.fields{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.field{display:flex;flex-direction:column;gap:6px;font-size:14px;color:var(--muted)}
+.field input{height:52px;border-radius:12px;border:1px solid #3A5248;background:var(--ground);color:var(--text);padding:0 14px;font:inherit;font-size:16px;color-scheme:dark}
+.field input:focus{outline:2px solid var(--accent);outline-offset:1px}
+.send-row{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.summary{font-size:14px;color:var(--soft)}
+
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;padding-bottom:72px}
+.step{border-top:2px solid var(--accent);padding-top:18px;display:flex;flex-direction:column;gap:8px}
+.step .n{font-family:var(--display);font-size:30px;color:var(--accent)}
+.step strong{font-size:17px}
+.step span{font-size:15px;color:var(--muted);line-height:1.6}
+
+.location{background:var(--band);border-top:1px solid var(--line)}
+.location .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px;align-items:center;padding-top:72px;padding-bottom:72px}
+.location h2{font-size:36px;margin:16px 0}
+.location p{color:var(--muted);line-height:1.7}
+.location ul{padding:0;margin:20px 0 0;list-style:none;display:flex;flex-direction:column;gap:10px;font-size:15px}
+.location .photo{aspect-ratio:4/3;border-radius:18px}
+
+.reviews{padding-top:72px;padding-bottom:72px}
+.reviews h2{font-size:36px;margin-bottom:12px}
+.reviews p{color:var(--soft)}
+
+footer.foot{border-top:1px solid var(--line)}
+footer.foot .wrap{padding-top:28px;padding-bottom:40px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:14px;color:var(--soft)}
+
+.sticky-book{display:none}
+
+@media (max-width:860px){
+  nav.links{display:none}
+  .hero{grid-template-columns:minmax(0,1fr);padding-top:16px;gap:32px}
+  .hero h1{font-size:44px}
+  .hero .photo{aspect-ratio:4/3}
+  .amenities .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .units,.fields,.steps,.location .grid{grid-template-columns:minmax(0,1fr)}
+  .gallery{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .section-head h2{font-size:34px}
+  .request .card{padding:24px}
+  .header-cta{display:none}
+  .sticky-book{display:flex;position:fixed;left:16px;right:16px;bottom:16px;z-index:20;box-shadow:0 12px 30px rgba(0,0,0,.45)}
+  footer.foot .wrap{padding-bottom:96px}
+}
+</style>
+</head>
+<body>
+
+<div class="demo-bar">Demo by <a href="/fully-booked">Fitaa Digital</a>. Your business name, photos and prices go here, live in 7 days.</div>
+
+<header class="wrap top">
+  <a class="brand" href="#top" id="top">
+    <svg width="34" height="34" viewBox="0 0 34 34" fill="none" aria-hidden="true"><rect x="1" y="1" width="32" height="32" rx="9" stroke="#D4A85A" stroke-width="1.5"/><path d="M8 23 L17 10 L26 23" stroke="#D4A85A" stroke-width="1.5" stroke-linejoin="round"/><path d="M13 23 V18 H21 V23" stroke="#D4A85A" stroke-width="1.5"/></svg>
+    <span>Ridge House Residences</span>
+  </a>
+  <nav class="links" aria-label="Page sections">
+    <a href="#apartments">Apartments</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#location">Location</a>
+    <a href="#how">How to book</a>
+  </nav>
+  <a class="cta header-cta" href="#request" style="min-height:44px;padding:0 20px;font-size:15px">Request your dates</a>
+</header>
+
+<main>
+<section class="wrap hero">
+  <div>
+    <p class="eyebrow">Serviced apartments · Airport Residential, Accra</p>
+    <h1>Home in Accra, from the moment you land.</h1>
+    <p class="lead">Quiet, fully furnished apartments minutes from Kotoka International Airport. Book directly with the host on WhatsApp: no platform fees, and a real person answers.</p>
+    <div class="actions">
+      <a class="cta" href="#request">Request your dates on WhatsApp</a>
+      <a class="ghost" href="#apartments">See the apartments</a>
+    </div>
+    <div class="trust"><span>Rated [X.X] by guests on Google</span><span aria-hidden="true">·</span><span>Receipt for every payment</span></div>
+  </div>
+  <div class="photo"><span>[Hero photo: living room at golden hour]</span></div>
+</section>
+
+<section class="amenities" aria-label="Amenities">
+  <div class="wrap grid">
+    <div class="amenity"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="9.5" stroke="#D4A85A" stroke-width="1.5"/><path d="M7 11.5 L10 14 L15 8.5" stroke="#D4A85A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><strong>Backup power</strong><span>Generator or inverter, so the lights and AC stay on.</span></div>
+    <div class="amenity"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="9.5" stroke="#D4A85A" stroke-width="1.5"/><path d="M7 11.5 L10 14 L15 8.5" stroke="#D4A85A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><strong>Fibre Wi-Fi</strong><span>Fast enough for video calls and streaming.</span></div>
+    <div class="amenity"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="9.5" stroke="#D4A85A" stroke-width="1.5"/><path d="M7 11.5 L10 14 L15 8.5" stroke="#D4A85A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><strong>Secure parking</strong><span>Gated, with 24-hour security.</span></div>
+    <div class="amenity"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="9.5" stroke="#D4A85A" stroke-width="1.5"/><path d="M7 11.5 L10 14 L15 8.5" stroke="#D4A85A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><strong>Airport pickup</strong><span>On request, from Kotoka International.</span></div>
+    <div class="amenity"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="9.5" stroke="#D4A85A" stroke-width="1.5"/><path d="M7 11.5 L10 14 L15 8.5" stroke="#D4A85A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><strong>Fully serviced</strong><span>Cleaning and fresh linen during your stay.</span></div>
+  </div>
+</section>
+
+<section id="apartments" class="wrap block">
+  <div class="section-head"><p class="eyebrow">The apartments</p><h2>Choose your stay</h2></div>
+  <div class="units">
+    <article class="unit"><div class="photo">[Studio photo]</div><div class="body"><h3>The Studio</h3><div class="specs">1 guest or a couple · [size] · queen bed</div><div class="rate">From <strong>GHS [rate]</strong> a night</div><a class="ghost" href="#request" data-unit="The Studio">Ask about this apartment</a></div></article>
+    <article class="unit"><div class="photo">[One-bedroom photo]</div><div class="body"><h3>One-bedroom</h3><div class="specs">Up to 2 guests · [size] · kitchen and lounge</div><div class="rate">From <strong>GHS [rate]</strong> a night</div><a class="ghost" href="#request" data-unit="One-bedroom">Ask about this apartment</a></div></article>
+    <article class="unit"><div class="photo">[Two-bedroom photo]</div><div class="body"><h3>Two-bedroom</h3><div class="specs">Up to 4 guests · [size] · two en-suite rooms</div><div class="rate">From <strong>GHS [rate]</strong> a night</div><a class="ghost" href="#request" data-unit="Two-bedroom">Ask about this apartment</a></div></article>
+  </div>
+</section>
+
+<section id="gallery" class="wrap block">
+  <div class="section-head"><h2>A closer look</h2></div>
+  <div class="gallery">
+    <div class="photo">[Bedroom]</div><div class="photo">[Kitchen]</div><div class="photo">[Bathroom]</div>
+    <div class="photo">[Balcony view]</div><div class="photo">[Building entrance]</div><div class="photo">[Pool or garden]</div>
+  </div>
+</section>
+
+<section id="request" class="request">
+  <div class="wrap">
+    <form class="card" id="request-form">
+      <div>
+        <h2>Request your dates</h2>
+        <p>Fill this in and WhatsApp opens with your request already written. The host replies with availability and the deposit details.</p>
+      </div>
+      <div class="fields">
+        <label class="field">Check-in<input type="date" id="checkin" required></label>
+        <label class="field">Check-out<input type="date" id="checkout" required></label>
+        <label class="field">Guests<input type="number" id="guests" min="1" max="12" value="2" required></label>
+      </div>
+      <label class="field">Apartment<input type="text" id="unit" placeholder="Any, or name one above"></label>
+      <div class="send-row">
+        <button class="cta" type="submit">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91A9.85 9.85 0 0 0 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.22 8.22 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24a8.2 8.2 0 0 1 8.24 8.25c0 4.54-3.7 8.23-8.24 8.23Z"/></svg>
+          Send request on WhatsApp
+        </button>
+        <span class="summary" id="summary" aria-live="polite">Pick your dates to see the length of stay.</span>
+      </div>
+    </form>
+  </div>
+</section>
+
+<section id="how" class="wrap">
+  <div class="section-head"><h2 style="font-size:36px">Booking direct, made simple</h2></div>
+  <div class="steps">
+    <div class="step"><span class="n">01</span><strong>Send your dates</strong><span>Use the form above or message the host on WhatsApp. You get a reply, not a bot.</span></div>
+    <div class="step"><span class="n">02</span><strong>Confirm and pay a deposit</strong><span>The host confirms availability and sends the deposit details, with a receipt.</span></div>
+    <div class="step"><span class="n">03</span><strong>Arrive and settle in</strong><span>Check-in details and directions arrive before you land. Airport pickup on request.</span></div>
+  </div>
+</section>
+
+<section id="location" class="location">
+  <div class="wrap grid">
+    <div>
+      <p class="eyebrow">Location</p>
+      <h2>Airport Residential Area</h2>
+      <p>One of Accra's quietest, leafiest neighbourhoods, minutes from the airport. Exact address shared after booking.</p>
+      <ul>
+        <li>House rules: [check-in time] · [check-out time] · [no parties]</li>
+        <li>Payment: deposit to [Business name] only, receipt issued for every payment.</li>
+      </ul>
+    </div>
+    <div class="photo">[Google map of the neighbourhood]</div>
+  </div>
+</section>
+
+<section class="wrap reviews">
+  <h2>What guests say</h2>
+  <p>[Real guest reviews from Google go here, with the guest's first name and month of stay.]</p>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div>© Ridge House Residences (demo). Airport Residential, Accra.</div>
+    <div>Page by <a href="/fully-booked">Fitaa Digital</a>. Want one for your property? Live in 7 days or half your fee back.</div>
+  </div>
+</footer>
+
+<a class="cta sticky-book" href="#request">Request your dates</a>
+
+<script>
+/* Demo: requests go to Fitaa Digital's WhatsApp, marked as a demo.
+   For a client page, set HOST_NUMBER to the client's number and remove the [Demo] prefix. */
+var HOST_NUMBER = '233242805256';
+var PREFIX = '[Demo from the Fully Booked page] ';
+var form = document.getElementById('request-form');
+var inEl = document.getElementById('checkin');
+var outEl = document.getElementById('checkout');
+var gEl = document.getElementById('guests');
+var uEl = document.getElementById('unit');
+var sumEl = document.getElementById('summary');
+
+var today = new Date().toISOString().slice(0, 10);
+inEl.min = today; outEl.min = today;
+
+function nights() {
+  if (!inEl.value || !outEl.value) return 0;
+  return Math.round((new Date(outEl.value) - new Date(inEl.value)) / 86400000);
+}
+function pretty(v) {
+  return new Date(v + 'T12:00:00').toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' });
+}
+function update() {
+  if (inEl.value) outEl.min = inEl.value;
+  var n = nights();
+  sumEl.textContent = n > 0 ? n + (n === 1 ? ' night' : ' nights') + ', ' + (gEl.value || '?') + ' guests'
+    : (inEl.value && outEl.value ? 'Check-out must be after check-in.' : 'Pick your dates to see the length of stay.');
+}
+[inEl, outEl, gEl].forEach(function (el) { el.addEventListener('input', update); });
+
+document.querySelectorAll('[data-unit]').forEach(function (a) {
+  a.addEventListener('click', function () { uEl.value = a.getAttribute('data-unit'); });
+});
+
+form.addEventListener('submit', function (e) {
+  e.preventDefault();
+  if (nights() <= 0) { sumEl.textContent = 'Check-out must be after check-in.'; outEl.focus(); return; }
+  var msg = PREFIX + 'Hello Ridge House, I would like to request dates.\n' +
+    'Check-in: ' + pretty(inEl.value) + '\nCheck-out: ' + pretty(outEl.value) +
+    '\nGuests: ' + gEl.value + (uEl.value ? '\nApartment: ' + uEl.value : '');
+  window.open('https://wa.me/' + HOST_NUMBER + '?text=' + encodeURIComponent(msg), '_blank', 'noopener');
+});
+</script>
+</body>
+</html>
