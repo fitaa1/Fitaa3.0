@@ -27,6 +27,9 @@ Single-page site for Fitaa Digital (formerly Fitaa Creative), a creative and dig
 | `public/work/` | Case study images (4:3 WebP) |
 | `public/sitemap.xml`, `public/robots.txt` | Search engine files |
 | `src/pages/Legal.tsx` | Privacy Policy and Terms text (`/privacy`, `/terms`) |
+| `src/config/fullyBooked.ts` | **All words on the Fully Booked offer page** (`/fully-booked`) |
+| `src/pages/FullyBooked.tsx` | Layout of the Fully Booked page |
+| `public/demo/ridge-house/index.html` | Demo host booking page (`/demo/ridge-house/`), one self-contained file to copy per client |
 | `src/components/` | One file per section: `Hero`, `Services`, `WhyUs`, `FeaturedWork`, `Testimonials`, `FinalCTA` (contact), `Navbar`, `Footer` |
 
 Editing guide: see **CUSTOMIZE.md**.
