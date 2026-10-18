@@ -5,7 +5,7 @@ import { siteConfig } from "@/config/site";
 type Section = { heading: string; body: string[] };
 type Doc = { title: string; intro: string; sections: Section[] };
 
-const UPDATED = "16 October 2026";
+const UPDATED = "18 October 2026";
 const { email, phone } = siteConfig.contact;
 
 const privacy: Doc = {
@@ -18,7 +18,7 @@ const privacy: Doc = {
       body: [
         "Only what you choose to send us. If you use the enquiry form, we receive your name, email address, company or project name, and your message.",
         "If you contact us on WhatsApp, by email or by phone, we receive whatever you share there, along with your number or email address.",
-        "This site does not use advertising or analytics cookies, and we do not track you across other websites.",
+        "We measure how the site is used: which pages are visited and which buttons are tapped, such as WhatsApp or demo links. We use Vercel Web Analytics, which sets no cookies, and Google Analytics, which uses cookies. This tells us what is useful; it is never used for advertising, and we do not track you across other websites. You can block Google Analytics with your browser settings or Google's opt-out add-on.",
       ],
     },
     {
@@ -31,7 +31,7 @@ const privacy: Doc = {
     {
       heading: "Who else handles it",
       body: [
-        "Enquiry form messages are delivered to us through Formspree, a form-processing service. WhatsApp messages are handled by WhatsApp. Our website is hosted by Vercel, and fonts are served by Google Fonts, which receives your IP address to deliver them.",
+        "Enquiry form messages are delivered to us through Formspree, a form-processing service. WhatsApp messages are handled by WhatsApp. Our website is hosted by Vercel, visits are measured by Vercel Web Analytics and Google Analytics, and fonts are served by Google Fonts, which receives your IP address to deliver them.",
         "Each of these providers processes data under its own privacy terms.",
       ],
     },

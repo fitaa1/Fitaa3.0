@@ -391,10 +391,12 @@ $('book-form').addEventListener('submit', function (e) {
   var name = $('name').value.trim();
   var msg = SETTINGS.prefix + 'Hello ' + SETTINGS.studio + (name ? ', this is ' + name : '') + '. I would like to book:\n' +
     'Service: ' + $('service').value + '\nDay: ' + pretty($('day').value) + '\nTime: ' + chosenTime;
+  if (window.fitaaTrack) fitaaTrack('booking_request', { label: 'Book your slot', niche: 'studios', service: $('service').value });
   window.open('https://wa.me/' + SETTINGS.whatsapp + '?text=' + encodeURIComponent(msg), '_blank', 'noopener');
 });
 
 fillServices(); renderTabs(); renderMenu(); renderSlots(); renderHours();
 </script>
+<script defer src="/fitaa-analytics.js"></script>
 </body>
 </html>
