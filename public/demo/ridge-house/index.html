@@ -291,8 +291,10 @@ form.addEventListener('submit', function (e) {
   var msg = PREFIX + 'Hello Ridge House, I would like to request dates.\n' +
     'Check-in: ' + pretty(inEl.value) + '\nCheck-out: ' + pretty(outEl.value) +
     '\nGuests: ' + gEl.value + (uEl.value ? '\nApartment: ' + uEl.value : '');
+  if (window.fitaaTrack) fitaaTrack('booking_request', { label: 'Request your dates', niche: 'hosts', nights: nights(), guests: gEl.value });
   window.open('https://wa.me/' + HOST_NUMBER + '?text=' + encodeURIComponent(msg), '_blank', 'noopener');
 });
 </script>
+<script defer src="/fitaa-analytics.js"></script>
 </body>
 </html>
