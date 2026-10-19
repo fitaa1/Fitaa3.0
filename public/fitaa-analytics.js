@@ -6,7 +6,7 @@
   2. Vercel Web Analytics (views): switch it on in Vercel, Project → Analytics → Enable.
      Nothing to paste here. On Vercel's free plan it counts page views only.
   3. Only real visits count: preview links and your own testing on other hosts are ignored.
-     Add a new domain to LIVE_HOSTS when the site moves (e.g. fitaa.digital).
+     Add a new domain to LIVE_HOSTS when the site moves (e.g. fitaacreative.com).
 
   Clicks sent to GA4 as events (see them in GA → Reports → Engagement → Events):
     whatsapp_click   any WhatsApp link or button
@@ -20,8 +20,8 @@
   Copying a page to another site? Copy this file too, or remove its <script> tag.
 */
 (function () {
-  var GA_ID = 'G-D62TL0T2VD';            // Fitaa Digital GA4 property (public ID, not a secret)
-  var LIVE_HOSTS = ['fitaadigital.vercel.app', 'fitaa.digital', 'www.fitaa.digital'];
+  var GA_ID = 'G-D62TL0T2VD';            // Fitaa Creative GA4 property (public ID, not a secret)
+  var LIVE_HOSTS = ['fitaacreative.vercel.app', 'fitaadigital.vercel.app', 'fitaacreative.com', 'www.fitaacreative.com'];
   var VERCEL_ANALYTICS = true;           // false if this site moves off Vercel
 
   var live = LIVE_HOSTS.indexOf(location.hostname) !== -1;

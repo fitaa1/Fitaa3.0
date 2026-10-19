@@ -11,7 +11,7 @@ const { email, phone } = siteConfig.contact;
 const privacy: Doc = {
   title: "Privacy Policy",
   intro:
-    "This policy explains what information Fitaa Digital (formerly Fitaa Creative) collects through this website, why, and what you can ask us to do with it.",
+    "This policy explains what information Fitaa Creative collects through this website, why, and what you can ask us to do with it.",
   sections: [
     {
       heading: "What we collect",
@@ -68,7 +68,7 @@ const terms: Doc = {
     {
       heading: "Our work and content",
       body: [
-        "The text, design and graphics on this site belong to Fitaa Digital. Client names, logos and brand assets shown in our portfolio remain the property of those clients.",
+        "The text, design and graphics on this site belong to Fitaa Creative. Client names, logos and brand assets shown in our portfolio remain the property of those clients.",
         "Please don't copy or reuse our content or our clients' work without written permission.",
       ],
     },
@@ -117,7 +117,7 @@ export default function Legal({ page }: { page: "privacy" | "terms" }) {
     <main className="min-h-screen bg-background text-foreground">
       <header className="border-b border-border/30">
         <div className="container mx-auto px-6 md:px-12 h-20 flex items-center justify-between">
-          <a href="/" className="flex items-center gap-3" aria-label="Fitaa Digital home">
+          <a href="/" className="flex items-center gap-3" aria-label="Fitaa Creative home">
             <img src="/logo-160.webp" alt="" width={36} height={36} className="h-9 w-9 rounded-sm" />
             <span className="font-serif font-semibold tracking-[0.15em] text-[1.05rem]">FITAA</span>
           </a>

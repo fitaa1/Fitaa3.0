@@ -15,13 +15,13 @@ import { Monitor, Palette, Globe, BarChart2 } from "lucide-react";
 
 export const siteConfig = {
   /* ── Brand ─────────────────────────────────────────────────────────────── */
-  name: "Fitaa Digital",
+  name: "Fitaa Creative",
   tagline: "Pure. Strategic. Impactful.",
   /** Shown under the hero headline. */
   description:
     "We turn billboard views and digital impressions into real customers. LED campaigns, striking visuals, and high-converting web experiences built for brands in Accra and beyond.",
   /** Live site address, no trailing slash. Used for the legal pages' canonical links. */
-  url: "https://fitaadigital.vercel.app",
+  url: "https://fitaacreative.vercel.app",
 
   /* ── Top menu ──────────────────────────────────────────────────────────────
    * href must match a section id: #home #services #why-us #work #contact,
@@ -89,7 +89,7 @@ export const siteConfig = {
   /* ── 3. Why Us + stats ─────────────────────────────────────────────────────
    * Stats count up from 0 when they scroll into view. */
   whyUsSection: {
-    eyebrow: "Why Fitaa Digital",
+    eyebrow: "Why Fitaa Creative",
     heading: "Pure craft. Measurable results.",
     body: "We don't just create pretty visuals. Every billboard, every post, every landing page is engineered to move people and drive real business results in Accra and across Ghana.",
   },
@@ -171,7 +171,7 @@ export const siteConfig = {
   testimonials: [
     {
       quote:
-        "Fitaa Digital gave our brand the identity it deserved. The content they created was fresh, professional, and our audience loved it from day one.",
+        "Fitaa Creative gave our brand the identity it deserved. The content they created was fresh, professional, and our audience loved it from day one.",
       title: "Founder",
       company: "Tinkertresses",
     },
@@ -200,7 +200,7 @@ export const siteConfig = {
   },
   contact: {
     email:       "fitaaba@gmail.com",
-    address:     "Accra, Ghana",
+    address:     "7 Boundary Rd, East Legon, Accra",  // must match the Google Business Profile exactly
     phone:       "+233 24 280 5256",
     formspreeId: "xdajglpn",
   },
