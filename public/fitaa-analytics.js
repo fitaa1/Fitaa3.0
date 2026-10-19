@@ -20,7 +20,7 @@
   Copying a page to another site? Copy this file too, or remove its <script> tag.
 */
 (function () {
-  var GA_ID = 'G-XXXXXXXXXX';            // ← paste your Measurement ID here
+  var GA_ID = 'G-D62TL0T2VD';            // Fitaa Digital GA4 property (public ID, not a secret)
   var LIVE_HOSTS = ['fitaadigital.vercel.app', 'fitaa.digital', 'www.fitaa.digital'];
   var VERCEL_ANALYTICS = true;           // false if this site moves off Vercel
 
