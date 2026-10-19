@@ -200,7 +200,7 @@ export const siteConfig = {
   },
   contact: {
     email:       "fitaaba@gmail.com",
-    address:     "Accra, Ghana",
+    address:     "7 Boundary Rd, East Legon, Accra",  // must match the Google Business Profile exactly
     phone:       "+233 24 280 5256",
     formspreeId: "xdajglpn",
   },
