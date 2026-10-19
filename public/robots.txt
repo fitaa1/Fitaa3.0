@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://fitaadigital.vercel.app/sitemap.xml
+Sitemap: https://fitaacreative.vercel.app/sitemap.xml

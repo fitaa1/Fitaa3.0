@@ -22,7 +22,7 @@ export function FeaturedWork() {
           <a
             href="#contact"
             className="text-[0.7rem] font-sans uppercase tracking-[0.18em] text-muted-foreground hover:text-ruby transition-colors duration-300 flex items-center gap-2 group shrink-0 pb-0.5 nav-link"
-            aria-label="Start a project with Fitaa Digital"
+            aria-label="Start a project with Fitaa Creative"
           >
             {workSection.headerLink}
             <ArrowUpRight

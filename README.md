@@ -1,8 +1,8 @@
-# Fitaa Digital: Agency Website
+# Fitaa Creative: Agency Website
 
-Single-page site for Fitaa Digital (formerly Fitaa Creative), a creative and digital marketing agency in Accra, Ghana.
+Single-page site for Fitaa Creative, a creative and digital marketing agency in Accra, Ghana.
 
-**Live:** https://fitaadigital.vercel.app
+**Live:** https://fitaacreative.vercel.app
 
 ## Stack
 

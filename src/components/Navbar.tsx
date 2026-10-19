@@ -67,11 +67,11 @@ export function Navbar() {
           <a
             href="#home"
             className="flex items-center gap-3.5 z-50 relative shrink-0 group"
-            aria-label="Fitaa Digital home"
+            aria-label="Fitaa Creative home"
           >
             <img
               src="/logo-160.webp"
-              alt="Fitaa Digital Adinkra logo mark"
+              alt="Fitaa Creative Adinkra logo mark"
               className="h-9 w-9 object-cover rounded-sm transition-transform duration-400 group-hover:scale-105"
               width={36}
               height={36}
@@ -81,7 +81,7 @@ export function Navbar() {
                 FITAA
               </span>
               <span className="block font-sans font-light text-[0.55rem] tracking-[0.42em] text-gold mt-[1px]">
-                —DIGITAL—
+                —CREATIVE—
               </span>
             </div>
           </a>
@@ -122,7 +122,7 @@ export function Navbar() {
             <a
               href="#contact"
               className="btn-gold hidden lg:inline-flex whitespace-nowrap items-center px-6 py-2.5 font-sans text-[0.68rem] uppercase tracking-[0.2em] ml-2"
-              aria-label="Contact Fitaa Digital"
+              aria-label="Contact Fitaa Creative"
             >
               Get in Touch
             </a>

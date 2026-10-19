@@ -33,11 +33,11 @@ export function Footer() {
           <a
             href="#home"
             className="flex items-center gap-3.5 group"
-            aria-label="Fitaa Digital, back to top"
+            aria-label="Fitaa Creative, back to top"
           >
             <img
               src="/logo-160.webp"
-              alt="Fitaa Digital logo"
+              alt="Fitaa Creative logo"
               className="h-10 w-10 object-cover rounded-sm transition-transform duration-350 group-hover:scale-105"
               width={40}
               height={40}
@@ -48,19 +48,19 @@ export function Footer() {
                 FITAA
               </span>
               <span className="block font-sans font-light text-[0.55rem] tracking-[0.42em] text-gold mt-[1px]">
-                —DIGITAL—
+                —CREATIVE—
               </span>
             </div>
           </a>
 
           {/* Social links */}
-          <nav className="flex items-center gap-6" aria-label="Fitaa Digital social media">
+          <nav className="flex items-center gap-6" aria-label="Fitaa Creative social media">
             <a
               href={siteConfig.social.behance}
               target="_blank"
               rel="noopener noreferrer"
               className="text-muted-foreground hover:text-ruby transition-colors duration-300 p-1"
-              aria-label="View Fitaa Digital's portfolio on Behance"
+              aria-label="View Fitaa Creative's portfolio on Behance"
             >
               <BehanceIcon size={17} />
             </a>
@@ -69,7 +69,7 @@ export function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               className="text-muted-foreground hover:text-ruby transition-colors duration-300 p-1"
-              aria-label="Follow Fitaa Digital on Instagram"
+              aria-label="Follow Fitaa Creative on Instagram"
             >
               <Instagram size={17} strokeWidth={1.5} />
             </a>

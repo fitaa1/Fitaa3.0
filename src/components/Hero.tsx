@@ -54,7 +54,7 @@ export function Hero() {
             <a
               href="#contact"
               className="btn-gold group inline-flex items-center justify-center px-10 py-4 font-sans text-[0.72rem] tracking-[0.22em] uppercase w-full sm:w-auto"
-              aria-label="Start your project with Fitaa Digital"
+              aria-label="Start your project with Fitaa Creative"
             >
               <span className="flex items-center gap-2.5">
                 {hero.primaryButton}
@@ -69,7 +69,7 @@ export function Hero() {
             <a
               href="#work"
               className="btn-outline inline-flex items-center justify-center px-10 py-4 border border-gold/40 text-gold hover:bg-gold/8 hover:border-gold/70 font-sans font-light text-[0.72rem] tracking-[0.22em] uppercase w-full sm:w-auto"
-              aria-label="View Fitaa Digital's case studies"
+              aria-label="View Fitaa Creative's case studies"
             >
               {hero.secondaryButton}
             </a>
