@@ -2,7 +2,7 @@
 
 Single-page site for Fitaa Creative, a creative and digital marketing agency in Accra, Ghana.
 
-**Live:** https://fitaacreative.vercel.app
+**Live:** https://fitaacreative.com (old fitaacreative.vercel.app links 301 here)
 
 ## Stack
 

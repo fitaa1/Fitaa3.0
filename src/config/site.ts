@@ -21,7 +21,7 @@ export const siteConfig = {
   description:
     "We turn billboard views and digital impressions into real customers. LED campaigns, striking visuals, and high-converting web experiences built for brands in Accra and beyond.",
   /** Live site address, no trailing slash. Used for the legal pages' canonical links. */
-  url: "https://fitaacreative.vercel.app",
+  url: "https://fitaacreative.com",
 
   /* ── Top menu ──────────────────────────────────────────────────────────────
    * href must match a section id: #home #services #why-us #work #contact,

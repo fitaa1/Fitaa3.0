@@ -1,17 +1,17 @@
 import { useEffect } from "react";
 import { ArrowLeft } from "lucide-react";
 import { siteConfig } from "@/config/site";
+import legalMeta from "@/config/legal-meta.json";
 
 type Section = { heading: string; body: string[] };
 type Doc = { title: string; intro: string; sections: Section[] };
 
-const UPDATED = "18 October 2026";
+const UPDATED = legalMeta.updated;
 const { email, phone } = siteConfig.contact;
 
 const privacy: Doc = {
-  title: "Privacy Policy",
-  intro:
-    "This policy explains what information Fitaa Creative collects through this website, why, and what you can ask us to do with it.",
+  title: legalMeta.privacy.title,
+  intro: legalMeta.privacy.intro,
   sections: [
     {
       heading: "What we collect",
@@ -55,9 +55,8 @@ const privacy: Doc = {
 };
 
 const terms: Doc = {
-  title: "Terms of Service",
-  intro:
-    "These terms apply to your use of this website. Work we carry out for clients is covered by a separate quote or agreement.",
+  title: legalMeta.terms.title,
+  intro: legalMeta.terms.intro,
   sections: [
     {
       heading: "Using this site",

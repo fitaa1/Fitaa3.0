@@ -1,8 +1,17 @@
 {
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "fitaacreative.vercel.app" }],
+      "destination": "https://fitaacreative.com/:path*",
+      "statusCode": 301
+    }
+  ],
   "rewrites": [
     { "source": "/fully-booked", "destination": "/fully-booked/index.html" },
     { "source": "/demo/ridge-house", "destination": "/demo/ridge-house/index.html" },
     { "source": "/demo/studio", "destination": "/demo/studio/index.html" },
-    { "source": "/(.*)", "destination": "/index.html" }
+    { "source": "/privacy", "destination": "/privacy/index.html" },
+    { "source": "/terms", "destination": "/terms/index.html" }
   ]
 }

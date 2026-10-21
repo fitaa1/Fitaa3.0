@@ -1,0 +1,12 @@
+{
+  "_note": "Titles and intros for /privacy and /terms. Used by the page itself (src/pages/Legal.tsx) and by scripts/static-pages.mjs, which writes each page's title, description and canonical into the HTML at build time so search engines and link previews see them without running JavaScript.",
+  "updated": "18 October 2026",
+  "privacy": {
+    "title": "Privacy Policy",
+    "intro": "This policy explains what information Fitaa Creative collects through this website, why, and what you can ask us to do with it."
+  },
+  "terms": {
+    "title": "Terms of Service",
+    "intro": "These terms apply to your use of this website. Work we carry out for clients is covered by a separate quote or agreement."
+  }
+}
