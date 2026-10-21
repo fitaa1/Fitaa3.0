@@ -37,6 +37,10 @@ Open `src/index.css`; the guide at the top lists every setting.
 
 In `index.html`: `<title>`, `description`, the `og:` and `twitter:` tags, and the business details in the `application/ld+json` block. If the domain changes, update it there, in `site.ts` (`url`), and in `public/sitemap.xml` and `public/robots.txt`.
 
+- **Main address:** https://fitaacreative.com. Old `fitaacreative.vercel.app` links 301 to the same path on fitaacreative.com (`vercel.json`, `redirects`). `www` is redirected in the Vercel dashboard (Settings → Domains), not in `vercel.json`, so the two can never loop.
+- **Privacy, Terms and the 404 page:** `npm run build` runs `scripts/static-pages.mjs`, which writes `dist/privacy/index.html`, `dist/terms/index.html` and `dist/404.html` with their own title, description and canonical. Their titles and intros live in `src/config/legal-meta.json`. Any address that isn't a real page shows the 404 page with a real 404 status.
+- **Share images for the standalone pages:** each has its own 1200×630 `og.jpg` next to it (`public/fully-booked/og.jpg`, `public/demo/ridge-house/og.jpg`, `public/demo/studio/og.jpg`). The demos stay `noindex` but show a proper card when the link is sent on WhatsApp.
+
 ## Enquiry form
 
 Messages go to Formspree. To change the inbox, create a form at formspree.io and paste its ID into `contact.formspreeId`.
