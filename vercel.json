@@ -1,9 +1,9 @@
 {
   "redirects": [
     {
-      "source": "/:path*",
+      "source": "/(.*)",
       "has": [{ "type": "host", "value": "fitaacreative.vercel.app" }],
-      "destination": "https://fitaacreative.com/:path*",
+      "destination": "https://fitaacreative.com/$1",
       "statusCode": 301
     }
   ],
