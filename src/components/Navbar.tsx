@@ -105,7 +105,7 @@ export function Navbar() {
             <button
               onClick={toggle}
               aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
-              className="p-2 text-muted-foreground hover:text-foreground transition-colors duration-250"
+              className="w-11 h-11 inline-flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors duration-250"
             >
               <motion.span
                 key={isDark ? "sun" : "moon"}
@@ -130,7 +130,7 @@ export function Navbar() {
             {/* Hamburger — mobile */}
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="lg:hidden p-2 -mr-2 text-foreground hover:text-ruby transition-colors duration-200"
+              className="lg:hidden w-11 h-11 -mr-2 inline-flex items-center justify-center text-foreground hover:text-ruby transition-colors duration-200"
               aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
               aria-expanded={isOpen}
               aria-controls="mobile-menu"
