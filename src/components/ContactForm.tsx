@@ -32,27 +32,34 @@ export function ContactForm() {
 
     const formspreeId = siteConfig.contact.formspreeId;
 
+    // Fail safe: without a form inbox the message cannot be delivered, so never show "Message Received".
     if (!formspreeId) {
-      await new Promise((r) => setTimeout(r, 800));
-      setState("success");
-      form.reset();
+      setState("error");
       return;
     }
 
+    // Give up after 12 seconds so a slow network ends in a clear error, not an endless spinner.
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 12000);
     try {
       const res = await fetch(`https://formspree.io/f/${formspreeId}`, {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify(data),
+        signal: controller.signal,
       });
       if (res.ok) {
         setState("success");
         form.reset();
+        const track = (window as unknown as { fitaaTrack?: (n: string, p: Record<string, unknown>) => void }).fitaaTrack;
+        if (track) track("enquiry_submit", { label: "Contact form" });
       } else {
         setState("error");
       }
     } catch {
       setState("error");
+    } finally {
+      clearTimeout(timer);
     }
   }
 

@@ -60,6 +60,12 @@ export const heroStagger: Variants = {
   hidden:  {},
   visible: { transition: { staggerChildren: 0.22, delayChildren: 0.12 } },
 };
+/** Hero headline and lede: visible from the first paint (they are the Largest Contentful Paint), glide up only. */
+export const heroText: Variants = {
+  hidden:  { opacity: 1, y: 18 },
+  visible: { opacity: 1, y: 0,  transition: { duration: 0.9, ease: EASE_CURVE } },
+};
+
 export const heroItem: Variants = {
   hidden:  { opacity: 0, y: 32 },
   visible: { opacity: 1, y: 0,  transition: { duration: 1.0, ease: EASE_CURVE } },

@@ -1,4 +1,5 @@
 import { lazy, Suspense } from "react";
+import { MotionConfig } from "framer-motion";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import Home from "@/pages/Home";
 
@@ -13,6 +14,7 @@ const isHome = path === "";
 
 export default function App() {
   return (
+    <MotionConfig reducedMotion="user">
     <ThemeProvider>
       {legalPage ? (
         <Suspense fallback={<div className="min-h-screen bg-background" />}>
@@ -26,5 +28,6 @@ export default function App() {
         </Suspense>
       )}
     </ThemeProvider>
+    </MotionConfig>
   );
 }

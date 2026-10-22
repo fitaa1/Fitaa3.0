@@ -2,16 +2,68 @@
   "redirects": [
     {
       "source": "/(.*)",
-      "has": [{ "type": "host", "value": "fitaacreative.vercel.app" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "fitaacreative.vercel.app"
+        }
+      ],
       "destination": "https://fitaacreative.com/$1",
       "statusCode": 301
     }
   ],
   "rewrites": [
-    { "source": "/fully-booked", "destination": "/fully-booked/index.html" },
-    { "source": "/demo/ridge-house", "destination": "/demo/ridge-house/index.html" },
-    { "source": "/demo/studio", "destination": "/demo/studio/index.html" },
-    { "source": "/privacy", "destination": "/privacy/index.html" },
-    { "source": "/terms", "destination": "/terms/index.html" }
+    {
+      "source": "/fully-booked",
+      "destination": "/fully-booked/index.html"
+    },
+    {
+      "source": "/demo/ridge-house",
+      "destination": "/demo/ridge-house/index.html"
+    },
+    {
+      "source": "/demo/studio",
+      "destination": "/demo/studio/index.html"
+    },
+    {
+      "source": "/privacy",
+      "destination": "/privacy/index.html"
+    },
+    {
+      "source": "/terms",
+      "destination": "/terms/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        }
+      ]
+    },
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
   ]
 }

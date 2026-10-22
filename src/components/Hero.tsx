@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import { AuroraBackground } from "./AuroraBackground";
-import { heroStagger, heroItem, EASE_CURVE } from "@/lib/animations";
+import { heroStagger, heroItem, heroText, EASE_CURVE } from "@/lib/animations";
 
 export function Hero() {
   const { hero } = siteConfig;
@@ -31,7 +31,7 @@ export function Hero() {
 
           {/* Main headline — scale: 6.5rem / φ / φ */}
           <motion.h1
-            variants={heroItem}
+            variants={heroText}
             className="text-[clamp(2.8rem,8vw,6.5rem)] font-serif font-bold leading-[1.04] tracking-[-0.015em] mb-[2.125rem] text-balance"
           >
             <span className="block text-foreground">{hero.headline[0]}</span>
@@ -40,7 +40,7 @@ export function Hero() {
 
           {/* Sub-headline — sits at golden width: max-w-2xl ≈ 62% of max-w-5xl */}
           <motion.p
-            variants={heroItem}
+            variants={heroText}
             className="text-[1.0625rem] md:text-[1.125rem] text-muted-foreground font-sans font-light max-w-2xl mb-[3.4375rem] leading-[1.75]"
           >
             {siteConfig.description}
@@ -69,7 +69,6 @@ export function Hero() {
             <a
               href="#work"
               className="btn-outline inline-flex items-center justify-center px-10 py-4 border border-gold/40 text-gold hover:bg-gold/8 hover:border-gold/70 font-sans font-light text-[0.72rem] tracking-[0.22em] uppercase w-full sm:w-auto"
-              aria-label="View Fitaa Creative's case studies"
             >
               {hero.secondaryButton}
             </a>
