@@ -153,7 +153,7 @@ export const siteConfig = {
       year: "2026",
       result: "UK Shipping Website",
       description:
-        "Website for a Southampton shipping company sending barrels, boxes, vehicles and full containers to 10 Caribbean destinations, with published sailing schedules and online payment for quotes and space.",
+        "Website for a Southampton shipping company sending barrels, boxes, vehicles and containers to the Caribbean, with published sailing schedules, shipment tracking and online payment for quotes, space and barrels.",
       deliverables: ["Website design and build"],
       link: "https://waypointenterprise.co.uk",
       imagePath: "/work/waypoint-enterprise.webp",
