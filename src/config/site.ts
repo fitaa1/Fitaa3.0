@@ -148,20 +148,20 @@ export const siteConfig = {
       imageAlt: "Tinker Hair Care Instagram promos: bestseller restock and bundle deal",
     },
     {
-      client: "Women of SOL",
-      industry: "Web3 / NFT",
-      year: "2022",
-      result: "10,000-Piece Mint",
+      client: "Waypoint Enterprise",
+      industry: "Shipping & Logistics",
+      year: "2026",
+      result: "UK Shipping Website",
       description:
-        "The mint site for a Ghanaian, women-led collection of 10,000 hand-drawn avatars on Solana, a project giving 20% of mint sales to women's health and education.",
-      deliverables: ["Mint website", "Web3 integration"],
-      link: "https://www.instagram.com/womenofsolnft",
-      imagePath: "/work/women-of-sol.webp",
-      imageAlt: "Two Women of SOL NFT avatars from the collection",
+        "Website for a Southampton shipping company sending barrels, boxes, vehicles and full containers to 10 Caribbean destinations, with published sailing schedules and online payment for quotes and space.",
+      deliverables: ["Website design and build"],
+      link: "https://waypointenterprise.co.uk",
+      imagePath: "/work/waypoint-enterprise.webp",
+      imageAlt: "The Waypoint Enterprise website on a laptop and a phone",
     },
   ],
   /** Names shown in the "Also worked with" row under the case studies. */
-  alsoWorkedWith: ["ChicKing!", "Liberty Hands Foundation", "502", "2nd Generation IT Group"],
+  alsoWorkedWith: ["ChicKing!", "Liberty Hands Foundation", "502", "2nd Generation IT Group", "Women of SOL"],
 
   /* ── 5. Testimonials ───────────────────────────────────────────────────── */
   testimonialsSection: {
