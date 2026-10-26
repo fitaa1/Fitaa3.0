@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#14201b">
+<title>Persia Luxury Apartment (preview) | Fully Booked by Fitaa</title>
+<meta name="description" content="A preview booking page for Persia Luxury Apartment, made by Fitaa Creative.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#14201b;--muted:#5d6b64;--paper:#fbf8f2;--card:#fff;--line:#e7e0d3;--accent:#0e6b4f;--accent-2:#0b5540;--gold:#b9873a}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:"DM Sans",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink);background:var(--paper);line-height:1.55;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit}
+.banner{background:var(--ink);color:#f3efe6;font-size:13px;text-align:center;padding:9px 16px}
+.banner b{color:#e9c98b;font-weight:600}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+header.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 0}
+.brand{font-family:"Fraunces",Georgia,serif;font-size:19px;font-weight:600;letter-spacing:-.01em}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 22px;border-radius:999px;background:var(--accent);color:#fff;text-decoration:none;font-weight:600;font-size:15px;border:0;cursor:pointer}
+.btn:hover{background:var(--accent-2)}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.btn.small{min-height:40px;padding:0 16px;font-size:14px}
+.hero{display:grid;gap:28px;padding:12px 0 40px}
+@media(min-width:860px){.hero{grid-template-columns:1fr 1.1fr;align-items:center;padding:28px 0 64px}}
+.kicker{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);font-weight:600;margin:0 0 12px}
+h1{font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:clamp(32px,5.4vw,52px);line-height:1.08;letter-spacing:-.02em;margin:0 0 16px}
+h2{font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:clamp(26px,3.6vw,34px);letter-spacing:-.015em;margin:0 0 8px}
+.lead{color:var(--muted);font-size:17px;margin:0 0 22px;max-width:52ch}
+.rating{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:6px 14px;margin-bottom:22px}
+.rating span{color:var(--gold)}
+.actions{display:flex;flex-wrap:wrap;gap:10px}
+.hero-img{border-radius:22px;overflow:hidden;aspect-ratio:4/3;background:#e9e3d7;box-shadow:0 20px 50px -24px rgba(20,32,27,.45)}
+.hero-img img{width:100%;height:100%;object-fit:cover}
+section{padding:44px 0;border-top:1px solid var(--line)}
+.sub{color:var(--muted);margin:0 0 24px}
+.features{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(min-width:720px){.features{grid-template-columns:repeat(3,1fr)}}
+.feature{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;font-weight:500;font-size:15px}
+.feature::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--accent);margin-right:10px;vertical-align:middle}
+.units{display:grid;gap:14px}
+@media(min-width:720px){.units{grid-template-columns:repeat(2,1fr)}}
+.unit{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px;display:flex;flex-direction:column;gap:6px}
+.unit h3{margin:0;font-size:19px}
+.unit p{margin:0;color:var(--muted);font-size:15px}
+.unit .rate{color:var(--ink);font-weight:600;margin:6px 0 10px}
+.gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(min-width:720px){.gallery{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}}
+.gallery img{width:100%;aspect-ratio:3/2;object-fit:cover;border-radius:14px;background:#e9e3d7}
+form.book{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px;display:grid;gap:14px;max-width:620px}
+.row2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}
+label{font-size:13px;font-weight:600;display:grid;gap:6px}
+input,select{font:inherit;font-size:16px;min-height:46px;padding:0 12px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--ink);width:100%;min-width:0}
+.note{font-size:13px;color:var(--muted);margin:0}
+.steps{display:grid;gap:12px;counter-reset:s;padding:0;margin:0;list-style:none}
+@media(min-width:720px){.steps{grid-template-columns:repeat(3,1fr)}}
+.steps li{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;counter-increment:s}
+.steps li::before{content:counter(s);display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--ink);color:#fff;font-weight:700;font-size:14px;margin-bottom:10px}
+footer{padding:36px 0 96px;color:var(--muted);font-size:14px;border-top:1px solid var(--line)}
+.sticky{position:fixed;left:0;right:0;bottom:0;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:rgba(251,248,242,.94);backdrop-filter:blur(8px);border-top:1px solid var(--line);display:flex;justify-content:center}
+.sticky .btn{width:100%;max-width:420px}
+@media(min-width:860px){.sticky{display:none}footer{padding-bottom:36px}}
+</style>
+</head>
+<body>
+<div class="banner"><b>Preview</b> made for Persia Luxury Apartment by Fitaa Creative, using your public listing photos. Not live yet.</div>
+<div class="wrap">
+<header class="top"><div class="brand">Persia Luxury Apartment</div><a class="btn small" href="https://wa.me/233243443754?text=Hello%20Persia%20Luxury%20Apartment%2C%20I%20found%20you%20online%20and%20would%20like%20to%20book.%20My%20dates%20are%3A%20" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9 0-1.4.7-2 1-2.3.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3Z"/></svg>Book on WhatsApp</a></header>
+<div class="hero">
+  <div>
+    <p class="kicker">Luxury apartments · Osu, Accra</p>
+    <h1>A quiet, gated home in the heart of Osu.</h1>
+    <p class="lead">Furnished apartments behind a secure, landscaped gate, with a swimming pool, gardens and a children&#x27;s play area. There is a restaurant and bar on site for evenings when you&#x27;d rather not go out, and the best of Osu is a short walk away.</p>
+    <div class="rating"><span>★</span>Rated 4.3 by 116 guests on Google</div>
+    <div class="actions"><a class="btn" href="#book"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9 0-1.4.7-2 1-2.3.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3Z"/></svg>Request your dates</a><a class="btn ghost" href="#stay">See the apartments</a></div>
+  </div>
+  <div class="hero-img"><img src="/preview/persia-img/hero.jpg" alt="Persia Luxury Apartment" referrerpolicy="no-referrer"></div>
+</div>
+</div>
+<section><div class="wrap"><h2>Why guests choose us</h2><p class="sub">Everything you need for a short stay or a long one.</p><div class="features"><div class="feature">Swimming pool</div><div class="feature">Gardens and play area</div><div class="feature">Restaurant and bar on site</div><div class="feature">Gated, with security</div><div class="feature">Balconies</div><div class="feature">Central Osu location</div></div></div></section>
+<section id="stay"><div class="wrap"><h2>Choose your stay</h2><p class="sub">Send your dates and we reply on WhatsApp with availability and the rate.</p><div class="units"><div class="unit"><h3>Furnished apartment</h3><p>Tell us your dates and how many guests, and we reply with what&#x27;s free</p><p class="rate">December rates on WhatsApp</p><a class="btn ghost small" href="#book" data-unit="Furnished apartment">Ask about this one</a></div><div class="unit"><h3>Longer stays</h3><p>Weekly and monthly stays welcome, ask for the rate</p><p class="rate">December rates on WhatsApp</p><a class="btn ghost small" href="#book" data-unit="Longer stays">Ask about this one</a></div></div></div></section>
+<section><div class="wrap"><h2>A closer look</h2><p class="sub">Real photos of the property.</p><div class="gallery"><img src="/preview/persia-img/garden.jpg" alt="Persia Luxury Apartment, photo 2" loading="lazy" referrerpolicy="no-referrer"><img src="/preview/persia-img/dining.jpg" alt="Persia Luxury Apartment, photo 3" loading="lazy" referrerpolicy="no-referrer"><img src="/preview/persia-img/bar.jpg" alt="Persia Luxury Apartment, photo 4" loading="lazy" referrerpolicy="no-referrer"><img src="/preview/persia-img/sign.jpg" alt="Persia Luxury Apartment, photo 5" loading="lazy" referrerpolicy="no-referrer"></div></div></section>
+<section id="book"><div class="wrap"><h2>Request your dates</h2><p class="sub">Your request opens in WhatsApp, already written. Nothing is booked until we confirm.</p>
+<form class="book" id="bookForm">
+  <div class="row2"><label>Check-in<input type="date" name="in" required></label><label>Check-out<input type="date" name="out" required></label></div>
+  <div class="row2"><label>Guests<select name="guests"><option>1</option><option selected>2</option><option>3</option><option>4</option></select></label><label>Apartment<select name="unit"><option>Furnished apartment</option><option>Longer stays</option></select></label></div>
+  <p class="note" id="nights">Pick your dates to see the length of stay.</p>
+  <button class="btn" type="submit"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9 0-1.4.7-2 1-2.3.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3Z"/></svg>Send request on WhatsApp</button>
+</form></div></section>
+<section><div class="wrap"><h2>How booking works</h2><ol class="steps"><li><b>Send your dates</b><br>Use the form or the WhatsApp button.</li><li><b>Confirm and pay a deposit</b><br>We reply with availability, the rate and how to pay.</li><li><b>Arrive and settle in</b><br>We share directions and check-in details before you land.</li></ol></div></section>
+<section><div class="wrap"><h2>Where we are</h2><p class="sub">Osu, Accra. Close to Oxford Street&#x27;s restaurants and shops, and about 20 minutes from Kotoka International Airport.</p></div></section>
+<footer><div class="wrap">© Persia Luxury Apartment · Preview page by Fitaa Creative</div></footer>
+<div class="sticky"><a class="btn" href="https://wa.me/233243443754?text=Hello%20Persia%20Luxury%20Apartment%2C%20I%20found%20you%20online%20and%20would%20like%20to%20book.%20My%20dates%20are%3A%20" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9 0-1.4.7-2 1-2.3.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3Z"/></svg>Book on WhatsApp</a></div>
+<script>
+(function(){
+  var f=document.getElementById('bookForm'),n=document.getElementById('nights');
+  function nights(){var a=new Date(f.in.value),b=new Date(f.out.value);var d=Math.round((b-a)/864e5);return d>0?d:0;}
+  f.addEventListener('change',function(){var d=nights();n.textContent=d?d+(d===1?' night':' nights'):'Pick your dates to see the length of stay.';});
+  document.querySelectorAll('[data-unit]').forEach(function(a){a.addEventListener('click',function(){f.unit.value=a.getAttribute('data-unit');});});
+  f.addEventListener('submit',function(ev){ev.preventDefault();var d=nights();
+    var t='Hello Persia Luxury Apartment, I would like to book the '+f.unit.value+' from '+f.in.value+' to '+f.out.value+(d?' ('+d+' nights)':'')+' for '+f.guests.value+' guest(s). Is it available?';
+    window.open('https://wa.me/233243443754?text='+encodeURIComponent(t),'_blank','noopener');});
+})();
+</script>
+</body>
+</html>
