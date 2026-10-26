@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#14201b">
+<title>Airport Grande (preview) | Fully Booked by Fitaa</title>
+<meta name="description" content="A preview booking page for Airport Grande, made by Fitaa Creative.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#14201b;--muted:#5d6b64;--paper:#fbf8f2;--card:#fff;--line:#e7e0d3;--accent:#0e6b4f;--accent-2:#0b5540;--gold:#b9873a}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:"DM Sans",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink);background:var(--paper);line-height:1.55;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit}
+.banner{background:var(--ink);color:#f3efe6;font-size:13px;text-align:center;padding:9px 16px}
+.banner b{color:#e9c98b;font-weight:600}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+header.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 0}
+.brand{font-family:"Fraunces",Georgia,serif;font-size:19px;font-weight:600;letter-spacing:-.01em}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 22px;border-radius:999px;background:var(--accent);color:#fff;text-decoration:none;font-weight:600;font-size:15px;border:0;cursor:pointer}
+.btn:hover{background:var(--accent-2)}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.btn.small{min-height:40px;padding:0 16px;font-size:14px}
+.hero{display:grid;gap:28px;padding:12px 0 40px}
+@media(min-width:860px){.hero{grid-template-columns:1fr 1.1fr;align-items:center;padding:28px 0 64px}}
+.kicker{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);font-weight:600;margin:0 0 12px}
+h1{font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:clamp(32px,5.4vw,52px);line-height:1.08;letter-spacing:-.02em;margin:0 0 16px}
+h2{font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:clamp(26px,3.6vw,34px);letter-spacing:-.015em;margin:0 0 8px}
+.lead{color:var(--muted);font-size:17px;margin:0 0 22px;max-width:52ch}
+.rating{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:6px 14px;margin-bottom:22px}
+.rating span{color:var(--gold)}
+.actions{display:flex;flex-wrap:wrap;gap:10px}
+.hero-img{border-radius:22px;overflow:hidden;aspect-ratio:4/3;background:#e9e3d7;box-shadow:0 20px 50px -24px rgba(20,32,27,.45)}
+.hero-img img{width:100%;height:100%;object-fit:cover}
+section{padding:44px 0;border-top:1px solid var(--line)}
+.sub{color:var(--muted);margin:0 0 24px}
+.features{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(min-width:720px){.features{grid-template-columns:repeat(3,1fr)}}
+.feature{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;font-weight:500;font-size:15px}
+.feature::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--accent);margin-right:10px;vertical-align:middle}
+.units{display:grid;gap:14px}
+@media(min-width:720px){.units{grid-template-columns:repeat(2,1fr)}}
+.unit{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px;display:flex;flex-direction:column;gap:6px}
+.unit h3{margin:0;font-size:19px}
+.unit p{margin:0;color:var(--muted);font-size:15px}
+.unit .rate{color:var(--ink);font-weight:600;margin:6px 0 10px}
+.gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(min-width:720px){.gallery{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}}
+.gallery img{width:100%;aspect-ratio:3/2;object-fit:cover;border-radius:14px;background:#e9e3d7}
+form.book{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px;display:grid;gap:14px;max-width:620px}
+.row2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}
+label{font-size:13px;font-weight:600;display:grid;gap:6px}
+input,select{font:inherit;font-size:16px;min-height:46px;padding:0 12px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--ink);width:100%;min-width:0}
+.note{font-size:13px;color:var(--muted);margin:0}
+.steps{display:grid;gap:12px;counter-reset:s;padding:0;margin:0;list-style:none}
+@media(min-width:720px){.steps{grid-template-columns:repeat(3,1fr)}}
+.steps li{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;counter-increment:s}
+.steps li::before{content:counter(s);display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--ink);color:#fff;font-weight:700;font-size:14px;margin-bottom:10px}
+footer{padding:36px 0 96px;color:var(--muted);font-size:14px;border-top:1px solid var(--line)}
+.sticky{position:fixed;left:0;right:0;bottom:0;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:rgba(251,248,242,.94);backdrop-filter:blur(8px);border-top:1px solid var(--line);display:flex;justify-content:center}
+.sticky .btn{width:100%;max-width:420px}
+@media(min-width:860px){.sticky{display:none}footer{padding-bottom:36px}}
+
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+.chips .rating{margin:0}
+.chip-bf{background:var(--accent);color:#fff;border-color:var(--accent)}
+.chip-bf span{color:#fff}
+.suites{display:grid;gap:16px}
+@media(min-width:720px){.suites{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1040px){.suites{grid-template-columns:repeat(3,1fr)}}
+.suite{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column}
+.suite img{width:100%;aspect-ratio:3/2;object-fit:cover;background:#e9e3d7}
+.suite .body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:6px;flex:1}
+.suite h3{margin:0;font-size:18px}
+.suite p{margin:0;color:var(--muted);font-size:14.5px}
+.stars{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;font-weight:600;color:var(--ink)}
+.stars span{color:var(--gold)}
+.suite .btn{margin-top:auto}
+.suite .spacer{flex:1;min-height:8px}
+.host{background:var(--ink);color:#f3efe6;border-radius:22px;padding:24px;display:grid;gap:18px}
+@media(min-width:720px){.host{grid-template-columns:1.2fr 1fr;align-items:center;padding:32px}}
+.host h2{color:#fff}
+.host p{color:#cfd6d1;margin:0}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.stat{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:14px 10px;text-align:center}
+.stat b{display:block;font-family:"Fraunces",Georgia,serif;font-size:26px;color:#e9c98b;line-height:1.1}
+.stat small{font-size:12.5px;color:#cfd6d1}
+</style>
+</head>
+<body>
+<div class="banner"><b>Preview</b> made for Airport Grande by Fitaa Creative, using your public listing photos. Not live yet.</div>
+<div class="wrap">
+<header class="top"><div class="brand">Airport Grande</div><a class="btn small" href="https://wa.me/233201351116?text=Hello%20Airport%20Grande%2C%20I%20found%20you%20online%20and%20would%20like%20to%20book.%20My%20dates%20are%3A%20" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9 0-1.4.7-2 1-2.3.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3Z"/></svg>Book on WhatsApp</a></header>
+<div class="hero">
+  <div>
+    <p class="kicker">Bed and breakfast · Airport Residential, Accra</p>
+    <h1>Quiet suites by the airport, with breakfast every morning.</h1>
+    <p class="lead">A small guesthouse in Airport Residential with suites, studios and en-suite rooms. Breakfast is included, your room is cleaned every day, and caretakers are on site from 7am to 5pm to help you settle in.</p>
+    <div class="chips"><div class="rating chip-bf"><span>☕</span>Breakfast included</div><div class="rating"><span>★</span>Superhost · 4.91 from 1,566 reviews</div></div>
+    <div class="actions"><a class="btn" href="#book"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9 0-1.4.7-2 1-2.3.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3Z"/></svg>Request your dates</a><a class="btn ghost" href="#stay">See the suites</a></div>
+  </div>
+  <div class="hero-img"><img src="/preview/airport-grande-img/house.jpg" alt="Airport Grande, Airport Residential"></div>
+</div>
+</div>
+<section><div class="wrap"><h2>Why guests choose us</h2><p class="sub">The comfort of a hotel, with the calm of a home.</p><div class="features"><div class="feature">Breakfast included</div><div class="feature">Daily cleaning</div><div class="feature">Caretakers on site, 7am to 5pm</div><div class="feature">Air conditioning</div><div class="feature">Fast Wi-Fi</div><div class="feature">Free parking</div></div></div></section>
+<section id="stay"><div class="wrap"><h2>Choose your suite</h2><p class="sub">Every suite has its own bathroom and air conditioning. Ratings are from guests on Airbnb.</p><div class="suites"><article class="suite"><img src="/preview/airport-grande-img/king-suite.jpg" alt="Quiet King Suite at Airport Grande" loading="lazy"><div class="body"><div class="stars"><span>★</span>4.89 · 418 reviews</div><h3>Quiet King Suite</h3><p>Whole suite · sleeps 2 · king bed · kitchen · private bathroom</p><div class="spacer"></div><a class="btn ghost small" href="#book" data-unit="Quiet King Suite">Ask about this one</a></div></article><article class="suite"><img src="/preview/airport-grande-img/queen-suite.jpg" alt="Spacious Queen Suite at Airport Grande" loading="lazy"><div class="body"><div class="stars"><span>★</span>4.92 · 275 reviews</div><h3>Spacious Queen Suite</h3><p>Whole suite · sleeps 2 · queen bed · fridge · private bathroom</p><div class="spacer"></div><a class="btn ghost small" href="#book" data-unit="Spacious Queen Suite">Ask about this one</a></div></article><article class="suite"><img src="/preview/airport-grande-img/studio.jpg" alt="Spacious Studio at Airport Grande" loading="lazy"><div class="body"><div class="stars"><span>★</span>4.95 · 165 reviews</div><h3>Spacious Studio</h3><p>Whole suite · sleeps 2 · queen bed · kitchen · private bathroom</p><div class="spacer"></div><a class="btn ghost small" href="#book" data-unit="Spacious Studio">Ask about this one</a></div></article><article class="suite"><img src="/preview/airport-grande-img/attic-studio.jpg" alt="Attic Studio at Airport Grande" loading="lazy"><div class="body"><div class="stars"><span>★</span>4.94 · 70 reviews</div><h3>Attic Studio</h3><p>Whole suite · sleeps 2 · kitchen · spare bedroom on request</p><div class="spacer"></div><a class="btn ghost small" href="#book" data-unit="Attic Studio">Ask about this one</a></div></article><article class="suite"><img src="/preview/airport-grande-img/double-room.jpg" alt="Double Room with En-suite at Airport Grande" loading="lazy"><div class="body"><div class="stars"><span>★</span>4.91 · 273 reviews</div><h3>Double Room with En-suite</h3><p>22 sq m · double bed · minibar and kettle · private bathroom</p><div class="spacer"></div><a class="btn ghost small" href="#book" data-unit="Double Room with En-suite">Ask about this one</a></div></article><article class="suite"><img src="/preview/airport-grande-img/twin-room.jpg" alt="Twin Room with En-suite at Airport Grande" loading="lazy"><div class="body"><div class="stars"><span>★</span>4.92 · 275 reviews</div><h3>Twin Room with En-suite</h3><p>22 sq m · two single beds · fridge · private bathroom</p><div class="spacer"></div><a class="btn ghost small" href="#book" data-unit="Twin Room with En-suite">Ask about this one</a></div></article></div></div></section>
+
+<section><div class="wrap"><div class="host"><div><h2>Hosted by Dinesh</h2><p>An Airbnb Superhost for seven years. More than fifteen hundred guests have stayed and left a review, and the average is 4.91 out of 5.</p></div><div class="stats"><div class="stat"><b>4.91</b><small>average rating</small></div><div class="stat"><b>1,566</b><small>guest reviews</small></div><div class="stat"><b>7</b><small>years hosting</small></div></div></div></div></section>
+<section id="book"><div class="wrap"><h2>Request your dates</h2><p class="sub">Your request opens in WhatsApp, already written. Nothing is booked until we confirm.</p>
+<form class="book" id="bookForm">
+  <div class="row2"><label>Check-in<input type="date" name="in" required></label><label>Check-out<input type="date" name="out" required></label></div>
+  <div class="row2"><label>Guests<select name="guests"><option>1</option><option selected>2</option><option>3</option><option>4</option></select></label><label>Suite<select name="unit"><option>Quiet King Suite</option><option>Spacious Queen Suite</option><option>Spacious Studio</option><option>Attic Studio</option><option>Double Room with En-suite</option><option>Twin Room with En-suite</option></select></label></div>
+  <p class="note" id="nights">Pick your dates to see the length of stay.</p>
+  <button class="btn" type="submit"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9 0-1.4.7-2 1-2.3.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3Z"/></svg>Send request on WhatsApp</button>
+</form></div></section>
+<section><div class="wrap"><h2>How booking works</h2><ol class="steps"><li><b>Send your dates</b><br>Choose a suite and send your dates on WhatsApp.</li><li><b>Confirm and pay a deposit</b><br>We reply with availability, the rate and how to pay.</li><li><b>Arrive to breakfast</b><br>We share directions before you land, and breakfast is ready each morning.</li></ol></div></section>
+<section><div class="wrap"><h2>Where we are</h2><p class="sub">Airport Residential, Accra. Close to Kotoka International Airport, Airport City and the Accra Mall.</p></div></section>
+<footer><div class="wrap">© Airport Grande · Preview page by Fitaa Creative</div></footer>
+<div class="sticky"><a class="btn" href="https://wa.me/233201351116?text=Hello%20Airport%20Grande%2C%20I%20found%20you%20online%20and%20would%20like%20to%20book.%20My%20dates%20are%3A%20" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9 0-1.4.7-2 1-2.3.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3Z"/></svg>Book on WhatsApp</a></div>
+<script>
+(function(){
+  var f=document.getElementById('bookForm'),n=document.getElementById('nights');
+  function nights(){var a=new Date(f.in.value),b=new Date(f.out.value);var d=Math.round((b-a)/864e5);return d>0?d:0;}
+  f.addEventListener('change',function(){var d=nights();n.textContent=d?d+(d===1?' night':' nights'):'Pick your dates to see the length of stay.';});
+  document.querySelectorAll('[data-unit]').forEach(function(a){a.addEventListener('click',function(){f.unit.value=a.getAttribute('data-unit');});});
+  f.addEventListener('submit',function(ev){ev.preventDefault();var d=nights();
+    var t='Hello Airport Grande, I would like to book the '+f.unit.value+' from '+f.in.value+' to '+f.out.value+(d?' ('+d+' nights)':'')+' for '+f.guests.value+' guest(s). Is it available?';
+    window.open('https://wa.me/233201351116?text='+encodeURIComponent(t),'_blank','noopener');});
+})();
+</script>
+</body>
+</html>
