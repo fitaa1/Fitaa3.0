@@ -47,7 +47,7 @@ export function Footer() {
               <span className="block font-serif font-semibold text-[1.05rem] tracking-[0.15em] text-foreground/75 group-hover:text-foreground transition-colors duration-300">
                 FITAA
               </span>
-              <span className="block font-sans font-light text-[0.55rem] tracking-[0.42em] text-gold mt-[1px]">
+              <span className="block font-sans font-light text-[0.55rem] tracking-[0.42em] text-gold-text mt-[1px]">
                 —CREATIVE—
               </span>
             </div>

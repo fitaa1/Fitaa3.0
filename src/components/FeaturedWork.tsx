@@ -62,7 +62,9 @@ export function FeaturedWork() {
                 {/* Image: every tile uses the same 4:3 frame */}
                 <div className="relative overflow-hidden bg-card mb-5 aspect-[4/3]">
                   <img
-                    src={study.imagePath}
+                    src={study.imagePath.replace(/\.webp$/, "-720.webp")}
+                    srcSet={`${study.imagePath.replace(/\.webp$/, "-720.webp")} 720w, ${study.imagePath.replace(/\.webp$/, "-1080.webp")} 1080w, ${study.imagePath} 1440w`}
+                    sizes="(min-width: 768px) 46vw, calc(100vw - 48px)"
                     alt={study.imageAlt}
                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
                     loading="lazy"
