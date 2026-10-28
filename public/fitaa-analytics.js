@@ -37,11 +37,20 @@
   window.dataLayer = window.dataLayer || [];
   window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
   if (gaOn) {
-    // Load Google's script after the page has finished loading, so it never slows the first
-    // screen. Everything sent before then waits in dataLayer and is delivered when it arrives.
-    var loadGa = function () { load('https://www.googletagmanager.com/gtag/js?id=' + GA_ID); };
-    if (document.readyState === 'complete') loadGa();
-    else window.addEventListener('load', loadGa, { once: true });
+    // Load Google's script on the visitor's first tap, scroll or key press, or after 4 seconds,
+    // whichever comes first. Its start-up work then never lands on the first screen or on a tap,
+    // and visits that skim past in under 4 seconds without touching the page aren't counted in GA
+    // (Vercel Web Analytics still counts them). Everything sent before then waits in dataLayer.
+    var gaLoaded = false;
+    var EVENTS = ['pointerdown', 'scroll', 'keydown', 'touchstart'];
+    var loadGa = function () {
+      if (gaLoaded) return;
+      gaLoaded = true;
+      EVENTS.forEach(function (ev) { window.removeEventListener(ev, loadGa, true); });
+      load('https://www.googletagmanager.com/gtag/js?id=' + GA_ID);
+    };
+    EVENTS.forEach(function (ev) { window.addEventListener(ev, loadGa, { capture: true, passive: true, once: true }); });
+    setTimeout(loadGa, 4000);
     window.gtag('js', new Date());
     window.gtag('config', GA_ID);
   }
