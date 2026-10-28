@@ -58,6 +58,7 @@
   --color-destructive-foreground: hsl(var(--destructive-foreground));
   --color-ruby:     hsl(var(--ruby));
   --color-gold:     hsl(var(--gold));
+  --color-gold-text: hsl(var(--gold-text));
   --color-charcoal: hsl(var(--charcoal));
   --font-sans:  var(--app-font-sans);
   --font-serif: var(--app-font-serif);
@@ -96,6 +97,7 @@
   --destructive-foreground: 210 30% 98%;
   --ruby:     192 95% 34%;   /* brand accent: deep cyan, darker for contrast on light */
   --gold:     38  72% 40%;
+  --gold-text: 38 72% 30%;  /* gold for tiny text on light: passes 4.5:1 on white */
   --charcoal: 211 32% 5%;
   --aurora-1: 217 95% 55%;
   --aurora-2: 188 100% 50%;
@@ -140,6 +142,7 @@
   --destructive-foreground: 211 30% 96%;
   --ruby: 188 100% 50%;      /* brand accent: electric cyan */
   --gold: 41 74% 65%;        /* champagne gold */
+  --gold-text: 41 74% 65%;
   --aurora-1: 217 95% 50%;   /* logo blue */
   --aurora-2: 188 100% 48%;  /* electric cyan */
   --aurora-3: 226 85% 52%;   /* deep sapphire */

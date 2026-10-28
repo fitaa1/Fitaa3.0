@@ -36,5 +36,7 @@ Found in the 22 Oct 2026 audit. Each line is a mistake that happened once, and t
 - **Google Docs edits:** an `insertText` needs a `location` or `endOfSegmentLocation`. Read the doc back after every edit before calling it done.
 - **Claims:** a "done", "live" or "verified" line in a PR, doc or the Daily Log needs a real check behind it (status code, screenshot, test run). Otherwise write UNVERIFIED and why.
 - **Contact form (Creative):** it used to show "Message Received" when no Formspree ID was set, which would silently drop every lead. It now shows the error state with the email address. Keep it that way.
-- **Fonts:** Google Fonts load without blocking the first paint (`index.html`). Do not turn the stylesheet back into a plain blocking link: it cost about 1.5 s of first paint on mobile.
+- **Fonts and analytics:** Google Fonts load without blocking the first paint on every page (`index.html` and each page in `public/`), and Google Analytics loads after the page has finished (`public/fitaa-analytics.js`). Never turn either back into a blocking load: the fonts alone cost about 1 s of first paint on mobile.
+- **Questions on /fully-booked:** the FAQPage data in the page head is built from the visible questions. Change both together, or Google and AI answers quote the old wording.
+- **Portfolio images:** each needs `name.webp` (1440 px), `name-1080.webp` and `name-720.webp` in `public/work/`, so phones never download the large file.
 - **Second GA destination:** every event on this site also reaches a second GA4 property, `G-G4NQ36GKW4`. It is not in the code, so it comes from the Google tag settings in Google Analytics (Admin, Data streams, Configure tag settings, Manage Google tag). Nigel decides whether to keep it.

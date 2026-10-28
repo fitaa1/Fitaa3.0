@@ -37,7 +37,11 @@
   window.dataLayer = window.dataLayer || [];
   window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
   if (gaOn) {
-    load('https://www.googletagmanager.com/gtag/js?id=' + GA_ID);
+    // Load Google's script after the page has finished loading, so it never slows the first
+    // screen. Everything sent before then waits in dataLayer and is delivered when it arrives.
+    var loadGa = function () { load('https://www.googletagmanager.com/gtag/js?id=' + GA_ID); };
+    if (document.readyState === 'complete') loadGa();
+    else window.addEventListener('load', loadGa, { once: true });
     window.gtag('js', new Date());
     window.gtag('config', GA_ID);
   }

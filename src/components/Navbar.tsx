@@ -80,7 +80,7 @@ export function Navbar() {
               <span className="block font-serif font-semibold text-[1.1rem] tracking-[0.15em] text-foreground">
                 FITAA
               </span>
-              <span className="block font-sans font-light text-[0.55rem] tracking-[0.42em] text-gold mt-[1px]">
+              <span className="block font-sans font-light text-[0.55rem] tracking-[0.42em] text-gold-text mt-[1px]">
                 —CREATIVE—
               </span>
             </div>
