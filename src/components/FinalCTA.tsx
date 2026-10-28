@@ -1,9 +1,7 @@
 import { useState, useEffect, lazy, Suspense } from "react";
-import { usePresence } from "@/lib/reveal";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import { Reveal } from "@/lib/reveal";
-import { fadeInLeft, fadeInUp, sectionViewport } from "@/lib/animations";
 
 /* The enquiry form (and its validation libraries) loads separately to keep the first load small. */
 const loadForm = () => import("./ContactForm");
