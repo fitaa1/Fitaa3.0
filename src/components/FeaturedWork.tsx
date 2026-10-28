@@ -1,8 +1,7 @@
-import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import { SectionLabel } from "./SectionLabel";
-import { staggerContainer, fadeInUp, cardViewport, sectionViewport } from "@/lib/animations";
+import { Reveal } from "@/lib/reveal";
 
 export function FeaturedWork() {
   const { workSection } = siteConfig;
@@ -11,13 +10,7 @@ export function FeaturedWork() {
       <div className="container mx-auto px-6 md:px-12">
 
         {/* Header row */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={sectionViewport}
-          variants={fadeInUp}
-          className="flex flex-col md:flex-row md:items-end justify-between mb-[var(--sp-6)] gap-5"
-        >
+        <Reveal variant="up" as="div" className="flex flex-col md:flex-row md:items-end justify-between mb-[var(--sp-6)] gap-5">
           <SectionLabel id="work-heading" eyebrow={workSection.eyebrow} heading={workSection.heading} />
           <a
             href="#contact"
@@ -31,17 +24,11 @@ export function FeaturedWork() {
               aria-hidden="true"
             />
           </a>
-        </motion.div>
+        </Reveal>
 
         {/* Grid: 1 column on phones, 2 from tablets up */}
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={cardViewport}
-          className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8"
-        >
-          {siteConfig.caseStudies.map((study) => {
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+          {siteConfig.caseStudies.map((study, i) => {
             /* A tile is a link only when the case study has one (e.g. Instagram). */
             const Wrapper = study.link ? "a" : "div";
             const linkProps = study.link
@@ -53,11 +40,7 @@ export function FeaturedWork() {
                 }
               : {};
             return (
-            <motion.article
-              key={study.client}
-              variants={fadeInUp}
-              className="group h-full"
-            >
+            <Reveal key={study.client} variant="up" delay={0.1 + i * 0.12} as="article" className="group h-full">
               <Wrapper {...linkProps} className="flex flex-col h-full">
                 {/* Image: every tile uses the same 4:3 frame */}
                 <div className="relative overflow-hidden bg-card mb-5 aspect-[4/3]">
@@ -121,19 +104,13 @@ export function FeaturedWork() {
                   </ul>
                 </div>
               </Wrapper>
-            </motion.article>
+            </Reveal>
             );
           })}
-        </motion.div>
+        </div>
 
         {/* "Also worked with" row */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={sectionViewport}
-          variants={fadeInUp}
-          className="mt-[var(--sp-6)] pt-8 border-t border-border/30 flex flex-col md:flex-row md:items-center gap-5 md:gap-10"
-        >
+        <Reveal variant="up" as="div" className="mt-[var(--sp-6)] pt-8 border-t border-border/30 flex flex-col md:flex-row md:items-center gap-5 md:gap-10">
           <p className="text-[0.65rem] font-sans uppercase tracking-[0.22em] text-muted-foreground shrink-0">
             {workSection.alsoWorkedWithLabel}
           </p>
@@ -144,7 +121,7 @@ export function FeaturedWork() {
               </li>
             ))}
           </ul>
-        </motion.div>
+        </Reveal>
       </div>
     </section>
   );

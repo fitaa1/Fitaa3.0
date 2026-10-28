@@ -1,7 +1,6 @@
-import { motion } from "framer-motion";
+import { Reveal } from "@/lib/reveal";
 import { siteConfig } from "@/config/site";
 import { SectionLabel } from "./SectionLabel";
-import { staggerContainerSlow, fadeInUp, cardViewport } from "@/lib/animations";
 
 export function Testimonials() {
   return (
@@ -22,19 +21,9 @@ export function Testimonials() {
       <div className="container mx-auto px-6 md:px-12 relative z-10">
         <SectionLabel id="testimonials-heading" eyebrow={siteConfig.testimonialsSection.eyebrow} heading={siteConfig.testimonialsSection.heading} className="mb-[var(--sp-6)]" />
 
-        <motion.div
-          variants={staggerContainerSlow}
-          initial="hidden"
-          whileInView="visible"
-          viewport={cardViewport}
-          className={`grid grid-cols-1 ${siteConfig.testimonials.length > 1 ? "md:grid-cols-2" : ""} gap-12 lg:gap-[5.5rem]`}
-        >
-          {siteConfig.testimonials.map((t) => (
-            <motion.figure
-              key={t.company}
-              variants={fadeInUp}
-              className="relative flex flex-col"
-            >
+        <div className={`grid grid-cols-1 ${siteConfig.testimonials.length > 1 ? "md:grid-cols-2" : ""} gap-12 lg:gap-[5.5rem]`}>
+          {siteConfig.testimonials.map((t, i) => (
+            <Reveal key={t.company} variant="up" delay={0.1 + i * 0.18} as="figure" className="relative flex flex-col">
               {/* Large decorative quotation mark */}
               <div
                 className="absolute -top-3 -left-1 text-[6rem] leading-none font-serif text-ruby/8 select-none pointer-events-none"
@@ -66,9 +55,9 @@ export function Testimonials() {
                 </div>
                 <div className="flex-1 h-px bg-border/25 hidden md:block" aria-hidden="true" />
               </figcaption>
-            </motion.figure>
+            </Reveal>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

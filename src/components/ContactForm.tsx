@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { motion } from "framer-motion";
 import { CheckCircle2, AlertCircle } from "lucide-react";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -68,9 +67,7 @@ export function ContactForm() {
 
   if (state === "success")
     return (
-      <motion.div
-        initial={{ opacity: 0, scale: 0.96 }}
-        animate={{ opacity: 1, scale: 1 }}
+      <div
         className="flex flex-col items-center justify-center text-center py-16 px-8"
       >
         <div className="w-14 h-14 bg-ruby/10 text-ruby rounded-full flex items-center justify-center mb-6">
@@ -86,14 +83,12 @@ export function ContactForm() {
         >
           Send Another
         </button>
-      </motion.div>
+      </div>
     );
 
   if (state === "error")
     return (
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
+      <div
         className="flex flex-col items-center justify-center text-center py-16 px-8"
       >
         <div className="w-14 h-14 bg-destructive/10 text-destructive rounded-full flex items-center justify-center mb-6">
@@ -112,7 +107,7 @@ export function ContactForm() {
         >
           Try Again
         </button>
-      </motion.div>
+      </div>
     );
 
   return (

@@ -1,15 +1,16 @@
-import { useRef, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useRef, useState, type CSSProperties } from "react";
+import { usePresence, useInViewOnce } from "@/lib/reveal";
 import { Plus, Check } from "lucide-react";
 import { SectionLabel } from "./SectionLabel";
 import { siteConfig } from "@/config/site";
-import { staggerContainerFast, fadeInUp, cardViewport, EASE_CURVE } from "@/lib/animations";
 
 type Service = (typeof siteConfig.services)[number];
 
-function ServiceCard({ service, index }: { service: Service; index: number }) {
+function ServiceCard({ service, index, delay }: { service: Service; index: number; delay: number }) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLLIElement>(null);
+  const isInView = useInViewOnce(ref, "-40px");
+  const { mounted, visible } = usePresence(open, 300);
   const panelId = `service-panel-${index}`;
 
   /* Spotlight follows the pointer (mouse, pen or finger) via CSS variables. */
@@ -22,13 +23,12 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
   };
 
   return (
-    <motion.li
+    <li
       ref={ref}
-      variants={fadeInUp}
-      onPointerMove={track}
-      onPointerDown={track}
+      data-reveal="up"
       data-open={open}
-      className="service-card group relative bg-card border border-border/40 overflow-hidden"
+      style={{ "--d": `${delay}s` } as CSSProperties}
+      className={`service-card group relative bg-card border border-border/40 overflow-hidden ${isInView ? "is-in" : ""}`}
     >
       {/* Pointer spotlight */}
       <div className="service-spotlight pointer-events-none absolute inset-0" aria-hidden="true" />
@@ -66,46 +66,39 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
         <span className="sr-only">{open ? "Hide" : "Show"} what's included</span>
       </button>
 
-      <AnimatePresence initial={false}>
-        {open && (
-          <motion.div
-            id={panelId}
-            key="panel"
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.4, ease: EASE_CURVE }}
-            className="relative overflow-hidden"
-          >
-            <div className="px-8 md:px-9 pb-8 md:pb-9">
-              <p className="text-[0.62rem] font-sans uppercase tracking-[0.22em] text-gold mb-4 pt-5 border-t border-border/40">
-                What's included
-              </p>
-              <ul className="grid gap-2.5">
-                {service.deliverables.map((d, i) => (
-                  <motion.li
-                    key={d}
-                    initial={{ opacity: 0, x: -8 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.06 * i + 0.1, duration: 0.35, ease: EASE_CURVE }}
-                    className="flex items-center gap-3 text-[0.9rem] font-sans text-foreground/85"
-                  >
-                    <Check size={14} className="text-ruby shrink-0" aria-hidden="true" />
-                    {d}
-                  </motion.li>
-                ))}
-              </ul>
-              <a
-                href="#contact"
-                className="inline-flex items-center gap-2 mt-6 text-[0.68rem] font-sans uppercase tracking-[0.18em] text-ruby hover:text-foreground transition-colors"
-              >
-                Start this project →
-              </a>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.li>
+      {mounted && (
+        <div
+          id={panelId}
+          data-open={visible}
+          className="service-panel relative overflow-hidden"
+        >
+          <div className="px-8 md:px-9 pb-8 md:pb-9">
+            <p className="text-[0.62rem] font-sans uppercase tracking-[0.22em] text-gold mb-4 pt-5 border-t border-border/40">
+              What's included
+            </p>
+            <ul className="grid gap-2.5">
+              {service.deliverables.map((d, i) => (
+                <li
+                  key={d}
+                  data-stagger
+                  style={{ "--d": `${0.1 + 0.06 * i}s` } as CSSProperties}
+                  className="flex items-center gap-3 text-[0.9rem] font-sans text-foreground/85"
+                >
+                  <Check size={14} className="text-ruby shrink-0" aria-hidden="true" />
+                  {d}
+                </li>
+              ))}
+            </ul>
+            <a
+              href="#contact"
+              className="inline-flex items-center gap-2 mt-6 text-[0.68rem] font-sans uppercase tracking-[0.18em] text-ruby hover:text-foreground transition-colors"
+            >
+              Start this project →
+            </a>
+          </div>
+        </div>
+      )}
+    </li>
   );
 }
 
@@ -130,18 +123,14 @@ export function Services() {
           className="mb-[var(--sp-6)] md:max-w-[38rem]"
         />
 
-        <motion.ul
-          variants={staggerContainerFast}
-          initial="hidden"
-          whileInView="visible"
-          viewport={cardViewport}
+        <ul
           className="grid grid-cols-1 md:grid-cols-2 gap-5 items-start"
           role="list"
         >
           {siteConfig.services.map((service, i) => (
-            <ServiceCard key={service.title} service={service} index={i} />
+            <ServiceCard key={service.title} service={service} index={i} delay={0.1 + i * 0.12} />
           ))}
-        </motion.ul>
+        </ul>
       </div>
     </section>
   );

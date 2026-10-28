@@ -1,0 +1,38 @@
+{
+  "tools": {
+    "approvalMode": "auto-edit"
+  },
+  "permissions": {
+    "allow": [
+      "Bash(git *)",
+      "Bash(npm *)",
+      "Bash(npx *)",
+      "Bash(node *)",
+      "Bash(python3 *)",
+      "Bash(sleep *)",
+      "Bash(sed -n *)",
+      "Bash(cat *)",
+      "Bash(ls *)",
+      "Bash(grep *)"
+    ],
+    "deny": [
+      "Bash(git push origin main*)",
+      "Bash(git push origin HEAD:main*)",
+      "Bash(git push * main*)",
+      "Bash(git push -f*)",
+      "Bash(git push --force*)",
+      "Bash(git push * -f*)",
+      "Bash(git push * --force*)",
+      "Bash(git checkout main*)",
+      "Bash(git switch main*)",
+      "Bash(git merge*)",
+      "Bash(git rebase*)",
+      "Bash(git reset --hard*)",
+      "Bash(git branch -D*)",
+      "Bash(git clean*)",
+      "Bash(npm publish*)",
+      "Bash(rm -rf*)"
+    ]
+  },
+  "$version": 4
+}

@@ -1,22 +1,9 @@
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Sun, Moon } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useScrolledPast } from "@/hooks/useScrolledPast";
-
-const overlayVariants = {
-  hidden:  { opacity: 0, y: "-100%" },
-  visible: { opacity: 1, y: 0,       transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
-  exit:    { opacity: 0, y: "-100%", transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] } },
-};
-const linkVariants = {
-  hidden:  { opacity: 0, y: 24 },
-  visible: (i: number) => ({
-    opacity: 1, y: 0,
-    transition: { delay: 0.1 + i * 0.08, duration: 0.6, ease: [0.22, 1, 0.36, 1] },
-  }),
-};
+import { usePresence, Reveal } from "@/lib/reveal";
 
 /** Tracks which page section sits under the middle of the screen. */
 function useActiveSection(ids: string[]) {
@@ -39,10 +26,11 @@ function useActiveSection(ids: string[]) {
 const sectionIds = siteConfig.nav.map((n) => n.href.slice(1));
 
 export function Navbar() {
-  const [isOpen,   setIsOpen]   = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const scrolled = useScrolledPast(60);
   const { isDark, toggle } = useTheme();
   const active = useActiveSection(sectionIds);
+  const { mounted, visible } = usePresence(isOpen, 300);
 
   useEffect(() => {
     document.body.style.overflow = isOpen ? "hidden" : "";
@@ -107,15 +95,9 @@ export function Navbar() {
               aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
               className="w-11 h-11 inline-flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors duration-250"
             >
-              <motion.span
-                key={isDark ? "sun" : "moon"}
-                initial={{ opacity: 0, rotate: -15, scale: 0.85 }}
-                animate={{ opacity: 1, rotate: 0,   scale: 1    }}
-                exit={{    opacity: 0, rotate:  15, scale: 0.85 }}
-                transition={{ duration: 0.2 }}
-              >
+              <span className="inline-flex items-center justify-center w-8 h-8 transition-transform duration-200">
                 {isDark ? <Sun size={17} strokeWidth={1.5} /> : <Moon size={17} strokeWidth={1.5} />}
-              </motion.span>
+              </span>
             </button>
 
             {/* CTA — desktop only */}
@@ -135,72 +117,60 @@ export function Navbar() {
               aria-expanded={isOpen}
               aria-controls="mobile-menu"
             >
-              <AnimatePresence mode="wait" initial={false}>
-                {isOpen
-                  ? <motion.span key="x"  initial={{ rotate: -45, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 45,  opacity: 0 }} transition={{ duration: 0.18 }}><X    size={22} /></motion.span>
-                  : <motion.span key="hb" initial={{ rotate:  45, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -45, opacity: 0 }} transition={{ duration: 0.18 }}><Menu size={22} /></motion.span>
-                }
-              </AnimatePresence>
+              <span className="inline-flex items-center justify-center w-8 h-8 transition-transform duration-200">
+                {isOpen ? <X size={22} /> : <Menu size={22} />}
+              </span>
             </button>
           </div>
         </div>
       </nav>
 
       {/* Full-screen mobile menu */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            id="mobile-menu"
-            key="overlay"
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-            variants={overlayVariants}
-            className="fixed inset-0 z-[45] bg-background/98 backdrop-blur-2xl flex flex-col items-center justify-center"
-            role="dialog"
-            aria-modal="true"
-            aria-label="Navigation"
-          >
-            {/* Ambient glow */}
-            <div
-              className="absolute inset-0 pointer-events-none"
-              style={{ background: "radial-gradient(ellipse 60% 40% at 50% 50%, hsl(var(--ruby) / 0.07), transparent)" }}
-              aria-hidden="true"
-            />
+      {mounted && (
+        <div
+          id="mobile-menu"
+          data-open={visible}
+          className="fixed inset-0 z-[45] bg-background/98 backdrop-blur-2xl flex flex-col items-center justify-center"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Navigation"
+        >
+          {/* Ambient glow */}
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{ background: "radial-gradient(ellipse 60% 40% at 50% 50%, hsl(var(--ruby) / 0.07), transparent)" }}
+            aria-hidden="true"
+          />
 
-            <nav className="flex flex-col items-center gap-7 relative z-10">
-              {siteConfig.nav.map((item, i) => (
-                <motion.a
-                  key={item.href}
-                  href={item.href}
-                  custom={i}
-                  variants={linkVariants}
-                  onClick={close}
-                  aria-current={active === item.href.slice(1) ? "location" : undefined}
-                  className="group flex items-center gap-5 text-[2.8rem] font-serif font-light text-foreground/60 hover:text-foreground aria-[current=location]:text-foreground transition-colors duration-300"
-                >
-                  <span
-                    className="w-0 h-px bg-ruby group-hover:w-7 group-aria-[current=location]:w-7 transition-all duration-500 ease-out"
-                    aria-hidden="true"
-                  />
-                  {item.label}
-                </motion.a>
-              ))}
-            </nav>
+          <nav className="flex flex-col items-center gap-7 relative z-10">
+            {siteConfig.nav.map((item, i) => (
+              <Reveal
+                key={item.href}
+                variant="up"
+                delay={0.1 + i * 0.08}
+                dur={0.6}
+                as="a"
+                href={item.href}
+                onClick={close}
+                aria-current={active === item.href.slice(1) ? "location" : undefined}
+                className="group flex items-center gap-5 text-[2.8rem] font-serif font-light text-foreground/60 hover:text-foreground aria-[current=location]:text-foreground transition-colors duration-300"
+              >
+                <span
+                  className="w-0 h-px bg-ruby group-hover:w-7 group-aria-[current=location]:w-7 transition-all duration-500 ease-out"
+                  aria-hidden="true"
+                />
+                {item.label}
+              </Reveal>
+            ))}
+          </nav>
 
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.6, duration: 0.5 }}
-              className="absolute bottom-10 flex flex-col items-center gap-2"
-            >
-              <span className="text-[0.65rem] font-sans uppercase tracking-[0.28em] text-muted-foreground">
-                {siteConfig.contact.email}
-              </span>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          <div className="absolute bottom-10 flex flex-col items-center gap-2">
+            <span className="text-[0.65rem] font-sans uppercase tracking-[0.28em] text-muted-foreground">
+              {siteConfig.contact.email}
+            </span>
+          </div>
+        </div>
+      )}
     </>
   );
 }

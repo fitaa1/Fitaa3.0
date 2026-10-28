@@ -380,3 +380,96 @@ html { scroll-behavior: smooth; }
 .tile-shadow {
   background-image: linear-gradient(to top, rgb(4 8 12 / 0.38), rgb(4 8 12 / 0) 45%);
 }
+
+/* ── Lean motion (src/lib/reveal.tsx): transform and opacity only ─────────── */
+[data-reveal] {
+  opacity: 0;
+  transition: opacity var(--dur, 0.75s) cubic-bezier(0.22, 1, 0.36, 1) var(--d, 0s),
+              transform var(--dur, 0.75s) cubic-bezier(0.22, 1, 0.36, 1) var(--d, 0s);
+}
+[data-reveal="up"]    { transform: translate3d(0, 28px, 0); }
+[data-reveal="down"]  { transform: translate3d(0, -20px, 0); }
+[data-reveal="left"]  { transform: translate3d(-36px, 0, 0); }
+[data-reveal="right"] { transform: translate3d(36px, 0, 0); }
+[data-reveal="scale"] { transform: scale(0.94); }
+[data-reveal="glide"] { opacity: 1; transform: translate3d(0, 18px, 0); }
+[data-reveal].is-in   { opacity: 1; transform: none; }
+
+/* Hero scroll indicator: fade-in on mount (was framer-motion
+ * initial={{opacity:0}} animate={{opacity:1}} transition={{delay:1.6,duration:1.2}}).
+ * Played as a CSS animation so it fires unconditionally on first paint. */
+.scroll-indicator {
+  animation: hero-scroll-fade 1.2s 1.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes hero-scroll-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Hero scroll line: draw-in from the top (was framer-motion
+ * animate={{scaleY:[0,1]}} originY:0, delay 1.8, duration 1.4). */
+.scroll-line {
+  transform-origin: top;
+  animation: hero-scroll-draw 1.4s 1.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes hero-scroll-draw {
+  from { transform: scaleY(0); }
+  to   { transform: scaleY(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-indicator { animation: none; opacity: 1; }
+  .scroll-line { animation: none; transform: scaleY(1); }
+}
+
+/* AnimatePresence replacements: data-open enter/exit for buttons */
+[data-draw] {
+  opacity: 0;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.55s, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.55s;
+}
+[data-draw="true"] {
+  opacity: 1;
+  transform: scaleX(1);
+  transition: opacity 0.9s 0.55s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Navbar mobile overlay: slide-down enter, slide-up exit */
+#mobile-menu {
+  opacity: 0;
+  transform: translate3d(0, -100%, 0);
+  transition: opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1), transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+#mobile-menu[data-open="true"] {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+#mobile-menu[data-open="false"] {
+  opacity: 0;
+  transform: translate3d(0, -100%, 0);
+  transition: opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1), transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+@media (prefers-reduced-motion: reduce) {
+  #mobile-menu { transition: none; }
+}
+
+/* AnimatePresence replacements: data-open enter/exit for buttons */
+button[data-open] {
+  opacity: 0;
+  transform: translate3d(0, 16px, 0);
+  transition: opacity 0.3s cubic-bezier(0.22, 1, 0.36, 1), transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+button[data-open="true"] {
+  opacity: 1;
+  transform: none;
+}
+button[data-open="false"] {
+  opacity: 0;
+  transform: translate3d(0, 16px, 0);
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] { opacity: 1; transform: none; transition: none; }
+  button[data-open] { transition: none; }
+}

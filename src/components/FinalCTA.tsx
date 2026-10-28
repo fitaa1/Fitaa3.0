@@ -1,8 +1,7 @@
 import { useState, useEffect, lazy, Suspense } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { siteConfig } from "@/config/site";
-import { fadeInLeft, fadeInUp, sectionViewport } from "@/lib/animations";
+import { Reveal } from "@/lib/reveal";
 
 /* The enquiry form (and its validation libraries) loads separately to keep the first load small. */
 const loadForm = () => import("./ContactForm");
@@ -24,12 +23,6 @@ function WhatsAppIcon({ size = 20 }: { size?: number }) {
     </svg>
   );
 }
-
-const tabVariants = {
-  hidden:  { opacity: 0, y: 8 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.35, ease: [0.22, 1, 0.36, 1] } },
-  exit:    { opacity: 0, y: -8, transition: { duration: 0.2 } },
-};
 
 type Tab = "form" | "whatsapp";
 
@@ -92,10 +85,8 @@ function ContactCard() {
 
               {/* Active underline */}
               {active && (
-                <motion.div
-                  layoutId="tab-indicator"
+                <div
                   className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold to-transparent"
-                  transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                   aria-hidden="true"
                 />
               )}
@@ -106,32 +97,26 @@ function ContactCard() {
 
       {/* ── Tab panels ──────────────────────────────────────── */}
       <div className="relative z-10 p-8 md:p-10">
-        <AnimatePresence mode="wait" initial={false}>
+        <div className="relative z-10">
           {tab === "form" ? (
-            <motion.div
+            <div
               key="form"
               id="tabpanel-form"
               role="tabpanel"
               aria-labelledby="tab-form"
-              variants={tabVariants}
-              initial="hidden"
-              animate="visible"
-              exit="exit"
+              className="min-h-[30rem]"
+              aria-busy="true"
             >
               <Suspense fallback={<div className="min-h-[30rem]" aria-busy="true" />}>
                 <ContactForm />
               </Suspense>
-            </motion.div>
+            </div>
           ) : (
-            <motion.div
+            <div
               key="whatsapp"
               id="tabpanel-whatsapp"
               role="tabpanel"
               aria-labelledby="tab-whatsapp"
-              variants={tabVariants}
-              initial="hidden"
-              animate="visible"
-              exit="exit"
               className="flex flex-col items-center justify-center text-center py-10 px-4"
             >
               {/* Icon halo */}
@@ -171,9 +156,9 @@ function ContactCard() {
               <p className="text-[0.65rem] font-sans uppercase tracking-[0.18em] text-muted-foreground/50">
                 {copy.whatsappNote}
               </p>
-            </motion.div>
+            </div>
           )}
-        </AnimatePresence>
+        </div>
       </div>
     </div>
   );
@@ -200,13 +185,7 @@ export function FinalCTA() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-14 lg:gap-[3.4375rem]">
 
           {/* Left — contact info */}
-          <motion.div
-            variants={fadeInLeft}
-            initial="hidden"
-            whileInView="visible"
-            viewport={sectionViewport}
-            className="lg:col-span-5 flex flex-col justify-center"
-          >
+          <Reveal variant="left" as="div" className="lg:col-span-5 flex flex-col justify-center">
             <span className="text-[0.68rem] font-sans uppercase tracking-[0.28em] text-ruby mb-5">
               {copy.eyebrow}
             </span>
@@ -260,18 +239,12 @@ export function FinalCTA() {
                 </div>
               </div>
             </div>
-          </motion.div>
+          </Reveal>
 
           {/* Right — tabbed card */}
-          <motion.div
-            variants={fadeInUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={sectionViewport}
-            className="lg:col-span-7"
-          >
+          <Reveal variant="up" as="div" className="lg:col-span-7">
             <ContactCard />
-          </motion.div>
+          </Reveal>
 
         </div>
       </div>
