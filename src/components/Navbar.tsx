@@ -147,7 +147,8 @@ export function Navbar() {
               <Reveal
                 key={item.href}
                 variant="up"
-                delay={0.1 + i * 0.12}
+                delay={0.1 + i * 0.08}
+                dur={0.6}
                 as="a"
                 href={item.href}
                 onClick={close}
