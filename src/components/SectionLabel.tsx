@@ -1,5 +1,4 @@
-import { motion } from "framer-motion";
-import { sectionViewport, fadeInUp } from "@/lib/animations";
+import { Reveal } from "@/lib/reveal";
 
 interface SectionLabelProps {
   /** id for the <h2>, so the section can point to it with aria-labelledby */
@@ -25,13 +24,7 @@ export function SectionLabel({
   const colorClass  = eyebrowColor === "gold" ? "text-gold" : "text-ruby";
 
   return (
-    <motion.div
-      className={`flex flex-col ${alignClass} ${className}`}
-      initial="hidden"
-      whileInView="visible"
-      viewport={sectionViewport}
-      variants={fadeInUp}
-    >
+    <Reveal variant="up" className={`flex flex-col ${alignClass} ${className}`}>
       {/* Eyebrow — golden ratio gap below: ~21px = var(--sp-3) */}
       <span className={`text-[0.68rem] font-sans font-medium uppercase tracking-[0.28em] mb-[1.3125rem] ${colorClass}`}>
         {eyebrow}
@@ -44,6 +37,6 @@ export function SectionLabel({
       >
         {heading}
       </h2>
-    </motion.div>
+    </Reveal>
   );
 }
