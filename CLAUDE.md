@@ -2,6 +2,8 @@
 
 The agency site for Fitaa Creative, Accra. React + Vite single-page site, hosted on Vercel (project name `fitaadigital`, which serves fitaacreative.com; www and fitaacreative.vercel.app 301 to it). Standalone pages live as plain HTML in `public/`: `/fully-booked`, `/demo/ridge-house`, `/demo/studio`. Privacy, terms and the 404 are written at build time by `scripts/static-pages.mjs`.
 
+This site is the template for every site Fitaa builds. `SITE_STANDARD.md` is the standard they all meet: when this site improves, update it in the same pull request.
+
 Git workflow: branch + pull request for every change, never push to `main`. Nigel approves every merge.
 
 ## Run, check, deploy, roll back
