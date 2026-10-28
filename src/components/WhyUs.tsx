@@ -1,25 +1,22 @@
-import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import { Reveal, useInViewOnce } from "@/lib/reveal";
 import { siteConfig } from "@/config/site";
 import { SectionLabel } from "./SectionLabel";
 import { useCountUp } from "@/hooks/useCountUp";
-import { fadeInLeft, fadeInUp, cardViewport, sectionViewport, EASE_CURVE } from "@/lib/animations";
 
 type Stat = (typeof siteConfig.stats)[0];
 
 function StatItem({ stat, index }: { stat: Stat; index: number }) {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
+  const isInView = useInViewOnce(ref, "-50px");
   const count = useCountUp(stat.value, 2000, isInView);
 
   return (
-    <motion.div
+    <div
       ref={ref}
-      initial="hidden"
-      animate={isInView ? "visible" : "hidden"}
-      variants={fadeInUp}
-      transition={{ delay: index * 0.13 }}
-      className="group flex flex-col items-center md:items-start border-l border-border/30 pl-7 py-3 hover:border-ruby/45 transition-colors duration-500"
+      data-reveal="up"
+      style={{ "--d": `${index * 0.13}s` } as any}
+      className={`group flex flex-col items-center md:items-start border-l border-border/30 pl-7 py-3 hover:border-ruby/45 transition-colors duration-500 ${isInView ? "is-in" : ""}`}
     >
       {/* Number — golden type scale: 4rem (closest φ step from 1rem) */}
       <div className="text-[clamp(2.8rem,5vw,4rem)] font-serif font-bold text-ruby leading-none mb-2 tracking-tight tabular-nums">
@@ -29,11 +26,14 @@ function StatItem({ stat, index }: { stat: Stat; index: number }) {
       <div className="text-[0.68rem] font-sans uppercase tracking-[0.2em] text-muted-foreground group-hover:text-foreground/55 transition-colors duration-350">
         {stat.label}
       </div>
-    </motion.div>
+    </div>
   );
 }
 
 export function WhyUs() {
+  const goldRef = useRef<HTMLDivElement>(null);
+  const goldInView = useInViewOnce(goldRef, "-40px");
+
   return (
     <section
       id="why-us"
@@ -58,13 +58,7 @@ export function WhyUs() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-8 items-center">
 
           {/* Left copy — 5/12 */}
-          <motion.div
-            variants={fadeInLeft}
-            initial="hidden"
-            whileInView="visible"
-            viewport={sectionViewport}
-            className="lg:col-span-5 flex flex-col"
-          >
+          <Reveal variant="left" as="div" className="lg:col-span-5 flex flex-col">
             <SectionLabel
               id="whyus-heading"
               eyebrow={siteConfig.whyUsSection.eyebrow}
@@ -76,16 +70,14 @@ export function WhyUs() {
               {siteConfig.whyUsSection.body}
             </p>
 
-            {/* Animated gold line */}
-            <motion.div
+            {/* Animated gold line — scroll-triggered draw-in via CSS toggle */}
+            <div
+              ref={goldRef}
+              data-draw={goldInView ? "true" : "false"}
               className="mt-10 h-px bg-gradient-to-r from-gold/55 via-gold/25 to-transparent w-16"
-              initial={{ scaleX: 0, originX: "left" }}
-              whileInView={{ scaleX: 1 }}
-              viewport={cardViewport}
-              transition={{ delay: 0.55, duration: 0.9, ease: EASE_CURVE }}
               aria-hidden="true"
             />
-          </motion.div>
+          </Reveal>
 
           {/* Right stats — 7/12 */}
           <div className="lg:col-span-7 grid grid-cols-2 gap-x-5 sm:gap-x-8 gap-y-10 lg:pl-14">

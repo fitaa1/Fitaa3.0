@@ -396,6 +396,19 @@ html { scroll-behavior: smooth; }
 [data-reveal].is-in   { opacity: 1; transform: none; }
 
 /* AnimatePresence replacements: data-open enter/exit for buttons */
+[data-draw] {
+  opacity: 0;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: opacity 0.9s 0.55s cubic-bezier(0.22, 1, 0.36, 1) var(--d, 0s);
+}
+[data-draw="true"] {
+  opacity: 1;
+  transform: scaleX(1);
+  transition: opacity 0.9s 0.55s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* AnimatePresence replacements: data-open enter/exit for buttons */
 button[data-open] {
   opacity: 0;
   transform: translate3d(0, 16px, 0);
