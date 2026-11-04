@@ -20,12 +20,20 @@ function savedTheme(): "dark" | "light" | null {
 }
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  /* index.html already applied the right class before first paint; start from it. */
-  const [isDark, setIsDark] = useState<boolean>(() =>
-    document.documentElement.classList.contains("dark"),
-  );
+  /* index.html already applied the right class before first paint. The home page is also
+     rendered at build time (scripts/prerender.mjs), where there is no document, so the first
+     render always says light and the real theme is read from the page right after it mounts.
+     That keeps the build-time HTML and the first browser render identical. */
+  const [isDark, setIsDark] = useState(false);
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
+    setIsDark(document.documentElement.classList.contains("dark"));
+    setReady(true);
+  }, []);
+
+  useEffect(() => {
+    if (!ready) return;
     const root = document.documentElement;
     root.classList.toggle("dark", isDark);
     root.style.colorScheme = isDark ? "dark" : "light";
@@ -33,7 +41,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     document
       .querySelectorAll('meta[name="theme-color"]')
       .forEach((m) => m.setAttribute("content", isDark ? "#090e12" : "#f7f9fb"));
-  }, [isDark]);
+  }, [isDark, ready]);
 
   /* Follow the device setting live, until the visitor picks a theme themselves. */
   useEffect(() => {
