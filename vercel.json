@@ -30,6 +30,14 @@
       "destination": "/demo/car-rental/index.html"
     },
     {
+      "source": "/demo/clinic",
+      "destination": "/demo/clinic/index.html"
+    },
+    {
+      "source": "/demo/restaurant",
+      "destination": "/demo/restaurant/index.html"
+    },
+    {
       "source": "/privacy",
       "destination": "/privacy/index.html"
     },

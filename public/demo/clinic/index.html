@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--
+  DEMO: family clinic appointment page (Fully Booked by Fitaa, Get Chosen tier)
+  One self-contained file. Export: download it and drop it on any host, or open it in a browser.
+  For a client copy: change HOST_NUMBER and PREFIX in the script at the bottom, replace the
+  [bracketed] text and photo placeholders, and remove the demo bar.
+
+  The idea: a clinic visit starts with worry, so the page answers "can I be seen, and when?" first.
+  The signature is an appointment card that fills in as the visitor picks a service, day and time.
+  Type: Atkinson Hyperlegible Next, made by the Braille Institute so every reader can read it,
+  for a clinic that sees everyone. Calm teal, clean white and one warm coral for the call to act.
+-->
+<title>Adom Family Clinic (demo) | Fully Booked by Fitaa</title>
+<meta name="description" content="Demo appointment page for a fictional family clinic in Dzorwulu, Accra. Built by Fitaa Creative.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://fitaacreative.com/demo/clinic">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Fitaa Creative">
+<meta property="og:title" content="Adom Family Clinic (demo)">
+<meta property="og:description" content="Seen today, not someday. A demo appointment page by Fitaa Creative: book a visit on WhatsApp.">
+<meta property="og:url" content="https://fitaacreative.com/demo/clinic">
+<meta property="og:image" content="https://fitaacreative.com/demo/clinic/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Adom Family Clinic demo: Seen today, not someday.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Adom Family Clinic (demo)">
+<meta name="twitter:description" content="Seen today, not someday. A demo appointment page by Fitaa Creative: book a visit on WhatsApp.">
+<meta name="twitter:image" content="https://fitaacreative.com/demo/clinic/og.jpg">
+<meta name="theme-color" content="#F6FAF9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0B1716" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230E6E66'/%3E%3Cpath d='M32 18v28M18 32h28' stroke='%23fff' stroke-width='7' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- One family: Atkinson Hyperlegible Next, built for legibility. -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400..800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400..800&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400..800&display=swap"></noscript>
+<style>
+:root{
+  --ground:#F6FAF9; --band:#EAF4F2; --surface:#FFFFFF; --photo:#DDEBE8;
+  --line:#D3E3DF; --line-strong:#A9C3BD;
+  --text:#0F2523; --muted:#3E5552; --soft:#566C69;
+  --teal:#0E6E66; --teal-text:#0B5E57; --teal-soft:#D7EEEA;
+  --accent:#C2452F; --accent-hover:#AE3B27; --on-accent:#fff;
+  --font:'Atkinson Hyperlegible Next','Segoe UI',system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --ground:#0B1716; --band:#0F1F1D; --surface:#132624; --photo:#183130;
+    --line:#1F3936; --line-strong:#35534F;
+    --text:#ECF5F3; --muted:#B4C8C4; --soft:#9AB1AD;
+    --teal:#3FB8AC; --teal-text:#6FD3C8; --teal-soft:#14332F;
+    --accent:#F07A64; --accent-hover:#F48E7B; --on-accent:#1A0B07;
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{margin:0;background:var(--ground);color:var(--text);font-family:var(--font);-webkit-font-smoothing:antialiased;line-height:1.6;font-size:17px}
+a{color:inherit}
+p{margin:0}
+h1,h2,h3{margin:0;font-weight:700;letter-spacing:-.02em;line-height:1.1}
+:focus-visible{outline:3px solid var(--teal);outline-offset:3px}
+.wrap{max-width:1160px;margin:0 auto;padding-left:clamp(16px,4vw,32px);padding-right:clamp(16px,4vw,32px)}
+.eyebrow{font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;color:var(--teal-text);font-weight:700}
+.cta{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 26px;border-radius:999px;background:var(--accent);color:var(--on-accent);font:inherit;font-weight:700;text-decoration:none;border:0;cursor:pointer;transition:background .2s,transform .12s}
+.cta:hover{background:var(--accent-hover)}
+.cta:active{transform:scale(.985)}
+.ghost{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 24px;border-radius:999px;border:1.5px solid var(--line-strong);color:var(--text);text-decoration:none;font-weight:700;transition:border-color .2s}
+.ghost:hover{border-color:var(--teal)}
+.photo{background:var(--photo);border:1px dashed var(--line-strong);display:flex;align-items:center;justify-content:center;text-align:center;color:var(--soft);font-size:.9rem;padding:12px}
+.ico{width:24px;height:24px;flex:none;color:var(--teal)}
+
+.demo-bar{background:#0E6E66;color:#fff;text-align:center;padding:10px 16px;font-size:.88rem;font-weight:700}
+.demo-bar a{color:#fff}
+.urgent{background:var(--teal-soft);color:var(--text);font-size:.92rem;padding:10px 0;border-bottom:1px solid var(--line)}
+.urgent .wrap{text-align:center}
+.urgent strong{color:var(--teal-text)}
+
+.top{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--ground) 88%,transparent);backdrop-filter:saturate(1.4) blur(14px);-webkit-backdrop-filter:saturate(1.4) blur(14px);border-bottom:1px solid var(--line)}
+.top .wrap{height:72px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.brand span{font-weight:800;font-size:1.15rem}
+.links{display:flex;gap:4px}
+.links a{position:relative;min-height:44px;display:inline-flex;align-items:center;padding:0 12px;font-size:.95rem;color:var(--muted);text-decoration:none}
+.links a::after{content:"";position:absolute;left:12px;right:12px;bottom:8px;height:3px;border-radius:3px;background:var(--teal);transform:scaleX(0);transition:transform .3s}
+.links a[aria-current="true"]{color:var(--text)}
+.links a[aria-current="true"]::after{transform:scaleX(1)}
+.top-right{display:flex;align-items:center;gap:8px}
+.wa-btn{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:999px;background:#25D366;color:#fff}
+.menu-btn{display:none;width:44px;height:44px;border-radius:999px;border:1.5px solid var(--line-strong);background:transparent;color:var(--text);cursor:pointer;align-items:center;justify-content:center}
+.header-cta{min-height:44px;padding:0 20px;font-size:.95rem}
+
+.hero{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(32px,5vw,64px);align-items:center;padding-top:clamp(32px,6vw,72px);padding-bottom:clamp(48px,7vw,88px)}
+.hero h1{font-size:clamp(2.5rem,6vw,4.4rem);margin:16px 0 20px}
+.hero h1 em{font-style:normal;color:var(--teal-text)}
+.hero .lead{font-size:clamp(1.02rem,1.6vw,1.15rem);color:var(--muted);max-width:33rem}
+.hero .actions{display:flex;gap:12px;flex-wrap:wrap;margin:28px 0 22px}
+.trust{display:flex;gap:10px 20px;flex-wrap:wrap;font-size:.92rem;color:var(--muted)}
+.trust span{display:inline-flex;align-items:center;gap:8px}
+
+/* Signature: the appointment card. A heartbeat line draws once, then the card fills in from the form. */
+.appt-wrap{display:flex;justify-content:center}
+.appt{width:min(100%,360px);background:var(--surface);border:1px solid var(--line);border-radius:24px;overflow:hidden;box-shadow:0 40px 80px -48px color-mix(in srgb,var(--teal) 70%,transparent)}
+.appt-head{background:#0E6E66;color:#fff;padding:18px 22px 10px}
+.appt-head small{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;opacity:.85}
+.appt-head b{display:block;font-size:1.25rem;margin-top:2px}
+.pulse{display:block;width:100%;height:42px;margin-top:6px}
+.pulse path{fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:420;stroke-dashoffset:420;animation:draw 2.2s ease-out .4s forwards}
+.appt-body{padding:20px 22px 22px;display:grid;gap:14px}
+.row{display:flex;justify-content:space-between;gap:12px;align-items:baseline;border-bottom:1px dashed var(--line);padding-bottom:12px}
+.row:last-child{border:0;padding:0}
+.row span{font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--soft)}
+.row b{font-size:1rem;text-align:right}
+.changed{animation:flash .7s ease}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes flash{from{color:var(--teal-text)}to{color:inherit}}
+
+.services{background:var(--band);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.services .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;padding-top:clamp(48px,7vw,72px);padding-bottom:clamp(48px,7vw,72px)}
+.svc{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px;display:flex;flex-direction:column;gap:10px}
+.svc h3{font-size:1.15rem}
+.svc p{font-size:.95rem;color:var(--muted)}
+.svc .fee{margin-top:auto;font-size:.92rem}
+.svc .fee strong{color:var(--teal-text)}
+.svc .ghost{min-height:44px;font-size:.92rem}
+.section-head{display:flex;flex-direction:column;gap:10px;margin-bottom:28px;grid-column:1/-1}
+.section-head h2{font-size:clamp(1.9rem,4vw,2.6rem)}
+
+.request{padding-top:clamp(56px,8vw,80px);padding-bottom:clamp(56px,8vw,80px)}
+.request .card{background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:clamp(24px,4vw,40px);display:grid;gap:22px}
+.request h2{font-size:clamp(1.8rem,3.6vw,2.4rem)}
+.request .card > div > p{color:var(--muted);margin-top:10px;max-width:40rem}
+.fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.field{display:flex;flex-direction:column;gap:6px;font-size:.92rem;color:var(--muted)}
+.field input,.field select{height:54px;border-radius:14px;border:1.5px solid var(--line-strong);background:var(--ground);color:var(--text);padding:0 14px;font:inherit;font-size:16px}
+.field input:focus,.field select:focus{outline:3px solid var(--teal);outline-offset:1px}
+fieldset{border:0;margin:0;padding:0}
+legend{font-size:.92rem;color:var(--muted);margin-bottom:8px}
+.slots{display:flex;flex-wrap:wrap;gap:10px}
+.slots label{position:relative}
+.slots input{position:absolute;opacity:0;width:1px;height:1px}
+.slots span{display:inline-flex;align-items:center;min-height:48px;padding:0 20px;border-radius:999px;border:1.5px solid var(--line-strong);cursor:pointer;font-weight:700;transition:background .2s,border-color .2s,color .2s}
+.slots input:checked + span{background:#0E6E66;border-color:#0E6E66;color:#fff}
+.slots input:focus-visible + span{outline:3px solid var(--teal);outline-offset:2px}
+.send-row{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.summary{font-size:.92rem;color:var(--soft)}
+.note{font-size:.88rem;color:var(--soft)}
+
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;padding-bottom:clamp(56px,8vw,80px)}
+.step{border-top:3px solid var(--teal);padding-top:18px;display:flex;flex-direction:column;gap:8px}
+.step .n{font-weight:800;font-size:1.7rem;color:var(--teal-text)}
+.step strong{font-size:1.05rem}
+.step span{color:var(--muted)}
+
+.visit{background:var(--band);border-top:1px solid var(--line)}
+.visit .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px;align-items:center;padding-top:clamp(56px,8vw,80px);padding-bottom:clamp(56px,8vw,80px)}
+.visit h2{font-size:clamp(1.8rem,3.6vw,2.4rem);margin:14px 0}
+.visit ul{list-style:none;padding:0;margin:18px 0 0;display:grid;gap:12px}
+.visit li{display:flex;gap:12px;align-items:flex-start}
+.visit .photo{aspect-ratio:4/3;border-radius:20px}
+
+.reviews{padding-top:clamp(56px,8vw,80px);padding-bottom:clamp(56px,8vw,80px)}
+.reviews h2{font-size:clamp(1.6rem,3vw,2.2rem);margin-bottom:12px}
+.reviews p{color:var(--soft)}
+footer.foot{border-top:1px solid var(--line)}
+footer.foot .wrap{padding-top:28px;padding-bottom:40px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:.9rem;color:var(--soft)}
+
+.sticky-book{display:none}
+.mobile-nav{display:none}
+@media (max-width:980px){.services .grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:860px){
+  .links,.header-cta{display:none}
+  .menu-btn{display:inline-flex}
+  .mobile-nav{display:block;position:fixed;top:72px;left:0;right:0;z-index:29;background:var(--ground);border-bottom:1px solid var(--line);padding:8px 16px 16px;transform:translateY(-8px);opacity:0;visibility:hidden;transition:opacity .25s,transform .25s,visibility .25s}
+  .mobile-nav.open{opacity:1;transform:none;visibility:visible}
+  .mobile-nav a{display:flex;align-items:center;min-height:48px;border-bottom:1px solid var(--line);text-decoration:none;font-weight:700}
+  .mobile-nav a[aria-current="true"]{color:var(--teal-text)}
+  .hero,.steps,.visit .grid{grid-template-columns:minmax(0,1fr)}
+  .sticky-book{display:flex;position:fixed;left:16px;right:16px;bottom:16px;z-index:20;box-shadow:0 12px 30px rgba(0,0,0,.25)}
+  footer.foot .wrap{padding-bottom:96px}
+}
+@media (max-width:560px){.services .grid,.fields{grid-template-columns:minmax(0,1fr)}}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  .pulse path{animation:none;stroke-dashoffset:0}
+  .changed{animation:none}
+  .links a::after,.mobile-nav{transition:none}
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91A9.85 9.85 0 0 0 12.04 2Zm4.52 11.99c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.16.04-.31-.02-.43-.06-.13-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43h-.48a.92.92 0 0 0-.67.31c-.23.25-.87.85-.87 2.07 0 1.22.89 2.4 1.02 2.57.12.16 1.75 2.67 4.24 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.1-.23-.17-.48-.29Z"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M12 7.5V12l3 2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+  <symbol id="i-steth" viewBox="0 0 24 24"><path d="M6 3.5v5a4.5 4.5 0 0 0 9 0v-5M10.5 13v2.5a4.5 4.5 0 0 0 9 0V13" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><circle cx="19.5" cy="11" r="2" fill="none" stroke="currentColor" stroke-width="1.7"/></symbol>
+  <symbol id="i-card" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M3 10h18M7 15h4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21Z" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="9.5" r="2.5" fill="none" stroke="currentColor" stroke-width="1.7"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 2.8 4.5 5.6v6.1c0 4.6 3.1 8.2 7.5 9.5 4.4-1.3 7.5-4.9 7.5-9.5V5.6Z" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="m8.8 12.2 2.3 2.2 4.3-4.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+</svg>
+
+<div class="demo-bar">Demo by <a href="https://fitaacreative.com/fully-booked">Fitaa Creative</a>. Your clinic's name, services and fees go here, live in 7 days.</div>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top" id="top">
+      <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><rect width="34" height="34" rx="10" fill="#0E6E66"/><path d="M17 9v16M9 17h16" stroke="#fff" stroke-width="3.6" stroke-linecap="round"/></svg>
+      <span>Adom Family Clinic</span>
+    </a>
+    <nav class="links" aria-label="Page sections">
+      <a href="#services">Services</a>
+      <a href="#book">Book</a>
+      <a href="#how">How it works</a>
+      <a href="#visit">Visit us</a>
+    </nav>
+    <div class="top-right">
+      <a class="cta header-cta" href="#book">Book a visit</a>
+      <a class="wa-btn" data-wa href="#" target="_blank" rel="noopener" aria-label="Message Adom Family Clinic on WhatsApp"><svg width="22" height="22"><use href="#wa"/></svg></a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu"><svg width="22" height="22"><use href="#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+<nav class="mobile-nav" id="mobile-nav" aria-label="Page sections">
+  <a href="#services">Services</a>
+  <a href="#book">Book</a>
+  <a href="#how">How it works</a>
+  <a href="#visit">Visit us</a>
+</nav>
+<div class="urgent"><div class="wrap"><strong>In an emergency</strong> go straight to the nearest emergency unit or call 112. This page is for booked visits.</div></div>
+
+<main>
+<section class="wrap hero">
+  <div>
+    <p class="eyebrow">Family clinic · Dzorwulu, Accra</p>
+    <h1>Seen today, <em>not someday.</em></h1>
+    <p class="lead">Book a visit on WhatsApp in under a minute. Same-day appointments when the doctor has room, clear fees before you come, and a reminder the evening before.</p>
+    <div class="actions">
+      <a class="cta" href="#book">Book a visit on WhatsApp</a>
+      <a class="ghost" href="#services">See services and fees</a>
+    </div>
+    <div class="trust"><span><svg class="ico"><use href="#i-shield"/></svg>Rated [X.X] on Google</span><span><svg class="ico"><use href="#i-card"/></svg>[Insurers accepted]</span></div>
+  </div>
+  <div class="appt-wrap" aria-hidden="true">
+    <div class="appt">
+      <div class="appt-head">
+        <small>Your appointment</small>
+        <b id="tag-svc">General consultation</b>
+        <svg class="pulse" viewBox="0 0 320 42" preserveAspectRatio="none"><path d="M0 24h88l10-14 12 28 12-34 10 20h188"/></svg>
+      </div>
+      <div class="appt-body">
+        <div class="row"><span>Day</span><b id="tag-day">Pick a day</b></div>
+        <div class="row"><span>Time</span><b id="tag-time">Morning</b></div>
+        <div class="row"><span>Patient</span><b id="tag-who">Adult</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services" class="services">
+  <div class="wrap grid">
+    <div class="section-head"><p class="eyebrow">Services and fees</p><h2>What we can help with</h2></div>
+    <article class="svc"><svg class="ico"><use href="#i-steth"/></svg><h3>General consultation</h3><p>Fevers, aches, infections and anything that needs a doctor's eye.</p><p class="fee">From <strong>GHS [fee]</strong></p><a class="ghost" href="#book" data-svc="General consultation">Book this</a></article>
+    <article class="svc"><svg class="ico"><use href="#i-steth"/></svg><h3>Children's clinic</h3><p>Check-ups, vaccinations and the coughs that won't go away.</p><p class="fee">From <strong>GHS [fee]</strong></p><a class="ghost" href="#book" data-svc="Children's clinic">Book this</a></article>
+    <article class="svc"><svg class="ico"><use href="#i-steth"/></svg><h3>Lab tests</h3><p>Blood work and malaria tests, with results sent to your phone.</p><p class="fee">From <strong>GHS [fee]</strong></p><a class="ghost" href="#book" data-svc="Lab tests">Book this</a></article>
+    <article class="svc"><svg class="ico"><use href="#i-steth"/></svg><h3>Health check</h3><p>A full check for work, travel or peace of mind.</p><p class="fee">From <strong>GHS [fee]</strong></p><a class="ghost" href="#book" data-svc="Health check">Book this</a></article>
+  </div>
+</section>
+
+<section id="book" class="request">
+  <div class="wrap">
+    <form class="card" id="request-form" novalidate>
+      <div>
+        <h2>Book a visit</h2>
+        <p>Choose a service, a day and a time of day. WhatsApp opens with your request already written, and the front desk confirms your exact time.</p>
+      </div>
+      <div class="fields">
+        <label class="field">Service<select id="svc"><option>General consultation</option><option>Children's clinic</option><option>Lab tests</option><option>Health check</option></select></label>
+        <label class="field">Day<input type="date" id="day" required></label>
+      </div>
+      <fieldset>
+        <legend>Time of day</legend>
+        <div class="slots">
+          <label><input type="radio" name="time" value="Morning" checked><span>Morning</span></label>
+          <label><input type="radio" name="time" value="Afternoon"><span>Afternoon</span></label>
+          <label><input type="radio" name="time" value="Evening"><span>Evening</span></label>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Who is the visit for?</legend>
+        <div class="slots">
+          <label><input type="radio" name="who" value="Adult" checked><span>Adult</span></label>
+          <label><input type="radio" name="who" value="Child"><span>Child</span></label>
+        </div>
+      </fieldset>
+      <p class="note">Please don't put medical details in the message. The doctor will ask you in person.</p>
+      <div class="send-row">
+        <button class="cta" type="submit"><svg width="20" height="20" aria-hidden="true"><use href="#wa"/></svg>Send request on WhatsApp</button>
+        <span class="summary" id="summary" aria-live="polite">Pick a day to send your request.</span>
+      </div>
+    </form>
+  </div>
+</section>
+
+<section id="how" class="wrap">
+  <div class="section-head" style="margin-bottom:28px"><p class="eyebrow">How it works</p><h2 style="font-size:clamp(1.9rem,4vw,2.6rem)">Three steps to being seen</h2></div>
+  <div class="steps">
+    <div class="step"><span class="n">01</span><strong>Send your request</strong><span>Use the form or message us on WhatsApp. A real person at the front desk replies.</span></div>
+    <div class="step"><span class="n">02</span><strong>Get your time</strong><span>We confirm your exact time and the fee, then remind you the evening before.</span></div>
+    <div class="step"><span class="n">03</span><strong>Walk straight in</strong><span>Give your name at the desk. Your file is ready and the wait is short.</span></div>
+  </div>
+</section>
+
+<section id="visit" class="visit">
+  <div class="wrap grid">
+    <div>
+      <p class="eyebrow">Visit us</p>
+      <h2>Dzorwulu, Accra</h2>
+      <ul>
+        <li><svg class="ico"><use href="#i-clock"/></svg><span>Open [Monday to Saturday, 8am to 8pm]</span></li>
+        <li><svg class="ico"><use href="#i-pin"/></svg><span>[Street address], with parking on site</span></li>
+        <li><svg class="ico"><use href="#i-card"/></svg><span>Pay by mobile money, card or [insurance]. Receipt for every payment.</span></li>
+      </ul>
+    </div>
+    <div class="photo">[Google map of the clinic]</div>
+  </div>
+</section>
+
+<section class="wrap reviews">
+  <h2>What patients say</h2>
+  <p>[Real patient reviews from Google go here, with the patient's first name and month of visit.]</p>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div>© Adom Family Clinic (demo). Dzorwulu, Accra.</div>
+    <div>Page by <a href="https://fitaacreative.com/fully-booked">Fitaa Creative</a>. Want one for your clinic? Live in 7 days or half your fee back.</div>
+  </div>
+</footer>
+
+<a class="cta sticky-book" href="#book">Book a visit</a>
+
+<script>
+/* Demo: requests go to Fitaa Creative's WhatsApp, marked as a demo.
+   For a client page, set HOST_NUMBER to the client's number and remove the [Demo] prefix. */
+var HOST_NUMBER = '233242805256';
+var PREFIX = '[Demo from the Fully Booked page] ';
+var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+function $(id) { return document.getElementById(id); }
+var form = $('request-form'), svcEl = $('svc'), dayEl = $('day'), sumEl = $('summary');
+function radio(name) { return form.querySelector('input[name="' + name + '"]:checked').value; }
+
+document.querySelectorAll('[data-wa]').forEach(function (a) {
+  a.href = 'https://wa.me/' + HOST_NUMBER + '?text=' + encodeURIComponent(PREFIX + 'Hello Adom Family Clinic, I would like to book a visit.');
+});
+dayEl.min = new Date().toISOString().slice(0, 10);
+function pretty(v) { return new Date(v + 'T12:00:00').toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' }); }
+function setTag(id, value) {
+  var el = $(id);
+  if (el.textContent === value) return;
+  el.textContent = value;
+  if (!reduce) { el.classList.remove('changed'); void el.offsetWidth; el.classList.add('changed'); }
+}
+function update() {
+  setTag('tag-svc', svcEl.value);
+  setTag('tag-day', dayEl.value ? pretty(dayEl.value) : 'Pick a day');
+  setTag('tag-time', radio('time'));
+  setTag('tag-who', radio('who'));
+  sumEl.textContent = dayEl.value ? svcEl.value + ', ' + pretty(dayEl.value) + ', ' + radio('time').toLowerCase() : 'Pick a day to send your request.';
+}
+form.addEventListener('input', update); form.addEventListener('change', update);
+document.querySelectorAll('[data-svc]').forEach(function (a) {
+  a.addEventListener('click', function () { svcEl.value = a.getAttribute('data-svc'); update(); });
+});
+form.addEventListener('submit', function (e) {
+  e.preventDefault();
+  if (!dayEl.value) { sumEl.textContent = 'Pick a day first.'; dayEl.focus(); return; }
+  var msg = PREFIX + 'Hello Adom Family Clinic, I would like to book a visit.\n' +
+    'Service: ' + svcEl.value + '\nDay: ' + pretty(dayEl.value) + '\nTime of day: ' + radio('time') + '\nPatient: ' + radio('who');
+  if (window.fitaaTrack) fitaaTrack('booking_request', { label: 'Book a visit', niche: 'clinics' });
+  window.open('https://wa.me/' + HOST_NUMBER + '?text=' + encodeURIComponent(msg), '_blank', 'noopener');
+});
+
+var menuBtn = document.querySelector('.menu-btn'), mnav = $('mobile-nav');
+function closeMenu() { mnav.classList.remove('open'); menuBtn.setAttribute('aria-expanded', 'false'); menuBtn.setAttribute('aria-label', 'Open menu'); }
+menuBtn.addEventListener('click', function () {
+  var open = !mnav.classList.contains('open');
+  mnav.classList.toggle('open', open);
+  menuBtn.setAttribute('aria-expanded', String(open));
+  menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+});
+mnav.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', closeMenu); });
+document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeMenu(); });
+
+if ('IntersectionObserver' in window) {
+  var navLinks = document.querySelectorAll('.links a, .mobile-nav a');
+  var spy = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      navLinks.forEach(function (a) { a.setAttribute('aria-current', a.getAttribute('href') === '#' + e.target.id ? 'true' : 'false'); });
+    });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  ['services', 'book', 'how', 'visit'].forEach(function (id) { spy.observe($(id)); });
+}
+update();
+</script>
+<script defer src="/fitaa-analytics.js"></script>
+</body>
+</html>
