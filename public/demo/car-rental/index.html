@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--
+  DEMO: car rental booking page (Fully Booked by Fitaa, Get Chosen tier)
+  One self-contained file. Export: download it and drop it on any host, or open it in a browser.
+  For a client copy: change HOST_NUMBER and PREFIX in the script at the bottom, replace the
+  [bracketed] text and photo placeholders, and remove the demo bar.
+
+  The idea: renting a car is about the moment the keys are in your hand. So the signature is
+  a key tag that fills in as you choose your car and dates, and the type is Archivo set wide,
+  like the badge on a car's boot. Asphalt, road-line white and indicator amber carry the rest.
+-->
+<title>Kora Drive (demo) | Fully Booked by Fitaa</title>
+<meta name="description" content="Demo booking page for a fictional car rental at Kotoka Airport, Accra. Built by Fitaa Creative.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://fitaacreative.com/demo/car-rental">
+<!-- Link preview (WhatsApp, iMessage, social). The page itself stays out of search results. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Fitaa Creative">
+<meta property="og:title" content="Kora Drive (demo)">
+<meta property="og:description" content="Keys in your hand when you land. A demo booking page by Fitaa Creative: reserve a car directly on WhatsApp.">
+<meta property="og:url" content="https://fitaacreative.com/demo/car-rental">
+<meta property="og:image" content="https://fitaacreative.com/demo/car-rental/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Kora Drive demo: Keys in your hand when you land.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Kora Drive (demo)">
+<meta name="twitter:description" content="Keys in your hand when you land. A demo booking page by Fitaa Creative: reserve a car directly on WhatsApp.">
+<meta name="twitter:image" content="https://fitaacreative.com/demo/car-rental/og.jpg">
+<meta name="theme-color" content="#F4F2EE" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121417" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23121417'/%3E%3Cpath d='M18 40h28M22 40l4-12h12l4 12' stroke='%23F2B33D' stroke-width='4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- One family: Archivo. Wide (125) for headings like a car badge, normal width (100) for reading. -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..800&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..800&display=swap"></noscript>
+<style>
+/* ── Edit the look here: colours and type for the whole page ── */
+:root{
+  --ground:#F4F2EE; --band:#ECE9E3; --surface:#FFFFFF; --photo:#E4E0D8;
+  --line:#DAD5CC; --line-strong:#B9B2A6;
+  --text:#121417; --muted:#4B4F55; --soft:#5E636A;
+  --accent:#F2B33D; --accent-hover:#F7C45E; --accent-text:#8A5A00; --on-accent:#121417;
+  --road:#121417; --on-road:#F4F5F6;
+  --font:'Archivo','Segoe UI',system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --ground:#121417; --band:#181B1F; --surface:#1C1F24; --photo:#22262C;
+    --line:#2A2E34; --line-strong:#454B53;
+    --text:#F4F5F6; --muted:#B8BDC4; --soft:#9EA4AC;
+    --accent-text:#F2B33D; --road:#0B0C0E;
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{margin:0;background:var(--ground);color:var(--text);font-family:var(--font);font-stretch:100%;-webkit-font-smoothing:antialiased;line-height:1.55}
+a{color:inherit}
+p{margin:0}
+h1,h2,h3{margin:0;font-stretch:125%;font-weight:800;letter-spacing:-.01em;text-transform:uppercase;line-height:1.02}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.wrap{max-width:1160px;margin:0 auto;padding:0 clamp(16px,4vw,32px)}
+.eyebrow{font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent-text);font-weight:700}
+.cta{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 26px;border-radius:12px;background:var(--accent);color:var(--on-accent);font:inherit;font-weight:700;font-size:1rem;text-decoration:none;border:0;cursor:pointer;transition:background .2s,transform .12s}
+.cta:hover{background:var(--accent-hover)}
+.cta:active{transform:scale(.985)}
+.ghost{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 24px;border-radius:12px;border:1px solid var(--line-strong);color:var(--text);text-decoration:none;font-weight:600;transition:border-color .2s}
+.ghost:hover{border-color:var(--accent)}
+.photo{background:var(--photo);border:1px dashed var(--line-strong);display:flex;align-items:center;justify-content:center;text-align:center;color:var(--soft);font-size:.9rem;padding:12px}
+.ico{width:22px;height:22px;flex:none;color:var(--accent-text)}
+
+.demo-bar{background:var(--road);color:var(--on-road);text-align:center;padding:10px 16px;font-size:.88rem;font-weight:600}
+.demo-bar a{color:var(--accent)}
+
+/* Header stays on screen; the section in view gets an amber underline. */
+.top{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--ground) 88%,transparent);backdrop-filter:saturate(1.4) blur(14px);-webkit-backdrop-filter:saturate(1.4) blur(14px);border-bottom:1px solid var(--line)}
+.top .wrap{height:72px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.brand span{font-stretch:125%;font-weight:800;font-size:1.15rem;letter-spacing:.02em;text-transform:uppercase}
+.links{display:flex;gap:6px}
+.links a{position:relative;min-height:44px;display:inline-flex;align-items:center;padding:0 12px;font-size:.92rem;color:var(--muted);text-decoration:none}
+.links a::after{content:"";position:absolute;left:12px;right:12px;bottom:8px;height:2px;background:var(--accent);transform:scaleX(0);transition:transform .3s}
+.links a[aria-current="true"]{color:var(--text)}
+.links a[aria-current="true"]::after{transform:scaleX(1)}
+.top-right{display:flex;align-items:center;gap:8px}
+.wa-btn{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:12px;background:#25D366;color:#fff}
+.menu-btn{display:none;width:44px;height:44px;border-radius:12px;border:1px solid var(--line-strong);background:transparent;color:var(--text);cursor:pointer;align-items:center;justify-content:center}
+.header-cta{min-height:44px;padding:0 18px;font-size:.92rem}
+
+/* Hero: the headline on the left, the key tag on the right */
+.hero{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(32px,5vw,64px);align-items:center;padding-top:clamp(32px,6vw,72px);padding-bottom:clamp(48px,7vw,88px)}
+.hero h1{font-size:clamp(2.5rem,6.2vw,4.6rem);margin:18px 0 20px}
+.hero .lead{font-size:clamp(1rem,1.6vw,1.15rem);color:var(--muted);max-width:32rem}
+.hero .actions{display:flex;gap:12px;flex-wrap:wrap;margin:28px 0 22px}
+.trust{display:flex;gap:10px 18px;flex-wrap:wrap;font-size:.9rem;color:var(--muted)}
+.trust span{display:inline-flex;align-items:center;gap:8px}
+
+/* Signature: the key tag. It fills in as the visitor builds their booking. */
+.tag-wrap{display:flex;justify-content:center;perspective:900px}
+.keytag{position:relative;width:min(100%,340px);background:var(--road);color:var(--on-road);border-radius:28px 28px 36px 36px;padding:64px 28px 28px;border:1px solid #2A2E34;box-shadow:0 40px 80px -40px rgba(0,0,0,.6);transform-origin:50% 0;animation:swing 6s ease-in-out 1s infinite}
+.keytag::before{content:"";position:absolute;top:20px;left:50%;width:26px;height:26px;margin-left:-13px;border-radius:50%;background:var(--ground);box-shadow:inset 0 0 0 3px #2A2E34}
+.keytag::after{content:"";position:absolute;top:-34px;left:50%;width:46px;height:46px;margin-left:-23px;border-radius:50%;border:4px solid #8A9098;clip-path:inset(0 0 52% 0)}
+.keytag small{display:block;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:#9EA4AC;margin-bottom:6px}
+.keytag .car{font-stretch:125%;font-weight:800;font-size:1.6rem;text-transform:uppercase;line-height:1.05;margin-bottom:18px;min-height:2.1em}
+.keytag dl{margin:0;display:grid;grid-template-columns:1fr 1fr;gap:14px 16px;border-top:1px dashed #3A3F46;padding-top:16px}
+.keytag dt{font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:#9EA4AC}
+.keytag dd{margin:2px 0 0;font-weight:600;font-size:.95rem}
+.plate{margin-top:20px;display:flex;justify-content:center;align-items:center;gap:10px;height:44px;border-radius:8px;background:#F4F5F6;color:#121417;font-stretch:125%;font-weight:800;letter-spacing:.12em;font-size:1.05rem}
+.plate i{font-style:normal;font-size:.6rem;letter-spacing:.06em;background:#121417;color:#F2B33D;padding:3px 5px;border-radius:3px;font-stretch:100%}
+.keytag .changed{animation:blink .6s ease}
+@keyframes swing{0%,100%{transform:rotate(-1.5deg)}50%{transform:rotate(1.5deg)}}
+@keyframes blink{from{color:#F2B33D}to{color:inherit}}
+
+/* What every rental includes */
+.included{background:var(--band);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.included .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;padding-top:28px;padding-bottom:28px}
+.inc strong{display:block;font-size:1rem;margin:10px 0 4px}
+.inc span{font-size:.88rem;color:var(--soft);line-height:1.5}
+
+section.block{padding-top:clamp(56px,8vw,88px);padding-bottom:clamp(24px,4vw,40px)}
+.section-head{display:flex;flex-direction:column;gap:12px;margin-bottom:32px}
+.section-head h2{font-size:clamp(1.9rem,4vw,2.8rem)}
+.fleet{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.car-card{background:var(--surface);border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;transition:transform .35s cubic-bezier(.22,1,.36,1),border-color .3s}
+@media(hover:hover){.car-card:hover{transform:translateY(-4px);border-color:var(--accent)}}
+.car-card .photo{aspect-ratio:16/10;border:0;border-bottom:1px dashed var(--line-strong)}
+.car-card .body{padding:22px;display:flex;flex-direction:column;gap:10px;flex-grow:1}
+.car-card h3{font-size:1.35rem}
+.specs{display:flex;flex-wrap:wrap;gap:8px}
+.specs span{font-size:.8rem;padding:4px 10px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+.rate{font-size:.95rem;margin-top:auto;padding-top:8px}
+.rate strong{color:var(--accent-text);font-size:1.1rem}
+.car-card .ghost{min-height:44px}
+
+/* Booking form */
+.request{padding:clamp(56px,8vw,80px) 0}
+.request .card{background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:clamp(24px,4vw,40px);display:grid;gap:24px}
+.request h2{font-size:clamp(1.8rem,3.6vw,2.5rem)}
+.request .card > div > p{color:var(--muted);margin-top:10px;max-width:40rem}
+.fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.field{display:flex;flex-direction:column;gap:6px;font-size:.9rem;color:var(--muted)}
+.field input,.field select{height:52px;border-radius:12px;border:1px solid var(--line-strong);background:var(--ground);color:var(--text);padding:0 14px;font:inherit;font-size:16px}
+.field input:focus,.field select:focus{outline:2px solid var(--accent);outline-offset:1px}
+.check{display:flex;align-items:center;gap:12px;min-height:44px;font-size:.95rem;color:var(--text);cursor:pointer}
+.check input{width:22px;height:22px;accent-color:#F2B33D}
+.send-row{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.summary{font-size:.9rem;color:var(--soft)}
+
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;padding-bottom:clamp(56px,8vw,80px)}
+.step{border-top:3px solid var(--accent);padding-top:18px;display:flex;flex-direction:column;gap:8px}
+.step .n{font-stretch:125%;font-weight:800;font-size:1.8rem;color:var(--accent-text)}
+.step strong{font-size:1.05rem}
+.step span{color:var(--muted)}
+
+/* Road band: what to bring, with a dashed centre line */
+.road{background:var(--road);color:var(--on-road);position:relative;overflow:hidden}
+.road::before{content:"";position:absolute;left:0;right:0;bottom:22px;height:4px;background:repeating-linear-gradient(90deg,rgba(244,245,246,.14) 0 48px,transparent 48px 96px);pointer-events:none}
+.road .grid{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px;padding-top:clamp(56px,8vw,80px);padding-bottom:clamp(56px,8vw,80px);align-items:center}
+.road h2{font-size:clamp(1.8rem,3.6vw,2.5rem);margin:14px 0}
+.road p{color:#B8BDC4}
+.road .eyebrow{color:#F2B33D}
+.road ul{list-style:none;padding:0;margin:0;display:grid;gap:12px}
+.road li{display:flex;gap:12px;align-items:flex-start;background:#1C1F24;border:1px solid #2A2E34;border-radius:14px;padding:16px}
+.road li .ico{color:#F2B33D}
+
+.reviews{padding-top:clamp(56px,8vw,80px);padding-bottom:clamp(56px,8vw,80px)}
+.reviews h2{font-size:clamp(1.6rem,3vw,2.2rem);margin-bottom:12px}
+.reviews p{color:var(--soft)}
+
+footer.foot{border-top:1px solid var(--line)}
+footer.foot .wrap{padding-top:28px;padding-bottom:40px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:.9rem;color:var(--soft)}
+
+.sticky-book{display:none}
+.mobile-nav{display:none}
+
+@media (max-width:860px){
+  .links,.header-cta{display:none}
+  .menu-btn{display:inline-flex}
+  .mobile-nav{display:block;position:fixed;top:72px;left:0;right:0;z-index:29;background:var(--ground);border-bottom:1px solid var(--line);padding:8px 16px 16px;transform:translateY(-8px);opacity:0;visibility:hidden;transition:opacity .25s,transform .25s,visibility .25s}
+  .mobile-nav.open{opacity:1;transform:none;visibility:visible}
+  .mobile-nav a{display:flex;align-items:center;min-height:48px;border-bottom:1px solid var(--line);text-decoration:none;font-weight:600}
+  .mobile-nav a[aria-current="true"]{color:var(--accent-text)}
+  .hero{grid-template-columns:minmax(0,1fr)}
+  .keytag{width:min(100%,320px)}
+  .included .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .fleet,.steps,.road .grid{grid-template-columns:minmax(0,1fr)}
+  .sticky-book{display:flex;position:fixed;left:16px;right:16px;bottom:16px;z-index:20;box-shadow:0 12px 30px rgba(0,0,0,.35)}
+  footer.foot .wrap{padding-bottom:96px}
+}
+@media (max-width:520px){
+  .fields{grid-template-columns:minmax(0,1fr)}
+  .keytag{padding:56px 22px 22px}
+  .keytag .car{font-size:1.35rem}
+}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  .keytag,.keytag .changed{animation:none}
+  .car-card,.links a::after,.mobile-nav{transition:none}
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91A9.85 9.85 0 0 0 12.04 2Zm4.52 11.99c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.16.04-.31-.02-.43-.06-.13-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43h-.48a.92.92 0 0 0-.67.31c-.23.25-.87.85-.87 2.07 0 1.22.89 2.4 1.02 2.57.12.16 1.75 2.67 4.24 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.1-.23-.17-.48-.29Z"/></symbol>
+  <symbol id="i-plane" viewBox="0 0 24 24"><path d="M2.5 19h19M3.8 13.6l2.4.9 4-1.5L5.6 8.4l1.9-.7 6.6 3.7 4.3-1.6a1.6 1.6 0 0 1 1.1 3l-12.9 4.8-3.8-3.2Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+  <symbol id="i-driver" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="2.2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3.5 10.5c3 .8 5.6 1 8.5 1s5.5-.2 8.5-1M10.2 13.6 7 20M13.8 13.6 17 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 2.8 4.5 5.6v6.1c0 4.6 3.1 8.2 7.5 9.5 4.4-1.3 7.5-4.9 7.5-9.5V5.6Z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="m8.8 12.2 2.3 2.2 4.3-4.6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 3.5h3l1.5 4-2 1.3a11 11 0 0 0 7.7 7.7l1.3-2 4 1.5v3a2 2 0 0 1-2.2 2A17 17 0 0 1 3 5.7a2 2 0 0 1 2-2.2Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+  <symbol id="i-card" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="9" cy="11" r="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M6 16c.6-1.4 1.7-2 3-2s2.4.6 3 2M14.5 10h4M14.5 13.5h3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+  <symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="4.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="m11.3 11.7 8.2-8.2M16.5 6.5l2.5 2.5M14 9l2 2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+  <symbol id="i-fuel" viewBox="0 0 24 24"><path d="M5 20V5.5A1.5 1.5 0 0 1 6.5 4h6A1.5 1.5 0 0 1 14 5.5V20M3.5 20h12M14 9h2a2 2 0 0 1 2 2v5a1.5 1.5 0 0 0 3 0V8l-2.5-2.5M7.5 8h4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+</svg>
+
+<div class="demo-bar">Demo by <a href="https://fitaacreative.com/fully-booked">Fitaa Creative</a>. Your business name, cars and prices go here, live in 7 days.</div>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top" id="top">
+      <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" rx="9" fill="#121417"/><path d="M9 22h16M11.5 22l2.8-8h5.4l2.8 8" stroke="#F2B33D" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>Kora Drive</span>
+    </a>
+    <nav class="links" aria-label="Page sections">
+      <a href="#fleet">Fleet</a>
+      <a href="#request">Reserve</a>
+      <a href="#how">How it works</a>
+      <a href="#bring">What to bring</a>
+    </nav>
+    <div class="top-right">
+      <a class="cta header-cta" href="#request">Reserve a car</a>
+      <a class="wa-btn" data-wa href="#" target="_blank" rel="noopener" aria-label="Message Kora Drive on WhatsApp"><svg width="22" height="22"><use href="#wa"/></svg></a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu"><svg width="22" height="22"><use href="#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+<nav class="mobile-nav" id="mobile-nav" aria-label="Page sections">
+  <a href="#fleet">Fleet</a>
+  <a href="#request">Reserve</a>
+  <a href="#how">How it works</a>
+  <a href="#bring">What to bring</a>
+</nav>
+
+<main>
+<section class="wrap hero">
+  <div>
+    <p class="eyebrow">Car rental · Kotoka Airport, Accra</p>
+    <h1>Keys in your hand when you land.</h1>
+    <p class="lead">Clean, well-kept cars waiting at arrivals or brought to your hotel. Reserve directly on WhatsApp. No counter queue, no booking site fees, and a real person answers.</p>
+    <div class="actions">
+      <a class="cta" href="#request">Reserve on WhatsApp</a>
+      <a class="ghost" href="#fleet">See the fleet</a>
+    </div>
+    <div class="trust"><span><svg class="ico"><use href="#i-shield"/></svg>Rated [X.X] on Google</span><span><svg class="ico"><use href="#i-key"/></svg>Receipt for every payment</span></div>
+  </div>
+  <div class="tag-wrap" aria-hidden="true">
+    <div class="keytag" id="keytag">
+      <small>Your reservation</small>
+      <p class="car" id="tag-car">Choose a car</p>
+      <dl>
+        <div><dt>Pick-up</dt><dd id="tag-from">Pick a date</dd></div>
+        <div><dt>Return</dt><dd id="tag-to">Pick a date</dd></div>
+        <div><dt>Where</dt><dd id="tag-where">Kotoka arrivals</dd></div>
+        <div><dt>Days</dt><dd id="tag-days">0</dd></div>
+      </dl>
+      <div class="plate"><i>GH</i>KORA 26</div>
+    </div>
+  </div>
+</section>
+
+<section class="included" aria-label="Included with every rental">
+  <div class="wrap grid">
+    <div class="inc"><svg class="ico"><use href="#i-plane"/></svg><strong>Airport handover</strong><span>Met at arrivals, or the car comes to your hotel.</span></div>
+    <div class="inc"><svg class="ico"><use href="#i-driver"/></svg><strong>Driver on request</strong><span>Sit back while someone who knows the roads drives.</span></div>
+    <div class="inc"><svg class="ico"><use href="#i-shield"/></svg><strong>Insured</strong><span>[Cover details] included in every rate.</span></div>
+    <div class="inc"><svg class="ico"><use href="#i-phone"/></svg><strong>Help any hour</strong><span>One WhatsApp number for anything on the road.</span></div>
+  </div>
+</section>
+
+<section id="fleet" class="wrap block">
+  <div class="section-head"><p class="eyebrow">The fleet</p><h2>Choose your car</h2></div>
+  <div class="fleet">
+    <article class="car-card"><div class="photo">[Compact sedan photo]</div><div class="body"><h3>Compact sedan</h3><div class="specs"><span>4 seats</span><span>Automatic</span><span>AC</span></div><div class="rate">From <strong>GHS [rate]</strong> a day</div><a class="ghost" href="#request" data-car="Compact sedan">Reserve this car</a></div></article>
+    <article class="car-card"><div class="photo">[SUV photo]</div><div class="body"><h3>SUV</h3><div class="specs"><span>5 seats</span><span>Automatic</span><span>Good for long trips</span></div><div class="rate">From <strong>GHS [rate]</strong> a day</div><a class="ghost" href="#request" data-car="SUV">Reserve this car</a></div></article>
+    <article class="car-card"><div class="photo">[7-seater photo]</div><div class="body"><h3>7-seater</h3><div class="specs"><span>7 seats</span><span>Family and luggage</span><span>Driver available</span></div><div class="rate">From <strong>GHS [rate]</strong> a day</div><a class="ghost" href="#request" data-car="7-seater">Reserve this car</a></div></article>
+  </div>
+</section>
+
+<section id="request" class="request">
+  <div class="wrap">
+    <form class="card" id="request-form" novalidate>
+      <div>
+        <h2>Reserve a car</h2>
+        <p>Fill this in and WhatsApp opens with your request already written. We reply with availability, the final price and the deposit details.</p>
+      </div>
+      <div class="fields">
+        <label class="field">Car<select id="car"><option value="">Any car</option><option>Compact sedan</option><option>SUV</option><option>7-seater</option></select></label>
+        <label class="field">Pick-up place<select id="where"><option>Kotoka arrivals</option><option>My hotel or address</option><option>Your office</option></select></label>
+        <label class="field">Pick-up date<input type="date" id="from" required></label>
+        <label class="field">Return date<input type="date" id="to" required></label>
+      </div>
+      <label class="check"><input type="checkbox" id="driver"> I'd like a driver</label>
+      <div class="send-row">
+        <button class="cta" type="submit"><svg width="20" height="20" aria-hidden="true"><use href="#wa"/></svg>Send request on WhatsApp</button>
+        <span class="summary" id="summary" aria-live="polite">Pick your dates to see the length of the rental.</span>
+      </div>
+    </form>
+  </div>
+</section>
+
+<section id="how" class="wrap">
+  <div class="section-head"><p class="eyebrow">How it works</p><h2>Reserve, confirm, drive</h2></div>
+  <div class="steps">
+    <div class="step"><span class="n">01</span><strong>Send your dates</strong><span>Use the form or message us on WhatsApp. You get a reply, not a bot.</span></div>
+    <div class="step"><span class="n">02</span><strong>Confirm with a deposit</strong><span>We confirm the car and send deposit details, with a receipt.</span></div>
+    <div class="step"><span class="n">03</span><strong>Collect your keys</strong><span>We meet you at arrivals or bring the car to you, fuelled and ready.</span></div>
+  </div>
+</section>
+
+<section id="bring" class="road">
+  <div class="wrap grid">
+    <div>
+      <p class="eyebrow">Before you collect</p>
+      <h2>What to bring</h2>
+      <p>Three things and you're on the road. Rental terms are shared in writing before you pay.</p>
+    </div>
+    <ul>
+      <li><svg class="ico"><use href="#i-card"/></svg><span>A valid driving licence, plus an international permit if yours is from abroad [check local rules]</span></li>
+      <li><svg class="ico"><use href="#i-key"/></svg><span>Your passport or Ghana Card</span></li>
+      <li><svg class="ico"><use href="#i-fuel"/></svg><span>The deposit, refunded when the car comes back as it left. Fuel policy: [full to full]</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="wrap reviews">
+  <h2>What drivers say</h2>
+  <p>[Real customer reviews from Google go here, with the customer's first name and month of rental.]</p>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div>© Kora Drive (demo). Kotoka Airport, Accra.</div>
+    <div>Page by <a href="https://fitaacreative.com/fully-booked">Fitaa Creative</a>. Want one for your business? Live in 7 days or half your fee back.</div>
+  </div>
+</footer>
+
+<a class="cta sticky-book" href="#request">Reserve a car</a>
+
+<script>
+/* Demo: requests go to Fitaa Creative's WhatsApp, marked as a demo.
+   For a client page, set HOST_NUMBER to the client's number and remove the [Demo] prefix. */
+var HOST_NUMBER = '233242805256';
+var PREFIX = '[Demo from the Fully Booked page] ';
+var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+function $(id) { return document.getElementById(id); }
+var form = $('request-form'), carEl = $('car'), whereEl = $('where'), fromEl = $('from'), toEl = $('to'), driverEl = $('driver'), sumEl = $('summary');
+
+document.querySelectorAll('[data-wa]').forEach(function (a) {
+  a.href = 'https://wa.me/' + HOST_NUMBER + '?text=' + encodeURIComponent(PREFIX + 'Hello Kora Drive, I would like to rent a car.');
+});
+
+var today = new Date().toISOString().slice(0, 10);
+fromEl.min = today; toEl.min = today;
+
+function days() {
+  if (!fromEl.value || !toEl.value) return 0;
+  return Math.round((new Date(toEl.value) - new Date(fromEl.value)) / 86400000);
+}
+function pretty(v, short) {
+  return new Date(v + 'T12:00:00').toLocaleDateString('en-GB', short ? { day: 'numeric', month: 'short' } : { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' });
+}
+/* The key tag mirrors the form, so the visitor sees their booking take shape. */
+function setTag(id, value) {
+  var el = $(id);
+  if (el.textContent === value) return;
+  el.textContent = value;
+  if (!reduce) { el.classList.remove('changed'); void el.offsetWidth; el.classList.add('changed'); }
+}
+function update() {
+  if (fromEl.value) toEl.min = fromEl.value;
+  var d = days();
+  setTag('tag-car', (carEl.value || 'Any car') + (driverEl.checked ? ' + driver' : ''));
+  setTag('tag-from', fromEl.value ? pretty(fromEl.value, true) : 'Pick a date');
+  setTag('tag-to', toEl.value ? pretty(toEl.value, true) : 'Pick a date');
+  setTag('tag-where', whereEl.value);
+  setTag('tag-days', String(d > 0 ? d : 0));
+  sumEl.textContent = d > 0 ? d + (d === 1 ? ' day' : ' days') + (carEl.value ? ', ' + carEl.value : '') + (driverEl.checked ? ', with a driver' : '')
+    : (fromEl.value && toEl.value ? 'The return date must be after pick-up.' : 'Pick your dates to see the length of the rental.');
+}
+[carEl, whereEl, fromEl, toEl, driverEl].forEach(function (el) { el.addEventListener('input', update); el.addEventListener('change', update); });
+
+document.querySelectorAll('[data-car]').forEach(function (a) {
+  a.addEventListener('click', function () { carEl.value = a.getAttribute('data-car'); update(); });
+});
+
+form.addEventListener('submit', function (e) {
+  e.preventDefault();
+  if (!fromEl.value) { sumEl.textContent = 'Pick a pick-up date first.'; fromEl.focus(); return; }
+  if (days() <= 0) { sumEl.textContent = 'The return date must be after pick-up.'; toEl.focus(); return; }
+  var msg = PREFIX + 'Hello Kora Drive, I would like to reserve a car.\n' +
+    'Car: ' + (carEl.value || 'Any') + '\nPick-up: ' + pretty(fromEl.value) + ', ' + whereEl.value +
+    '\nReturn: ' + pretty(toEl.value) + '\nDriver: ' + (driverEl.checked ? 'Yes please' : 'No, I will drive');
+  if (window.fitaaTrack) fitaaTrack('booking_request', { label: 'Reserve a car', niche: 'cars', days: days() });
+  window.open('https://wa.me/' + HOST_NUMBER + '?text=' + encodeURIComponent(msg), '_blank', 'noopener');
+});
+
+/* Phone menu */
+var menuBtn = document.querySelector('.menu-btn'), mnav = $('mobile-nav');
+function closeMenu() { mnav.classList.remove('open'); menuBtn.setAttribute('aria-expanded', 'false'); menuBtn.setAttribute('aria-label', 'Open menu'); }
+menuBtn.addEventListener('click', function () {
+  var open = !mnav.classList.contains('open');
+  mnav.classList.toggle('open', open);
+  menuBtn.setAttribute('aria-expanded', String(open));
+  menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+});
+mnav.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', closeMenu); });
+document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeMenu(); });
+
+/* Mark the section in view in both menus */
+if ('IntersectionObserver' in window) {
+  var navLinks = document.querySelectorAll('.links a, .mobile-nav a');
+  var spy = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      navLinks.forEach(function (a) { a.setAttribute('aria-current', a.getAttribute('href') === '#' + e.target.id ? 'true' : 'false'); });
+    });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  ['fleet', 'request', 'how', 'bring'].forEach(function (id) { spy.observe($(id)); });
+}
+update();
+</script>
+<script defer src="/fitaa-analytics.js"></script>
+</body>
+</html>
