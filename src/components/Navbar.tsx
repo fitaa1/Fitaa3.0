@@ -65,7 +65,7 @@ export function Navbar() {
               height={36}
             />
             <div className="leading-none">
-              <span className="block font-serif font-semibold text-[1.1rem] tracking-[0.15em] text-foreground">
+              <span className="block font-display font-semibold text-[1.1rem] tracking-[0.15em] text-foreground">
                 FITAA
               </span>
               <span className="block font-sans font-light text-[0.55rem] tracking-[0.42em] text-gold-text mt-[1px]">
@@ -153,7 +153,7 @@ export function Navbar() {
                 href={item.href}
                 onClick={close}
                 aria-current={active === item.href.slice(1) ? "location" : undefined}
-                className="group flex items-center gap-5 text-[2.8rem] font-serif font-light text-foreground/60 hover:text-foreground aria-[current=location]:text-foreground transition-colors duration-300"
+                className="group flex items-center gap-5 text-[2.8rem] font-display font-light text-foreground/60 hover:text-foreground aria-[current=location]:text-foreground transition-colors duration-300"
               >
                 <span
                   className="w-0 h-px bg-ruby group-hover:w-7 group-aria-[current=location]:w-7 transition-all duration-500 ease-out"

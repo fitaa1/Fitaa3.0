@@ -33,7 +33,7 @@ export function SectionLabel({
       {/* Heading — type scale: 4.2rem ≈ 6.8rem / φ */}
       <h2
         id={id}
-        className={`text-[clamp(2.2rem,4.5vw,4.2rem)] font-serif font-semibold text-foreground leading-[1.1] tracking-[-0.008em] ${headingClass}`}
+        className={`text-[clamp(2.2rem,4.5vw,4.2rem)] font-display font-semibold text-foreground leading-[1.1] tracking-[-0.008em] ${headingClass}`}
       >
         {heading}
       </h2>

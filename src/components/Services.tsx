@@ -57,7 +57,7 @@ function ServiceCard({ service, index, delay }: { service: Service; index: numbe
           </span>
         </div>
 
-        <h3 className="text-[1.25rem] font-serif font-medium mb-3 text-foreground group-hover:text-ruby group-data-[open=true]:text-ruby transition-colors duration-300 leading-snug">
+        <h3 className="text-[1.25rem] font-display font-medium mb-3 text-foreground group-hover:text-ruby group-data-[open=true]:text-ruby transition-colors duration-300 leading-snug">
           {service.title}
         </h3>
         <p className="text-muted-foreground font-sans font-light text-[0.9rem] leading-[1.72]">

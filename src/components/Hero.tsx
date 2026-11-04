@@ -24,7 +24,7 @@ export function Hero() {
         </Reveal>
 
         {/* Main headline — glide, visible from first paint */}
-        <Reveal variant="glide" className="text-[clamp(2.8rem,8vw,6.5rem)] font-serif font-bold leading-[1.04] tracking-[-0.015em] mb-[2.125rem] text-balance">
+        <Reveal as="h1" variant="glide" className="text-[clamp(2.8rem,8vw,6.5rem)] font-display font-bold leading-[1.04] tracking-[-0.015em] mb-[2.125rem] text-balance">
           <span className="block text-foreground">{hero.headline[0]}</span>
           <span className="block text-ruby mt-[0.18em]">{hero.headline[1]}</span>
         </Reveal>

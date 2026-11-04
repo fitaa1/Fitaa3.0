@@ -14,7 +14,7 @@ export default function NotFound() {
         <div className="container mx-auto px-6 md:px-12 h-20 flex items-center justify-between">
           <a href="/" className="flex items-center gap-3" aria-label="Fitaa Creative home">
             <img src="/logo-160.webp" alt="" width={36} height={36} className="h-9 w-9 rounded-sm" />
-            <span className="font-serif font-semibold tracking-[0.15em] text-[1.05rem]">FITAA</span>
+            <span className="font-display font-semibold tracking-[0.15em] text-[1.05rem]">FITAA</span>
           </a>
           <a
             href="/"
@@ -29,7 +29,7 @@ export default function NotFound() {
       <section className="flex-1 flex items-center">
         <div className="container mx-auto px-6 md:px-12 py-20 md:py-28 max-w-3xl">
           <p className="text-[0.65rem] font-sans uppercase tracking-[0.22em] text-ruby mb-4">Error 404</p>
-          <h1 className="text-[clamp(2.4rem,6vw,4rem)] font-serif font-bold leading-[1.05] mb-6">
+          <h1 className="text-[clamp(2.4rem,6vw,4rem)] font-display font-bold leading-[1.05] mb-6">
             This page isn&rsquo;t here.
           </h1>
           <p className="text-muted-foreground font-sans leading-[1.75] mb-10 max-w-xl">

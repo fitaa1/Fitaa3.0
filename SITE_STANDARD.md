@@ -10,7 +10,7 @@ A speed gain that makes the site plainer fails the third test; find another way.
 
 ## Speed
 
-- **Fonts:** Google Fonts load without blocking the first paint (preload, `media="print"` swap,
+- **Fonts:** at most two families. Google Fonts load without blocking the first paint (preload, `media="print"` swap,
   `noscript` fallback, `display=swap`), or the device's own fonts.
 - **Analytics:** one file (`public/fitaa-analytics.js`) with a list of live hosts. Google Analytics
   loads on the visitor's first tap, scroll or key press, or after 4 seconds. Events queue until then.
@@ -47,6 +47,30 @@ A speed gain that makes the site plainer fails the third test; find another way.
 - WhatsApp click-to-chat with a message already written.
 - Fail safe, never fail free: when data cannot be read (a calendar, a form service), the page
   says so and sends the visitor to WhatsApp. No success message it cannot back up.
+
+## Type and intent (Nigel, 4 Nov 2026)
+
+- **Sans serif first.** Each site sets its headings in one display sans and its text in one text sans
+  (or one family for both), chosen for what the business stands for. The reason sits in a comment next
+  to the font settings, so the choice is never accidental.
+- **Serif only as a signature:** one name or word per site at most, set like a nameplate, for example
+  "Southampton" on Fitaa Homes. Never for body text or every heading.
+- **No fake styles:** load every weight and italic the page uses, or the browser smears its own.
+- **One idea per site.** The type, colour, icons and one signature detail all tell the same story about
+  that business. Design for the story, never decoration for its own sake.
+- **Navigation:** the header stays on screen at every size, the section in view is marked, phones get a
+  menu button, and WhatsApp is one tap away from anywhere on the page.
+- **Favicon:** rounded corners (about a 22% radius) with the outside transparent, never a hard square.
+
+| Site | Headings | Text | Signature |
+| --- | --- | --- | --- |
+| fitaacreative.com and Fully Booked | Bricolage Grotesque (poster type, for a studio that makes billboards and print) | Inter | Adinkra mark |
+| Fitaa Homes | Manrope | Manrope | the home's name in Fraunces italic, like a nameplate |
+| Airport Grande | Instrument Sans (clear like airport signs) | device sans | the booking summary as a boarding pass |
+| Fitaa Global | Plus Jakarta Sans (a confident group voice) | Inter | one mark, four divisions |
+| Ridge House demo | Manrope | Manrope | |
+| Maison Adwoa demo (studio) | Jost (fashion type, for a beauty studio) | Manrope | |
+| Lead previews | DM Sans | DM Sans | |
 
 ## Proof in every pull request
 
