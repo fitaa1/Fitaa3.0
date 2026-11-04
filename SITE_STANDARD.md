@@ -29,7 +29,7 @@ A speed gain that makes the site plainer fails the third test; find another way.
 
 ## Search and AI answers
 
-- Title, description, canonical, share image (og and twitter) on every page.
+- Title, description, canonical, share image (og and twitter) on every page, lead previews included. The share card is a 1200 × 630 JPEG (WhatsApp does not reliably show WebP) in the page's own fonts and story, never an old niche or old fonts. When a card changes, give it a new file name (e.g. `og-2026-11.jpg`) so WhatsApp and others fetch it fresh.
 - `sitemap.xml` with real dates; `robots.txt` that lets everyone in, AI crawlers included.
   Demos and lead previews carry `noindex` instead.
 - Structured data for the business type (ProfessionalService, LodgingBusiness, BeautySalon and
