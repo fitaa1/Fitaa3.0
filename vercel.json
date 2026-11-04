@@ -26,6 +26,10 @@
       "destination": "/demo/studio/index.html"
     },
     {
+      "source": "/demo/car-rental",
+      "destination": "/demo/car-rental/index.html"
+    },
+    {
       "source": "/privacy",
       "destination": "/privacy/index.html"
     },

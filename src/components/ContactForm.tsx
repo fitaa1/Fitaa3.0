@@ -156,7 +156,7 @@ export function ContactForm() {
               <FormLabel className="text-xs uppercase tracking-wider text-muted-foreground font-sans">Tell Us About Your Project</FormLabel>
               <FormControl>
                 <Textarea
-                  placeholder="What are you looking to achieve? Billboard campaign, website, branding...?"
+                  placeholder="What are you looking to achieve? A website, Google listing, ads, branding...?"
                   className="min-h-[120px] bg-transparent border-border focus-visible:ring-ruby rounded-none resize-none font-sans text-sm placeholder:text-muted-foreground/70"
                   {...field}
                 />

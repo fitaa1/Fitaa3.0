@@ -60,6 +60,15 @@ A speed gain that makes the site plainer fails the third test; find another way.
   that business. Design for the story, never decoration for its own sake.
 - **Navigation:** the header stays on screen at every size, the section in view is marked, phones get a
   menu button, and WhatsApp is one tap away from anywhere on the page.
+- **Signatures do a job.** The signature detail carries the page's main action or proof, not decoration:
+  the Fully Booked hero shows the WhatsApp message the business is built to receive, the car rental
+  demo's key tag fills in as the visitor builds a booking. Illustrations are labelled as illustrations.
+- **Retell the story in every section.** When a page sells steps (Found, Chosen, Booked), the cards,
+  the stats and the calls to action use the same steps, so the page reads as one journey.
+- **Write for every reader.** Offer pages speak to any business; niche detail lives in the demos,
+  behind one switch that takes a new demo with a button, a card and a line in SETTINGS.
+- **Prices abroad:** GHS first, with fixed GBP and USD beside it. The conversion rate and its date sit in
+  a comment next to the prices (`src/config/site.ts`), so the figures are checked when the cedi moves.
 - **Favicon:** rounded corners (about a 22% radius) with the outside transparent, never a hard square.
 
 | Site | Headings | Text | Signature |
@@ -70,6 +79,7 @@ A speed gain that makes the site plainer fails the third test; find another way.
 | Fitaa Global | Plus Jakarta Sans (a confident group voice) | Inter | one mark, four divisions |
 | Ridge House demo | Manrope | Manrope | |
 | Maison Adwoa demo (studio) | Jost (fashion type, for a beauty studio) | Manrope | |
+| Kora Drive demo (car rental) | Archivo, set wide (125) like a car badge | Archivo at normal width | the booking as a key tag that fills in as you choose |
 | Lead previews | DM Sans | DM Sans | |
 
 ## Proof in every pull request

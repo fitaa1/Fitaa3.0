@@ -11,7 +11,29 @@
  *     previews lives in index.html.
  * ═══════════════════════════════════════════════════════════════════════════ */
 
-import { Monitor, Palette, Globe, BarChart2 } from "lucide-react";
+import { Search, BadgeCheck, CalendarCheck, Palette, type LucideIcon } from "lucide-react";
+
+/** A price in Ghana cedis with fixed GBP and USD figures for clients abroad.
+ *  GBP and USD are straight conversions of the GHS price at the Wise mid-market
+ *  rate on 4 Nov 2026 (GHS 1 = GBP 0.0644 = USD 0.0851), rounded to the nearest 5.
+ *  Nigel chose straight conversion. Review them if the cedi moves a lot. */
+export type Price = { ghs: string; gbp: string; usd: string; unit: string };
+
+export type Service = {
+  /** "Step 1" etc. on the card; leave out for services outside the journey. */
+  step?: string;
+  title: string;
+  description: string;
+  icon: LucideIcon;
+  deliverables: string[];
+  /** Leave out to show "Quoted per project". */
+  price?: Price;
+  /** A second, smaller price line (founding offer, upkeep). */
+  priceNote?: string;
+  timing?: string;
+  /** The message WhatsApp opens with when a visitor taps "Start this project". */
+  whatsapp: string;
+};
 
 export const siteConfig = {
   /* ── Brand ─────────────────────────────────────────────────────────────── */
@@ -19,7 +41,7 @@ export const siteConfig = {
   tagline: "Pure. Strategic. Impactful.",
   /** Shown under the hero headline. */
   description:
-    "We turn billboard views and digital impressions into real customers. LED campaigns, striking visuals, and high-converting web experiences built for brands in Accra and beyond.",
+    "We make sure the customers already looking for you find you, trust you and book you. Google listings, WhatsApp booking, premium websites, Meta ads and design, built in Accra for businesses at home and abroad.",
   /** Live site address, no trailing slash. Used for the legal pages' canonical links. */
   url: "https://fitaacreative.com",
 
@@ -53,45 +75,88 @@ export const siteConfig = {
    * deliverables: shown when a visitor taps the card ("What's included"). */
   servicesSection: {
     eyebrow: "What We Do",
-    heading: "Services Built to Perform.",
+    heading: "From first search to fully booked.",
+    lede: "Three steps that take a customer from finding you to booking you, then coming back. Take one, or take all three.",
+    /** Shown under the cards. */
+    moreLabel: "See the full packages and live demos",
+    moreHref: "/fully-booked",
   },
   services: [
     {
-      title: "LED Billboard Campaigns",
+      step: "Step 1",
+      title: "Get Found",
       description:
-        "Turn high-traffic views into real customers with dynamic, eye-catching LED advertising that commands attention day and night.",
-      icon: Monitor,
-      deliverables: ["Campaign concept & messaging", "Static and animated LED creatives", "Artwork sized for every screen", "QR / landing page follow-through"],
+        "Be easy to find and easy to message. We put you on Google and set up WhatsApp Business, so people searching for what you sell can reach you in one tap.",
+      icon: Search,
+      deliverables: [
+        "Google Business Profile set up and polished, for eligible businesses",
+        "Instagram profile tune-up",
+        "WhatsApp Business catalogue with prices, greeting and away messages",
+        "Quick replies for your five most-asked questions",
+        "One click-to-chat link for your bio, flyers and signage",
+        "A print-ready QR card for your counter, desk or car",
+      ],
+      price: { ghs: "1,500", gbp: "95", usd: "130", unit: "one-off" },
+      timing: "Live in 5 days",
+      whatsapp: "Hi Fitaa, I'm interested in Get Found. My business is ",
+    },
+    {
+      step: "Step 2",
+      title: "Get Chosen",
+      description:
+        "Look like the obvious choice. A premium website on your own web address that shows your best work, prices and reviews, with one button that opens WhatsApp with the booking already written.",
+      icon: BadgeCheck,
+      deliverables: [
+        "Everything in Get Found",
+        "A premium one-page website on your own web address (domain billed at cost)",
+        "Gallery, prices, reviews and map",
+        "A booking button that opens WhatsApp with the request already written",
+        "Shaped around how your customers book, whether by dates, slots, vehicles or appointments",
+        "One round of revisions before launch",
+      ],
+      price: { ghs: "3,500", gbp: "225", usd: "300", unit: "one-off" },
+      priceNote: "Founding price GHS 2,500 / £160 / $215 for the first 3 clients",
+      timing: "Live in 7 days",
+      whatsapp: "Hi Fitaa, I'm interested in Get Chosen. My business is ",
+    },
+    {
+      step: "Step 3",
+      title: "Stay Booked",
+      description:
+        "Keep the calendar full. We run your Meta ads, keep your page and catalogue fresh, and send a one-page report each month so you can see what's working.",
+      icon: CalendarCheck,
+      deliverables: [
+        "Meta ads managed for you, aimed at the people most likely to book",
+        "Website and catalogue updates with new photos, prices and seasonal offers",
+        "A one-page monthly report on enquiries, bookings, reviews and ad results",
+        "Ad budget is separate and agreed on the call",
+      ],
+      price: { ghs: "1,200", gbp: "75", usd: "100", unit: "a month, 3-month minimum" },
+      priceNote: "Upkeep only GHS 350 / £25 / $30 a month for hosting and small updates, for Get Chosen clients who don't want ads",
+      whatsapp: "Hi Fitaa, I'm interested in Stay Booked. My business is ",
     },
     {
       title: "Graphic & Digital Design",
       description:
-        "Professional visuals and creatives that grab attention instantly, crafted to work across billboards, social media, and every digital surface.",
+        "Logos, brand identities, print and social content that look as good as the business behind them, for launches, campaigns and everything in between.",
       icon: Palette,
-      deliverables: ["Logos & brand identity", "Flyers, brochures & magazines", "Social graphics & animated posts", "Print-ready files"],
+      deliverables: [
+        "Logos & brand identity",
+        "Flyers, brochures & magazines",
+        "Social graphics & animated posts",
+        "Artwork for LED and digital screens",
+        "Print-ready files",
+      ],
+      whatsapp: "Hi Fitaa, I'd like a quote for design work. My business is ",
     },
-    {
-      title: "Campaign Landing Pages",
-      description:
-        "Fast, high-converting websites built specifically to turn billboard viewers and ad clicks into paying customers.",
-      icon: Globe,
-      deliverables: ["Single-page campaign sites", "Mobile-first and fast-loading", "WhatsApp & enquiry forms", "Web3 / NFT mint sites"],
-    },
-    {
-      title: "Digital Marketing & Web Presence",
-      description:
-        "Complete online setup: websites, SEO basics, Google Business and social presence that amplify every advertising effort.",
-      icon: BarChart2,
-      deliverables: ["Business websites", "Google Business Profile setup", "SEO basics", "Social media content"],
-    },
-  ],
+  ] as Service[],
 
   /* ── 3. Why Us + stats ─────────────────────────────────────────────────────
    * Stats count up from 0 when they scroll into view. */
   whyUsSection: {
     eyebrow: "Why Fitaa Creative",
     heading: "Pure craft. Measurable results.",
-    body: "We don't just create pretty visuals. Every billboard, every post, every landing page is engineered to move people and drive real business results in Accra and across Ghana.",
+    body: "We don't design for decoration. Every listing, page, post and ad is built to move one person closer to booking you, and we measure whether it did.",
   },
   stats: [
     { value: 50,  suffix: "+", label: "Brands Elevated"      },
@@ -190,7 +255,7 @@ export const siteConfig = {
     eyebrow: "Start the Conversation",
     /** Two lines, shown one under the other. */
     heading: ["Ready to Elevate", "Your Brand?"],
-    body: "Whether it's a billboard campaign, a striking new identity, or a complete digital presence, let's make it happen.",
+    body: "Whether you need to be found, chosen or kept fully booked, tell us about your business and we'll show you the fastest way there.",
     whatsappTab: "WhatsApp",
     formTab: "Send Enquiry",
     whatsappHeading: "Prefer a quick conversation?",

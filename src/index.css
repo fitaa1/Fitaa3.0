@@ -375,6 +375,15 @@ html { scroll-behavior: smooth; }
   transform: translateY(-2px) rotate(-6deg) scale(1.06);
   border-color: hsl(var(--ruby) / 0.45);
 }
+/* The journey thread: one line at icon height behind Found, Chosen and Booked.
+ * Cards cover it, so it only shows in the gaps, joining the three steps. */
+.service-thread {
+  left: 0; right: 0;
+  top: calc(2.25rem + 1.5rem);
+  height: 1px;
+  z-index: 0;
+  background: linear-gradient(90deg, hsl(var(--ruby) / 0.6), hsl(var(--gold) / 0.7));
+}
 @media (prefers-reduced-motion: reduce) {
   .service-card, .service-icon { transition: none; }
   .service-card:hover, .service-card:hover .service-icon { transform: none; }
