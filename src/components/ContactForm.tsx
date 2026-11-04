@@ -73,7 +73,7 @@ export function ContactForm() {
         <div className="w-14 h-14 bg-ruby/10 text-ruby rounded-full flex items-center justify-center mb-6">
           <CheckCircle2 size={28} aria-hidden="true" />
         </div>
-        <h4 className="text-2xl font-serif font-semibold text-foreground mb-2">Message Received</h4>
+        <h4 className="text-2xl font-display font-semibold text-foreground mb-2">Message Received</h4>
         <p className="text-muted-foreground font-sans font-light mb-8 max-w-xs">
           Thank you for reaching out. We'll get back to you within 24 hours.
         </p>
@@ -94,7 +94,7 @@ export function ContactForm() {
         <div className="w-14 h-14 bg-destructive/10 text-destructive rounded-full flex items-center justify-center mb-6">
           <AlertCircle size={28} aria-hidden="true" />
         </div>
-        <h4 className="text-2xl font-serif font-semibold text-foreground mb-2">Something went wrong</h4>
+        <h4 className="text-2xl font-display font-semibold text-foreground mb-2">Something went wrong</h4>
         <p className="text-muted-foreground font-sans font-light mb-8 max-w-xs">
           Please try again or email us directly at{" "}
           <a href={`mailto:${siteConfig.contact.email}`} className="text-ruby underline">

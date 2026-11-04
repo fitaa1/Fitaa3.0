@@ -26,13 +26,13 @@ export function Testimonials() {
             <Reveal key={t.company} variant="up" delay={0.1 + i * 0.18} as="figure" className="relative flex flex-col">
               {/* Large decorative quotation mark */}
               <div
-                className="absolute -top-3 -left-1 text-[6rem] leading-none font-serif text-ruby/8 select-none pointer-events-none"
+                className="absolute -top-3 -left-1 text-[6rem] leading-none font-display text-ruby/8 select-none pointer-events-none"
                 aria-hidden="true"
               >
                 &ldquo;
               </div>
 
-              <blockquote className="relative z-10 text-[1.2rem] md:text-[1.35rem] font-serif font-light text-foreground/82 leading-[1.68] mb-[2.125rem] pt-5">
+              <blockquote className="relative z-10 text-[1.2rem] md:text-[1.35rem] font-display font-light text-foreground/82 leading-[1.68] mb-[2.125rem] pt-5">
                 {t.quote}
               </blockquote>
 
@@ -42,7 +42,7 @@ export function Testimonials() {
               <figcaption className="flex items-center gap-4 mt-auto">
                 {/* Avatar initial */}
                 <div
-                  className="w-10 h-10 border border-ruby/25 bg-background flex items-center justify-center text-ruby font-serif text-base shrink-0"
+                  className="w-10 h-10 border border-ruby/25 bg-background flex items-center justify-center text-ruby font-display text-base shrink-0"
                   aria-hidden="true"
                 >
                   {t.company.charAt(0)}

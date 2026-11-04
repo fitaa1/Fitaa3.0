@@ -131,7 +131,7 @@ function ContactCard() {
                 </div>
               </div>
 
-              <h3 className="font-serif text-[1.5rem] font-medium text-foreground mb-3 leading-snug">
+              <h3 className="font-display text-[1.5rem] font-medium text-foreground mb-3 leading-snug">
                 {copy.whatsappHeading}
               </h3>
               <p className="text-muted-foreground font-sans font-light text-[0.9375rem] max-w-xs leading-[1.72] mb-2">
@@ -192,7 +192,7 @@ export function FinalCTA() {
 
             <h2
               id="contact-heading"
-              className="text-[clamp(2.2rem,5vw,3.5rem)] font-serif font-bold text-foreground leading-[1.08] tracking-[-0.012em] mb-[1.3125rem]"
+              className="text-[clamp(2.2rem,5vw,3.5rem)] font-display font-bold text-foreground leading-[1.08] tracking-[-0.012em] mb-[1.3125rem]"
             >
               {copy.heading[0]}<br />{copy.heading[1]}
             </h2>
@@ -209,7 +209,7 @@ export function FinalCTA() {
                   <p className="text-[0.65rem] font-sans uppercase tracking-[0.22em] text-muted-foreground mb-1">Email</p>
                   <a
                     href={`mailto:${siteConfig.contact.email}`}
-                    className="text-foreground font-serif text-[1.125rem] hover:text-ruby transition-colors duration-300"
+                    className="text-foreground font-display text-[1.125rem] hover:text-ruby transition-colors duration-300"
                   >
                     {siteConfig.contact.email}
                   </a>
@@ -235,7 +235,7 @@ export function FinalCTA() {
                 <MapPin size={15} className="text-gold mt-1 shrink-0" strokeWidth={1.5} aria-hidden="true" />
                 <div>
                   <p className="text-[0.65rem] font-sans uppercase tracking-[0.22em] text-muted-foreground mb-1">Location</p>
-                  <p className="text-foreground font-serif text-[1.125rem]">{siteConfig.contact.address}</p>
+                  <p className="text-foreground font-display text-[1.125rem]">{siteConfig.contact.address}</p>
                 </div>
               </div>
             </div>

@@ -19,7 +19,7 @@ function StatItem({ stat, index }: { stat: Stat; index: number }) {
       className={`group flex flex-col items-center md:items-start border-l border-border/30 pl-7 py-3 hover:border-ruby/45 transition-colors duration-500 ${isInView ? "is-in" : ""}`}
     >
       {/* Number — golden type scale: 4rem (closest φ step from 1rem) */}
-      <div className="text-[clamp(2.8rem,5vw,4rem)] font-serif font-bold text-ruby leading-none mb-2 tracking-tight tabular-nums">
+      <div className="text-[clamp(2.8rem,5vw,4rem)] font-display font-bold text-ruby leading-none mb-2 tracking-tight tabular-nums">
         <span>{count}</span>
         {stat.suffix && <span>{stat.suffix}</span>}
       </div>

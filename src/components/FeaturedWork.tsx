@@ -86,7 +86,7 @@ export function FeaturedWork() {
                     {study.industry}
                     <span className="text-muted-foreground/70"> · {study.year}</span>
                   </p>
-                  <h3 className="text-[1.5rem] font-serif font-normal text-foreground group-hover:text-ruby transition-colors duration-300 leading-snug">
+                  <h3 className="text-[1.5rem] font-display font-normal text-foreground group-hover:text-ruby transition-colors duration-300 leading-snug">
                     {study.client}
                   </h3>
                   <p className="text-[0.875rem] text-muted-foreground font-sans font-light leading-[1.7]">
@@ -116,7 +116,7 @@ export function FeaturedWork() {
           </p>
           <ul className="flex flex-wrap gap-x-8 gap-y-3">
             {siteConfig.alsoWorkedWith.map((name) => (
-              <li key={name} className="font-serif text-[1.15rem] text-foreground/75">
+              <li key={name} className="font-display text-[1.15rem] text-foreground/75">
                 {name}
               </li>
             ))}

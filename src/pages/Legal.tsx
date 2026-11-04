@@ -118,7 +118,7 @@ export default function Legal({ page }: { page: "privacy" | "terms" }) {
         <div className="container mx-auto px-6 md:px-12 h-20 flex items-center justify-between">
           <a href="/" className="flex items-center gap-3" aria-label="Fitaa Creative home">
             <img src="/logo-160.webp" alt="" width={36} height={36} className="h-9 w-9 rounded-sm" />
-            <span className="font-serif font-semibold tracking-[0.15em] text-[1.05rem]">FITAA</span>
+            <span className="font-display font-semibold tracking-[0.15em] text-[1.05rem]">FITAA</span>
           </a>
           <a
             href="/"
@@ -132,13 +132,13 @@ export default function Legal({ page }: { page: "privacy" | "terms" }) {
 
       <article className="container mx-auto px-6 md:px-12 py-14 md:py-20 max-w-3xl">
         <p className="text-[0.65rem] font-sans uppercase tracking-[0.22em] text-ruby mb-4">Legal</p>
-        <h1 className="text-[clamp(2.2rem,5vw,3.4rem)] font-serif font-bold leading-[1.08] mb-5">{doc.title}</h1>
+        <h1 className="text-[clamp(2.2rem,5vw,3.4rem)] font-display font-bold leading-[1.08] mb-5">{doc.title}</h1>
         <p className="text-muted-foreground font-sans leading-[1.75] mb-12">{doc.intro}</p>
 
         <div className="space-y-10">
           {doc.sections.map((s) => (
             <section key={s.heading}>
-              <h2 className="text-[1.35rem] font-serif font-semibold mb-3">{s.heading}</h2>
+              <h2 className="text-[1.35rem] font-display font-semibold mb-3">{s.heading}</h2>
               <div className="space-y-3">
                 {s.body.map((p) => (
                   <p key={p} className="text-[0.95rem] text-muted-foreground font-sans leading-[1.8]">
