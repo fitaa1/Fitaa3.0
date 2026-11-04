@@ -80,6 +80,8 @@ A speed gain that makes the site plainer fails the third test; find another way.
 | Ridge House demo | Manrope | Manrope | |
 | Maison Adwoa demo (studio) | Jost (fashion type, for a beauty studio) | Manrope | |
 | Kora Drive demo (car rental) | Archivo, set wide (125) like a car badge | Archivo at normal width | the booking as a key tag that fills in as you choose |
+| Adom Family Clinic demo | Atkinson Hyperlegible Next (built by the Braille Institute so every reader can read it) | the same | an appointment card with a heartbeat line, filled in by the form |
+| Nkyene Kitchen demo (restaurant) | Unbounded (round and generous, like a full plate) | Manrope | a "Reserved" table card standing on the plate, filled in by the booking |
 | Lead previews | DM Sans | DM Sans | |
 
 ## Proof in every pull request

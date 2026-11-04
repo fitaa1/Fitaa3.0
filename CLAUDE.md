@@ -1,6 +1,6 @@
 # Fitaa Creative (fitaacreative.com)
 
-The agency site for Fitaa Creative, Accra. React + Vite single-page site, hosted on Vercel (project name `fitaadigital`, which serves fitaacreative.com; www and fitaacreative.vercel.app 301 to it). Standalone pages live as plain HTML in `public/`: `/fully-booked`, `/demo/ridge-house`, `/demo/studio`, `/demo/car-rental`. Privacy, terms and the 404 are written at build time by `scripts/static-pages.mjs`.
+The agency site for Fitaa Creative, Accra. React + Vite single-page site, hosted on Vercel (project name `fitaadigital`, which serves fitaacreative.com; www and fitaacreative.vercel.app 301 to it). Standalone pages live as plain HTML in `public/`: `/fully-booked`, `/demo/ridge-house`, `/demo/studio`, `/demo/car-rental`, `/demo/clinic`, `/demo/restaurant`. Privacy, terms and the 404 are written at build time by `scripts/static-pages.mjs`.
 
 This site is the template for every site Fitaa builds. `SITE_STANDARD.md` is the standard they all meet: when this site improves, update it in the same pull request.
 
@@ -23,6 +23,8 @@ Git workflow: branch + pull request for every change, never push to `main`. Nige
 ## Content rules
 
 British spelling, plain English, no em dashes in copy (the "—CREATIVE—" wordmark is part of the logo lockup and stays). Do not invent prices, numbers, awards or guarantees; every figure on the site needs a source Nigel has confirmed.
+
+Straight to the point (Nigel, 4 Nov 2026): every package card on /fully-booked has its own link (`#get-found`, `#get-chosen`, `#stay-booked`) and every niche has its own demo, so a lead is sent to the exact thing they asked for, never the general page. Keep those ids when editing the page, and give each new demo its own tab, card and `?demo=` value. Get Chosen is the website alone: never list the Get Found items inside it.
 
 ## Known issues and guards
 

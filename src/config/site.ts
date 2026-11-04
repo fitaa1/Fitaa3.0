@@ -107,8 +107,8 @@ export const siteConfig = {
         "Look like the obvious choice. A premium website on your own web address that shows your best work, prices and reviews, with one button that opens WhatsApp with the booking already written.",
       icon: BadgeCheck,
       deliverables: [
-        "Everything in Get Found",
         "A premium one-page website on your own web address (domain billed at cost)",
+        "Built for search, so you show up on Google and in AI answers like ChatGPT",
         "Gallery, prices, reviews and map",
         "A booking button that opens WhatsApp with the request already written",
         "Shaped around how your customers book, whether by dates, slots, vehicles or appointments",

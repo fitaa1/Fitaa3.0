@@ -96,21 +96,21 @@
       "name": "Get Chosen",
       "price": "3500",
       "priceCurrency": "GHS",
-      "description": "Everything in Get Found plus a premium one-page website on your own web address with WhatsApp booking. Live in 7 days."
+      "description": "A premium one-page website on your own web address, built for Google and AI answers, with WhatsApp booking. Live in 7 days."
     },
     {
       "@type": "Offer",
       "name": "Get Chosen",
       "price": "225",
       "priceCurrency": "GBP",
-      "description": "Everything in Get Found plus a premium one-page website on your own web address with WhatsApp booking. Live in 7 days."
+      "description": "A premium one-page website on your own web address, built for Google and AI answers, with WhatsApp booking. Live in 7 days."
     },
     {
       "@type": "Offer",
       "name": "Get Chosen",
       "price": "300",
       "priceCurrency": "USD",
-      "description": "Everything in Get Found plus a premium one-page website on your own web address with WhatsApp booking. Live in 7 days."
+      "description": "A premium one-page website on your own web address, built for Google and AI answers, with WhatsApp booking. Live in 7 days."
     },
     {
       "@type": "Offer",
@@ -396,7 +396,7 @@ a{color:inherit}
 .demo[hidden]{display:none}
 .demo.pop{animation:demoIn .45s cubic-bezier(.22,1,.36,1)}
 @keyframes demoIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-.switch-sm{margin:1.5rem 0 0}
+.switch-sm{margin:1.5rem 0 0;display:flex;flex-wrap:wrap;gap:4px;width:fit-content;max-width:100%}
 @media (prefers-reduced-motion: reduce){.demo.pop{animation:none}}
 .demo{display:block;text-decoration:none;border:1px solid var(--border);overflow:hidden;transition:transform .45s cubic-bezier(.22,1,.36,1),box-shadow .45s}
 @media(hover:hover){.demo:hover{transform:translateY(-4px);box-shadow:0 30px 60px -36px rgba(0,0,0,.5)}}
@@ -416,6 +416,10 @@ a{color:inherit}
 .studio small{color:#8E4352}.studio strong{font-family:Inter,sans-serif;color:#2A1E22;font-weight:300;letter-spacing:.12em;text-transform:uppercase}.studio .btnish{background:#8E4352;color:#FFF7F3}.studio .tiles i{background:#F1E4DD;border:1px dashed #D2B8AD}
 .cars{background:#121417}.cars .bar{background:#1A1D21;border-bottom:1px solid #2A2E34}.cars .bar i{background:#3A3F46}
 .cars small{color:#F2B33D}.cars strong{font-family:'Bricolage Grotesque',Inter,sans-serif;font-weight:800;letter-spacing:-.01em;text-transform:uppercase;color:#F4F5F6}.cars .btnish{background:#F2B33D;color:#121417}.cars .tiles i{background:#1C1F24;border:1px dashed #3A3F46}
+.clinics{background:#F6FAF9}.clinics .bar{background:#EAF4F2;border-bottom:1px solid #D3E3DF}.clinics .bar i{background:#A9C3BD}
+.clinics small{color:#0B5E57}.clinics strong{font-family:Inter,sans-serif;font-weight:700;letter-spacing:-.02em;color:#0F2523}.clinics .btnish{background:#C2452F;color:#fff}.clinics .tiles i{background:#DDEBE8;border:1px dashed #A9C3BD}
+.restaurants{background:#FBF3E7}.restaurants .bar{background:#F5E8D4;border-bottom:1px solid #E6D3B8}.restaurants .bar i{background:#C9AE8B}
+.restaurants small{color:#9E2A17}.restaurants strong{font-family:'Bricolage Grotesque',Inter,sans-serif;font-weight:700;color:#241713}.restaurants .btnish{background:#B8321D;color:#FFF7EC}.restaurants .tiles i{background:#EEDCC2;border:1px dashed #C9AE8B;border-radius:50%}
 
 /* ── FAQ ── */
 .faq{border-top:1px solid var(--border)}
@@ -508,7 +512,7 @@ em{font-style:normal}</style>
 <section class="section tint" id="packages">
   <div class="container">
     <div class="center reveal"><span class="eyebrow">Three steps in</span><h2 class="h2">Find you. Choose you. Come back.</h2>
-      <p class="lede center-lede">Each step stands on its own, and each one builds on the last. Prices are fixed, in cedis for Ghana and in pounds and dollars for clients abroad.</p></div>
+      <p class="lede center-lede">Each step stands on its own, so take the one you need. Prices are fixed, in cedis for Ghana and in pounds and dollars for clients abroad.</p></div>
     <div class="tiers">
       <article id="get-found" class="tier reveal">
         <span class="step">Step 1</span>
@@ -524,14 +528,14 @@ em{font-style:normal}</style>
         <a class="btn btn-line" data-wa="Hi Fitaa, I'm interested in Get Found. My business is " href="#" target="_blank" rel="noopener"><svg class="wa"><use href="#wa"/></svg>Ask about Get Found</a>
       </article>
       <article id="get-chosen" class="tier featured reveal">
-        <span class="badge">Full package</span>
+        <span class="badge">The website</span>
         <span class="step">Step 2</span>
         <h3>Get Chosen</h3><p class="tag">Look like the obvious choice.</p>
         <div class="price"><b>GHS 3,500</b><span>one-off</span></div><p class="abroad">£225 / $300 for clients abroad</p><p class="timing">Live in 7 days</p>
         <p class="founding-note">Founding price GHS 2,500 / £160 / $215 for the first 3 clients</p>
         <ul>
-          <li><svg width="16" height="16"><use href="#tick"/></svg>Everything in Get Found</li>
           <li><svg width="16" height="16"><use href="#tick"/></svg>A premium one-page website on your own web address (domain billed at cost)</li>
+          <li><svg width="16" height="16"><use href="#tick"/></svg>Built for search, so you show up on Google and in AI answers like ChatGPT</li>
           <li><svg width="16" height="16"><use href="#tick"/></svg>Gallery, prices, reviews and map, with one button that opens WhatsApp with the booking already written</li>
           <li><svg width="16" height="16"><use href="#tick"/></svg>Shaped around how your customers book, whether by dates, slots, vehicles or appointments</li>
           <li><svg width="16" height="16"><use href="#tick"/></svg>Deposit or payment details written in, so requests arrive ready to confirm</li>
@@ -624,6 +628,8 @@ em{font-style:normal}</style>
         <button role="tab" id="demo-tab-hosts" aria-selected="true" aria-controls="demos" data-niche="hosts">Short-let host</button>
         <button role="tab" id="demo-tab-studios" aria-selected="false" aria-controls="demos" data-niche="studios">Beauty studio</button>
         <button role="tab" id="demo-tab-cars" aria-selected="false" aria-controls="demos" data-niche="cars">Car rental</button>
+        <button role="tab" id="demo-tab-clinics" aria-selected="false" aria-controls="demos" data-niche="clinics">Clinic</button>
+        <button role="tab" id="demo-tab-restaurants" aria-selected="false" aria-controls="demos" data-niche="restaurants">Restaurant</button>
       </div></div>
     <div class="demos" id="demos" role="tabpanel" aria-labelledby="demo-tab-hosts" aria-live="polite">
       <a class="demo host reveal" data-for="hosts" href="https://fitaacreative.com/demo/ridge-house">
@@ -640,6 +646,16 @@ em{font-style:normal}</style>
         <div class="bar" aria-hidden="true"><i></i><i></i><i></i></div>
         <div class="shot" aria-hidden="true"><small>Car rental · Airport, Accra</small><strong>Keys in your hand when you land.</strong><span class="btnish">Reserve a car</span><div class="tiles"><i></i><i></i><i></i></div></div>
         <div class="caption">Car rental demo <em>Kora Drive →</em></div>
+      </a>
+      <a class="demo clinics reveal" data-for="clinics" hidden href="https://fitaacreative.com/demo/clinic">
+        <div class="bar" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="shot" aria-hidden="true"><small>Family clinic · Dzorwulu</small><strong>Seen today, not someday.</strong><span class="btnish">Book a visit</span><div class="tiles"><i></i><i></i><i></i></div></div>
+        <div class="caption">Clinic demo <em>Adom Family Clinic →</em></div>
+      </a>
+      <a class="demo restaurants reveal" data-for="restaurants" hidden href="https://fitaacreative.com/demo/restaurant">
+        <div class="bar" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="shot" aria-hidden="true"><small>Ghanaian kitchen · Osu</small><strong>Ghana on a plate, with a table waiting.</strong><span class="btnish">Book a table</span><div class="tiles"><i></i><i></i><i></i></div></div>
+        <div class="caption">Restaurant demo <em>Nkyene Kitchen →</em></div>
       </a>
     </div>
   </div>
@@ -697,7 +713,9 @@ var SETTINGS = {
   demos: {
     hosts: 'A demo built for a fictional serviced apartment. Try the booking form. It opens WhatsApp with the request already written.',
     studios: 'A demo built for a fictional beauty studio. Try the booking form. It opens WhatsApp with the request already written.',
-    cars: 'A demo built for a fictional car rental. Pick a car and your dates. It opens WhatsApp with the request already written.'
+    cars: 'A demo built for a fictional car rental. Pick a car and your dates. It opens WhatsApp with the request already written.',
+    clinics: 'A demo built for a fictional family clinic. Choose a service and a day. It opens WhatsApp with the appointment request already written.',
+    restaurants: 'A demo built for a fictional Ghanaian restaurant. Pick your party size and time. It opens WhatsApp with the booking already written.'
   }
 };
 
@@ -739,7 +757,7 @@ tabs.forEach(function (b, i) {
   });
 });
 var q = (location.search.match(/[?&]demo=(\w+)/) || [])[1];
-setDemo(q || (/studio|salon/i.test(location.search) ? 'studios' : /car/i.test(location.search) ? 'cars' : 'hosts'), false);
+setDemo(q || (/studio|salon/i.test(location.search) ? 'studios' : /car/i.test(location.search) ? 'cars' : /clinic/i.test(location.search) ? 'clinics' : /restaurant/i.test(location.search) ? 'restaurants' : 'hosts'), false);
 
 /* Hero message: cycles while it is on screen and the tab is open; still for reduce motion. */
 (function () {

@@ -13,9 +13,9 @@
     booking_request  a demo booking form sent to WhatsApp
     call_click       phone links        email_click   email links
     demo_open        a demo card on the Fully Booked page
-    niche_switch     the demo switch on the Fully Booked page (hosts, studios, cars)
+    niche_switch     the demo switch on the Fully Booked page (hosts, studios, cars, clinics, restaurants)
     outbound_click   any other link that leaves the site
-  Each event carries: label (button text), page, and niche (the demo in view: hosts, studios or cars) when known.
+  Each event carries: label (button text), page, and niche (the demo in view: hosts, studios, cars, clinics or restaurants) when known.
 
   Copying a page to another site? Copy this file too, or remove its <script> tag.
 */
