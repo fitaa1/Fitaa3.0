@@ -24,6 +24,8 @@ Git workflow: branch + pull request for every change, never push to `main`. Nige
 
 British spelling, plain English, no em dashes in copy (the "—CREATIVE—" wordmark is part of the logo lockup and stays). Do not invent prices, numbers, awards or guarantees; every figure on the site needs a source Nigel has confirmed.
 
+Straight to the point (Nigel, 4 Nov 2026): every package card on /fully-booked has its own link (`#get-found`, `#get-chosen`, `#stay-booked`) and every niche has its own demo, so a lead is sent to the exact thing they asked for, never the general page. Keep those ids when editing the page, and give each new demo its own tab, card and `?demo=` value. Get Chosen is the website alone: never list the Get Found items inside it.
+
 ## Known issues and guards
 
 Found in the 22 Oct 2026 audit. Each line is a mistake that happened once, and the guard that stops it repeating.
