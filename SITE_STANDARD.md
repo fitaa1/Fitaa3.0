@@ -10,6 +10,7 @@ A speed gain that makes the site plainer fails the third test; find another way.
 
 ## Speed
 
+- **No jump when fonts load:** each web font gets a fallback face from local Arial with `size-adjust` set to its measured width (wide display faces need about 127 to 130%), listed straight after it, so layout shift stays under 0.1. Measured 4 Nov: Archivo wide 127.3%, Unbounded 129.3%, Manrope 101.6%, Atkinson Hyperlegible Next 98.3%, Archivo 97.5%.
 - **Fonts:** at most two families. Google Fonts load without blocking the first paint (preload, `media="print"` swap,
   `noscript` fallback, `display=swap`), or the device's own fonts.
 - **Analytics:** one file (`public/fitaa-analytics.js`) with a list of live hosts. Google Analytics
@@ -29,7 +30,7 @@ A speed gain that makes the site plainer fails the third test; find another way.
 
 ## Search and AI answers
 
-- Title, description, canonical, share image (og and twitter) on every page.
+- Title, description, canonical, share image (og and twitter) on every page, lead previews included. The share card is a 1200 × 630 JPEG (WhatsApp does not reliably show WebP) in the page's own fonts and story, never an old niche or old fonts. When a card changes, give it a new file name (e.g. `og-2026-11.jpg`) so WhatsApp and others fetch it fresh.
 - `sitemap.xml` with real dates; `robots.txt` that lets everyone in, AI crawlers included.
   Demos and lead previews carry `noindex` instead.
 - Structured data for the business type (ProfessionalService, LodgingBusiness, BeautySalon and
