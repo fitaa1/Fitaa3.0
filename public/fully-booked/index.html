@@ -12,10 +12,15 @@
   Vercel) or open it straight in a browser. Nothing else is needed.
   Edit: words are in the page below; the WhatsApp number and messages are in SETTINGS
   at the bottom of the file. Copy source: "Fully Booked by Fitaa: Offer Playbook" (Drive).
-  Written for any business (4 Nov 2026). Demos sit behind one switch; see the note above them.
+  Written for any business (4 Nov 2026), in any country (5 Nov 2026). Demos sit behind one switch;
+  see the note above them.
+  Prices: shown in the visitor's currency. The figures live in src/config/pricing.json; the build
+  writes them into every [data-price] element and SETTINGS.prices, once per currency, and
+  middleware.ts hands each visitor the right copy (GHS for Ghana, GBP for the UK, USD for
+  everyone else). The figures typed below are the USD copy, which search engines get.
 -->
 <title>Fully Booked by Fitaa | Get found, chosen and booked on WhatsApp</title>
-<meta name="description" content="A Google listing, WhatsApp booking, a premium website and Meta ads for businesses in Accra and abroad. Fixed prices in cedis, pounds and dollars. Live in 7 days, or half your fee back.">
+<meta name="description" content="A Google listing, WhatsApp booking, a premium website and Meta ads for businesses in Ghana, the UK and beyond. Fixed prices in cedis, pounds and dollars. Live in 7 days, or half your fee back.">
 <link rel="canonical" href="https://fitaacreative.com/fully-booked">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Fully Booked by Fitaa">
@@ -26,7 +31,7 @@
 <meta property="og:image:alt" content="Fully Booked by Fitaa: Your next client is already looking for you.">
 <meta property="og:url" content="https://fitaacreative.com/fully-booked">
 <meta property="og:site_name" content="Fitaa Creative">
-<meta property="og:locale" content="en_GH">
+<meta property="og:locale" content="en_GB">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Fully Booked by Fitaa">
 <meta name="twitter:description" content="Your next client is already looking for you. Live in 7 days, or 50% of your fee back.">
@@ -41,10 +46,6 @@
   "description": "Get Found, Get Chosen and Stay Booked: a Google listing, WhatsApp Business setup, a premium one-page website with WhatsApp booking, and monthly Meta ads management for businesses that take bookings or enquiries. Live in 7 days, or 50% of your fee back.",
   "url": "https://fitaacreative.com/fully-booked",
   "areaServed": [
-    {
-      "@type": "City",
-      "name": "Accra"
-    },
     {
       "@type": "Country",
       "name": "Ghana"
@@ -73,20 +74,6 @@
     {
       "@type": "Offer",
       "name": "Get Found",
-      "price": "1500",
-      "priceCurrency": "GHS",
-      "description": "Google listing, WhatsApp Business, click-to-chat link and print-ready QR card. Live in 5 days."
-    },
-    {
-      "@type": "Offer",
-      "name": "Get Found",
-      "price": "95",
-      "priceCurrency": "GBP",
-      "description": "Google listing, WhatsApp Business, click-to-chat link and print-ready QR card. Live in 5 days."
-    },
-    {
-      "@type": "Offer",
-      "name": "Get Found",
       "price": "130",
       "priceCurrency": "USD",
       "description": "Google listing, WhatsApp Business, click-to-chat link and print-ready QR card. Live in 5 days."
@@ -94,37 +81,9 @@
     {
       "@type": "Offer",
       "name": "Get Chosen",
-      "price": "3500",
-      "priceCurrency": "GHS",
-      "description": "A premium one-page website on your own web address, built for Google and AI answers, with WhatsApp booking. Live in 7 days."
-    },
-    {
-      "@type": "Offer",
-      "name": "Get Chosen",
-      "price": "225",
-      "priceCurrency": "GBP",
-      "description": "A premium one-page website on your own web address, built for Google and AI answers, with WhatsApp booking. Live in 7 days."
-    },
-    {
-      "@type": "Offer",
-      "name": "Get Chosen",
       "price": "300",
       "priceCurrency": "USD",
       "description": "A premium one-page website on your own web address, built for Google and AI answers, with WhatsApp booking. Live in 7 days."
-    },
-    {
-      "@type": "Offer",
-      "name": "Stay Booked",
-      "price": "1200",
-      "priceCurrency": "GHS",
-      "description": "Monthly Meta ads management, website and catalogue updates and a one-page report. 3-month minimum, ad budget separate."
-    },
-    {
-      "@type": "Offer",
-      "name": "Stay Booked",
-      "price": "75",
-      "priceCurrency": "GBP",
-      "description": "Monthly Meta ads management, website and catalogue updates and a one-page report. 3-month minimum, ad budget separate."
     },
     {
       "@type": "Offer",
@@ -175,10 +134,10 @@
   },
   {
    "@type": "Question",
-   "name": "Do you work with businesses outside Ghana?",
+   "name": "Do you work with businesses where I am?",
    "acceptedAnswer": {
     "@type": "Answer",
-    "text": "Yes. We build from Accra for clients at home and abroad, including a shipping company in Southampton. Prices are fixed in cedis, pounds and dollars, and everything runs over WhatsApp, so distance doesn't slow anything down."
+    "text": "Yes. We work with businesses in Ghana and the UK, including a shipping company in Southampton, and everything runs over WhatsApp, so distance doesn't slow anything down. Prices are fixed in cedis, pounds and dollars, and this page shows yours."
    }
   },
   {
@@ -218,7 +177,7 @@
    "name": "Who else have you done this for?",
    "acceptedAnswer": {
     "@type": "Answer",
-    "text": "You'd be one of our founding clients, which is why the price is lower and the guarantee is there. Our past work for brands in Accra and the UK is on the main site."
+    "text": "You'd be one of our founding clients, which is why the price is lower and the guarantee is there. Our past work for brands in Ghana and the UK is on the main site."
    }
   }
  ]
@@ -303,8 +262,8 @@ a{color:inherit}
 .hero .sub{font-size:clamp(1.06rem,1.6vw,1.15rem);font-weight:300;color:var(--muted);max-width:42rem;line-height:1.75;margin-bottom:2.5rem}
 .switch{display:inline-flex;padding:4px;border:1px solid var(--border);background:var(--card-soft);backdrop-filter:blur(10px);margin-bottom:1.25rem}
 .switch button{position:relative;min-height:44px;padding:0 1.6rem;border:0;background:transparent;color:var(--muted);font:inherit;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;transition:color .3s,background .35s}
-.switch button[aria-selected="true"]{background:var(--accent-strong);color:var(--on-accent)}
-.switch button:not([aria-selected="true"]):hover{color:var(--fg)}
+.switch button[aria-selected="true"],.switch button[aria-pressed="true"]{background:var(--accent-strong);color:var(--on-accent)}
+.switch button:not([aria-selected="true"]):not([aria-pressed="true"]):hover{color:var(--fg)}
 .actions{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin-top:1.5rem}
 @media(max-width:640px){.actions{flex-direction:column;width:100%}.actions .btn{width:100%}.switch button{padding:0 1rem}}
 
@@ -397,6 +356,10 @@ a{color:inherit}
 .demo.pop{animation:demoIn .45s cubic-bezier(.22,1,.36,1)}
 @keyframes demoIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 .switch-sm{margin:1.5rem 0 0;display:flex;flex-wrap:wrap;gap:4px;width:fit-content;max-width:100%}
+/* Currency switch: prices arrive in the visitor's currency (middleware.ts); this is for anyone the guess got wrong */
+.cur-switch{margin:1.75rem auto 0;align-items:center;flex-wrap:nowrap}
+.cur-switch button{padding:0 1rem}
+.cur-label{padding:0 .7rem 0 .55rem;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
 @media (prefers-reduced-motion: reduce){.demo.pop{animation:none}}
 .demo{display:block;text-decoration:none;border:1px solid var(--border);overflow:hidden;transition:transform .45s cubic-bezier(.22,1,.36,1),box-shadow .45s}
 @media(hover:hover){.demo:hover{transform:translateY(-4px);box-shadow:0 30px 60px -36px rgba(0,0,0,.5)}}
@@ -512,12 +475,18 @@ em{font-style:normal}</style>
 <section class="section tint" id="packages">
   <div class="container">
     <div class="center reveal"><span class="eyebrow">Three steps in</span><h2 class="h2">Find you. Choose you. Come back.</h2>
-      <p class="lede center-lede">Each step stands on its own, so take the one you need. Prices are fixed, in cedis for Ghana and in pounds and dollars for clients abroad.</p></div>
+      <p class="lede center-lede">Each step stands on its own, so take the one you need. Prices are fixed, and shown in your currency.</p>
+      <div class="switch switch-sm cur-switch" role="group" aria-label="Show prices in">
+        <span class="cur-label" aria-hidden="true">Prices in</span>
+        <button type="button" data-currency="GHS" aria-pressed="false" aria-label="GHS, Ghana cedis">GHS</button>
+        <button type="button" data-currency="GBP" aria-pressed="false" aria-label="GBP, pounds">GBP</button>
+        <button type="button" data-currency="USD" aria-pressed="true" aria-label="USD, US dollars">USD</button>
+      </div></div>
     <div class="tiers">
       <article id="get-found" class="tier reveal">
         <span class="step">Step 1</span>
         <h3>Get Found</h3><p class="tag">Be easy to find and easy to message.</p>
-        <div class="price"><b>GHS 1,500</b><span>one-off</span></div><p class="abroad">£95 / $130 for clients abroad</p><p class="timing">Live in 5 days</p>
+        <div class="price"><b data-price="getFound">$130</b><span>one-off</span></div><p class="timing">Live in 5 days</p>
         <ul>
           <li><svg width="16" height="16"><use href="#tick"/></svg>Google Business Profile set up and polished with photos, hours, services and a map pin (eligible businesses)</li>
           <li><svg width="16" height="16"><use href="#tick"/></svg>Instagram profile tune-up, so your bio sends people straight to WhatsApp</li>
@@ -531,8 +500,8 @@ em{font-style:normal}</style>
         <span class="badge">The website</span>
         <span class="step">Step 2</span>
         <h3>Get Chosen</h3><p class="tag">Look like the obvious choice.</p>
-        <div class="price"><b>GHS 3,500</b><span>one-off</span></div><p class="abroad">£225 / $300 for clients abroad</p><p class="timing">Live in 7 days</p>
-        <p class="founding-note">Founding price GHS 2,500 / £160 / $215 for the first 3 clients</p>
+        <div class="price"><b data-price="getChosen">$300</b><span>one-off</span></div><p class="timing">Live in 7 days</p>
+        <p class="founding-note" data-price="foundingNote">Founding price $215 for the first 3 clients, for up to 3 units</p>
         <ul>
           <li><svg width="16" height="16"><use href="#tick"/></svg>A premium one-page website on your own web address (domain billed at cost)</li>
           <li><svg width="16" height="16"><use href="#tick"/></svg>Built for search, so you show up on Google and in AI answers like ChatGPT</li>
@@ -546,9 +515,9 @@ em{font-style:normal}</style>
       <article id="stay-booked" class="tier reveal">
         <span class="step">Step 3</span>
         <h3>Stay Booked</h3><p class="tag">Keep the calendar full.</p>
-        <div class="price"><b>GHS 1,200</b><span>per month</span></div><p class="abroad">£75 / $100 a month for clients abroad</p><p class="timing">3-month minimum</p>
+        <div class="price"><b data-price="stayBooked">$100</b><span>per month</span></div><p class="timing">3-month minimum</p>
         <ul>
-          <li><svg width="16" height="16"><use href="#tick"/></svg>Meta ads managed for you, aimed at the people most likely to book, from your own neighbourhood to Ghanaians abroad planning a trip home</li>
+          <li><svg width="16" height="16"><use href="#tick"/></svg>Meta ads managed for you, aimed at the people most likely to book, from your own neighbourhood to visitors planning their trip</li>
           <li><svg width="16" height="16"><use href="#tick"/></svg>Website and catalogue updates with new photos, prices and seasonal offers</li>
           <li><svg width="16" height="16"><use href="#tick"/></svg>A one-page monthly report on WhatsApp enquiries, bookings, new reviews and ad results</li>
           <li><svg width="16" height="16"><use href="#tick"/></svg>Ad budget is separate and agreed on the call</li>
@@ -556,7 +525,7 @@ em{font-style:normal}</style>
         <a class="btn btn-line" data-wa="Hi Fitaa, I'm interested in Stay Booked. My business is " href="#" target="_blank" rel="noopener"><svg class="wa"><use href="#wa"/></svg>Ask about Stay Booked</a>
       </article>
     </div>
-    <p class="upkeep">Upkeep only, GHS 350 / £25 / $30 a month for hosting and small updates, for Get Chosen clients who don't want ads.</p>
+    <p class="upkeep" data-price="upkeepNote">Upkeep only, $30 a month for hosting and small updates, for Get Chosen clients who don't want ads.</p>
   </div>
 </section>
 
@@ -573,7 +542,7 @@ em{font-style:normal}</style>
     <div class="founding reveal">
       <div>
         <span class="eyebrow gold">Founding clients</span>
-        <h3>Get Chosen for GHS 2,500, for the first 3 clients.</h3>
+        <h3>Get Chosen for <span data-price="founding">$215</span>, for the first 3 clients.</h3>
         <p class="lede">In return, we ask for a short video or written testimonial, permission to show the work, and your before and after numbers at 30 days.</p>
       </div>
       <a class="btn btn-gold" data-wa="Hi Fitaa, I'd like to be a founding client. My business is " href="#" target="_blank" rel="noopener"><svg class="wa"><use href="#wa"/></svg>Become a founding client</a>
@@ -634,27 +603,27 @@ em{font-style:normal}</style>
     <div class="demos" id="demos" role="tabpanel" aria-labelledby="demo-tab-hosts" aria-live="polite">
       <a class="demo host reveal" data-for="hosts" href="https://fitaacreative.com/demo/ridge-house">
         <div class="bar" aria-hidden="true"><i></i><i></i><i></i></div>
-        <div class="shot" aria-hidden="true"><small>Serviced apartments · Airport Residential</small><strong>Home in Accra, from the moment you land.</strong><span class="btnish">Request your dates</span><div class="tiles"><i></i><i></i><i></i></div></div>
+        <div class="shot" aria-hidden="true"><small>Serviced apartments · Near the airport</small><strong>Home in the city, from the moment you land.</strong><span class="btnish">Request your dates</span><div class="tiles"><i></i><i></i><i></i></div></div>
         <div class="caption">Short-let host demo <em>Ridge House →</em></div>
       </a>
       <a class="demo studio reveal" data-for="studios" hidden href="https://fitaacreative.com/demo/studio">
         <div class="bar" aria-hidden="true"><i></i><i></i><i></i></div>
-        <div class="shot" aria-hidden="true"><small>Hair, nails and lashes · East Legon</small><strong>Leave looking like the best day of your year.</strong><span class="btnish">Book your slot</span><div class="tiles"><i></i><i></i><i></i></div></div>
+        <div class="shot" aria-hidden="true"><small>Hair, nails and lashes · By appointment</small><strong>Leave looking like the best day of your year.</strong><span class="btnish">Book your slot</span><div class="tiles"><i></i><i></i><i></i></div></div>
         <div class="caption">Beauty studio demo <em>Maison Adwoa →</em></div>
       </a>
       <a class="demo cars reveal" data-for="cars" hidden href="https://fitaacreative.com/demo/car-rental">
         <div class="bar" aria-hidden="true"><i></i><i></i><i></i></div>
-        <div class="shot" aria-hidden="true"><small>Car rental · Airport, Accra</small><strong>Keys in your hand when you land.</strong><span class="btnish">Reserve a car</span><div class="tiles"><i></i><i></i><i></i></div></div>
+        <div class="shot" aria-hidden="true"><small>Car rental · At the airport</small><strong>Keys in your hand when you land.</strong><span class="btnish">Reserve a car</span><div class="tiles"><i></i><i></i><i></i></div></div>
         <div class="caption">Car rental demo <em>Kora Drive →</em></div>
       </a>
       <a class="demo clinics reveal" data-for="clinics" hidden href="https://fitaacreative.com/demo/clinic">
         <div class="bar" aria-hidden="true"><i></i><i></i><i></i></div>
-        <div class="shot" aria-hidden="true"><small>Family clinic · Dzorwulu</small><strong>Seen today, not someday.</strong><span class="btnish">Book a visit</span><div class="tiles"><i></i><i></i><i></i></div></div>
+        <div class="shot" aria-hidden="true"><small>Family clinic · Same-day visits</small><strong>Seen today, not someday.</strong><span class="btnish">Book a visit</span><div class="tiles"><i></i><i></i><i></i></div></div>
         <div class="caption">Clinic demo <em>Adom Family Clinic →</em></div>
       </a>
       <a class="demo restaurants reveal" data-for="restaurants" hidden href="https://fitaacreative.com/demo/restaurant">
         <div class="bar" aria-hidden="true"><i></i><i></i><i></i></div>
-        <div class="shot" aria-hidden="true"><small>Ghanaian kitchen · Osu</small><strong>Ghana on a plate, with a table waiting.</strong><span class="btnish">Book a table</span><div class="tiles"><i></i><i></i><i></i></div></div>
+        <div class="shot" aria-hidden="true"><small>Ghanaian kitchen · Tables for two or twenty</small><strong>Ghana on a plate, with a table waiting.</strong><span class="btnish">Book a table</span><div class="tiles"><i></i><i></i><i></i></div></div>
         <div class="caption">Restaurant demo <em>Nkyene Kitchen →</em></div>
       </a>
     </div>
@@ -669,12 +638,12 @@ em{font-style:normal}</style>
       <details><summary>I already have Instagram.<svg width="18" height="18"><use href="#plus"/></svg></summary><p>Instagram is where people discover you. Your page is where they decide and book. It also puts you on Google, where people search when they're ready to buy, and your Instagram links straight to it.</p></details>
       <details><summary>Most of my customers come by word of mouth.<svg width="18" height="18"><use href="#plus"/></svg></summary><p>Keep them coming. Word of mouth gives people your name, and many will look you up before they get in touch. This makes sure what they find looks as good as what they heard, with one button to book you.</p></details>
       <details><summary>Can every business get on Google Maps?<svg width="18" height="18"><use href="#plus"/></svg></summary><p>Most businesses that serve customers in person can. Google doesn't allow listings for a few, such as a single rental apartment with no staffed office, and we won't risk your listing. If yours can't have one, your page shows your area on a map and your name still shows up in Google search.</p></details>
-      <details><summary>Do you work with businesses outside Ghana?<svg width="18" height="18"><use href="#plus"/></svg></summary><p>Yes. We build from Accra for clients at home and abroad, including a shipping company in Southampton. Prices are fixed in cedis, pounds and dollars, and everything runs over WhatsApp, so distance doesn't slow anything down.</p></details>
+      <details><summary>Do you work with businesses where I am?<svg width="18" height="18"><use href="#plus"/></svg></summary><p>Yes. We work with businesses in Ghana and the UK, including a shipping company in Southampton, and everything runs over WhatsApp, so distance doesn't slow anything down. Prices are fixed in cedis, pounds and dollars, and this page shows yours.</p></details>
       <details><summary>How long does it take?<svg width="18" height="18"><use href="#plus"/></svg></summary><p>Get Found is live in 5 days and Get Chosen in 7 days. The clock starts when we have your photos, prices, logo and account access, and if you pause us, the clock pauses too.</p></details>
       <details><summary>What do I need to send you?<svg width="18" height="18"><use href="#plus"/></svg></summary><p>Photos, prices and your logo, plus access to the accounts we're setting up for you. We handle the rest.</p></details>
       <details><summary>How do I pay?<svg width="18" height="18"><use href="#plus"/></svg></summary><p>Half to start and half once you approve the work, for every client. Message us on WhatsApp and we'll send payment details for your country.</p></details>
       <details><summary>What if you miss the 7 days?<svg width="18" height="18"><use href="#plus"/></svg></summary><p>Half your fee comes back to you. No fine print beyond this. The clock starts when we have your photos, prices, logo and account access, and one revision round is included.</p></details>
-      <details><summary>Who else have you done this for?<svg width="18" height="18"><use href="#plus"/></svg></summary><p>You'd be one of our founding clients, which is why the price is lower and the guarantee is there. Our past work for brands in Accra and the UK is on the <a href="https://fitaacreative.com/#work">main site</a>.</p></details>
+      <details><summary>Who else have you done this for?<svg width="18" height="18"><use href="#plus"/></svg></summary><p>You'd be one of our founding clients, which is why the price is lower and the guarantee is there. Our past work for brands in Ghana and the UK is on the <a href="https://fitaacreative.com/#work">main site</a>.</p></details>
     </div>
   </div>
 </section>
@@ -692,14 +661,18 @@ em{font-style:normal}</style>
 <footer>
   <div class="container">
     <nav><a href="https://fitaacreative.com/privacy">Privacy Policy</a><a href="https://fitaacreative.com/terms">Terms of Service</a></nav>
-    <span>© <span id="year">2026</span> Fitaa Creative · Accra, Ghana</span>
+    <span>© <span id="year">2026</span> Fitaa Creative · Ghana &amp; UK</span>
   </div>
 </footer>
 
 <script>
 /* ── SETTINGS: edit these for a copy of this page ── */
 var SETTINGS = {
-  whatsapp: '233242805256',   // international format, digits only
+  whatsapp: '233242805256',   // international format, digits only (the build swaps in the UK line for UK visitors)
+  // Prices: the currency this copy shows, and every currency's text from src/config/pricing.json.
+  // The build fills both in; left as null the switch keeps the prices typed in the page.
+  currency: 'USD',
+  prices: null,
   message: "Hi Fitaa, I'd like a Fully Booked spot. My business is ",
   // Hero signature: example messages, one per kind of business. Illustrations, not real customers.
   pings: [
@@ -728,6 +701,34 @@ document.querySelectorAll('[data-wa]').forEach(function (a) {
   var v = a.getAttribute('data-wa');
   a.href = link(v === 'main' ? SETTINGS.message : v);
 });
+
+/* Currency switch: changes every price in place and remembers the choice (cookie fitaa_cur),
+   which middleware.ts reads so the next page arrives in that currency with no flash. */
+(function () {
+  var btns = document.querySelectorAll('[data-currency]');
+  function show(cur) {
+    var p = SETTINGS.prices && SETTINGS.prices[cur];
+    if (!p) return false;
+    SETTINGS.currency = cur;
+    document.documentElement.setAttribute('data-cur', cur);
+    document.querySelectorAll('[data-price]').forEach(function (el) {
+      var v = p[el.getAttribute('data-price')];
+      if (v != null) el.textContent = typeof v === 'string' ? v : v.text;
+    });
+    btns.forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-currency') === cur); });
+    return true;
+  }
+  btns.forEach(function (b) {
+    b.addEventListener('click', function () {
+      var cur = b.getAttribute('data-currency');
+      if (!show(cur)) return;
+      document.cookie = 'fitaa_cur=' + cur.toLowerCase() + '; Max-Age=31536000; Path=/; SameSite=Lax' + (location.protocol === 'https:' ? '; Secure' : '');
+    });
+  });
+  /* Hosts without middleware.ts (a local preview, an exported copy) still honour a saved choice. */
+  var saved = (document.cookie.match(/(?:^|;\s*)fitaa_cur=([a-z]{3})/i) || [])[1];
+  if (saved && saved.toUpperCase() !== SETTINGS.currency) show(saved.toUpperCase());
+})();
 
 /* Demo switch: shows one demo card at a time. ?demo=cars (or studios, hosts) opens on that one. */
 var tabs = document.querySelectorAll('[data-niche]');

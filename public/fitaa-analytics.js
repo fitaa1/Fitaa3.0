@@ -14,8 +14,10 @@
     call_click       phone links        email_click   email links
     demo_open        a demo card on the Fully Booked page
     niche_switch     the demo switch on the Fully Booked page (hosts, studios, cars, clinics, restaurants)
+    currency_switch  the "Prices in" switch on the home page and Fully Booked (label: GHS, GBP or USD)
     outbound_click   any other link that leaves the site
-  Each event carries: label (button text), page, and niche (the demo in view: hosts, studios, cars, clinics or restaurants) when known.
+  Each event carries: label (button text), page, niche (the demo in view: hosts, studios, cars, clinics or restaurants) when known,
+  and currency (the prices on screen: GHS, GBP or USD, which follows the visitor's country unless they switched).
 
   Copying a page to another site? Copy this file too, or remove its <script> tag.
 */
@@ -60,6 +62,8 @@
     params = params || {};
     params.page = params.page || location.pathname;
     if (window.FITAA_NICHE && !params.niche) params.niche = window.FITAA_NICHE;
+    var cur = document.documentElement.getAttribute('data-cur');
+    if (cur && !params.currency) params.currency = cur;
     if (gaOn) window.gtag('event', name, params);
     if (!live && window.console) console.debug('[fitaa-analytics, not live]', name, params);
   };
@@ -70,8 +74,11 @@
   }
 
   document.addEventListener('click', function (e) {
-    var t = e.target.closest ? e.target.closest('a,[data-niche]') : null;
+    var t = e.target.closest ? e.target.closest('a,[data-niche],[data-currency]') : null;
     if (!t) return;
+    if (t.hasAttribute('data-currency')) {
+      return window.fitaaTrack('currency_switch', { label: t.getAttribute('data-currency'), currency: t.getAttribute('data-currency') });
+    }
     if (t.hasAttribute('data-niche') && !t.href) {
       return window.fitaaTrack('niche_switch', { label: t.getAttribute('data-niche'), niche: t.getAttribute('data-niche') });
     }

@@ -1,0 +1,44 @@
+{
+  "_read_me": "Every Fitaa Creative price, in each currency the site shows. Ghana sees GHS, the United Kingdom sees GBP, every other country sees USD (middleware.ts decides, a visitor can switch). Each currency's text is written out in full so nothing is worked out in code: change a price here and the home page, Fully Booked, the structured data and llms.txt all follow at the next build. 'amount' is the plain number for search engines and must match the text beside it (the build checks). GBP and USD are Nigel's fixed prices, confirmed 4 and 5 Nov 2026 (straight conversion of GHS at the Wise mid-market rate on 4 Nov 2026, GHS 1 = GBP 0.0644 = USD 0.0851, rounded); review them if the cedi moves a lot. There is no GBP or USD price per extra unit yet, so those currencies leave it out.",
+  "default": "USD",
+  "order": ["GHS", "GBP", "USD"],
+  "currencies": {
+    "GHS": {
+      "label": "GHS",
+      "symbol": "GHS ",
+      "name": "Ghana cedis",
+      "getFound": { "amount": 1500, "text": "GHS 1,500" },
+      "getChosen": { "amount": 3500, "text": "GHS 3,500" },
+      "stayBooked": { "amount": 1200, "text": "GHS 1,200" },
+      "founding": { "amount": 2500, "text": "GHS 2,500" },
+      "upkeep": { "amount": 350, "text": "GHS 350" },
+      "extraUnit": { "amount": 300, "text": "GHS 300" },
+      "foundingNote": "Founding price GHS 2,500 for the first 3 clients, for up to 3 units, plus GHS 300 for each extra unit",
+      "upkeepNote": "Upkeep only, GHS 350 a month for hosting and small updates, for Get Chosen clients who don't want ads."
+    },
+    "GBP": {
+      "label": "GBP",
+      "symbol": "£",
+      "name": "pounds",
+      "getFound": { "amount": 95, "text": "£95" },
+      "getChosen": { "amount": 225, "text": "£225" },
+      "stayBooked": { "amount": 75, "text": "£75" },
+      "founding": { "amount": 160, "text": "£160" },
+      "upkeep": { "amount": 25, "text": "£25" },
+      "foundingNote": "Founding price £160 for the first 3 clients, for up to 3 units",
+      "upkeepNote": "Upkeep only, £25 a month for hosting and small updates, for Get Chosen clients who don't want ads."
+    },
+    "USD": {
+      "label": "USD",
+      "symbol": "$",
+      "name": "US dollars",
+      "getFound": { "amount": 130, "text": "$130" },
+      "getChosen": { "amount": 300, "text": "$300" },
+      "stayBooked": { "amount": 100, "text": "$100" },
+      "founding": { "amount": 215, "text": "$215" },
+      "upkeep": { "amount": 30, "text": "$30" },
+      "foundingNote": "Founding price $215 for the first 3 clients, for up to 3 units",
+      "upkeepNote": "Upkeep only, $30 a month for hosting and small updates, for Get Chosen clients who don't want ads."
+    }
+  }
+}

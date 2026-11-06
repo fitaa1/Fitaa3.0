@@ -2,6 +2,7 @@ import { useState, useEffect, lazy, Suspense } from "react";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import { Reveal } from "@/lib/reveal";
+import { formatPhone, useRegion } from "@/lib/region";
 
 /* The enquiry form (and its validation libraries) loads separately to keep the first load small. */
 const loadForm = () => import("./ContactForm");
@@ -36,9 +37,9 @@ function ContactCard() {
     else setTimeout(() => void loadForm(), 2500);
   }, []);
 
-  const waNumber = siteConfig.contact.phone.replace(/\D/g, "").replace(/^0/, "233");
-  const waMessage = encodeURIComponent("Hi Fitaa Creative! I'd like to discuss a project with you.");
-  const waLink = `https://wa.me/${waNumber}?text=${waMessage}`;
+  /* WhatsApp goes to the UK line for visitors in the UK, the Ghana line for everyone else. */
+  const { waNumber, waLink: wa } = useRegion();
+  const waLink = wa("Hi Fitaa Creative! I'd like to discuss a project with you.");
 
   return (
     <div className="bg-card border border-border/45 relative overflow-hidden">
@@ -138,7 +139,7 @@ function ContactCard() {
                 {copy.whatsappBody}
               </p>
               <p className="text-gold font-sans font-medium tabular-nums text-[1.0625rem] mb-10 tracking-wide">
-                {siteConfig.contact.phone}
+                {formatPhone(waNumber)}
               </p>
 
               {/* Gold CTA */}

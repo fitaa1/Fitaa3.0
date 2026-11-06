@@ -389,6 +389,46 @@ html { scroll-behavior: smooth; }
   .service-card:hover, .service-card:hover .service-icon { transform: none; }
 }
 
+/* ─── Currency switch (src/lib/region.tsx) ────────────────────────────────
+ * Prices show in the visitor's own currency, picked by country before the page
+ * leaves Vercel. This lets anyone the guess got wrong change it. Same shape as
+ * the demo switch on /fully-booked: square, quiet, the chosen one filled.     */
+.currency-switch {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px;
+  border: 1px solid hsl(var(--border) / 0.6);
+  background: hsl(var(--card) / 0.6);
+}
+.currency-switch-label {
+  padding: 0 0.75rem 0 0.6rem;
+  font-family: var(--app-font-sans);
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: hsl(var(--muted-foreground));
+}
+.currency-switch button {
+  min-height: 44px;
+  min-width: 52px;
+  padding: 0 0.85rem;
+  font-family: var(--app-font-sans);
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  color: hsl(var(--muted-foreground));
+  background: transparent;
+  cursor: pointer;
+  transition: color 0.3s, background-color 0.35s;
+}
+.currency-switch button:hover { color: hsl(var(--foreground)); }
+.currency-switch button[aria-pressed="true"] {
+  background: hsl(192 95% 28%);   /* the brand cyan, deep enough for small text: 5.4:1 */
+  color: hsl(var(--primary-foreground));
+}
+.dark .currency-switch button[aria-pressed="true"] { background: hsl(var(--ruby)); color: hsl(var(--charcoal)); }
+.currency-switch button:focus-visible { outline: 2px solid hsl(var(--ruby)); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { .currency-switch button { transition: none; } }
+
 /* ─── Case study tiles: soft bottom shadow ────────────────────────────────
  * Fixed dark tint (not the page colour) so tiles look the same in light and
  * dark mode. Strength: 38% at the bottom edge, fading out by 45% height.   */

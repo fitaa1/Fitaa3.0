@@ -30,7 +30,7 @@ A speed gain that makes the site plainer fails the third test; find another way.
 
 ## Search and AI answers
 
-- Title, description, canonical, share image (og and twitter) on every page, lead previews included. The share card is a 1200 × 630 JPEG (WhatsApp does not reliably show WebP) in the page's own fonts and story, never an old niche or old fonts. When a card changes, give it a new file name (e.g. `og-2026-11.jpg`) so WhatsApp and others fetch it fresh.
+- Title, description, canonical, share image (og and twitter) on every page, lead previews included. The share card is a 1200 × 630 JPEG, rebuilt with `scripts/share-cards.mjs` (WhatsApp does not reliably show WebP) in the page's own fonts and story, never an old niche or old fonts. When a card changes, give it a new file name (e.g. `og-2026-11.jpg`) so WhatsApp and others fetch it fresh.
 - `sitemap.xml` with real dates; `robots.txt` that lets everyone in, AI crawlers included.
   Demos and lead previews carry `noindex` instead.
 - Structured data for the business type (ProfessionalService, LodgingBusiness, BeautySalon and
@@ -68,8 +68,19 @@ A speed gain that makes the site plainer fails the third test; find another way.
   the stats and the calls to action use the same steps, so the page reads as one journey.
 - **Write for every reader.** Offer pages speak to any business; niche detail lives in the demos,
   behind one switch that takes a new demo with a button, a card and a line in SETTINGS.
-- **Prices abroad:** GHS first, with fixed GBP and USD beside it. The conversion rate and its date sit in
-  a comment next to the prices (`src/config/site.ts`), so the figures are checked when the cedi moves.
+- **Prices by country:** one price, in the visitor's own currency, chosen before the page leaves the
+  host so it is right in the first paint (Ghana GHS, the United Kingdom GBP, everyone else USD). The
+  build writes one copy of each page per currency and WhatsApp line, and Vercel middleware
+  (`middleware.ts`) picks the copy from the `x-vercel-ip-country` header. Each copy has its own address
+  on the CDN, so a cached page can never show one country's prices to another. A small "Prices in"
+  switch fixes a wrong guess and is remembered (cookie `fitaa_cur`). Search engines and AI crawlers
+  always get the USD copy, and every copy's structured data names its own currency. All figures live
+  in one file (`src/config/pricing.json`), each written out in full, with the conversion rate and its
+  date beside them, so they are checked when the cedi moves. Never work a price out in code.
+- **WhatsApp by country:** a business with numbers in more than one country sends each visitor to the
+  nearest one, decided the same way as prices. Numbers that are not public yet live in the host's
+  environment variables, never in the repo, and the page falls back to the main number when one is
+  missing or malformed.
 - **Favicon:** rounded corners (about a 22% radius) with the outside transparent, never a hard square.
 
 | Site | Headings | Text | Signature |

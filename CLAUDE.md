@@ -1,6 +1,6 @@
 # Fitaa Creative (fitaacreative.com)
 
-The agency site for Fitaa Creative, Accra. React + Vite single-page site, hosted on Vercel (project name `fitaadigital`, which serves fitaacreative.com; www and fitaacreative.vercel.app 301 to it). Standalone pages live as plain HTML in `public/`: `/fully-booked`, `/demo/ridge-house`, `/demo/studio`, `/demo/car-rental`, `/demo/clinic`, `/demo/restaurant`. Privacy, terms and the 404 are written at build time by `scripts/static-pages.mjs`.
+The agency site for Fitaa Creative, based in Accra, working with businesses in Ghana, the UK and beyond. React + Vite single-page site, hosted on Vercel (project name `fitaadigital`, which serves fitaacreative.com; www and fitaacreative.vercel.app 301 to it). Standalone pages live as plain HTML in `public/`: `/fully-booked`, `/demo/ridge-house`, `/demo/studio`, `/demo/car-rental`, `/demo/clinic`, `/demo/restaurant`. Privacy, terms and the 404 are written at build time by `scripts/static-pages.mjs`.
 
 This site is the template for every site Fitaa builds. `SITE_STANDARD.md` is the standard they all meet: when this site improves, update it in the same pull request.
 
@@ -8,7 +8,7 @@ Git workflow: branch + pull request for every change, never push to `main`. Nige
 
 ## Run, check, deploy, roll back
 
-- `npm ci`, then `npm run typecheck` and `npm run build` before every push. There are no unit tests yet.
+- `npm ci`, then `npm run typecheck`, `npm run build` and `npm test` before every push. `npm test` fakes Vercel's country header against `middleware.ts` and checks every built copy's prices, WhatsApp number and structured data (run it after the build).
 - Look at changed pages at 390, 820 and 1440 px (Playwright or a headless browser). `vite preview` does not apply `vercel.json` rewrites, so open `/fully-booked/index.html` locally, not `/fully-booked`.
 - Deploy: merging to `main` deploys to production on Vercel. Each pull request gets a Vercel preview.
 - Roll back in under two minutes: Vercel, project `fitaadigital`, Deployments, pick the last good production deploy, menu, **Instant Rollback** (or Promote to Production).
@@ -16,7 +16,10 @@ Git workflow: branch + pull request for every change, never push to `main`. Nige
 ## Where things live
 
 - Every word, number, link and contact detail: `src/config/site.ts`. Do not scatter contact details elsewhere.
-- Analytics: `public/fitaa-analytics.js` (GA4 `G-D62TL0T2VD`, events whatsapp_click, booking_request, call_click, email_click, demo_open, niche_switch, outbound_click, enquiry_submit). It only switches on for the live hosts listed in the file.
+- Prices: `src/config/pricing.json` only, once per currency (GHS, GBP, USD), each written out in full. The build writes them into the home page, Fully Booked (every `data-price` element), the structured data and `llms.txt`.
+- Prices and WhatsApp by country: `middleware.ts` reads Vercel's `x-vercel-ip-country` and serves one of six built copies of each page (`dist/_r/<currency>-<line>/`, written by `scripts/prerender.mjs` and `scripts/regional-pages.mjs`). Ghana gets GHS, the UK gets GBP and the UK WhatsApp number, everyone else USD; crawlers always get USD; the "Prices in" switch sets cookie `fitaa_cur`. The UK number is the Vercel variable `UK_WHATSAPP` (Production only), read at build time; without it UK visitors get the Ghana number. A new page with prices or WhatsApp needs a line in `PAGES` in `middleware.ts` and in `scripts/regional-pages.mjs`.
+- Share cards: `node scripts/share-cards.mjs` after a build rebuilds every 1200 × 630 card and renames it (change `CARD` in the script).
+- Analytics: `public/fitaa-analytics.js` (GA4 `G-D62TL0T2VD`, events whatsapp_click, booking_request, call_click, email_click, demo_open, niche_switch, currency_switch, outbound_click, enquiry_submit; each carries the currency on screen). It only switches on for the live hosts listed in the file.
 - Contact form: Formspree (`formspreeId` in `site.ts`). Messages arrive in Gmail from formspree.io, usually in the Updates tab.
 - Headers and redirects: `vercel.json`.
 

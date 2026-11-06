@@ -3,13 +3,11 @@ import { usePresence, useInViewOnce } from "@/lib/reveal";
 import { Plus, Check, ArrowRight } from "lucide-react";
 import { SectionLabel } from "./SectionLabel";
 import { siteConfig, type Service } from "@/config/site";
-
-/* WhatsApp number in international format, built from the one phone number in site.ts. */
-const waNumber = siteConfig.contact.phone.replace(/\D/g, "").replace(/^0/, "233");
-const waLink = (text: string) => `https://wa.me/${waNumber}?text=${encodeURIComponent(text)}`;
+import { CurrencySwitch, useRegion } from "@/lib/region";
 
 function ServiceCard({ service, index, delay }: { service: Service; index: number; delay: number }) {
   const [open, setOpen] = useState(false);
+  const { price, note, waLink } = useRegion();
   const ref = useRef<HTMLLIElement>(null);
   const isInView = useInViewOnce(ref, "-40px");
   const { mounted, visible } = usePresence(open, 300);
@@ -82,15 +80,14 @@ function ServiceCard({ service, index, delay }: { service: Service; index: numbe
               {service.price ? (
                 <>
                   <p className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                    <span className="font-display font-semibold text-[1.9rem] leading-none text-foreground tabular-nums">GHS {service.price.ghs}</span>
-                    <span className="text-[0.95rem] font-sans text-foreground/80 tabular-nums">£{service.price.gbp} <span className="text-muted-foreground" aria-hidden="true">/</span><span className="sr-only">or</span> ${service.price.usd}</span>
+                    <span className="font-display font-semibold text-[1.9rem] leading-none text-foreground tabular-nums">{price(service.price.key)}</span>
                     <span className="text-[0.8rem] font-sans text-muted-foreground">{service.price.unit}</span>
                   </p>
                   {service.timing && (
                     <p className="mt-2 text-[0.62rem] font-sans uppercase tracking-[0.22em] text-ruby">{service.timing}</p>
                   )}
                   {service.priceNote && (
-                    <p className="mt-3 text-[0.82rem] font-sans leading-relaxed text-gold-text border border-gold/30 bg-gold/[0.06] px-3 py-2">{service.priceNote}</p>
+                    <p className="mt-3 text-[0.82rem] font-sans leading-relaxed text-gold-text border border-gold/30 bg-gold/[0.06] px-3 py-2">{note(service.priceNote)}</p>
                   )}
                 </>
               ) : (
@@ -148,9 +145,10 @@ export function Services() {
           heading={siteConfig.servicesSection.heading}
           className="mb-5 md:max-w-[38rem]"
         />
-        <p className="mb-[var(--sp-6)] max-w-[36rem] text-muted-foreground font-sans font-light text-[1rem] leading-[1.75]">
+        <p className="mb-5 max-w-[36rem] text-muted-foreground font-sans font-light text-[1rem] leading-[1.75]">
           {siteConfig.servicesSection.lede}
         </p>
+        <CurrencySwitch className="mb-[var(--sp-6)]" />
 
         {/* The three steps share one thread: it runs behind the cards and shows in the gaps,
             so Found, Chosen and Booked read as one journey. Design sits below, alongside all three. */}
