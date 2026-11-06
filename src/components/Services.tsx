@@ -3,7 +3,7 @@ import { usePresence, useInViewOnce } from "@/lib/reveal";
 import { Plus, Check, ArrowRight } from "lucide-react";
 import { SectionLabel } from "./SectionLabel";
 import { siteConfig, type Service } from "@/config/site";
-import { CurrencySwitch, useRegion } from "@/lib/region";
+import { useRegion } from "@/lib/region";
 
 function ServiceCard({ service, index, delay }: { service: Service; index: number; delay: number }) {
   const [open, setOpen] = useState(false);
@@ -145,10 +145,9 @@ export function Services() {
           heading={siteConfig.servicesSection.heading}
           className="mb-5 md:max-w-[38rem]"
         />
-        <p className="mb-5 max-w-[36rem] text-muted-foreground font-sans font-light text-[1rem] leading-[1.75]">
+        <p className="mb-[var(--sp-6)] max-w-[36rem] text-muted-foreground font-sans font-light text-[1rem] leading-[1.75]">
           {siteConfig.servicesSection.lede}
         </p>
-        <CurrencySwitch className="mb-[var(--sp-6)]" />
 
         {/* The three steps share one thread: it runs behind the cards and shows in the gaps,
             so Found, Chosen and Booked read as one journey. Design sits below, alongside all three. */}

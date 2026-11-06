@@ -72,8 +72,11 @@ A speed gain that makes the site plainer fails the third test; find another way.
   host so it is right in the first paint (Ghana GHS, the United Kingdom GBP, everyone else USD). The
   build writes one copy of each page per currency and WhatsApp line, and Vercel middleware
   (`middleware.ts`) picks the copy from the `x-vercel-ip-country` header. Each copy has its own address
-  on the CDN, so a cached page can never show one country's prices to another. A small "Prices in"
-  switch fixes a wrong guess and is remembered (cookie `fitaa_cur`). Search engines and AI crawlers
+  on the CDN, so a cached page can never show one country's prices to another. The currency is
+  automatic. The only control is a quiet fail-safe for a wrong guess: small dimmed flags in the
+  footer (Ghana, UK, US), drawn in SVG because Windows shows flag emoji as letters, remembered in
+  cookie `fitaa_cur`. Never put a currency switch above or beside the prices: it makes an automatic
+  choice look like a task for the visitor (Nigel, 6 Nov 2026). Search engines and AI crawlers
   always get the USD copy, and every copy's structured data names its own currency. All figures live
   in one file (`src/config/pricing.json`), each written out in full, with the conversion rate and its
   date beside them, so they are checked when the cedi moves. Never work a price out in code.

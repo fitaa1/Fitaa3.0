@@ -389,45 +389,33 @@ html { scroll-behavior: smooth; }
   .service-card:hover, .service-card:hover .service-icon { transform: none; }
 }
 
-/* ─── Currency switch (src/lib/region.tsx) ────────────────────────────────
- * Prices show in the visitor's own currency, picked by country before the page
- * leaves Vercel. This lets anyone the guess got wrong change it. Same shape as
- * the demo switch on /fully-booked: square, quiet, the chosen one filled.     */
-.currency-switch {
+/* ─── Currency flags (src/lib/region.tsx) ────────────────────────────────
+ * Prices arrive in the visitor's currency automatically. These three flags in
+ * the footer are only the fail-safe for a wrong guess, so they stay quiet:
+ * small, dimmed, full colour only for the one on screen (Nigel, 6 Nov 2026). */
+.currency-flags { display: inline-flex; align-items: center; gap: 2px; }
+.currency-flags button {
   display: inline-flex;
   align-items: center;
-  padding: 3px;
-  border: 1px solid hsl(var(--border) / 0.6);
-  background: hsl(var(--card) / 0.6);
-}
-.currency-switch-label {
-  padding: 0 0.75rem 0 0.6rem;
-  font-family: var(--app-font-sans);
-  font-size: 0.62rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: hsl(var(--muted-foreground));
-}
-.currency-switch button {
-  min-height: 44px;
-  min-width: 52px;
-  padding: 0 0.85rem;
-  font-family: var(--app-font-sans);
-  font-size: 0.68rem;
-  letter-spacing: 0.16em;
-  color: hsl(var(--muted-foreground));
+  justify-content: center;
+  width: 34px;
+  height: 32px;
   background: transparent;
+  border-radius: 6px;
   cursor: pointer;
-  transition: color 0.3s, background-color 0.35s;
+  opacity: 0.45;
+  filter: saturate(0.6);
+  transition: opacity 0.25s, filter 0.25s;
 }
-.currency-switch button:hover { color: hsl(var(--foreground)); }
-.currency-switch button[aria-pressed="true"] {
-  background: hsl(192 95% 28%);   /* the brand cyan, deep enough for small text: 5.4:1 */
-  color: hsl(var(--primary-foreground));
+.currency-flags svg {
+  display: block;
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px hsl(var(--foreground) / 0.12);
 }
-.dark .currency-switch button[aria-pressed="true"] { background: hsl(var(--ruby)); color: hsl(var(--charcoal)); }
-.currency-switch button:focus-visible { outline: 2px solid hsl(var(--ruby)); outline-offset: 2px; }
-@media (prefers-reduced-motion: reduce) { .currency-switch button { transition: none; } }
+.currency-flags button:hover { opacity: 0.85; filter: none; }
+.currency-flags button[aria-pressed="true"] { opacity: 1; filter: none; }
+.currency-flags button:focus-visible { outline: 2px solid hsl(var(--ruby)); outline-offset: 1px; opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .currency-flags button { transition: none; } }
 
 /* ─── Case study tiles: soft bottom shadow ────────────────────────────────
  * Fixed dark tint (not the page colour) so tiles look the same in light and
