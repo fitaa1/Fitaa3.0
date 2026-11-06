@@ -12,12 +12,12 @@
  * ═══════════════════════════════════════════════════════════════════════════ */
 
 import { Search, BadgeCheck, CalendarCheck, Palette, type LucideIcon } from "lucide-react";
+import type { NoteKey, PriceKey } from "@/lib/region";
 
-/** A price in Ghana cedis with fixed GBP and USD figures for clients abroad.
- *  GBP and USD are straight conversions of the GHS price at the Wise mid-market
- *  rate on 4 Nov 2026 (GHS 1 = GBP 0.0644 = USD 0.0851), rounded to the nearest 5.
- *  Nigel chose straight conversion. Review them if the cedi moves a lot. */
-export type Price = { ghs: string; gbp: string; usd: string; unit: string };
+/** A price on a service card. The figures themselves live in src/config/pricing.json, once per
+ *  currency (GHS for Ghana, GBP for the UK, USD for everyone else), so the visitor sees one
+ *  price in their own currency. `key` names the price there; `unit` is shown beside it. */
+export type Price = { key: PriceKey; unit: string };
 
 export type Service = {
   /** "Step 1" etc. on the card; leave out for services outside the journey. */
@@ -28,8 +28,8 @@ export type Service = {
   deliverables: string[];
   /** Leave out to show "Quoted per project". */
   price?: Price;
-  /** A second, smaller price line (founding offer, upkeep). */
-  priceNote?: string;
+  /** A second, smaller price line (founding offer, upkeep), named by its key in pricing.json. */
+  priceNote?: NoteKey;
   timing?: string;
   /** The message WhatsApp opens with when a visitor taps "Start this project". */
   whatsapp: string;
@@ -41,7 +41,7 @@ export const siteConfig = {
   tagline: "Pure. Strategic. Impactful.",
   /** Shown under the hero headline. */
   description:
-    "We make sure the customers already looking for you find you, trust you and book you. Google listings, WhatsApp booking, premium websites, Meta ads and design, built in Accra for businesses at home and abroad.",
+    "We make sure the customers already looking for you find you, trust you and book you. Google listings, WhatsApp booking, premium websites, Meta ads and design, for businesses in Ghana, the UK and beyond.",
   /** Live site address, no trailing slash. Used for the legal pages' canonical links. */
   url: "https://fitaacreative.com",
 
@@ -62,7 +62,7 @@ export const siteConfig = {
   /* ── 1. Hero (first screen) ────────────────────────────────────────────── */
   hero: {
     /** Small pill above the headline. The prefix only shows on wider screens. */
-    eyebrow: "Creative Agency · Accra, Ghana",
+    eyebrow: "Creative Agency · Ghana & UK",
     eyebrowWidePrefix: "Premium ",
     /** Two lines: the second line is coloured with the accent colour. */
     headline: ["Turn Eyeballs", "Into Revenue."],
@@ -96,7 +96,7 @@ export const siteConfig = {
         "One click-to-chat link for your bio, flyers and signage",
         "A print-ready QR card for your counter, desk or car",
       ],
-      price: { ghs: "1,500", gbp: "95", usd: "130", unit: "one-off" },
+      price: { key: "getFound", unit: "one-off" },
       timing: "Live in 5 days",
       whatsapp: "Hi Fitaa, I'm interested in Get Found. My business is ",
     },
@@ -114,8 +114,8 @@ export const siteConfig = {
         "Shaped around how your customers book, whether by dates, slots, vehicles or appointments",
         "One round of revisions before launch",
       ],
-      price: { ghs: "3,500", gbp: "225", usd: "300", unit: "one-off" },
-      priceNote: "Founding price GHS 2,500 / £160 / $215 for the first 3 clients",
+      price: { key: "getChosen", unit: "one-off" },
+      priceNote: "foundingNote",
       timing: "Live in 7 days",
       whatsapp: "Hi Fitaa, I'm interested in Get Chosen. My business is ",
     },
@@ -131,8 +131,8 @@ export const siteConfig = {
         "A one-page monthly report on enquiries, bookings, reviews and ad results",
         "Ad budget is separate and agreed on the call",
       ],
-      price: { ghs: "1,200", gbp: "75", usd: "100", unit: "a month, 3-month minimum" },
-      priceNote: "Upkeep only GHS 350 / £25 / $30 a month for hosting and small updates, for Get Chosen clients who don't want ads",
+      price: { key: "stayBooked", unit: "a month, 3-month minimum" },
+      priceNote: "upkeepNote",
       whatsapp: "Hi Fitaa, I'm interested in Stay Booked. My business is ",
     },
     {

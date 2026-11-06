@@ -1,6 +1,7 @@
 import { lazy, Suspense } from "react";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import Home from "@/pages/Home";
+import { RegionProvider } from "@/lib/region";
 
 const Legal = lazy(() => import("@/pages/Legal"));
 const NotFound = lazy(() => import("@/pages/NotFound"));
@@ -14,17 +15,19 @@ const isHome = path === "";
 export default function App() {
   return (
     <ThemeProvider>
-      {legalPage ? (
-        <Suspense fallback={<div className="min-h-screen bg-background" />}>
-          <Legal page={legalPage} />
-        </Suspense>
-      ) : isHome ? (
-        <Home />
-      ) : (
-        <Suspense fallback={<div className="min-h-screen bg-background" />}>
-          <NotFound />
-        </Suspense>
-      )}
+      <RegionProvider>
+        {legalPage ? (
+          <Suspense fallback={<div className="min-h-screen bg-background" />}>
+            <Legal page={legalPage} />
+          </Suspense>
+        ) : isHome ? (
+          <Home />
+        ) : (
+          <Suspense fallback={<div className="min-h-screen bg-background" />}>
+            <NotFound />
+          </Suspense>
+        )}
+      </RegionProvider>
     </ThemeProvider>
   );
 }

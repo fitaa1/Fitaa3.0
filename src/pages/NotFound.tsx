@@ -33,7 +33,7 @@ export default function NotFound() {
             This page isn&rsquo;t here.
           </h1>
           <p className="text-muted-foreground font-sans leading-[1.75] mb-10 max-w-xl">
-            The link may be old or mistyped. Everything Fitaa Creative does for Accra brands is one tap away.
+            The link may be old or mistyped. Everything Fitaa Creative does is one tap away.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
             <a

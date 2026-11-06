@@ -10,7 +10,7 @@
   opening hours), replace the [bracketed] text and the photo placeholders, and remove the demo bar.
 -->
 <title>Maison Adwoa (demo) | Fully Booked by Fitaa</title>
-<meta name="description" content="Demo booking page for a fictional beauty studio in East Legon, Accra. Built by Fitaa Creative.">
+<meta name="description" content="Demo booking page for a fictional beauty studio. Built by Fitaa Creative.">
 <meta name="robots" content="noindex, nofollow">
 <!-- Link preview (WhatsApp, iMessage, social). The page itself stays out of search results. -->
 <meta property="og:type" content="website">
@@ -18,14 +18,14 @@
 <meta property="og:title" content="Maison Adwoa (demo)">
 <meta property="og:description" content="Leave looking like the best day of your year. A demo booking page by Fitaa Creative: see the menu and book on WhatsApp.">
 <meta property="og:url" content="https://fitaacreative.com/demo/studio">
-<meta property="og:image" content="https://fitaacreative.com/demo/studio/og-2026-11.jpg">
+<meta property="og:image" content="https://fitaacreative.com/demo/studio/og-2026-11-06.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Maison Adwoa demo: Leave looking like the best day of your year.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Maison Adwoa (demo)">
 <meta name="twitter:description" content="Leave looking like the best day of your year. A demo booking page by Fitaa Creative: see the menu and book on WhatsApp.">
-<meta name="twitter:image" content="https://fitaacreative.com/demo/studio/og-2026-11.jpg">
+<meta name="twitter:image" content="https://fitaacreative.com/demo/studio/og-2026-11-06.jpg">
 <meta name="theme-color" content="#FBF6F2">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -178,7 +178,7 @@ header.top{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--g
 <main>
 <section class="wrap hero">
   <div>
-    <p class="eyebrow">Beauty studio · East Legon, Accra</p>
+    <p class="eyebrow">Beauty studio · By appointment</p>
     <h1>Leave looking like the <em>best day</em> of your year.</h1>
     <p class="lead">Braids, silk presses, nails and lashes by stylists who take their time. See the menu and prices, pick your slot, and confirm on WhatsApp in under a minute.</p>
     <div class="actions">
@@ -263,7 +263,7 @@ header.top{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--g
   <div class="wrap grid">
     <div>
       <p class="eyebrow">Visit</p>
-      <h2>East Legon, Accra</h2>
+      <h2>[Neighbourhood, city]</h2>
       <p>[Street name, landmark]. Parking on site. Exact directions sent with your booking.</p>
       <dl class="hours" id="hours"></dl>
     </div>
@@ -279,7 +279,7 @@ header.top{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--g
 
 <footer class="foot">
   <div class="wrap">
-    <div>© Maison Adwoa (demo). East Legon, Accra.</div>
+    <div>© Maison Adwoa (demo).</div>
     <div>Page by <a href="https://fitaacreative.com/fully-booked?studio">Fitaa Creative</a>. Want one for your studio? Live in 7 days or half your fee back.</div>
   </div>
 </footer>
@@ -291,6 +291,7 @@ header.top{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--g
 var SETTINGS = {
   studio: 'Maison Adwoa',
   whatsapp: '233242805256',                       // the studio's number, digits only
+  sym: '$',                                       // price sign shown before [price] (the build sets it per visitor's currency)
   prefix: '[Demo from the Fully Booked page] ',   // remove for a real client: ''
   // Opening hours: day number (0 = Sunday) → [open, close] in 24h, or null when closed
   hours: { 0: null, 1: [9, 19], 2: [9, 19], 3: [9, 19], 4: [9, 19], 5: [9, 20], 6: [8, 20] },
@@ -342,7 +343,7 @@ function renderMenu() {
     var name = document.createElement('b'); name.textContent = s[0];
     var dur = document.createElement('small'); dur.textContent = s[1];
     info.appendChild(name); info.appendChild(dur);
-    var price = document.createElement('span'); price.className = 'price'; price.textContent = 'GHS [price]';
+    var price = document.createElement('span'); price.className = 'price'; price.textContent = SETTINGS.sym + '[price]';
     var btn = document.createElement('button'); btn.type = 'button'; btn.textContent = 'Book this';
     btn.addEventListener('click', function () {
       $('service').value = s[0]; update();
