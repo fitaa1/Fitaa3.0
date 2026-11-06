@@ -1,6 +1,6 @@
 import { useRef, useState, type CSSProperties } from "react";
 import { usePresence, useInViewOnce } from "@/lib/reveal";
-import { Plus, Check, ArrowRight } from "lucide-react";
+import { Plus, Check, ArrowRight, ArrowUpRight } from "lucide-react";
 import { SectionLabel } from "./SectionLabel";
 import { siteConfig, type Service } from "@/config/site";
 import { useRegion } from "@/lib/region";
@@ -110,11 +110,20 @@ function ServiceCard({ service, index, delay }: { service: Service; index: numbe
                 </li>
               ))}
             </ul>
+            {service.learnMore && (
+              <a
+                href={service.learnMore}
+                className="flex w-fit items-center gap-2 min-h-[44px] mt-4 text-[0.85rem] font-sans text-foreground/85 underline decoration-border underline-offset-[5px] hover:text-ruby hover:decoration-ruby transition-colors"
+              >
+                Learn more<span className="sr-only"> about {service.title}</span>
+                <ArrowUpRight size={14} aria-hidden="true" />
+              </a>
+            )}
             <a
               href={waLink(service.whatsapp)}
               target="_blank"
               rel="noopener"
-              className="inline-flex items-center gap-2 min-h-[44px] mt-5 text-[0.68rem] font-sans uppercase tracking-[0.18em] text-ruby hover:text-foreground transition-colors"
+              className={`inline-flex items-center gap-2 min-h-[44px] ${service.learnMore ? "mt-1" : "mt-5"} text-[0.68rem] font-sans uppercase tracking-[0.18em] text-ruby hover:text-foreground transition-colors`}
             >
               {service.price ? "Start this project" : "Get a quote"} <ArrowRight size={14} aria-hidden="true" />
             </a>

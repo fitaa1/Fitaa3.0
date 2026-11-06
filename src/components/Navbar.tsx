@@ -153,10 +153,11 @@ export function Navbar() {
                 href={item.href}
                 onClick={close}
                 aria-current={active === item.href.slice(1) ? "location" : undefined}
-                className="group flex items-center gap-5 text-[2.8rem] font-display font-light text-foreground/60 hover:text-foreground aria-[current=location]:text-foreground transition-colors duration-300"
+                className="group relative text-center text-[2.8rem] font-display font-light text-foreground/60 hover:text-foreground aria-[current=location]:text-foreground transition-colors duration-300"
               >
+                {/* Marker sits outside the label's box, so every label stays truly centred. */}
                 <span
-                  className="w-0 h-px bg-ruby group-hover:w-7 group-aria-[current=location]:w-7 transition-all duration-500 ease-out"
+                  className="absolute right-full top-1/2 mr-4 w-7 h-px bg-ruby origin-right scale-x-0 group-hover:scale-x-100 group-aria-[current=location]:scale-x-100 transition-transform duration-500 ease-out motion-reduce:transition-none"
                   aria-hidden="true"
                 />
                 {item.label}

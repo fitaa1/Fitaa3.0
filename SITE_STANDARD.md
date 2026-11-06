@@ -60,7 +60,10 @@ A speed gain that makes the site plainer fails the third test; find another way.
 - **One idea per site.** The type, colour, icons and one signature detail all tell the same story about
   that business. Design for the story, never decoration for its own sake.
 - **Navigation:** the header stays on screen at every size, the section in view is marked, phones get a
-  menu button, and WhatsApp is one tap away from anywhere on the page.
+  menu button, and WhatsApp is one tap away from anywhere on the page. In the phone menu every label is
+  truly centred: the in-view marker sits outside the label's box (absolutely placed, grown with a transform),
+  never in the flow, where it pushes labels off centre (6 Nov 2026). Each package card ends with a "Learn
+  more" link straight to that package's own section on the offer page, above its WhatsApp button.
 - **Signatures do a job.** The signature detail carries the page's main action or proof, not decoration:
   the Fully Booked hero shows the WhatsApp message the business is built to receive, the car rental
   demo's key tag fills in as the visitor builds a booking. Illustrations are labelled as illustrations.
