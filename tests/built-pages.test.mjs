@@ -78,3 +78,17 @@ test("llms.txt lists the prices in all three currencies", { skip: !built && "run
   const txt = fs.readFileSync(path.join(dist, "llms.txt"), "utf8");
   for (const cur of pricing.order) for (const k of ["getFound", "getChosen", "stayBooked", "founding", "upkeep"]) assert.ok(txt.includes(pricing.currencies[cur][k].text), `${cur} ${k}`);
 });
+
+test("the currency flags sit only in the footer, quiet, with the copy's currency pressed", { skip: !built && "run npm run build first" }, () => {
+  for (const { cur, dir } of copies) {
+    for (const file of ["index.html", "fully-booked/index.html"]) {
+      const html = fs.readFileSync(path.join(dist, dir, file), "utf8");
+      const footer = html.slice(html.lastIndexOf("<footer"));
+      const before = html.slice(0, html.lastIndexOf("<footer"));
+      assert.ok(!/data-currency=/.test(before), `${dir}${file}: a currency control sits above the footer`);
+      const flags = [...footer.matchAll(/<button[^>]*data-currency="(\w+)" aria-pressed="(true|false)"[^>]*>(<svg[\s\S]*?<\/svg>)<\/button>/g)];
+      assert.equal(flags.length, 3, `${dir}${file}: expected 3 flag buttons with SVGs, found ${flags.length}`);
+      assert.deepEqual(flags.filter((m) => m[2] === "true").map((m) => m[1]), [cur.toUpperCase()], `${dir}${file}: wrong flag pressed`);
+    }
+  }
+});

@@ -1,5 +1,6 @@
 import { Instagram } from "lucide-react";
 import { siteConfig } from "@/config/site";
+import { CurrencySwitch } from "@/lib/region";
 
 function BehanceIcon({ size = 18 }: { size?: number }) {
   return (
@@ -81,6 +82,7 @@ export function Footer() {
             <a href="/privacy" className="hover:text-foreground transition-colors duration-250">Privacy Policy</a>
             <a href="/terms" className="hover:text-foreground transition-colors duration-250">Terms of Service</a>
           </div>
+          <CurrencySwitch />
           <p>&copy; {year} {siteConfig.name}. All rights reserved.</p>
         </div>
       </div>

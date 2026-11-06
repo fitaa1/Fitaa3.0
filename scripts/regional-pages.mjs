@@ -10,6 +10,7 @@ import path from "node:path";
 import { dist, pricing, CURRENCIES, GHANA, COPIES, markHtml, offersFor, rewriteJsonLd, write } from "./regions.mjs";
 
 const read = (rel) => fs.readFileSync(path.join(dist, rel), "utf8");
+const FLAGS = JSON.parse(fs.readFileSync(path.join(dist, "..", "src/config/flags.json"), "utf8"));
 
 /* Replaces every match of `re`, after checking how many there are. A text value is passed as a
    function so "$130" is written as it is, never read as a replacement pattern. */
@@ -39,6 +40,7 @@ for (const copy of COPIES) {
   let html = markHtml(fb, copy.cur, copy.number);
   html = html.replace(/(<[a-z0-9]+[^>]*\sdata-price="(\w+)"[^>]*>)([^<]*)(<\/)/g, (all, open, key, _old, close) => `${open}${p[key]}${close}`);
   html = swap(html, /data-currency="(GHS|GBP|USD)" aria-pressed="(true|false)"/, (all, c) => `data-currency="${c}" aria-pressed="${c === copy.cur}"`, "currency button", 3);
+  html = swap(html, /(data-currency="(GHS|GBP|USD)"[^>]*data-flag>)(<\/button>)/, (all, open, c, close) => `${open}${FLAGS[c]}${close}`, "footer flag", 3);
   html = swap(html, new RegExp(`whatsapp: '${GHANA}',`), `whatsapp: '${copy.number}',`, "SETTINGS.whatsapp");
   html = swap(html, /currency: 'USD',\n  prices: null,/, `currency: '${copy.cur}',\n  prices: ${JSON.stringify(PRICES)},`, "SETTINGS.currency and SETTINGS.prices");
   const offers = offersFor(copy.cur);

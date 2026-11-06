@@ -357,9 +357,16 @@ a{color:inherit}
 @keyframes demoIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 .switch-sm{margin:1.5rem 0 0;display:flex;flex-wrap:wrap;gap:4px;width:fit-content;max-width:100%}
 /* Currency switch: prices arrive in the visitor's currency (middleware.ts); this is for anyone the guess got wrong */
-.cur-switch{margin:1.75rem auto 0;align-items:center;flex-wrap:nowrap}
-.cur-switch button{padding:0 1rem}
-.cur-label{padding:0 .7rem 0 .55rem;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+/* Currency flags in the footer: prices arrive in the visitor's currency automatically (middleware.ts);
+   these are only the fail-safe for a wrong guess, so they stay small and dimmed (Nigel, 6 Nov 2026).
+   The build fills each button with its SVG flag from src/config/flags.json. */
+.currency-flags{display:inline-flex;align-items:center;gap:2px}
+.currency-flags button{display:inline-flex;align-items:center;justify-content:center;width:34px;height:32px;padding:0;border:0;background:transparent;border-radius:6px;cursor:pointer;opacity:.45;filter:saturate(.6);transition:opacity .25s,filter .25s}
+.currency-flags svg{display:block;border-radius:2px;box-shadow:0 0 0 1px color-mix(in srgb,var(--fg) 12%,transparent)}
+.currency-flags button:hover{opacity:.85;filter:none}
+.currency-flags button[aria-pressed="true"]{opacity:1;filter:none}
+.currency-flags button:focus-visible{outline:2px solid var(--accent-strong);outline-offset:1px;opacity:1}
+@media (prefers-reduced-motion:reduce){.currency-flags button{transition:none}}
 @media (prefers-reduced-motion: reduce){.demo.pop{animation:none}}
 .demo{display:block;text-decoration:none;border:1px solid var(--border);overflow:hidden;transition:transform .45s cubic-bezier(.22,1,.36,1),box-shadow .45s}
 @media(hover:hover){.demo:hover{transform:translateY(-4px);box-shadow:0 30px 60px -36px rgba(0,0,0,.5)}}
@@ -475,13 +482,7 @@ em{font-style:normal}</style>
 <section class="section tint" id="packages">
   <div class="container">
     <div class="center reveal"><span class="eyebrow">Three steps in</span><h2 class="h2">Find you. Choose you. Come back.</h2>
-      <p class="lede center-lede">Each step stands on its own, so take the one you need. Prices are fixed, and shown in your currency.</p>
-      <div class="switch switch-sm cur-switch" role="group" aria-label="Show prices in">
-        <span class="cur-label" aria-hidden="true">Prices in</span>
-        <button type="button" data-currency="GHS" aria-pressed="false" aria-label="GHS, Ghana cedis">GHS</button>
-        <button type="button" data-currency="GBP" aria-pressed="false" aria-label="GBP, pounds">GBP</button>
-        <button type="button" data-currency="USD" aria-pressed="true" aria-label="USD, US dollars">USD</button>
-      </div></div>
+      <p class="lede center-lede">Each step stands on its own, so take the one you need. Prices are fixed, and shown in your currency.</p></div>
     <div class="tiers">
       <article id="get-found" class="tier reveal">
         <span class="step">Step 1</span>
@@ -661,6 +662,11 @@ em{font-style:normal}</style>
 <footer>
   <div class="container">
     <nav><a href="https://fitaacreative.com/privacy">Privacy Policy</a><a href="https://fitaacreative.com/terms">Terms of Service</a></nav>
+    <div class="currency-flags" role="group" aria-label="Show prices in">
+      <button type="button" data-currency="GHS" aria-pressed="false" aria-label="GHS, Ghana cedis" title="Prices in GHS" data-flag></button>
+      <button type="button" data-currency="GBP" aria-pressed="false" aria-label="GBP, pounds" title="Prices in GBP" data-flag></button>
+      <button type="button" data-currency="USD" aria-pressed="true" aria-label="USD, US dollars" title="Prices in USD" data-flag></button>
+    </div>
     <span>© <span id="year">2026</span> Fitaa Creative · Ghana &amp; UK</span>
   </div>
 </footer>

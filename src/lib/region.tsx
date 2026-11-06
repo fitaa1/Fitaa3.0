@@ -1,4 +1,4 @@
-/* Prices and WhatsApp for the visitor's country.
+/* Prices and WhatsApp for the visitor's country (automatic; the footer flags are only a fail-safe).
  * middleware.ts picks which built copy of the page a visitor gets, and that copy says on its
  * <html> tag which currency to show (data-cur) and which WhatsApp number to use (data-wa).
  * The build renders the home page once per copy (scripts/prerender.mjs), so React starts from
@@ -6,6 +6,7 @@
  * remembers the choice in the fitaa_cur cookie, which middleware.ts reads on the next visit. */
 import { createContext, useCallback, useContext, useEffect, useState, type ReactNode } from "react";
 import pricing from "@/config/pricing.json";
+import flags from "@/config/flags.json";
 import { siteConfig } from "@/config/site";
 
 export type Currency = "GHS" | "GBP" | "USD";
@@ -107,12 +108,14 @@ export function useRegion(): Region {
   return r;
 }
 
-/** Small accessible switch: three buttons in a labelled group, the pressed one is the one shown. */
+/** The fail-safe for a wrong country guess: three small flags in the footer (Ghana GHS, UK GBP,
+ *  US USD). Prices already arrive in the visitor's currency, so this stays quiet on purpose
+ *  (Nigel, 6 Nov 2026). Flags are drawn in SVG (src/config/flags.json) because Windows shows
+ *  flag emoji as letters. Each is a labelled button; the pressed one is the currency on screen. */
 export function CurrencySwitch({ className = "" }: { className?: string }) {
   const { currency, setCurrency } = useRegion();
   return (
-    <div role="group" aria-label="Show prices in" className={`currency-switch ${className}`}>
-      <span className="currency-switch-label" aria-hidden="true">Prices in</span>
+    <div role="group" aria-label="Show prices in" className={`currency-flags ${className}`}>
       {currencies.map((c) => (
         <button
           key={c}
@@ -120,10 +123,10 @@ export function CurrencySwitch({ className = "" }: { className?: string }) {
           data-currency={c}
           aria-pressed={c === currency}
           aria-label={`${table[c].label}, ${table[c].name}`}
+          title={`Prices in ${table[c].label}`}
           onClick={() => setCurrency(c)}
-        >
-          {table[c].label}
-        </button>
+          dangerouslySetInnerHTML={{ __html: (flags as Record<string, string>)[c] }}
+        />
       ))}
     </div>
   );
