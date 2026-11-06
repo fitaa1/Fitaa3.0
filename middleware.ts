@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════════════════════
- * Prices and WhatsApp by country (Vercel Routing Middleware, runs at the edge).
+ * Prices and WhatsApp by country (Vercel Routing Middleware, runs before the CDN cache).
  *
  * The build (scripts/prerender.mjs and scripts/regional-pages.mjs) writes one copy of
  * each page per currency and WhatsApp line:
@@ -19,7 +19,8 @@
 import { next, rewrite } from "@vercel/functions";
 
 export const config = {
-  runtime: "edge",
+  /* Vercel's recommended runtime for Routing Middleware (the "edge" runtime is deprecated). */
+  runtime: "nodejs",
   /* Only the pages that show prices or Fitaa's WhatsApp, so images and scripts never wait on this. */
   matcher: [
     "/",
