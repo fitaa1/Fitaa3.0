@@ -10,9 +10,11 @@ A speed gain that makes the site plainer fails the third test; find another way.
 
 ## Speed
 
-- **No jump when fonts load:** each web font gets a fallback face from local Arial with `size-adjust` set to its measured width (wide display faces need about 127 to 130%), listed straight after it, so layout shift stays under 0.1. Measured 4 Nov: Archivo wide 127.3%, Unbounded 129.3%, Manrope 101.6%, Atkinson Hyperlegible Next 98.3%, Archivo 97.5%, DM Sans 104.4% (6 Nov, lead previews).
-- **Fonts:** at most two families. Google Fonts load without blocking the first paint (preload, `media="print"` swap,
-  `noscript` fallback, `display=swap`), or the device's own fonts.
+- **No jump when fonts load:** each web font gets a fallback face from local Arial with `size-adjust` set to its measured width (wide display faces need about 127 to 130%), listed straight after it, so layout shift stays under 0.1. Measured 4 Nov: Archivo wide 127.3%, Unbounded 129.3%, Manrope 101.6%, Atkinson Hyperlegible Next 98.3%, Archivo 97.5%, DM Sans 104.4% (6 Nov, lead previews), Schibsted Grotesk 700 100.7%, Inter 105.3% (7 Nov, Collections; `scripts/measure-fonts.mjs` there measures them in Chrome).
+- **Fonts:** at most two families. Best: self-hosted on the site's own address (one latin WOFF2 per family and
+  weight, preloaded, with `unicode-range` and `display=swap`), so no request leaves for Google before the first
+  paint; Fitaa Collections does this. Otherwise Google Fonts load without blocking the first paint (preload,
+  `media="print"` swap, `noscript` fallback, `display=swap`), or the device's own fonts.
 - **Analytics:** one file (`public/fitaa-analytics.js`) with a list of live hosts. Google Analytics
   loads on the visitor's first tap, scroll or key press, or after 4 seconds. Events queue until then.
 - **Motion:** CSS transform and opacity only, through one shared reveal helper
@@ -21,6 +23,9 @@ A speed gain that makes the site plainer fails the third test; find another way.
 - **Images:** WebP. Responsive sizes with `srcset` and `sizes` (720, 1080 and 1440 px for
   portfolio work; at most 1200 px for gallery and preview photos). Width and height always set;
   lazy below the first screen.
+- **Photos visitors upload** are resized on their own phone before upload (1200 px and 480 px), WebP where
+  the browser can make it and JPEG from Safari, which cannot make WebP from a canvas. The cover also uploads
+  a JPEG for WhatsApp previews. Fitaa Collections, 7 Nov 2026.
 - **Never hotlink** Airbnb, Booking.com, Trip.com or any listing site. Copy photos in
   (`scripts/localise-preview-images.py`) and convert them to WebP.
 - **Splash (optional):** at most 0.5 s, first visit only, starts once its image has loaded,
@@ -48,6 +53,11 @@ A speed gain that makes the site plainer fails the third test; find another way.
 - WhatsApp click-to-chat with a message already written.
 - Fail safe, never fail free: when data cannot be read (a calendar, a form service), the page
   says so and sends the visitor to WhatsApp. No success message it cannot back up.
+- **Payments fail safe too:** an order is paid only when the payment service confirms it to the site
+  directly (a signed webhook, then a second check with the service). A visitor arriving back on a
+  "thank you" address proves nothing. A test build refuses live keys and a live build refuses test keys,
+  and a test build shows a test banner and sends `noindex` until the switch to live (Fitaa Collections).
+- Prices use tabular figures (`font-variant-numeric: tabular-nums`) so they line up in lists and totals.
 
 ## Type and intent (Nigel, 4 Nov 2026)
 
@@ -62,7 +72,10 @@ A speed gain that makes the site plainer fails the third test; find another way.
 - **Navigation:** the header stays on screen at every size, the section in view is marked, phones get a
   menu button, and WhatsApp is one tap away from anywhere on the page. In the phone menu every label is
   truly centred: the in-view marker sits outside the label's box (absolutely placed, grown with a transform),
-  never in the flow, where it pushes labels off centre (6 Nov 2026). Each package card ends with a "Learn
+  never in the flow, where it pushes labels off centre (6 Nov 2026). A blur behind a sticky header goes on a
+  `::before` layer, never on the header itself: `backdrop-filter` makes the header the containing box for
+  the fixed phone menu, so the menu only covers the header. Checks open the phone menu and confirm it fills
+  the screen (found on Fitaa Collections, 7 Nov 2026). Each package card ends with a "Learn
   more" link to the full offer page (not the package's own section: the open card already shows that),
   above its WhatsApp button (Nigel, 7 Nov 2026). Messages to leads still link to the exact section.
 - **Signatures do a job.** The signature detail carries the page's main action or proof, not decoration:
@@ -102,6 +115,7 @@ A speed gain that makes the site plainer fails the third test; find another way.
 | Adom Family Clinic demo | Atkinson Hyperlegible Next (built by the Braille Institute so every reader can read it) | the same | an appointment card with a heartbeat line, filled in by the form |
 | Nkyene Kitchen demo (restaurant) | Unbounded (round and generous, like a full plate) | Manrope | a "Reserved" table card standing on the plate, filled in by the booking |
 | Lead previews | DM Sans | DM Sans | |
+| Fitaa Collections | Schibsted Grotesk (plain and sturdy, drawn for the Norwegian media and marketplace group Schibsted, made to sit next to prices) | Inter, tabular figures for prices | every price on a gold swing tag beside the item's condition |
 
 ## Proof in every pull request
 
@@ -109,3 +123,6 @@ A speed gain that makes the site plainer fails the third test; find another way.
 - First paint, load time and page size, before and after, measured several times
   (single Lighthouse runs are noisy).
 - Anything not checked is written as UNVERIFIED, with the reason.
+- Sites with accounts, forms or payments script the whole journey and run it on every change, failing on
+  sideways scroll, console errors, missing alt text, tap targets under 44 px or a phone menu that does not
+  open fully. Fitaa Collections' `scripts/check-pages.mjs` is the example to copy.
