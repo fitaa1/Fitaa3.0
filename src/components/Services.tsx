@@ -110,9 +110,9 @@ function ServiceCard({ service, index, delay }: { service: Service; index: numbe
                 </li>
               ))}
             </ul>
-            {service.learnMore && (
+            {service.step && (
               <a
-                href={service.learnMore}
+                href={siteConfig.servicesSection.moreHref}
                 className="flex w-fit items-center gap-2 min-h-[44px] mt-4 text-[0.85rem] font-sans text-foreground/85 underline decoration-border underline-offset-[5px] hover:text-ruby hover:decoration-ruby transition-colors"
               >
                 Learn more<span className="sr-only"> about {service.title}</span>
@@ -123,7 +123,7 @@ function ServiceCard({ service, index, delay }: { service: Service; index: numbe
               href={waLink(service.whatsapp)}
               target="_blank"
               rel="noopener"
-              className={`inline-flex items-center gap-2 min-h-[44px] ${service.learnMore ? "mt-1" : "mt-5"} text-[0.68rem] font-sans uppercase tracking-[0.18em] text-ruby hover:text-foreground transition-colors`}
+              className={`inline-flex items-center gap-2 min-h-[44px] ${service.step ? "mt-1" : "mt-5"} text-[0.68rem] font-sans uppercase tracking-[0.18em] text-ruby hover:text-foreground transition-colors`}
             >
               {service.price ? "Start this project" : "Get a quote"} <ArrowRight size={14} aria-hidden="true" />
             </a>

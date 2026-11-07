@@ -63,7 +63,8 @@ A speed gain that makes the site plainer fails the third test; find another way.
   menu button, and WhatsApp is one tap away from anywhere on the page. In the phone menu every label is
   truly centred: the in-view marker sits outside the label's box (absolutely placed, grown with a transform),
   never in the flow, where it pushes labels off centre (6 Nov 2026). Each package card ends with a "Learn
-  more" link straight to that package's own section on the offer page, above its WhatsApp button.
+  more" link to the full offer page (not the package's own section: the open card already shows that),
+  above its WhatsApp button (Nigel, 7 Nov 2026). Messages to leads still link to the exact section.
 - **Signatures do a job.** The signature detail carries the page's main action or proof, not decoration:
   the Fully Booked hero shows the WhatsApp message the business is built to receive, the car rental
   demo's key tag fills in as the visitor builds a booking. Illustrations are labelled as illustrations.
