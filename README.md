@@ -1,62 +1,80 @@
-# Fitaa Creative: Agency Website
+# Fitaa Creative
 
-Single-page site for Fitaa Creative, a creative and digital marketing agency in Accra, Ghana.
+The agency site for Fitaa Creative, for businesses in Ghana, the UK and beyond. It is also the template every Fitaa site starts from: `SITE_STANDARD.md` is the standard they all meet.
 
-**Live:** https://fitaacreative.com (old fitaacreative.vercel.app links 301 here)
+- **Live:** [fitaacreative.com](https://fitaacreative.com). www and the old fitaacreative.vercel.app addresses redirect here.
+- **Hosted on:** Vercel, project `fitaadigital`. Every pull request gets its own preview link.
+- **Built with:** React, TypeScript, Vite and Tailwind, with Lucide icons and Formspree for the contact form.
 
-## Stack
+## The pages
 
-| Tool | Role |
+| Address | What it is | Where it lives |
+|---|---|---|
+| `/` | The agency site, one page: Services, Why Us, Work, Contact | `src/components/`, words in `src/config/site.ts` |
+| `/fully-booked` | The offer page. Each package has its own link: `#get-found`, `#get-chosen`, `#stay-booked` | `public/fully-booked/index.html` |
+| `/demo/ridge-house`, `/demo/studio`, `/demo/car-rental`, `/demo/clinic`, `/demo/restaurant` | One demo per niche, hidden from Google | `public/demo/<name>/index.html` |
+| `/preview/<lead>` | Lead and client previews (persia, kass, masterpiece, palm-court, airport-grande, diz-eden, 1125-city-apartments), hidden from Google | `public/preview/` |
+| `/privacy`, `/terms`, 404 | Written at build time | `scripts/static-pages.mjs`, titles in `src/config/legal-meta.json` |
+
+## Change something
+
+| To change | Edit |
 |---|---|
-| React 18 + TypeScript | UI |
-| Vite 6 | Build and dev server |
-| Tailwind CSS v4 | Styling |
-| Framer Motion | Animations |
-| React Hook Form + Zod | Enquiry form (loaded only when needed) |
-| Formspree | Delivers enquiry form messages |
-| Lucide | Icons |
-| Vercel | Hosting; every branch gets a preview link |
+| Any word, link, contact detail or list | `src/config/site.ts` (see `CUSTOMIZE.md` for a section-by-section map) |
+| A price | `src/config/pricing.json` only, once per currency (GHS, GBP, USD). The build writes it everywhere else |
+| Colours and fonts | `src/index.css` (the guide at the top lists every setting) |
+| Title, description, link previews, business details for Google | `index.html` |
+| Redirects and headers | `vercel.json` |
+| Analytics events | `public/fitaa-analytics.js` (Google Analytics `G-D62TL0T2VD`) |
 
-## Where things are
+## Prices and WhatsApp by country
 
-| File | What it controls |
+Visitors see prices in their own currency without choosing anything:
+
+| Visitor in | Sees | WhatsApp number |
+|---|---|---|
+| Ghana | GHS | Ghana |
+| UK | GBP | UK (Vercel variable `UK_WHATSAPP`) |
+| Everywhere else, and search engines | USD | Ghana |
+
+`middleware.ts` reads the visitor's country and serves one of six ready-built copies of each page, so nothing is worked out while the page loads. Three small dimmed flags in the footer let a visitor correct a wrong guess. A new page with prices or WhatsApp needs a line in `PAGES` in `middleware.ts` and in `scripts/regional-pages.mjs`.
+
+## Run, check, deploy, roll back
+
+| Step | How |
 |---|---|
-| `src/config/site.ts` | **All words, links, images and lists on the page** |
-| `src/index.css` | Colours (light and dark), fonts, spacing, effects |
-| `index.html` | SEO title and description, link previews, Google business data, favicon, splash screen |
-| `public/work/` | Case study images (4:3 WebP) |
-| `public/sitemap.xml`, `public/robots.txt` | Search engine files |
-| `src/pages/Legal.tsx` | Privacy Policy and Terms text (`/privacy`, `/terms`) |
-| `public/fully-booked/index.html` | **Fully Booked offer page** (`/fully-booked`): one self-contained file (styles, script and logo inside). WhatsApp number and messages in `SETTINGS` at the bottom |
-| `public/demo/ridge-house/index.html` | Demo short-let host page (`/demo/ridge-house`), one self-contained file |
-| `public/demo/studio/index.html` | Demo beauty studio page (`/demo/studio`), one self-contained file; services, hours and number in `SETTINGS` |
-| `src/components/` | One file per section: `Hero`, `Services`, `WhyUs`, `FeaturedWork`, `Testimonials`, `FinalCTA` (contact), `Navbar`, `Footer` |
+| Install | `npm ci` |
+| Run locally | `npm run dev` (opens on port 5000) |
+| Check | `npm run typecheck`, `npm run build`, then `npm test` (it checks every country's prices, WhatsApp number and Google data in the built copies) |
+| Look | Changed pages at 390, 820 and 1440 px wide. Open standalone pages as `/fully-booked/index.html` locally |
+| Deploy | Merge the pull request into `main`; Vercel publishes it |
+| Roll back | Vercel, project `fitaadigital`, Deployments, the last good one, menu, **Instant Rollback** (under two minutes) |
 
-Editing guide: see **CUSTOMIZE.md**.
+Every change goes on a branch with a pull request. Nobody pushes to `main`, and Nigel approves every merge.
 
-## Standalone pages: export or copy for a client
+## After changing images
 
-The three pages under `public/` (Fully Booked and the two demos) need nothing else from this repo.
-
-1. **Export:** open the file on GitHub, tap **Download raw file**, and drop it on [Netlify Drop](https://app.netlify.com/drop) or Cloudflare Pages, or open it in a browser.
-2. **Client copy:** copy the demo folder (for example `public/demo/studio/` to `public/clients/<client-name>/`), change `SETTINGS` at the bottom of the file (WhatsApp number, name, services or prices), replace the `[bracketed]` text and photo placeholders, set `prefix` to `''` and delete the demo bar.
-3. **Client hosting:** client sites go on Cloudflare Pages or Netlify (both free for commercial use). Vercel's free plan is for non-commercial use.
-
-## Run locally
-
-```bash
-npm install
-npm run dev        # http://localhost:5000
-npm run build      # production build in dist/
-```
-
-## Deploy
-
-Push a branch to GitHub and Vercel builds a preview automatically. Merging into `main` updates the live site. Work happens on branches with a pull request; nothing is pushed straight to `main`.
+- **Share cards** (the picture WhatsApp and social apps show): after a build, run `node scripts/share-cards.mjs`. It rebuilds every 1200 × 630 card. To force apps to fetch the new one, change `CARD` in the script.
+- **Portfolio images:** three sizes of each in `public/work/`: `name.webp` (1440 px), `name-1080.webp` and `name-720.webp`, so phones never download the large one.
+- **Preview photos:** WebP in `public/preview/<page>-img/`, at most 1200 px. Never link to Airbnb or Booking.com photos directly (their links change); `scripts/localise-preview-images.py` copies them in.
 
 ## Built-in behaviour worth knowing
 
-- **Theme** follows the visitor's device (light or dark) until they tap the toggle; their choice is then remembered.
-- **Splash** shows the logo for 1 second on the first visit of a session, and is skipped for visitors with reduced motion turned on.
-- **Menu highlight** follows the section on screen.
-- **Speed:** the enquiry form and legal pages load separately, so the first load stays small.
+- **Speed:** the page is pre-built, the contact form and legal pages load only when needed, fonts never hold up the first paint, and Google Analytics waits for the first tap, scroll or 4 seconds.
+- **Splash:** a 0.5 second pulse of the logo on the first visit of a session.
+- **Theme:** follows the device (light or dark) until the visitor taps the toggle, then remembers their choice.
+- **Menu:** stays at the top, marks the section on screen, and on phones opens a centred full-screen menu.
+- **Contact form:** if Formspree can't be reached, it shows an error with the email address, never a false "message received".
+
+## Client sites
+
+Client sites start from this standard but live in their own repo, hosted on Cloudflare, connected to GitHub so every merge deploys. Their domain sits in the client's own Cloudflare account with Fitaa added as a member.
+
+## Other documents
+
+| File | What's in it |
+|---|---|
+| `CUSTOMIZE.md` | Where every part of the page is edited in `site.ts`, images, colours, SEO |
+| `SITE_STANDARD.md` | The standard every Fitaa site meets. Improve it in the same pull request as the site |
+| `CLAUDE.md` | Claude's rules for this repo, including every known issue and its guard |
+| `QWEN.md` | Qwen's rules |
