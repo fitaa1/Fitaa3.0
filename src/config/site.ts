@@ -33,6 +33,8 @@ export type Service = {
   timing?: string;
   /** The message WhatsApp opens with when a visitor taps "Start this project". */
   whatsapp: string;
+  /** "Learn more" link to this package's own card on /fully-booked (#get-found etc.). */
+  learnMore?: string;
 };
 
 export const siteConfig = {
@@ -99,6 +101,7 @@ export const siteConfig = {
       price: { key: "getFound", unit: "one-off" },
       timing: "Live in 5 days",
       whatsapp: "Hi Fitaa, I'm interested in Get Found. My business is ",
+      learnMore: "/fully-booked#get-found",
     },
     {
       step: "Step 2",
@@ -118,6 +121,7 @@ export const siteConfig = {
       priceNote: "foundingNote",
       timing: "Live in 7 days",
       whatsapp: "Hi Fitaa, I'm interested in Get Chosen. My business is ",
+      learnMore: "/fully-booked#get-chosen",
     },
     {
       step: "Step 3",
@@ -134,6 +138,7 @@ export const siteConfig = {
       price: { key: "stayBooked", unit: "a month, 3-month minimum" },
       priceNote: "upkeepNote",
       whatsapp: "Hi Fitaa, I'm interested in Stay Booked. My business is ",
+      learnMore: "/fully-booked#stay-booked",
     },
     {
       title: "Graphic & Digital Design",
