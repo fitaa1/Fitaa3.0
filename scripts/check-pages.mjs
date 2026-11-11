@@ -2,8 +2,8 @@
 // Serves dist/ the way the host does (compressed, clean addresses, the Ghana copy of each
 // priced page), opens every page at 390, 820 and 1440 px in light and dark, and FAILS on:
 //   sideways scroll, a browser console error, an image without alt text, a tap target under
-//   44 px, a phone menu that does not open fully (a link hidden, off screen or covered), and a first load heavier
-//   than the standard's first-screen budget (350 KB).
+//   44 px, a phone menu that does not open fully (a link hidden, off screen or covered), a photo below the first screen that is not
+//   lazy, and a first screen heavier than the standard's budget (350 KB).
 // Run after a build:  npm run build && npm run check:pages
 // SHOTS=1 also saves a screenshot of every page, width and scheme into shots/ to look at.
 // Never loosen a limit here to get a pull request through: fix the page (Nigel, 5 Nov 2026).
@@ -29,6 +29,7 @@ const WIDTHS = [390, 820, 1440];
 const TYPES = { ".html": "text/html; charset=utf-8", ".js": "text/javascript", ".css": "text/css", ".json": "application/json", ".webp": "image/webp", ".png": "image/png", ".jpg": "image/jpeg", ".svg": "image/svg+xml", ".woff2": "font/woff2", ".xml": "application/xml", ".txt": "text/plain; charset=utf-8", ".webmanifest": "application/manifest+json" };
 
 let sent = 0; // bytes this server has sent since the last reset, as a visitor would download them
+let sentBy = {}; // the same, per address, so photos below the first screen can be told apart
 function fileFor(urlPath) {
   const clean = decodeURIComponent(urlPath.split("?")[0]).replace(/\/+$/, "") || "/";
   const tries = [];
@@ -50,6 +51,7 @@ const server = http.createServer((req, res) => {
     body = zlib.gzipSync(body); head["content-encoding"] = "gzip";
   }
   sent += body.length;
+  sentBy[req.url.split("?")[0]] = body.length;
   res.writeHead(f ? 200 : 404, head); res.end(body);
 });
 await new Promise((r) => server.listen(0, "127.0.0.1", r));
@@ -81,9 +83,16 @@ try {
         // Other hosts (fonts, analytics) are counted by their stated size when they give one.
         let outside = 0;
         p.on("response", (r) => { if (!r.url().startsWith(BASE)) outside += Number(r.headers()["content-length"] || 0); });
-        sent = 0;
+        sent = 0; sentBy = {};
         await p.goto(BASE + pagePath, { waitUntil: "networkidle" });
-        if (scheme === "light" && width === 390) weights.push([pagePath, Math.round((sent + outside) / 1024)]);
+        // The budget is for the first screen. A browser fetches lazy photos some way ahead, and how far
+        // differs between machines, so photos that are lazy and start below the first screen are taken
+        // off the total. A photo below the first screen that is NOT lazy is a fault of its own.
+        const below = await p.evaluate(() => [...document.images].filter((i) => i.getBoundingClientRect().top + scrollY > innerHeight).map((i) => ({ src: new URL(i.currentSrc || i.src, location.href).pathname, lazy: i.loading === "lazy" })));
+        const later = below.filter((i) => i.lazy).reduce((n, i) => n + (sentBy[i.src] || 0), 0);
+        const eager = [...new Set(below.filter((i) => !i.lazy && !i.src.startsWith("data:")).map((i) => i.src))];
+        if (eager.length) problems.push(`${where}: photo below the first screen is not lazy (add loading="lazy"): ${eager.slice(0, 4).join(", ")}`);
+        if (scheme === "light" && width === 390) weights.push([pagePath, Math.round((sent - later + outside) / 1024)]);
         // Scroll through once so content that appears on scroll is shown, as a visitor sees it.
         await p.evaluate(async () => { for (let y = 0; y < document.body.scrollHeight; y += 500) { scrollTo(0, y); await new Promise((r) => setTimeout(r, 30)); } scrollTo(0, 0); });
         await p.waitForTimeout(400);
@@ -152,10 +161,10 @@ try {
   await new Promise((r) => server.close(r)); // never leave the local server running
 }
 
-console.log("First load at 390 px (compressed, as downloaded):");
+console.log("First screen at 390 px (compressed, as downloaded, lazy photos below the first screen left out):");
 for (const [pg, kb] of weights) {
   console.log(`  ${String(kb).padStart(5)} KB  ${pg}`);
-  if (kb > BUDGET_KB) problems.push(`${pg}: first load is ${kb} KB, over the ${BUDGET_KB} KB budget`);
+  if (kb > BUDGET_KB) problems.push(`${pg}: the first screen is ${kb} KB, over the ${BUDGET_KB} KB budget`);
 }
 console.log(`\nChecked ${pages.length} pages at ${WIDTHS.join(", ")} px, light and dark.`);
 if (problems.length) {
