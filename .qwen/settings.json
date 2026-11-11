@@ -34,5 +34,11 @@
       "Bash(rm -rf*)"
     ]
   },
-  "$version": 4
+  "$version": 4,
+  "general": {
+    "gitCoAuthor": {
+      "commit": false,
+      "pr": false
+    }
+  }
 }
