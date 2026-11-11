@@ -151,6 +151,20 @@ try {
             else if (m.hidden.length) problems.push(`${where}: the phone menu did not open fully, these links are hidden or covered: ${m.hidden.join(", ")}`);
             if (process.env.SHOTS) await p.screenshot({ path: path.join(root, "shots", `${pagePath.replace(/[^\w]+/g, "_") || "home"}-390-menu.png`) });
           }
+          // A page whose section nav is hidden on a phone needs a visible menu button to open it.
+          const missingMenu = await p.evaluate(() => {
+            const navs = [...document.querySelectorAll("nav")];
+            const sectionNav = navs.find((n) => n.querySelectorAll("a[href^='#']").length >= 3);
+            if (!sectionNav) return null;
+            const links = [...sectionNav.querySelectorAll("a[href^='#']")];
+            const visible = (el) => { const b = el.getBoundingClientRect(); const s = getComputedStyle(el); return b.width > 0 && b.height > 0 && s.visibility !== "hidden" && s.display !== "none"; };
+            if (links.some((a) => visible(a))) return null;
+            const btn = document.querySelector("button[aria-expanded]");
+            const btnVisible = !!btn && getComputedStyle(btn).display !== "none" && getComputedStyle(btn).visibility !== "hidden" && btn.getBoundingClientRect().width > 0;
+            if (btnVisible) return null;
+            return "section links are hidden on a phone and there is no menu button";
+          });
+          if (missingMenu) problems.push(`${where}: ${missingMenu}`);
         }
         await ctx.close();
       }

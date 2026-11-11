@@ -68,6 +68,7 @@ nav.links{display:flex;gap:28px;font-size:15px}
 nav.links a{color:var(--muted);text-decoration:none}
 nav.links a:hover{color:var(--ink)}
 .header-cta{min-height:44px;padding:0 22px}
+.menu-btn{display:none;width:44px;height:44px;border-radius:12px;border:1px solid var(--line-strong);background:transparent;color:var(--text);cursor:pointer;align-items:center;justify-content:center}
 
 .hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:center;padding-top:32px;padding-bottom:80px}
 .hero h1{font-size:68px;line-height:1.02;margin-bottom:22px}
@@ -161,6 +162,11 @@ footer.foot .wrap{padding-top:28px;padding-bottom:40px;display:flex;justify-cont
   .tabs button{padding:0 14px;flex:none}
   .sticky-book{display:flex;position:fixed;left:16px;right:16px;bottom:16px;z-index:20;box-shadow:0 14px 30px rgba(42,30,34,.28)}
   footer.foot .wrap{padding-bottom:96px}
+  .menu-btn{display:inline-flex}
+  .mobile-nav{display:block;position:fixed;top:84px;left:0;right:0;z-index:29;background:var(--ground);border-bottom:1px solid var(--line);padding:8px 16px 16px;transform:translateY(-8px);opacity:0;visibility:hidden;transition:opacity .25s,transform .25s,visibility .25s}
+  .mobile-nav.open{opacity:1;transform:none;visibility:visible}
+  .mobile-nav a{display:flex;align-items:center;min-height:48px;border-bottom:1px solid var(--line);text-decoration:none;font-weight:600}
+  .mobile-nav a[aria-current="true"]{color:var(--rose)}
 }
 header.top{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--ground) 86%,transparent);backdrop-filter:saturate(1.4) blur(14px);-webkit-backdrop-filter:saturate(1.4) blur(14px);box-shadow:0 0 0 100vmax color-mix(in srgb,var(--ground) 86%,transparent);clip-path:inset(0 -100vmax)}
 /* Tap targets: 44 px or more (SITE_STANDARD.md). scripts/check-pages.mjs measures them. */
@@ -169,6 +175,9 @@ header.top{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--g
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+</svg>
 
 <div class="demo-bar">Demo by <a href="https://fitaacreative.com/fully-booked?studio">Fitaa Creative</a>. Your studio name, photos and prices go here, live in 7 days.</div>
 
@@ -178,7 +187,14 @@ header.top{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--g
     <a href="#menu">Menu</a><a href="#team">Stylists</a><a href="#work">Our work</a><a href="#visit">Visit</a>
   </nav>
   <a class="cta header-cta" href="#book">Book your slot</a>
+  <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu"><svg width="22" height="22"><use href="#i-menu"/></svg></button>
 </header>
+<nav class="mobile-nav" id="mobile-nav" aria-label="Page sections">
+  <a href="#menu">Menu</a>
+  <a href="#team">Stylists</a>
+  <a href="#work">Our work</a>
+  <a href="#visit">Visit</a>
+</nav>
 
 <main>
 <section class="wrap hero">
@@ -416,6 +432,20 @@ $('book-form').addEventListener('submit', function (e) {
   if (window.fitaaTrack) fitaaTrack('booking_request', { label: 'Book your slot', niche: 'studios', service: $('service').value });
   window.open('https://wa.me/' + SETTINGS.whatsapp + '?text=' + encodeURIComponent(msg), '_blank', 'noopener');
 });
+
+/* Phone menu */
+var menuBtn = document.querySelector('.menu-btn'), mnav = $('mobile-nav');
+function closeMenu() { mnav.classList.remove('open'); menuBtn.setAttribute('aria-expanded', 'false'); menuBtn.setAttribute('aria-label', 'Open menu'); }
+menuBtn.addEventListener('click', function () {
+  var open = !mnav.classList.contains('open');
+  /* The menu opens just under the header wherever the header sits, so the demo bar above it never hides the first link. */
+  if (open) mnav.style.top = Math.round(menuBtn.closest('header').getBoundingClientRect().bottom) + 'px';
+  mnav.classList.toggle('open', open);
+  menuBtn.setAttribute('aria-expanded', String(open));
+  menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+});
+mnav.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', closeMenu); });
+document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeMenu(); });
 
 fillServices(); renderTabs(); renderMenu(); renderSlots(); renderHours();
 </script>
