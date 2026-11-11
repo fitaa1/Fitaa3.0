@@ -38,6 +38,14 @@
       "destination": "/demo/restaurant/index.html"
     },
     {
+      "source": "/demo/aesthetics",
+      "destination": "/demo/aesthetics/index.html"
+    },
+    {
+      "source": "/demo/photographer",
+      "destination": "/demo/photographer/index.html"
+    },
+    {
       "source": "/privacy",
       "destination": "/privacy/index.html"
     },
