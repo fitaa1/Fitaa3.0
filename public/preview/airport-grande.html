@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <meta name="robots" content="noindex, nofollow">
 <!-- Link preview (WhatsApp, iMessage, social). The page itself stays out of search results. -->
 <meta property="og:type" content="website">
@@ -105,7 +106,10 @@ footer{padding:36px 0 96px;color:var(--muted);font-size:14px;border-top:1px soli
 .stat{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:14px 10px;text-align:center}
 .stat b{display:block;font-family:"DM Sans",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;font-weight:700;letter-spacing:-.035em;font-size:26px;color:#e9c98b;line-height:1.1}
 .stat small{font-size:12.5px;color:#cfd6d1}
-.topbar{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--paper) 86%,transparent);backdrop-filter:saturate(1.4) blur(14px);-webkit-backdrop-filter:saturate(1.4) blur(14px);border-bottom:1px solid var(--line)}</style>
+.topbar{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--paper) 86%,transparent);backdrop-filter:saturate(1.4) blur(14px);-webkit-backdrop-filter:saturate(1.4) blur(14px);border-bottom:1px solid var(--line)}
+/* Tap targets: 44 px or more (SITE_STANDARD.md). scripts/check-pages.mjs measures them. */
+.btn.small,.btn.ghost{min-height:44px}
+</style>
 </head>
 <body>
 <div class="banner"><b>Preview</b> made for Airport Grande by Fitaa Creative, using your public listing photos. Not live yet.</div>

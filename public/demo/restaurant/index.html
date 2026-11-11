@@ -179,6 +179,9 @@ footer.foot .wrap{padding-top:28px;padding-bottom:40px;display:flex;justify-cont
   .tent,.changed{animation:none}
   .links a::after,.mobile-nav{transition:none}
 }
+
+/* Tap targets: 44 px or more (SITE_STANDARD.md). scripts/check-pages.mjs measures them. */
+.brand{min-height:44px}
 </style>
 </head>
 <body>
@@ -367,6 +370,8 @@ var menuBtn = document.querySelector('.menu-btn'), mnav = $('mobile-nav');
 function closeMenu() { mnav.classList.remove('open'); menuBtn.setAttribute('aria-expanded', 'false'); menuBtn.setAttribute('aria-label', 'Open menu'); }
 menuBtn.addEventListener('click', function () {
   var open = !mnav.classList.contains('open');
+  /* The menu opens just under the header wherever the header sits, so the demo bar above it never hides the first link. */
+  if (open) mnav.style.top = Math.round(menuBtn.closest('header').getBoundingClientRect().bottom) + 'px';
   mnav.classList.toggle('open', open);
   menuBtn.setAttribute('aria-expanded', String(open));
   menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');

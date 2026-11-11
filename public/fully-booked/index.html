@@ -417,7 +417,15 @@ footer nav{display:flex;gap:24px}
 .js .reveal{opacity:0;transform:translateY(24px);transition:opacity .75s cubic-bezier(.22,1,.36,1),transform .75s cubic-bezier(.22,1,.36,1)}
 .js .reveal.in{opacity:1;transform:none}
 @media (prefers-reduced-motion: reduce){.blob,.pill i,.ping-card,.tier:target{animation:none}.ping-body{transition:none}.js .reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
-em{font-style:normal}</style>
+em{font-style:normal}
+/* Tap targets: 44 px or more (SITE_STANDARD.md). scripts/check-pages.mjs measures them. */
+.brand{min-height:44px}
+.back{line-height:44px}
+.proof-group figure>a{display:flex;align-items:center;min-height:44px}
+footer nav a{display:inline-flex;align-items:center;min-height:44px}
+.currency-flags button{width:44px;height:44px}
+.currency-flags{margin-inline:-10px}
+</style>
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">

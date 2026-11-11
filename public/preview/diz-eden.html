@@ -112,6 +112,9 @@ footer{padding:36px 0 104px;color:var(--muted);font-size:14px;border-top:1px sol
 .js .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
 .js .reveal.in{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.js .reveal{opacity:1;transform:none;transition:none}nav.links a::after,.btn{transition:none}}
+
+/* Tap targets: 44 px or more (SITE_STANDARD.md). scripts/check-pages.mjs measures them. */
+.btn.small,.btn.ghost{min-height:44px}
 </style>
 </head>
 <body>

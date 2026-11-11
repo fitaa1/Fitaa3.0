@@ -516,3 +516,19 @@ button[data-open="false"] {
   [data-reveal] { opacity: 1; transform: none; transition: none; }
   button[data-open] { transition: none; }
 }
+
+/* ─── Tap targets: 44 px or more (SITE_STANDARD.md, Function and look) ───────
+ * Small links get taller with padding and an equal negative margin, so the hit
+ * area grows and nothing on the page moves. scripts/check-pages.mjs measures it. */
+.nav-link { padding: 14px 4px; margin: -14px -4px; }
+.nav-link::after { bottom: 12px; left: 4px; }
+.nav-link:hover::after,
+.nav-link[aria-current="location"]::after { width: calc(100% - 8px); }
+a[aria-label="Fitaa Creative home"] { padding-block: 5px; margin-block: -5px; }
+a[aria-label="Fitaa Creative, back to top"] { padding-block: 3px; margin-block: -3px; }
+header a[href="/"]:not([aria-label]) { padding-block: 14px; margin-block: -14px; }
+.btn-gold { min-height: 44px; }
+footer a[href="/privacy"], footer a[href="/terms"] { display: inline-block; padding-block: 14px; margin-block: -14px; }
+footer a[aria-label^="Follow"], footer a[aria-label^="View"] { display: inline-flex; padding: 14px; margin: -14px; }
+button[data-currency] { min-width: 44px; min-height: 44px; }
+a[href^="mailto:"]:not(.underline), a[href^="tel:"]:not(.underline) { display: inline-block; padding-block: 12px; margin-block: -12px; }
