@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <!--
   DEMO: beauty studio booking page (Fully Booked by Fitaa, Get Chosen tier)
   One self-contained file. Export: download it and drop it on any host, or open it in a browser.
@@ -161,7 +162,11 @@ footer.foot .wrap{padding-top:28px;padding-bottom:40px;display:flex;justify-cont
   .sticky-book{display:flex;position:fixed;left:16px;right:16px;bottom:16px;z-index:20;box-shadow:0 14px 30px rgba(42,30,34,.28)}
   footer.foot .wrap{padding-bottom:96px}
 }
-header.top{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--ground) 86%,transparent);backdrop-filter:saturate(1.4) blur(14px);-webkit-backdrop-filter:saturate(1.4) blur(14px);box-shadow:0 0 0 100vmax color-mix(in srgb,var(--ground) 86%,transparent);clip-path:inset(0 -100vmax)}</style>
+header.top{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--ground) 86%,transparent);backdrop-filter:saturate(1.4) blur(14px);-webkit-backdrop-filter:saturate(1.4) blur(14px);box-shadow:0 0 0 100vmax color-mix(in srgb,var(--ground) 86%,transparent);clip-path:inset(0 -100vmax)}
+/* Tap targets: 44 px or more (SITE_STANDARD.md). scripts/check-pages.mjs measures them. */
+.brand{display:inline-flex;flex-direction:column;justify-content:center;min-height:44px}
+.links a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;min-width:44px}
+</style>
 </head>
 <body>
 

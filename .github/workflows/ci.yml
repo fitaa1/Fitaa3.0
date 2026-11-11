@@ -1,0 +1,34 @@
+# Runs on every pull request and on main. A red X on a pull request means do not merge.
+# 1. The site must typecheck, build and pass its tests.
+# 2. Every built page must pass the page check (scripts/check-pages.mjs): no sideways scroll,
+#    console error, image without alt text, tap target under 44 px, phone menu that does not
+#    open fully or first load over the budget, at 390, 820 and 1440 px in light and dark.
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  build-test-and-page-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run build
+      - run: npm test
+      - name: Install the browser for the page check
+        run: |
+          npm install --no-save playwright
+          npx playwright install --with-deps chromium
+      - run: npm run check:pages

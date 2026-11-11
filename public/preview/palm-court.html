@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <meta name="robots" content="noindex, nofollow">
 <!-- Link preview (WhatsApp, iMessage, social). The page itself stays out of search results. -->
 <meta property="og:type" content="website">
@@ -80,7 +81,10 @@ footer{padding:36px 0 96px;color:var(--muted);font-size:14px;border-top:1px soli
 .sticky{position:fixed;left:0;right:0;bottom:0;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:rgba(251,248,242,.94);backdrop-filter:blur(8px);border-top:1px solid var(--line);display:flex;justify-content:center}
 .sticky .btn{width:100%;max-width:420px}
 @media(min-width:860px){.sticky{display:none}footer{padding-bottom:36px}}
-.topbar{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--paper) 86%,transparent);backdrop-filter:saturate(1.4) blur(14px);-webkit-backdrop-filter:saturate(1.4) blur(14px);border-bottom:1px solid var(--line)}</style>
+.topbar{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--paper) 86%,transparent);backdrop-filter:saturate(1.4) blur(14px);-webkit-backdrop-filter:saturate(1.4) blur(14px);border-bottom:1px solid var(--line)}
+/* Tap targets: 44 px or more (SITE_STANDARD.md). scripts/check-pages.mjs measures them. */
+.btn.small,.btn.ghost{min-height:44px}
+</style>
 </head>
 <body>
 <div class="banner"><b>Preview</b> made for Palm Court Apartments by Fitaa Creative, using your public listing photos. Not live yet.</div>
