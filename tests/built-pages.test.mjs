@@ -69,8 +69,10 @@ test("demos show the copy's price sign", { skip: !built && "run npm run build fi
       const signs = [...html.matchAll(/<span data-sym>([^<]*)<\/span>/g)].map((m) => m[1]);
       assert.ok(signs.length > 0 && signs.every((s) => s === sym), `${dir} ${demo}: signs ${signs}`);
     }
-    const studio = fs.readFileSync(path.join(dist, dir, "demo/studio/index.html"), "utf8");
-    assert.ok(studio.includes(`sym: '${sym}',`), `${dir} studio: sign`);
+    for (const demo of ["studio", "aesthetics", "photographer"]) {
+      const html = fs.readFileSync(path.join(dist, dir, `demo/${demo}/index.html`), "utf8");
+      assert.ok(html.includes(`sym: '${sym}',`), `${dir} ${demo}: sign`);
+    }
   }
 });
 

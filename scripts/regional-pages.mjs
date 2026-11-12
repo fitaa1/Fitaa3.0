@@ -66,6 +66,8 @@ const DEMOS = {
   clinic: { number: /var HOST_NUMBER = '\d+';/, set: (n) => `var HOST_NUMBER = '${n}';`, syms: 4 },
   restaurant: { number: /var HOST_NUMBER = '\d+';/, set: (n) => `var HOST_NUMBER = '${n}';`, syms: 6 },
   studio: { number: /whatsapp: '\d+',/, set: (n) => `whatsapp: '${n}',`, syms: 0, jsSym: true },
+  aesthetics: { number: /whatsapp: '\d+',/, set: (n) => `whatsapp: '${n}',`, syms: 0, jsSym: true },
+  photographer: { number: /whatsapp: '\d+',/, set: (n) => `whatsapp: '${n}',`, syms: 0, jsSym: true },
 };
 for (const [name, d] of Object.entries(DEMOS)) {
   const src = read(`demo/${name}/index.html`);

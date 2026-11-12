@@ -28,9 +28,9 @@ export const config = {
     "/fully-booked",
     "/fully-booked/",
     "/fully-booked/index.html",
-    "/demo/:page(ridge-house|studio|car-rental|clinic|restaurant)",
-    "/demo/:page(ridge-house|studio|car-rental|clinic|restaurant)/",
-    "/demo/:page(ridge-house|studio|car-rental|clinic|restaurant)/index.html",
+    "/demo/:page(ridge-house|studio|car-rental|clinic|restaurant|aesthetics|photographer)",
+    "/demo/:page(ridge-house|studio|car-rental|clinic|restaurant|aesthetics|photographer)/",
+    "/demo/:page(ridge-house|studio|car-rental|clinic|restaurant|aesthetics|photographer)/index.html",
     "/_r/:path*",
   ],
 };
@@ -44,6 +44,8 @@ export const PAGES: Record<string, string> = {
   "/demo/car-rental": "/demo/car-rental/index.html",
   "/demo/clinic": "/demo/clinic/index.html",
   "/demo/restaurant": "/demo/restaurant/index.html",
+  "/demo/aesthetics": "/demo/aesthetics/index.html",
+  "/demo/photographer": "/demo/photographer/index.html",
 };
 
 export const COOKIE = "fitaa_cur";

@@ -66,6 +66,8 @@ header.top{display:flex;align-items:center;justify-content:space-between;gap:16p
 nav.links{display:flex;gap:28px;font-size:15px}
 nav.links a{color:var(--muted);text-decoration:none}
 nav.links a:hover{color:var(--text)}
+.mobile-nav{display:none}
+.menu-btn{display:none;width:44px;height:44px;border-radius:12px;border:1px solid var(--line-strong);background:transparent;color:var(--text);cursor:pointer;align-items:center;justify-content:center}
 
 .hero{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:48px;align-items:center;padding-top:40px;padding-bottom:72px}
 .hero h1{font-size:62px;line-height:1.04;margin:22px 0}
@@ -142,14 +144,24 @@ footer.foot .wrap{padding-top:28px;padding-bottom:40px;display:flex;justify-cont
   .header-cta{display:none}
   .sticky-book{display:flex;position:fixed;left:16px;right:16px;bottom:16px;z-index:20;box-shadow:0 12px 30px rgba(0,0,0,.45)}
   footer.foot .wrap{padding-bottom:96px}
+  .menu-btn{display:inline-flex}
+  .mobile-nav{display:block;position:fixed;top:84px;left:0;right:0;z-index:29;background:var(--ground);border-bottom:1px solid var(--line);padding:8px 16px 16px;transform:translateY(-8px);opacity:0;visibility:hidden;transition:opacity .25s,transform .25s,visibility .25s}
+  .mobile-nav.open{opacity:1;transform:none;visibility:visible}
+  .mobile-nav a{display:flex;align-items:center;min-height:48px;border-bottom:1px solid var(--line);text-decoration:none;font-weight:600}
+  .mobile-nav a[aria-current="true"]{color:var(--accent)}
 }
 header.top{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--ground) 86%,transparent);backdrop-filter:saturate(1.4) blur(14px);-webkit-backdrop-filter:saturate(1.4) blur(14px);box-shadow:0 0 0 100vmax color-mix(in srgb,var(--ground) 86%,transparent);clip-path:inset(0 -100vmax)}
 /* Tap targets: 44 px or more (SITE_STANDARD.md). scripts/check-pages.mjs measures them. */
 .brand{min-height:44px}
 .links a{display:inline-flex;align-items:center;min-height:44px}
+/* On a phone the name and the menu button share one line. */
+@media (max-width:860px){header.top{flex-wrap:nowrap}.brand{min-width:0}.menu-btn{flex:none}}
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+</svg>
 
 <div class="demo-bar">Demo by <a href="https://fitaacreative.com/fully-booked">Fitaa Creative</a>. Your business name, photos and prices go here, live in 7 days.</div>
 
@@ -165,7 +177,14 @@ header.top{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--g
     <a href="#how">How to book</a>
   </nav>
   <a class="cta header-cta" href="#request" style="min-height:44px;padding:0 20px;font-size:15px">Request your dates</a>
+  <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu"><svg width="22" height="22"><use href="#i-menu"/></svg></button>
 </header>
+<nav class="mobile-nav" id="mobile-nav" aria-label="Page sections">
+  <a href="#apartments">Apartments</a>
+  <a href="#gallery">Gallery</a>
+  <a href="#location">Location</a>
+  <a href="#how">How to book</a>
+</nav>
 
 <main>
 <section class="wrap hero">
@@ -315,6 +334,20 @@ form.addEventListener('submit', function (e) {
   if (window.fitaaTrack) fitaaTrack('booking_request', { label: 'Request your dates', niche: 'hosts', nights: nights(), guests: gEl.value });
   window.open('https://wa.me/' + HOST_NUMBER + '?text=' + encodeURIComponent(msg), '_blank', 'noopener');
 });
+
+/* Phone menu */
+var menuBtn = document.querySelector('.menu-btn'), mnav = document.getElementById('mobile-nav');
+function closeMenu() { mnav.classList.remove('open'); menuBtn.setAttribute('aria-expanded', 'false'); menuBtn.setAttribute('aria-label', 'Open menu'); }
+menuBtn.addEventListener('click', function () {
+  var open = !mnav.classList.contains('open');
+  /* The menu opens just under the header wherever the header sits, so the demo bar above it never hides the first link. */
+  if (open) mnav.style.top = Math.round(menuBtn.closest('header').getBoundingClientRect().bottom) + 'px';
+  mnav.classList.toggle('open', open);
+  menuBtn.setAttribute('aria-expanded', String(open));
+  menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+});
+mnav.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', closeMenu); });
+document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeMenu(); });
 </script>
 <script defer src="/fitaa-analytics.js"></script>
 </body>
