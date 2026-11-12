@@ -151,6 +151,14 @@ try {
             else if (m.hidden.length) problems.push(`${where}: the phone menu did not open fully, these links are hidden or covered: ${m.hidden.join(", ")}`);
             if (process.env.SHOTS) await p.screenshot({ path: path.join(root, "shots", `${pagePath.replace(/[^\w]+/g, "_") || "home"}-390-menu.png`) });
           }
+          // Demo pages must not show bracket placeholders (Nigel, 12 Nov 2026).
+          if (pagePath.startsWith("/demo/")) {
+            const placeholder = await p.evaluate(() => {
+              const text = document.body.innerText || "";
+              return /\[[A-Z][^\]]*\]/.test(text);
+            });
+            if (placeholder) problems.push(`${where}: a bracket placeholder is showing`);
+          }
           // A page whose section nav is hidden on a phone needs a visible menu button to open it.
           const missingMenu = await p.evaluate(() => {
             const navs = [...document.querySelectorAll("nav")];
