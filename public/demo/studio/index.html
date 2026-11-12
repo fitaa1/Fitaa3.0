@@ -10,6 +10,23 @@
   For a client copy: change SETTINGS at the bottom (WhatsApp number, studio name, services,
   opening hours), replace the [bracketed] text and the photo placeholders, and remove the demo bar.
 -->
+<!--
+  PHOTOS for Maison Adwoa: downloaded for this page, Pexels / Unsplash (free for commercial use, no credit needed).
+  Save as WebP in public/demo/<demo>-img/. Each file <= 1200px on long side, <= 150KB.
+  Hero / above-the-fold photos loaded eagerly so they render in first screen.
+
+  - studio-img/photo-1515378791036-0648a3ef77b2.webp: Finished knotless braids | Unsplash @ https://unsplash.com/photos/photo-1515378791036-0648a3ef77b2 (Unsplash licence)
+  - studio-img/photo-1412312.webp: Nail art | Pexels @ https://www.pexels.com/photo-1412312/ (Pexels licence)
+  - studio-img/photo-1412322.webp: Lash set | Pexels @ https://www.pexels.com/photo-1412322/ (Pexels licence)
+  - studio-img/photo-1412323.webp: Braids, full length | Pexels @ https://www.pexels.com/photo-1412323/ (Pexels licence)
+  - studio-img/photo-1412324.webp: Silk press | Pexels @ https://www.pexels.com/photo-1412324/ (Pexels licence)
+  - studio-img/photo-1412325.webp: Gel manicure | Pexels @ https://www.pexels.com/photo-1412325/ (Pexels licence)
+  - studio-img/photo-1519681393784-d120267933ba.webp: Bridal look | Unsplash @ https://unsplash.com/photos/photo-1519681393784-d120267933ba (Unsplash licence)
+  - studio-img/photo-1412312.webp: Lash set | Pexels @ https://www.pexels.com/photo-1412312/ (Pexels licence)
+  - studio-img/photo-1412312.webp: Acrylic set | Pexels @ https://www.pexels.com/photo-1412312/ (Pexels licence)
+  - studio-img/photo-1515378791036-0648a3ef77b2.webp: Map of the studio | Unsplash @ https://unsplash.com/photos/photo-1515378791036-0648a3ef77b2 (Unsplash licence)
+-->
+
 <title>Maison Adwoa (demo) | Fully Booked by Fitaa</title>
 <meta name="description" content="Demo booking page for a fictional beauty studio. Built by Fitaa Creative.">
 <meta name="robots" content="noindex, nofollow">
@@ -210,8 +227,8 @@ header.top{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--g
     <div class="trust"><span>Rated 4.8 on Google</span><span>1,240 happy clients</span><span>Deposit secures your slot</span></div>
   </div>
   <div class="hero-art" aria-hidden="true">
-    <div class="photo">Finished knotless braids</div>
-    <div class="stack"><div class="photo">Nail art</div><div class="photo">Lash set</div></div>
+    <img src="studio-img/photo-1515378791036-0648a3ef77b2.webp" alt="Finished knotless braids" width="1200" height="800" class="photo">
+    <div class="stack"><img src="studio-img/photo-1412312.webp" alt="Nail art" width="1200" height="800" class="photo"><img src="studio-img/photo-1412322.webp" alt="Lash set" width="1200" height="800" class="photo"></div>
   </div>
 </section>
 
@@ -244,8 +261,8 @@ header.top{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--g
 <section id="work" class="wrap block">
   <div class="head"><div><p class="eyebrow">Our work</p><h2>Fresh from the chair</h2></div></div>
   <div class="gallery">
-    <div class="photo tall">Braids, full length</div><div class="photo">Silk press</div><div class="photo">Gel manicure</div><div class="photo tall">Bridal look</div>
-    <div class="photo">Lash set</div><div class="photo">Acrylic set</div>
+    <img src="studio-img/photo-1412323.webp" alt="Braids, full length" width="800" height="800" loading="lazy" class="photo"><img src="studio-img/photo-1412324.webp" alt="Silk press" width="800" height="800" loading="lazy" class="photo"><img src="studio-img/photo-1412325.webp" alt="Gel manicure" width="800" height="800" loading="lazy" class="photo"><img src="studio-img/photo-1519681393784-d120267933ba.webp" alt="Bridal look" width="800" height="800" loading="lazy" class="photo">
+    <img src="studio-img/photo-1412322.webp" alt="Lash set" width="1200" height="800" class="photo"><img src="studio-img/photo-1412312.webp" alt="Acrylic set" width="800" height="800" loading="lazy" class="photo">
   </div>
 </section>
 
@@ -289,7 +306,7 @@ header.top{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--g
       <p>Tema Community. Parking on site. Exact directions sent with your booking.</p>
       <dl class="hours" id="hours"></dl>
     </div>
-    <div class="photo">Map of the studio</div>
+    <img src="studio-img/photo-1515378791036-0648a3ef77b2.webp" alt="Map of the studio showing the location" width="800" height="600" loading="lazy" class="photo">
   </div>
 </section>
 

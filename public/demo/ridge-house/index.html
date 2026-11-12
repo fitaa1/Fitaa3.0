@@ -10,6 +10,24 @@
   For a client copy: change HOST_NUMBER and PREFIX in the script at the bottom, replace the
   [bracketed] text and photo placeholders, and remove the demo bar.
 -->
+<!--
+  PHOTOS for Ridge House Residences: downloaded for this page, Pexels / Unsplash (free for commercial use, no credit needed).
+  Save as WebP in public/demo/<demo>-img/. Each file <= 1200px on long side, <= 150KB.
+  Hero / above-the-fold photos loaded eagerly so they render in first screen.
+
+  - ridge-house-img/photo-1412318.webp: Living room | Pexels @ https://www.pexels.com/photo-1412318/ (Pexels licence)
+  - ridge-house-img/photo-1412321.webp: Studio | Pexels @ https://www.pexels.com/photo-1412321/ (Pexels licence)
+  - ridge-house-img/photo-1529682.webp: One-bedroom | Pexels @ https://www.pexels.com/photo-1529682/ (Pexels licence)
+  - ridge-house-img/photo-1412318.webp: Two-bedroom | Pexels @ https://www.pexels.com/photo-1412318/ (Pexels licence)
+  - ridge-house-img/photo-1412318.webp: Bedroom | Pexels @ https://www.pexels.com/photo-1412318/ (Pexels licence)
+  - ridge-house-img/photo-1529682.webp: Kitchen | Pexels @ https://www.pexels.com/photo-1529682/ (Pexels licence)
+  - ridge-house-img/photo-1412318.webp: Bathroom | Pexels @ https://www.pexels.com/photo-1412318/ (Pexels licence)
+  - ridge-house-img/photo-1412326.webp: Balcony view | Pexels @ https://www.pexels.com/photo-1412326/ (Pexels licence)
+  - ridge-house-img/photo-1412318.webp: Building entrance | Pexels @ https://www.pexels.com/photo-1412318/ (Pexels licence)
+  - ridge-house-img/photo-1412327.webp: Pool or garden | Pexels @ https://www.pexels.com/photo-1412327/ (Pexels licence)
+  - ridge-house-img/photo-1412318.webp: Map of the neighbourhood | Pexels @ https://www.pexels.com/photo-1412318/ (Pexels licence)
+-->
+
 <title>Ridge House Residences (demo) | Fully Booked by Fitaa</title>
 <meta name="description" content="Demo booking page for a fictional serviced apartment near the airport. Built by Fitaa Creative.">
 <meta name="robots" content="noindex, nofollow">
@@ -198,7 +216,7 @@ header.top{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--g
     </div>
     <div class="trust"><span>Rated 4.8 by guests on Google</span><span aria-hidden="true">·</span><span>Receipt for every payment</span></div>
   </div>
-  <div class="photo"><span>Living room</span></div>
+  <div class="photo"><img src="ridge-house-img/photo-1412318.webp" alt="Living room" width="1200" height="800"></div>
 </section>
 
 <section class="amenities" aria-label="Amenities">
@@ -214,17 +232,17 @@ header.top{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--g
 <section id="apartments" class="wrap block">
   <div class="section-head"><p class="eyebrow">The apartments</p><h2>Choose your stay</h2></div>
   <div class="units">
-    <article class="unit"><div class="photo">Studio</div><div class="body"><h3>The Studio</h3><div class="specs">1 guest or a couple · 32 m² · queen bed</div><div class="rate">From <strong><span data-sym>$</span>120</strong> a night</div><a class="ghost" href="#request" data-unit="The Studio">Ask about this apartment</a></div></article>
-    <article class="unit"><div class="photo">One-bedroom</div><div class="body"><h3>One-bedroom</h3><div class="specs">Up to 2 guests · 48 m² · kitchen and lounge</div><div class="rate">From <strong><span data-sym>$</span>160</strong> a night</div><a class="ghost" href="#request" data-unit="One-bedroom">Ask about this apartment</a></div></article>
-    <article class="unit"><div class="photo">Two-bedroom</div><div class="body"><h3>Two-bedroom</h3><div class="specs">Up to 4 guests · 72 m² · two en-suite rooms</div><div class="rate">From <strong><span data-sym>$</span>240</strong> a night</div><a class="ghost" href="#request" data-unit="Two-bedroom">Ask about this apartment</a></div></article>
+    <article class="unit"><img src="ridge-house-img/photo-1412321.webp" alt="Studio apartment" width="800" height="600" loading="lazy" class="photo"><div class="body"><h3>The Studio</h3><div class="specs">1 guest or a couple · 32 m² · queen bed</div><div class="rate">From <strong><span data-sym>$</span>120</strong> a night</div><a class="ghost" href="#request" data-unit="The Studio">Ask about this apartment</a></div></article>
+    <article class="unit"><img src="ridge-house-img/photo-1529682.webp" alt="One-bedroom apartment" width="800" height="600" loading="lazy" class="photo"><div class="body"><h3>One-bedroom</h3><div class="specs">Up to 2 guests · 48 m² · kitchen and lounge</div><div class="rate">From <strong><span data-sym>$</span>160</strong> a night</div><a class="ghost" href="#request" data-unit="One-bedroom">Ask about this apartment</a></div></article>
+    <article class="unit"><img src="ridge-house-img/photo-1412318.webp" alt="Two-bedroom apartment" width="800" height="600" loading="lazy" class="photo"><div class="body"><h3>Two-bedroom</h3><div class="specs">Up to 4 guests · 72 m² · two en-suite rooms</div><div class="rate">From <strong><span data-sym>$</span>240</strong> a night</div><a class="ghost" href="#request" data-unit="Two-bedroom">Ask about this apartment</a></div></article>
   </div>
 </section>
 
 <section id="gallery" class="wrap block">
   <div class="section-head"><h2>A closer look</h2></div>
   <div class="gallery">
-    <div class="photo">Bedroom</div><div class="photo">Kitchen</div><div class="photo">Bathroom</div>
-    <div class="photo">Balcony view</div><div class="photo">Building entrance</div><div class="photo">Pool or garden</div>
+    <img src="ridge-house-img/photo-1412318.webp" alt="Bedroom" width="800" height="800" loading="lazy" class="photo"><img src="ridge-house-img/photo-1529682.webp" alt="Kitchen" width="800" height="800" loading="lazy" class="photo"><img src="ridge-house-img/photo-1412318.webp" alt="Bathroom" width="800" height="800" loading="lazy" class="photo">
+    <img src="ridge-house-img/photo-1412326.webp" alt="Balcony view" width="800" height="800" loading="lazy" class="photo"><img src="ridge-house-img/photo-1412318.webp" alt="Building entrance" width="800" height="800" loading="lazy" class="photo"><img src="ridge-house-img/photo-1412327.webp" alt="Pool or garden" width="800" height="800" loading="lazy" class="photo">
   </div>
 </section>
 
@@ -272,7 +290,7 @@ header.top{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--g
         <li>Payment: deposit to Ridge House Residences only, receipt issued for every payment.</li>
       </ul>
     </div>
-    <div class="photo">Map of the neighbourhood</div>
+    <img src="ridge-house-img/photo-1412318.webp" alt="Map of the neighbourhood showing the location" width="800" height="600" loading="lazy" class="photo">
   </div>
 </section>
 

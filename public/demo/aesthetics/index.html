@@ -10,6 +10,23 @@
   For a client copy: change SETTINGS at the bottom (WhatsApp number, clinic name, services,
   opening hours), replace the [bracketed] text and the photo placeholders, and remove the demo bar.
 -->
+<!--
+  PHOTOS for Lumen Skin Clinic: downloaded for this page, Pexels / Unsplash (free for commercial use, no credit needed).
+  Save as WebP in public/demo/<demo>-img/. Each file <= 1200px on long side, <= 150KB.
+  Hero / above-the-fold photos loaded eagerly so they render in first screen.
+
+  - aesthetics-img/photo-1519681393784-d120267933ba.webp: Clear skin consult | Unsplash @ https://unsplash.com/photos/photo-1519681393784-d120267933ba (Unsplash licence)
+  - aesthetics-img/photo-1412313.webp: Skin needling | Pexels @ https://www.pexels.com/photo-1412313/ (Pexels licence)
+  - aesthetics-img/photo-1412326.webp: Hydrating facial | Pexels @ https://www.pexels.com/photo-1412326/ (Pexels licence)
+  - aesthetics-img/photo-1412327.webp: Acne programme | Pexels @ https://www.pexels.com/photo-1412327/ (Pexels licence)
+  - aesthetics-img/photo-1412328.webp: Hydrated skin at 12 weeks | Pexels @ https://www.pexels.com/photo-1412328/ (Pexels licence)
+  - aesthetics-img/photo-1412329.webp: Skin rebalancing after breakout | Pexels @ https://www.pexels.com/photo-1412329/ (Pexels licence)
+  - aesthetics-img/photo-1412313.webp: Aging contour first results | Pexels @ https://www.pexels.com/photo-1412313/ (Pexels licence)
+  - aesthetics-img/photo-1412326.webp: Texture improvement from facials | Pexels @ https://www.pexels.com/photo-1412326/ (Pexels licence)
+  - aesthetics-img/photo-1412313.webp: Post-procedure care | Pexels @ https://www.pexels.com/photo-1412313/ (Pexels licence)
+  - aesthetics-img/photo-1519681393784-d120267933ba.webp: Map of the clinic | Unsplash @ https://unsplash.com/photos/photo-1519681393784-d120267933ba (Unsplash licence)
+-->
+
 <title>Lumen Skin Clinic (demo) | Fully Booked by Fitaa</title>
 <meta name="description" content="Demo booking page for a fictional skin and aesthetics clinic. Built by Fitaa Creative.">
 <meta name="robots" content="noindex, nofollow">
@@ -214,8 +231,8 @@ header.top{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--g
     <div class="trust"><span>Rated 4.8 on Google</span><span>900 happy clients</span><span>Consultation from <span data-money>$40</span></span></div>
   </div>
   <div class="hero-art" aria-hidden="true">
-    <div class="photo">Clear skin consult</div>
-    <div class="stack"><div class="photo">Skin needling</div><div class="photo">Hydrating facial</div></div>
+    <img src="aesthetics-img/photo-1519681393784-d120267933ba.webp" alt="Clear skin consult" width="1200" height="800" class="photo">
+    <div class="stack"><img src="aesthetics-img/photo-1412313.webp" alt="Skin needling treatment" width="1200" height="800" class="photo"><img src="aesthetics-img/photo-1412326.webp" alt="Hydrating facial treatment" width="1200" height="800" class="photo"></div>
   </div>
 </section>
 
@@ -248,8 +265,8 @@ header.top{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--g
 <section id="results" class="wrap block">
   <div class="head"><div><p class="eyebrow">Results</p><h2>Real skin, real change</h2></div></div>
   <div class="gallery">
-    <div class="photo tall">Acne programme</div><div class="photo">Hydrated skin at 12 weeks</div><div class="photo">Skin rebalancing after breakout</div><div class="photo tall">Aging contour first results</div>
-    <div class="photo">Texture improvement from facials</div><div class="photo">Post-procedure care</div>
+    <img src="aesthetics-img/photo-1412327.webp" alt="Acne programme" width="800" height="800" loading="lazy" class="photo"><img src="aesthetics-img/photo-1412328.webp" alt="Hydrated skin at 12 weeks" width="800" height="800" loading="lazy" class="photo"><img src="aesthetics-img/photo-1412329.webp" alt="Skin rebalancing after breakout" width="800" height="800" loading="lazy" class="photo"><img src="aesthetics-img/photo-1412313.webp" alt="Aging contour first results" width="800" height="800" loading="lazy" class="photo">
+    <img src="aesthetics-img/photo-1412326.webp" alt="Texture improvement from facials" width="800" height="800" loading="lazy" class="photo"><img src="aesthetics-img/photo-1412313.webp" alt="Post-procedure care" width="800" height="800" loading="lazy" class="photo">
   </div>
 </section>
 
@@ -293,7 +310,7 @@ header.top{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--g
       <p>Airport Residential Area. Quiet, ground floor, no stairs. Exact directions sent with your booking.</p>
       <dl class="hours" id="hours"></dl>
     </div>
-    <div class="photo">Map of the clinic</div>
+    <img src="aesthetics-img/photo-1519681393784-d120267933ba.webp" alt="Map of the clinic showing the location" width="800" height="600" loading="lazy" class="photo">
   </div>
 </section>
 
