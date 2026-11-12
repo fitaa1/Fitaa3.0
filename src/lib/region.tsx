@@ -10,8 +10,8 @@ import flags from "@/config/flags.json";
 import { siteConfig } from "@/config/site";
 
 export type Currency = "GHS" | "GBP" | "USD";
-export type PriceKey = "getFound" | "getChosen" | "stayBooked" | "founding" | "upkeep";
-export type NoteKey = "foundingNote" | "upkeepNote";
+export type PriceKey = "getFound" | "getChosen" | "stayBooked" | "upkeep";
+export type NoteKey = "getChosenNote" | "upkeepNote";
 type CurrencyPrices = Record<PriceKey, { amount: number; text: string }> &
   Record<NoteKey, string> & { label: string; name: string };
 

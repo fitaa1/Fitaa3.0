@@ -30,6 +30,8 @@ British spelling, plain English, no em dashes in copy (the "—CREATIVE—" word
 
 Straight to the point (Nigel, 4 Nov 2026): every package card on /fully-booked has its own link (`#get-found`, `#get-chosen`, `#stay-booked`) and every niche has its own demo, so a lead is sent to the exact thing they asked for, never the general page. The site's own package cards are the exception: their "Learn more" opens the whole of /fully-booked, because the open card already shows that package (Nigel, 7 Nov). Keep those ids when editing the page, and give each new demo its own tab, card and `?demo=` value. Get Chosen is the website alone: never list the Get Found items inside it.
 
+The founding offer ended on 12 Nov 2026 (Nigel). One price for the website, paid once in full before work starts, live in 7 days or half the fee back.
+
 ## Known issues and guards
 
 Found in the 22 Oct 2026 audit. Each line is a mistake that happened once, and the guard that stops it repeating.

@@ -161,7 +161,7 @@
    "name": "How do I pay?",
    "acceptedAnswer": {
     "@type": "Answer",
-    "text": "Half to start and half once you approve the work, for every client. Message us on WhatsApp and we'll send payment details for your country."
+    "text": "Once, in full, before we start. Your site is live in 7 days from the day we have your photos, prices and logo, or half your fee comes back."
    }
   },
   {
@@ -177,7 +177,7 @@
    "name": "Who else have you done this for?",
    "acceptedAnswer": {
     "@type": "Answer",
-    "text": "You'd be one of our founding clients, which is why the price is lower and the guarantee is there. Our past work for brands in Ghana and the UK is on the main site."
+    "text": "Our past work for brands in Ghana and the UK is on the main site."
    }
   }
  ]
@@ -307,23 +307,21 @@ a{color:inherit}
 .abroad{font-size:.85rem;color:var(--fg);opacity:.8;margin-top:.45rem}
 .center-lede{max-width:40rem;margin:1rem auto 0}
 .timing{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:.5rem 0 1.5rem}
-.founding-note{font-size:.85rem;color:var(--gold-text);border:1px solid color-mix(in srgb,var(--gold) 30%,transparent);background:var(--gold-soft);padding:8px 12px;margin-bottom:1.5rem}
+.paid{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:.5rem 0 1.5rem}
+.chosen-note{font-size:.85rem;color:var(--gold-text);border:1px solid color-mix(in srgb,var(--gold) 30%,transparent);background:var(--gold-soft);padding:8px 12px;margin-bottom:1.5rem}
 .tier ul{list-style:none;padding:0;margin:0 0 2rem;display:flex;flex-direction:column;gap:12px;flex-grow:1}
 .tier li{display:flex;gap:12px;font-size:.92rem;color:var(--muted);line-height:1.6}
 .tier li svg{flex:none;margin-top:.2rem;color:var(--accent)}
 .tier .btn{min-height:48px;padding:0 1.2rem;font-size:.68rem}
 .upkeep{text-align:center;color:var(--muted);font-size:.88rem;margin-top:2.5rem}
 
-/* ── Guarantee and founding ── */
+/* ── Guarantee ── */
 .guarantee{position:relative;overflow:hidden;border:1px solid color-mix(in srgb,var(--accent) 30%,transparent);background:var(--card);padding:3rem 1.75rem;display:grid;gap:2rem;align-items:center}
 .guarantee::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 0% 50%,color-mix(in srgb,var(--accent) 10%,transparent),transparent 70%);pointer-events:none}
 @media(min-width:768px){.guarantee{grid-template-columns:auto minmax(0,1fr);padding:4rem}}
 .guarantee svg{color:var(--accent);position:relative}
 .guarantee > div{position:relative}
 .guarantee h2{font-size:clamp(1.9rem,4vw,3.2rem);font-weight:600;line-height:1.1;margin-bottom:1rem}
-.founding{margin-top:24px;border:1px solid color-mix(in srgb,var(--gold) 35%,transparent);background:var(--gold-soft);padding:2.5rem 1.75rem;display:grid;gap:1.5rem;align-items:center}
-@media(min-width:768px){.founding{grid-template-columns:minmax(0,1fr) auto;padding:2.5rem 4rem}}
-.founding h3{font-size:clamp(1.5rem,3vw,2.2rem);font-weight:600;line-height:1.15;margin-bottom:.75rem}
 
 /* ── Steps ── */
 .steps{list-style:none;padding:0;margin:3.5rem 0 0;display:grid;gap:1px;background:var(--border);border:1px solid var(--border)}
@@ -495,7 +493,6 @@ footer nav a{display:inline-flex;align-items:center;min-height:44px}
       <article id="get-found" class="tier reveal">
         <span class="step">Step 1</span>
         <h3>Get Found</h3><p class="tag">Be easy to find and easy to message.</p>
-        <div class="price"><b data-price="getFound">$130</b><span>one-off</span></div><p class="timing">Live in 5 days</p>
         <ul>
           <li><svg width="16" height="16"><use href="#tick"/></svg>Google Business Profile set up and polished with photos, hours, services and a map pin (eligible businesses)</li>
           <li><svg width="16" height="16"><use href="#tick"/></svg>Instagram profile tune-up, so your bio sends people straight to WhatsApp</li>
@@ -503,14 +500,15 @@ footer nav a{display:inline-flex;align-items:center;min-height:44px}
           <li><svg width="16" height="16"><use href="#tick"/></svg>One click-to-chat link for your bio, flyers and signage</li>
           <li><svg width="16" height="16"><use href="#tick"/></svg>A print-ready QR card for your counter, front desk or car, for reviews or bookings</li>
         </ul>
+        <div class="price"><b data-price="getFound">$130</b><span>one-off</span></div>
+        <p class="paid">Paid once, before we start.</p>
+        <p class="timing">Live in 5 days</p>
         <a class="btn btn-line" data-wa="Hi Fitaa, I'm interested in Get Found. My business is " href="#" target="_blank" rel="noopener"><svg class="wa"><use href="#wa"/></svg>Ask about Get Found</a>
       </article>
       <article id="get-chosen" class="tier featured reveal">
         <span class="badge">The website</span>
         <span class="step">Step 2</span>
         <h3>Get Chosen</h3><p class="tag">Look like the obvious choice.</p>
-        <div class="price"><b data-price="getChosen">$300</b><span>one-off</span></div><p class="timing">Live in 7 days</p>
-        <p class="founding-note" data-price="foundingNote">Founding price $215 for the first 3 clients, for up to 3 units</p>
         <ul>
           <li><svg width="16" height="16"><use href="#tick"/></svg>A premium one-page website on your own web address (domain billed at cost)</li>
           <li><svg width="16" height="16"><use href="#tick"/></svg>Built for search, so you show up on Google and in AI answers like ChatGPT</li>
@@ -519,18 +517,24 @@ footer nav a{display:inline-flex;align-items:center;min-height:44px}
           <li><svg width="16" height="16"><use href="#tick"/></svg>Deposit or payment details written in, so requests arrive ready to confirm</li>
           <li><svg width="16" height="16"><use href="#tick"/></svg>One round of revisions before launch</li>
         </ul>
+        <div class="price"><b data-price="getChosen">$300</b><span>one-off</span></div>
+        <p class="chosen-note" data-price="getChosenNote">One business at one location. For hosts, up to 3 units.</p>
+        <p class="paid">Paid once, before we start.</p>
+        <p class="timing">Live in 7 days</p>
         <a class="btn btn-gold" data-wa="Hi Fitaa, I'm interested in Get Chosen. My business is " href="#" target="_blank" rel="noopener"><svg class="wa"><use href="#wa"/></svg>Ask about Get Chosen</a>
       </article>
       <article id="stay-booked" class="tier reveal">
         <span class="step">Step 3</span>
         <h3>Stay Booked</h3><p class="tag">Keep the calendar full.</p>
-        <div class="price"><b data-price="stayBooked">$100</b><span>per month</span></div><p class="timing">3-month minimum</p>
         <ul>
           <li><svg width="16" height="16"><use href="#tick"/></svg>Meta ads managed for you, aimed at the people most likely to book, from your own neighbourhood to visitors planning their trip</li>
           <li><svg width="16" height="16"><use href="#tick"/></svg>Website and catalogue updates with new photos, prices and seasonal offers</li>
           <li><svg width="16" height="16"><use href="#tick"/></svg>A one-page monthly report on WhatsApp enquiries, bookings, new reviews and ad results</li>
           <li><svg width="16" height="16"><use href="#tick"/></svg>Ad budget is separate, paid straight to Meta, and agreed with you before anything runs</li>
         </ul>
+        <div class="price"><b data-price="stayBooked">$100</b><span>per month</span></div>
+        <p class="paid">Paid each month in advance.</p>
+        <p class="timing">3-month minimum</p>
         <a class="btn btn-line" data-wa="Hi Fitaa, I'm interested in Stay Booked. My business is " href="#" target="_blank" rel="noopener"><svg class="wa"><use href="#wa"/></svg>Ask about Stay Booked</a>
       </article>
     </div>
@@ -547,14 +551,6 @@ footer nav a{display:inline-flex;align-items:center;min-height:44px}
         <h2>Live in 7 days, or half your fee back.</h2>
         <p class="lede">No fine print beyond this: the clock starts when we have your photos, prices, logo and account access. One revision round is included. If you pause us, the clock pauses too.</p>
       </div>
-    </div>
-    <div class="founding reveal">
-      <div>
-        <span class="eyebrow gold">Founding clients</span>
-        <h3>Get Chosen for <span data-price="founding">$215</span>, for the first 3 clients.</h3>
-        <p class="lede">In return, we ask for a short video or written testimonial, permission to show the work, and your before and after numbers at 30 days.</p>
-      </div>
-      <a class="btn btn-gold" data-wa="Hi Fitaa, I'd like to be a founding client. My business is " href="#" target="_blank" rel="noopener"><svg class="wa"><use href="#wa"/></svg>Become a founding client</a>
     </div>
   </div>
 </section>
@@ -650,9 +646,9 @@ footer nav a{display:inline-flex;align-items:center;min-height:44px}
       <details><summary>Do you work with businesses where I am?<svg width="18" height="18"><use href="#plus"/></svg></summary><p>Yes. We work with businesses in Ghana and the UK, including a shipping company in Southampton, and everything runs over WhatsApp, so distance doesn't slow anything down. Prices are fixed in cedis, pounds and dollars, and this page shows yours.</p></details>
       <details><summary>How long does it take?<svg width="18" height="18"><use href="#plus"/></svg></summary><p>Get Found is live in 5 days and Get Chosen in 7 days. The clock starts when we have your photos, prices, logo and account access, and if you pause us, the clock pauses too.</p></details>
       <details><summary>What do I need to send you?<svg width="18" height="18"><use href="#plus"/></svg></summary><p>Photos, prices and your logo, plus access to the accounts we're setting up for you. We handle the rest.</p></details>
-      <details><summary>How do I pay?<svg width="18" height="18"><use href="#plus"/></svg></summary><p>Half to start and half once you approve the work, for every client. Message us on WhatsApp and we'll send payment details for your country.</p></details>
+      <details><summary>How do I pay?<svg width="18" height="18"><use href="#plus"/></svg></summary><p>Once, in full, before we start. Your site is live in 7 days from the day we have your photos, prices and logo, or half your fee comes back.</p></details>
       <details><summary>What if you miss the 7 days?<svg width="18" height="18"><use href="#plus"/></svg></summary><p>Half your fee comes back to you. No fine print beyond this. The clock starts when we have your photos, prices, logo and account access, and one revision round is included.</p></details>
-      <details><summary>Who else have you done this for?<svg width="18" height="18"><use href="#plus"/></svg></summary><p>You'd be one of our founding clients, which is why the price is lower and the guarantee is there. Our past work for brands in Ghana and the UK is on the <a href="https://fitaacreative.com/#work">main site</a>.</p></details>
+      <details><summary>Who else have you done this for?<svg width="18" height="18"><use href="#plus"/></svg></summary><p>Our past work for brands in Ghana and the UK is on the <a href="https://fitaacreative.com/#work">main site</a>.</p></details>
     </div>
   </div>
 </section>

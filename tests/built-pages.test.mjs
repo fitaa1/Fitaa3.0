@@ -19,7 +19,7 @@ for (const cur of ["ghs", "gbp", "usd"]) for (const line of ["gh", "uk"]) copies
 /* Every price text of the other two currencies, so a copy can be searched for any of them. */
 const others = (cur) =>
   pricing.order.filter((c) => c !== cur).flatMap((c) =>
-    ["getFound", "getChosen", "stayBooked", "founding", "upkeep"].map((k) => pricing.currencies[c][k].text),
+    ["getFound", "getChosen", "stayBooked", "upkeep"].map((k) => pricing.currencies[c][k].text),
   );
 
 test("every copy middleware.ts can serve exists, in its own currency and WhatsApp line", { skip: !built && "run npm run build first" }, () => {
@@ -53,7 +53,7 @@ test("Fully Booked shows only the copy's own currency on screen", { skip: !built
     /* Visible text only: drop the switch's price list in SETTINGS and the structured data. */
     const visible = html.replace(/<script[\s\S]*?<\/script>/g, "").replace(/<style[\s\S]*?<\/style>/g, "");
     for (const k of ["getFound", "getChosen", "stayBooked"]) assert.ok(visible.includes(`>${p[k].text}<`), `${dir}: ${k} ${p[k].text} not shown`);
-    assert.ok(visible.includes(p.foundingNote), `${dir}: founding note`);
+    assert.ok(visible.includes(p.getChosenNote), `${dir}: Get Chosen note`);
     assert.ok(visible.includes(p.upkeepNote), `${dir}: upkeep note`);
     for (const t of others(cur.toUpperCase())) assert.ok(!visible.includes(`>${t}<`), `${dir}: shows another currency's price ${t}`);
     assert.match(visible, new RegExp(`data-currency="${cur.toUpperCase()}" aria-pressed="true"`), `${dir}: switch does not mark ${cur}`);
@@ -91,7 +91,7 @@ test("demos show the copy's price sign", { skip: !built && "run npm run build fi
 
 test("llms.txt lists the prices in all three currencies", { skip: !built && "run npm run build first" }, () => {
   const txt = fs.readFileSync(path.join(dist, "llms.txt"), "utf8");
-  for (const cur of pricing.order) for (const k of ["getFound", "getChosen", "stayBooked", "founding", "upkeep"]) assert.ok(txt.includes(pricing.currencies[cur][k].text), `${cur} ${k}`);
+  for (const cur of pricing.order) for (const k of ["getFound", "getChosen", "stayBooked", "upkeep"]) assert.ok(txt.includes(pricing.currencies[cur][k].text), `${cur} ${k}`);
 });
 
 test("the currency flags sit only in the footer, quiet, with the copy's currency pressed", { skip: !built && "run npm run build first" }, () => {

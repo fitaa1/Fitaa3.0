@@ -156,8 +156,8 @@ different hue at the same lightness:
 - Drop shadows are not used. The two exceptions are the focus ring and the floating WhatsApp button.
 - Champagne is hardware: lines of 2 px or less, icons of 20 px or less, the signature line, and at
   most one filled button per screen. Never a background for a section and never body text.
-- Leather appears at most once per page, on the one premium moment (the founding price, the
-  guarantee, a signed-off result). If a second use is tempting, the first one was wrong.
+- Leather appears at most once per page, on the one premium moment (the guarantee, a signed-off
+  result). If a second use is tempting, the first one was wrong.
 
 ### 3. Craft in the details (Pagani)
 

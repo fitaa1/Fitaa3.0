@@ -25,7 +25,7 @@ function swap(html, re, value, label, expected = 1) {
 const PRICES = Object.fromEntries(
   CURRENCIES.map((cur) => {
     const c = pricing.currencies[cur];
-    return [cur, { getFound: c.getFound.text, getChosen: c.getChosen.text, stayBooked: c.stayBooked.text, founding: c.founding.text, foundingNote: c.foundingNote, upkeepNote: c.upkeepNote }];
+    return [cur, { getFound: c.getFound.text, getChosen: c.getChosen.text, stayBooked: c.stayBooked.text, getChosenNote: c.getChosenNote, upkeepNote: c.upkeepNote }];
   }),
 );
 
@@ -33,7 +33,7 @@ const PRICES = Object.fromEntries(
 const fb = read("fully-booked/index.html");
 const fbKeys = [...fb.matchAll(/data-price="(\w+)"/g)].map((m) => m[1]);
 for (const k of fbKeys) if (!(k in PRICES.USD)) throw new Error(`regional-pages: Fully Booked asks for data-price="${k}", which pricing.json does not have`);
-if (fbKeys.length < 6) throw new Error(`regional-pages: Fully Booked has ${fbKeys.length} [data-price] elements, expected at least 6`);
+for (const k of ["getFound", "getChosen", "stayBooked", "getChosenNote", "upkeepNote"]) if (!fbKeys.includes(k)) throw new Error(`regional-pages: Fully Booked is missing data-price="${k}"`);
 
 for (const copy of COPIES) {
   const p = PRICES[copy.cur];
@@ -107,15 +107,13 @@ for (const [name, d] of Object.entries(DEMOS)) {
 /* ── llms.txt: the published prices, all three currencies ─────────────── */
 const c = pricing.currencies;
 const all = (key) => CURRENCIES.map((cur) => c[cur][key].text).join(" / ");
-const extra = CURRENCIES.filter((cur) => c[cur].extraUnit).map((cur) => `${c[cur].extraUnit.text} per extra unit in ${cur}`).join(", ");
 const line =
   `- [Fully Booked by Fitaa](https://fitaacreative.com/fully-booked): the three packages in full, for any business that takes bookings or enquiries (car rentals, clinics, short-let hosts, studios and more), in Ghana, the UK and beyond. ` +
   `Prices are fixed in three currencies (visitors in Ghana see GHS, in the UK GBP, everywhere else USD). ` +
   `Get Found ${all("getFound")} one-off, live in 5 days (Google Business Profile, WhatsApp Business, click-to-chat link, QR card). ` +
-  `Get Chosen ${all("getChosen")} one-off, live in 7 days (a premium one-page website on your own web address, built for Google and AI answers, with WhatsApp booking); ` +
-  `founding price ${all("founding")} for the first 3 clients, for up to 3 units${extra ? ` (${extra})` : ""}. ` +
+  `Get Chosen ${all("getChosen")} one-off, live in 7 days (a premium one-page website on your own web address, built for Google and AI answers, with WhatsApp booking). ` +
   `Stay Booked ${all("stayBooked")} a month, 3-month minimum (Meta ads management, updates, monthly report; ad budget separate). ` +
-  `Upkeep only ${all("upkeep")} a month. Live in 7 days, or 50% of your fee back. Payment is half to start and half on approval.`;
+  `Upkeep only ${all("upkeep")} a month. Live in 7 days, or 50% of your fee back. Payment is once, in full, before work starts.`;
 const llms = read("llms.txt");
 write("llms.txt", swap(llms, /^- \[Fully Booked by Fitaa\]\(.*$/m, line, "Fully Booked line in llms.txt"));
 
