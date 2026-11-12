@@ -56,10 +56,8 @@ gh run view $(gh run list --branch "$(git branch --show-current)" --limit 1 --js
 5. Never change a limit or remove a rule in `scripts/check-pages.mjs` to get to green. Fix the page.
 6. Do not install Playwright or a browser in the Codespace, and do not ask Nigel to upgrade Node for the page check. GitHub runs it.
 7. End with one short report: the branch name, `git log --oneline origin/main..HEAD`, the last lines of `npm run build`, and the line "check: green" or "check: red" with the problems still listed. Paste raw output for each. Never claim a commit, build, push or green check without it, and say plainly what was not done.
-8. When the check is green, open the pull request yourself, so Nigel can see the preview. Claude reviews every pull request before Nigel merges it, and writes its review as a comment on the pull request (Nigel, 12 Nov 2026). Write the description to a file with real line breaks, never as one line with `\n` in it:
+8. When the check is green, stop and report. Do not open a pull request. Claude reviews your branch and opens the pull request, so an open pull request always means reviewed and ready for Nigel to merge (Nigel, 12 Nov 2026: one step for him, never two).
 
-```
-cat > pr.md <<'EOF'
 ## Why
 <the task in one or two sentences, and who asked>
 
