@@ -24,6 +24,9 @@ for (const cur of CURRENCIES) {
   for (const key of ["getChosenNote", "upkeepNote"]) {
     if (typeof c[key] !== "string" || !c[key]) throw new Error(`pricing.json: ${cur}.${key} is missing`);
   }
+  // A note that names a price must name the price in this file, so the two can never drift apart.
+  if (!c.upkeepNote.includes(c.upkeep.text)) throw new Error(`pricing.json: ${cur}.upkeepNote does not say ${c.upkeep.text}`);
+  if (c.extraUnit && !c.getChosenNote.includes(c.extraUnit.text)) throw new Error(`pricing.json: ${cur}.getChosenNote does not say ${c.extraUnit.text}`);
 }
 
 /* The Ghana number comes from the one phone number in src/config/site.ts. */
