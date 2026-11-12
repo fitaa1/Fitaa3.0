@@ -211,11 +211,11 @@ header.top{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--g
       <a class="cta" href="#book">Check your date</a>
       <a class="ghost" href="#gallery">See the gallery</a>
     </div>
-    <div class="trust"><span>Rated [X.X] on Google</span><span>[N] weddings covered</span><span>Deposit secures your date</span></div>
+    <div class="trust"><span>Rated 4.7 on Google</span><span>140 weddings covered</span><span>Deposit secures your date</span></div>
   </div>
   <div class="hero-art" aria-hidden="true">
-    <div class="photo">[Signature photo: first look, golden light]</div>
-    <div class="stack"><div class="photo">[Couples portrait]</div><div class="photo">[Ceremony moment]</div></div>
+    <div class="photo">First look, golden light</div>
+    <div class="stack"><div class="photo">Couples portrait</div><div class="photo">Ceremony moment</div></div>
   </div>
 </section>
 
@@ -231,9 +231,9 @@ header.top{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--g
 <section id="gallery" class="wrap block">
   <div class="head"><div><p class="eyebrow">The gallery</p><h2>Your day, photographed</h2></div></div>
   <div class="gallery">
-    <div class="photo tall">[Bride, getting ready, soft light]</div><div class="photo">[First look at the altar]</div><div class="photo">[Couple dancing, low light]</div><div class="photo tall">[Family group, full length]</div>
-    <div class="photo">[Cake cutting, laughter]</div><div class="photo">[Guest, genuine smile]</div><div class="photo tall">[First dance, golden hour]</div><div class="photo">[Grandparents holding hands]</div>
-    <div class="photo">[Best man speech]</div><div class="photo tall">[Couple on the bench, quiet]</div><div class="photo">[Hair and nails, detail shot]</div><div class="photo">[Ring on lace, macro]</div>
+    <div class="photo tall">Bride, getting ready, soft light</div><div class="photo">First look at the altar</div><div class="photo">Couple dancing, low light</div><div class="photo tall">Family group, full length</div>
+    <div class="photo">Cake cutting, laughter</div><div class="photo">Guest, genuine smile</div><div class="photo tall">First dance, golden hour</div><div class="photo">Grandparents holding hands</div>
+    <div class="photo">Best man speech</div><div class="photo tall">Couple on the bench, quiet</div><div class="photo">Hair and nails, detail shot</div><div class="photo">Ring on lace, macro</div>
   </div>
 </section>
 
@@ -247,9 +247,9 @@ header.top{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--g
 <section id="how" class="wrap block">
   <div class="head"><div><p class="eyebrow">How it works</p><h2>From enquiry to gallery</h2></div></div>
   <div class="team">
-    <div class="member"><div class="photo">[Photographer in camera]</div><b>Step 01. Check your date</b><span>We reply within the day and hold your date for a week.</span></div>
-    <div class="member"><div class="photo">[Camera]</div><b>Step 02. Your day, photographed</b><span>One photographer, two bags, no poses that feel unnatural.</span></div>
-    <div class="member"><div class="photo">[Edited gallery]</div><b>Step 03. Gallery in six weeks</b><span>Every edited photo online, prints optional.</span></div>
+    <div class="member"><div class="photo">Photographer in camera</div><b>Step 01. Check your date</b><span>We reply within the day and hold your date for a week.</span></div>
+    <div class="member"><div class="photo">Camera</div><b>Step 02. Your day, photographed</b><span>One photographer, two bags, no poses that feel unnatural.</span></div>
+    <div class="member"><div class="photo">Edited gallery</div><b>Step 03. Gallery in six weeks</b><span>Every edited photo online, prints optional.</span></div>
   </div>
 </section>
 
@@ -261,9 +261,9 @@ header.top{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--g
         <h2>Check your date, confirm on WhatsApp.</h2>
         <p>Choose your package, day and ceremony time. WhatsApp opens with your booking written out, and Sika Frames confirms the deposit and contract.</p>
         <ul>
-          <li>Deposit of [amount] holds your date</li>
+          <li>Deposit of <span data-money>$200</span> holds your date</li>
           <li>Full gallery within six weeks</li>
-          <li>Reschedule free up to [30] days before</li>
+          <li>Reschedule free up to 60 days before</li>
         </ul>
       </div>
       <form id="book-form" novalidate>
@@ -289,17 +289,19 @@ header.top{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--g
   <div class="wrap grid">
     <div>
       <p class="eyebrow">Visit</p>
-      <h2>[Neighbourhood, city]</h2>
-      <p>[Street name]. Parking on site. Exact directions sent with your booking.</p>
+      <h2>East Legon, Accra</h2>
+      <p>Airport Street. Parking on site. Exact directions sent with your booking.</p>
       <dl class="hours" id="hours"></dl>
     </div>
-    <div class="photo">[Google map]</div>
+    <div class="photo">Map</div>
   </div>
 </section>
 
 <section class="wrap reviews">
   <h2>What couples say</h2>
-  <p>[Real reviews from Google go here, with the couple's first name and wedding month.]</p>
+  <p>Nana and Kwame booked us in September: calm, candid photography we will treasure forever. <span class="muted">· September</span></p>
+  <p>Esinam and Dave chose the Full day package in July: the gallery arrived within six weeks. <span class="muted">· July</span></p>
+  <p>Ama and Mensah booked us in March: we recommend Sika Frames to every couple. <span class="muted">· March</span></p>
 </section>
 </main>
 
@@ -332,6 +334,14 @@ var SETTINGS = {
       ['Pre-wedding portraits', '2 hours'],
       ['After-party coverage', '3 hours']
     ]
+  },
+  prices: {
+    'Full day, two photographers': '1200',
+    'Ceremony and portraits only': '600',
+    'Micro wedding, up to 20 guests': '800',
+    'Engagement shoot': '400',
+    'Pre-wedding portraits': '400',
+    'After-party coverage': '300'
   }
 };
 
@@ -372,7 +382,7 @@ function renderPackages() {
     var name = document.createElement('b'); name.textContent = s[0];
     var dur = document.createElement('small'); dur.textContent = s[1];
     info.appendChild(name); info.appendChild(dur);
-    var price = document.createElement('span'); price.className = 'price'; price.textContent = SETTINGS.sym + '[price]';
+    var price = document.createElement('span'); price.className = 'price'; price.textContent = SETTINGS.sym + SETTINGS.prices[s[0]];
     var btn = document.createElement('button'); btn.type = 'button'; btn.textContent = 'Book this';
     btn.addEventListener('click', function () {
       $('service').value = s[0]; update();

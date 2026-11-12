@@ -69,6 +69,28 @@ const DEMOS = {
   aesthetics: { number: /whatsapp: '\d+',/, set: (n) => `whatsapp: '${n}',`, syms: 0, jsSym: true },
   photographer: { number: /whatsapp: '\d+',/, set: (n) => `whatsapp: '${n}',`, syms: 0, jsSym: true },
 };
+// Sample prices in the demos are written once, in US dollars, and shown in the visitor's own money
+// at a believable size (Nigel, 12 Nov 2026: a lead must see a finished example, and GHS 14 a day for
+// a car is not one). Fitaa's own prices never pass through here: they come from pricing.json.
+const SAMPLE_RATE = { USD: 1, GHS: 11.75, GBP: 0.757 }; // the 4 Nov 2026 rates noted in pricing.json
+const sampleAmount = (usd, cur) => {
+  const raw = Number(usd) * SAMPLE_RATE[cur];
+  if (cur === "USD") return Number(usd);
+  const step = cur === "GHS" ? (raw >= 100 ? 10 : 5) : (raw >= 40 ? 5 : 1);
+  return Math.max(step, Math.round(raw / step) * step);
+};
+const money = (n) => n.toLocaleString("en-GB");
+function sampleMoney(html, cur, sym, name) {
+  let n = 0;
+  // 1. A sign followed by a number in the page itself.
+  html = html.replace(/(<span data-sym>[^<]*<\/span>)(\d[\d,]*)/g, (_, sign, amt) => { n++; return sign + money(sampleAmount(amt.replace(/,/g, ""), cur)); });
+  // 2. A sum written inside a sentence.
+  html = html.replace(/<span data-money>\$(\d+)<\/span>/g, (_, amt) => { n++; return `<span data-money>${sym}${money(sampleAmount(amt, cur))}</span>`; });
+  // 3. The price list in a page's SETTINGS.
+  html = html.replace(/(prices: \{)([^}]*)(\})/, (_, a, body, z) => a + body.replace(/: '(\d+)'/g, (_m, amt) => { n++; return `: '${money(sampleAmount(amt, cur))}'`; }) + z);
+  if (!n) throw new Error(`regional-pages: ${name} has no sample prices to show in ${cur}`);
+  return html;
+}
 for (const [name, d] of Object.entries(DEMOS)) {
   const src = read(`demo/${name}/index.html`);
   for (const copy of COPIES) {
@@ -77,6 +99,7 @@ for (const [name, d] of Object.entries(DEMOS)) {
     html = swap(html, d.number, d.set(copy.number), `${name} WhatsApp number`);
     if (d.syms) html = swap(html, /<span data-sym>[^<]*<\/span>/, `<span data-sym>${sym}</span>`, `${name} price sign`, d.syms);
     if (d.jsSym) html = swap(html, /sym: '[^']*',/, `sym: '${sym}',`, `${name} SETTINGS.sym`);
+    html = sampleMoney(html, copy.cur, sym, name);
     write(`${copy.dir}demo/${name}/index.html`, html);
   }
 }

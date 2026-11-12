@@ -211,11 +211,11 @@ header.top{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--g
       <a class="cta" href="#book">Book a consultation</a>
       <a class="ghost" href="#menu">See the menu</a>
     </div>
-    <div class="trust"><span>Rated [X.X] on Google</span><span>[N] happy clients</span><span>Consultation from [amount]</span></div>
+    <div class="trust"><span>Rated 4.8 on Google</span><span>900 happy clients</span><span>Consultation from <span data-money>$40</span></span></div>
   </div>
   <div class="hero-art" aria-hidden="true">
-    <div class="photo">[Signature treatment: clear skin consult]</div>
-    <div class="stack"><div class="photo">[Skin needling]</div><div class="photo">[Hydrating facial]</div></div>
+    <div class="photo">Clear skin consult</div>
+    <div class="stack"><div class="photo">Skin needling</div><div class="photo">Hydrating facial</div></div>
   </div>
 </section>
 
@@ -239,17 +239,17 @@ header.top{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--g
 <section id="team" class="wrap block">
   <div class="head"><div><p class="eyebrow">The practitioners</p><h2>People you can trust</h2></div></div>
   <div class="team">
-    <div class="member"><div class="photo">[Practitioner photo]</div><b>[Practitioner name]</b><span>Cosmetology · [X] years</span></div>
-    <div class="member"><div class="photo">[Practitioner photo]</div><b>[Practitioner name]</b><span>Dermatology · [X] years</span></div>
-    <div class="member"><div class="photo">[Practitioner photo]</div><b>[Practitioner name]</b><span>Advanced aesthetics · [X] years</span></div>
+    <div class="member"><div class="photo">Portrait</div><b>Ama Boaten</b><span>Cosmetology · 11 years</span></div>
+    <div class="member"><div class="photo">Portrait</div><b>Kwame Asante</b><span>Dermatology · 14 years</span></div>
+    <div class="member"><div class="photo">Portrait</div><b>Naa Shika</b><span>Advanced aesthetics · 9 years</span></div>
   </div>
 </section>
 
 <section id="results" class="wrap block">
   <div class="head"><div><p class="eyebrow">Results</p><h2>Real skin, real change</h2></div></div>
   <div class="gallery">
-    <div class="photo tall">[Before and after: acne programme]</div><div class="photo">[Hydrated skin, 12 week mark]</div><div class="photo">[Skin rebalancing after flare-up]</div><div class="photo tall">[Aging contour, first results]</div>
-    <div class="photo">[Texture improvement, facials]</div><div class="photo">[Post-procedure care]</div>
+    <div class="photo tall">Acne programme</div><div class="photo">Hydrated skin at 12 weeks</div><div class="photo">Skin rebalancing after breakout</div><div class="photo tall">Aging contour first results</div>
+    <div class="photo">Texture improvement from facials</div><div class="photo">Post-procedure care</div>
   </div>
 </section>
 
@@ -261,9 +261,9 @@ header.top{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--g
         <h2>Two consults before any treatment.</h2>
         <p>Choose your treatment, day and time. WhatsApp opens with your booking written out, and the clinic confirms with the consultation details.</p>
         <ul>
-          <li>Consultation of [amount]</li>
-          <li>Treatment plans start from [amount]</li>
-          <li>Reschedule free up to [24] hours before</li>
+          <li>Consultation of <span data-money>$40</span></li>
+          <li>Treatment plans start from <span data-money>$120</span></li>
+          <li>Reschedule free up to 72 hours before</li>
         </ul>
       </div>
       <form id="book-form" novalidate>
@@ -289,17 +289,19 @@ header.top{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--g
   <div class="wrap grid">
     <div>
       <p class="eyebrow">Visit</p>
-      <h2>[Neighbourhood, city]</h2>
-      <p>[Street name, landmark]. Quiet, ground floor, no stairs. Exact directions sent with your booking.</p>
+      <h2>Accra, Ghana</h2>
+      <p>Airport Residential Area. Quiet, ground floor, no stairs. Exact directions sent with your booking.</p>
       <dl class="hours" id="hours"></dl>
     </div>
-    <div class="photo">[Google map of the clinic]</div>
+    <div class="photo">Map of the clinic</div>
   </div>
 </section>
 
 <section class="wrap reviews">
   <h2>What clients say</h2>
-  <p>[Real reviews from Google go here, with the client's first name and treatment.]</p>
+  <p>Aba chose the Skin analysis and plan and her skin calmed within weeks. <span class="muted">· March</span></p>
+  <p>Yaa chose the Hydrating facial and left calm and glowing. <span class="muted">· October</span></p>
+  <p>Akosua chose the RF skin tightening and saw her contour improve. <span class="muted">· January</span></p>
 </section>
 </main>
 
@@ -343,6 +345,21 @@ var SETTINGS = {
       ['Vitamin C infusion', '30 minutes'],
       ['Hydration booster', '30 minutes']
     ]
+  },
+  prices: {
+    'Skin consultation': '40',
+    'Skin analysis and plan': '120',
+    'Hydrating facial': '65',
+    'Deep cleansing and exfoliation': '80',
+    'Anti-ageing facial': '110',
+    'Skin needling': '95',
+    'Microneedling and growth factors': '150',
+    'RF skin tightening': '130',
+    'LED light therapy': '60',
+    'Dermal filler': '180',
+    'Botanical injectable': '95',
+    'Vitamin C infusion': '45',
+    'Hydration booster': '40'
   }
 };
 
@@ -383,7 +400,7 @@ function renderMenu() {
     var name = document.createElement('b'); name.textContent = s[0];
     var dur = document.createElement('small'); dur.textContent = s[1];
     info.appendChild(name); info.appendChild(dur);
-    var price = document.createElement('span'); price.className = 'price'; price.textContent = SETTINGS.sym + '[price]';
+    var price = document.createElement('span'); price.className = 'price'; price.textContent = SETTINGS.sym + SETTINGS.prices[s[0]];
     var btn = document.createElement('button'); btn.type = 'button'; btn.textContent = 'Book this';
     btn.addEventListener('click', function () {
       $('service').value = s[0]; update();
