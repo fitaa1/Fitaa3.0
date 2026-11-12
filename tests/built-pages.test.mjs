@@ -61,6 +61,19 @@ test("Fully Booked shows only the copy's own currency on screen", { skip: !built
   }
 });
 
+test("demo sample prices are shown at a believable size in each currency", { skip: !built && "run npm run build first" }, () => {
+  const read = (dir, demo) => fs.readFileSync(path.join(dist, dir, `demo/${demo}/index.html`), "utf8");
+  const rates = (html) => [...html.matchAll(/<span data-sym>[^<]*<\/span>([\d,]+)<\/strong> a day/g)].map((m) => Number(m[1].replace(/,/g, "")));
+  const usd = rates(read("_r/usd-uk", "car-rental")), ghs = rates(read("_r/ghs-gh", "car-rental")), gbp = rates(read("_r/gbp-uk", "car-rental"));
+  assert.equal(usd.length, 3);
+  assert.ok(ghs.every((n, i) => n >= usd[i] * 10 && n % 10 === 0), `car rental in GHS: ${ghs}`);
+  assert.ok(gbp.every((n, i) => n < usd[i]), `car rental in GBP: ${gbp}`);
+  for (const demo of ["studio", "aesthetics", "photographer"]) {
+    assert.ok(!/data-money>\$/.test(read("_r/ghs-gh", demo)), `${demo}: a dollar sum is left in the GHS copy`);
+    assert.ok(/data-money>GHS [\d,]+</.test(read("_r/ghs-gh", demo)), `${demo}: no GHS sum`);
+  }
+});
+
 test("demos show the copy's price sign", { skip: !built && "run npm run build first" }, () => {
   for (const { cur, dir } of copies) {
     const sym = pricing.currencies[cur.toUpperCase()].symbol;

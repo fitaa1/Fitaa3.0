@@ -155,7 +155,7 @@ try {
           if (pagePath.startsWith("/demo/")) {
             const placeholder = await p.evaluate(() => {
               const text = document.body.innerText || "";
-              return /\[[A-Z][^\]]*\]/.test(text);
+              return /\[[^\]\n]{1,80}\]/.test(text);
             });
             if (placeholder) problems.push(`${where}: a bracket placeholder is showing`);
           }
