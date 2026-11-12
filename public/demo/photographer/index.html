@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <!--
   DEMO: wedding photographer booking page (Fully Booked by Fitaa, Get Chosen tier)
   One self-contained file. Export: download it and drop it on any host, or open it in a browser.
@@ -165,9 +166,23 @@ header.top{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--g
 /* Tap targets: 44 px or more (SITE_STANDARD.md). scripts/check-pages.mjs measures them. */
 .brand{display:inline-flex;flex-direction:column;justify-content:center;min-height:44px}
 .links a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;min-width:44px}
+
+/* Phone menu, the same one the studio demo uses. */
+.mobile-nav{display:none}
+.menu-btn{display:none;width:44px;height:44px;border-radius:12px;border:1px solid var(--line-strong);background:transparent;color:var(--ink);cursor:pointer;align-items:center;justify-content:center}
+@media (max-width:900px){
+  .menu-btn{display:inline-flex}
+  .mobile-nav{display:block;position:fixed;top:84px;left:0;right:0;z-index:29;background:var(--ground);border-bottom:1px solid var(--line);padding:8px 16px 16px;transform:translateY(-8px);opacity:0;visibility:hidden;transition:opacity .25s,transform .25s,visibility .25s}
+  .mobile-nav.open{opacity:1;transform:none;visibility:visible}
+  .mobile-nav a{display:flex;align-items:center;min-height:48px;border-bottom:1px solid var(--line);text-decoration:none;font-weight:600;color:var(--ink)}
+}
+@media (prefers-reduced-motion:reduce){.mobile-nav{transition:none}}
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+</svg>
 
 <div class="demo-bar">Demo by <a href="https://fitaacreative.com/fully-booked?studio">Fitaa Creative</a>. Your photography name, packages and prices go here, live in 7 days.</div>
 
@@ -177,14 +192,21 @@ header.top{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--g
     <a href="#gallery">Gallery</a><a href="#packages">Packages</a><a href="#how">How it works</a><a href="#book">Book</a>
   </nav>
   <a class="cta header-cta" href="#book">Check your date</a>
+  <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu"><svg width="22" height="22"><use href="#i-menu"/></svg></button>
 </header>
+<nav class="mobile-nav" id="mobile-nav" aria-label="Page sections">
+  <a href="#gallery">Gallery</a>
+  <a href="#packages">Packages</a>
+  <a href="#how">How it works</a>
+  <a href="#book">Book</a>
+</nav>
 
 <main>
 <section class="wrap hero">
   <div>
     <p class="eyebrow">Wedding photographer · Accra &amp; beyond</p>
     <h1>Wedding photographs you will still <em>love</em> in thirty years.</h1>
-    <p class="lead">Quiet photography for weddings of every size — candlelit, candid and unforced. Check your date, choose your package, and confirm on WhatsApp in under a minute.</p>
+    <p class="lead">Quiet photography for weddings of every size, candlelit, candid and unforced. Check your date, choose your package, and confirm on WhatsApp in under a minute.</p>
     <div class="actions">
       <a class="cta" href="#book">Check your date</a>
       <a class="ghost" href="#gallery">See the gallery</a>
@@ -225,9 +247,9 @@ header.top{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--g
 <section id="how" class="wrap block">
   <div class="head"><div><p class="eyebrow">How it works</p><h2>From enquiry to gallery</h2></div></div>
   <div class="team">
-    <div class="member"><div class="photo">[Photographer in camera]</div><b>Step 01 — Check your date</b><span>We reply within the day and hold your date for a week.</span></div>
-    <div class="member"><div class="photo">[Camera]</div><b>Step 02 — Your day, photographed</b><span>One photographer, two bags, no poses that feel unnatural.</span></div>
-    <div class="member"><div class="photo">[Edited gallery]</div><b>Step 03 — Gallery in six weeks</b><span>Every edited photo online, prints optional.</span></div>
+    <div class="member"><div class="photo">[Photographer in camera]</div><b>Step 01. Check your date</b><span>We reply within the day and hold your date for a week.</span></div>
+    <div class="member"><div class="photo">[Camera]</div><b>Step 02. Your day, photographed</b><span>One photographer, two bags, no poses that feel unnatural.</span></div>
+    <div class="member"><div class="photo">[Edited gallery]</div><b>Step 03. Gallery in six weeks</b><span>Every edited photo online, prints optional.</span></div>
   </div>
 </section>
 
@@ -314,6 +336,19 @@ var SETTINGS = {
 };
 
 var $ = function (id) { return document.getElementById(id); };
+/* Phone menu */
+var menuBtn = document.querySelector('.menu-btn'), mnav = $('mobile-nav');
+function closeMenu() { mnav.classList.remove('open'); menuBtn.setAttribute('aria-expanded', 'false'); menuBtn.setAttribute('aria-label', 'Open menu'); }
+menuBtn.addEventListener('click', function () {
+  var open = !mnav.classList.contains('open');
+  /* The menu opens just under the header wherever the header sits, so the demo bar above it never hides the first link. */
+  if (open) mnav.style.top = Math.round(menuBtn.closest('header').getBoundingClientRect().bottom) + 'px';
+  mnav.classList.toggle('open', open);
+  menuBtn.setAttribute('aria-expanded', String(open));
+  menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+});
+mnav.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', closeMenu); });
+document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeMenu(); });
 var cats = Object.keys(SETTINGS.services);
 var current = cats[0];
 var chosenTime = '';

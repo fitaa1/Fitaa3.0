@@ -66,6 +66,7 @@ header.top{display:flex;align-items:center;justify-content:space-between;gap:16p
 nav.links{display:flex;gap:28px;font-size:15px}
 nav.links a{color:var(--muted);text-decoration:none}
 nav.links a:hover{color:var(--text)}
+.mobile-nav{display:none}
 .menu-btn{display:none;width:44px;height:44px;border-radius:12px;border:1px solid var(--line-strong);background:transparent;color:var(--text);cursor:pointer;align-items:center;justify-content:center}
 
 .hero{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:48px;align-items:center;padding-top:40px;padding-bottom:72px}
@@ -153,6 +154,8 @@ header.top{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--g
 /* Tap targets: 44 px or more (SITE_STANDARD.md). scripts/check-pages.mjs measures them. */
 .brand{min-height:44px}
 .links a{display:inline-flex;align-items:center;min-height:44px}
+/* On a phone the name and the menu button share one line. */
+@media (max-width:860px){header.top{flex-wrap:nowrap}.brand{min-width:0}.menu-btn{flex:none}}
 </style>
 </head>
 <body>
@@ -333,7 +336,7 @@ form.addEventListener('submit', function (e) {
 });
 
 /* Phone menu */
-var menuBtn = document.querySelector('.menu-btn'), mnav = $('mobile-nav');
+var menuBtn = document.querySelector('.menu-btn'), mnav = document.getElementById('mobile-nav');
 function closeMenu() { mnav.classList.remove('open'); menuBtn.setAttribute('aria-expanded', 'false'); menuBtn.setAttribute('aria-label', 'Open menu'); }
 menuBtn.addEventListener('click', function () {
   var open = !mnav.classList.contains('open');
