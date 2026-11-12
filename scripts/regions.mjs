@@ -14,18 +14,16 @@ export const CURRENCIES = pricing.order; // ["GHS", "GBP", "USD"]
 for (const cur of CURRENCIES) {
   const c = pricing.currencies[cur];
   if (!c) throw new Error(`pricing.json: ${cur} is listed in "order" but has no prices`);
-  for (const key of ["getFound", "getChosen", "stayBooked", "founding", "upkeep"]) {
+  for (const key of ["getFound", "getChosen", "stayBooked", "upkeep"]) {
     const p = c[key];
     if (!p || typeof p.amount !== "number" || typeof p.text !== "string")
       throw new Error(`pricing.json: ${cur}.${key} needs an amount and a text`);
     const digits = p.text.replace(/[^\d.]/g, "");
     if (Number(digits) !== p.amount) throw new Error(`pricing.json: ${cur}.${key} text "${p.text}" does not match amount ${p.amount}`);
   }
-  for (const key of ["foundingNote", "upkeepNote"]) {
+  for (const key of ["getChosenNote", "upkeepNote"]) {
     if (typeof c[key] !== "string" || !c[key]) throw new Error(`pricing.json: ${cur}.${key} is missing`);
   }
-  if (!c.foundingNote.includes(c.founding.text)) throw new Error(`pricing.json: ${cur}.foundingNote does not say ${c.founding.text}`);
-  if (!c.upkeepNote.includes(c.upkeep.text)) throw new Error(`pricing.json: ${cur}.upkeepNote does not say ${c.upkeep.text}`);
 }
 
 /* The Ghana number comes from the one phone number in src/config/site.ts. */

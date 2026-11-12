@@ -28,7 +28,7 @@ export type Service = {
   deliverables: string[];
   /** Leave out to show "Quoted per project". */
   price?: Price;
-  /** A second, smaller price line (founding offer, upkeep), named by its key in pricing.json. */
+  /** A second, smaller price line (Get Chosen note, upkeep), named by its key in pricing.json. */
   priceNote?: NoteKey;
   timing?: string;
   /** The message WhatsApp opens with when a visitor taps "Start this project". */
@@ -115,7 +115,7 @@ export const siteConfig = {
         "One round of revisions before launch",
       ],
       price: { key: "getChosen", unit: "one-off" },
-      priceNote: "foundingNote",
+      priceNote: "getChosenNote",
       timing: "Live in 7 days",
       whatsapp: "Hi Fitaa, I'm interested in Get Chosen. My business is ",
     },
