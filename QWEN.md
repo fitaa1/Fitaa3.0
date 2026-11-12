@@ -37,10 +37,25 @@ Never invent prices, numbers, awards or guarantees.
 
 ## Verification and reporting
 
-1. Run `npm run typecheck` and `npm run build` before every push. Both must pass.
-2. Never claim a commit, build or push succeeded without pasting its raw output.
-3. Finish every task with: the branch name, `git log --oneline origin/main..HEAD`,
-   and the last lines of `npm run build`.
+A task is finished when GitHub's check on your branch is green, not when the code is written.
+
+1. Run `npm run typecheck`, `npm run build` and `npm test` before every push. All three must pass.
+2. Push your branch. GitHub then runs the same three plus the page check (`scripts/check-pages.mjs`) on your branch. It opens every built page at 390, 820 and 1440 px in light and dark and fails on sideways scroll, a script error or missing file, an image without alt text, a tap target under 44 px, a phone menu that does not open fully, section links hidden on a phone with no menu button, and a first screen over 350 KB.
+3. Wait for the result and read it:
+
+```
+gh run watch --exit-status $(gh run list --branch "$(git branch --show-current)" --limit 1 --json databaseId --jq '.[0].databaseId')
+```
+
+4. If it failed, read why, fix the page, commit, push, and go back to step 3. Repeat until it is green.
+
+```
+gh run view $(gh run list --branch "$(git branch --show-current)" --limit 1 --json databaseId --jq '.[0].databaseId') --log-failed | grep -A40 "problem(s)"
+```
+
+5. Never change a limit or remove a rule in `scripts/check-pages.mjs` to get to green. Fix the page.
+6. Do not install Playwright or a browser in the Codespace, and do not ask Nigel to upgrade Node for the page check. GitHub runs it.
+7. End with one short report: the branch name, `git log --oneline origin/main..HEAD`, the last lines of `npm run build`, and the line "check: green" or "check: red" with the problems still listed. Paste raw output for each. Never claim a commit, build, push or green check without it, and say plainly what was not done.
 
 ## Honesty rules
 

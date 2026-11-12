@@ -1,14 +1,14 @@
-# Runs on every pull request and on main. A red X on a pull request means do not merge.
+# Runs on every push to every branch. A red X on a pull request means do not merge.
 # 1. The site must typecheck, build and pass its tests.
 # 2. Every built page must pass the page check (scripts/check-pages.mjs): no sideways scroll,
 #    console error, image without alt text, tap target under 44 px, phone menu that does not
 #    open fully or first load over the budget, at 390, 820 and 1440 px in light and dark.
 name: CI
 
+# It runs on every push to every branch, so Qwen can push, read the result and fix until green
+# without waiting for Claude (QWEN.md, Verification and reporting).
 on:
-  pull_request:
   push:
-    branches: [main]
 
 permissions:
   contents: read
@@ -31,4 +31,15 @@ jobs:
         run: |
           npm install --no-save playwright
           npx playwright install --with-deps chromium
-      - run: npm run check:pages
+      - name: Page check
+        run: npm run check:pages
+        env:
+          SHOTS: "1"
+      - name: Keep the screenshots for 7 days
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: page-screenshots
+          path: shots
+          retention-days: 7
+          if-no-files-found: ignore
