@@ -43,7 +43,7 @@ test("all labels are non-empty", () => {
 });
 
 test("the reserved width CSS exists in index.css", () => {
-  const indexCss = fs.readFileSync("/workspaces/Fitaa3.0/src/index.css", "utf8");
+  const indexCss = fs.readFileSync(path.join(root, "..", "src", "index.css"), "utf8");
   assert.match(indexCss, /\.btn-cta \.cta-label/, "CSS rule .btn-cta .cta-label exists");
   assert.match(indexCss, /min-width:\s*\d+ch/, "min-width in ch present in CSS");
   assert.match(indexCss, /animation: cta-label-in/, "fade-in animation present");
