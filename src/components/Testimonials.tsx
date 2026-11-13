@@ -9,44 +9,27 @@ export function Testimonials() {
 
   return (
     <section
-      className="py-[var(--sp-7)] bg-card border-y border-border/20 relative overflow-hidden"
+      id="testimonials"
+      data-cta-label={siteConfig.testimonialsSection.dataCtaLabel}
+      data-cta-message={siteConfig.testimonialsSection.dataCtaMessage}
+      className="py-[var(--sp-7)] plane-band relative overflow-hidden"
       aria-labelledby="testimonials-heading"
     >
-      {/* Faint background motif */}
-      <div
-        className="absolute inset-0 pointer-events-none opacity-[0.03] dark:opacity-[0.04]"
-        style={{
-          backgroundImage:
-            "radial-gradient(circle at 20% 50%, hsl(var(--ruby) / 1) 0%, transparent 50%), radial-gradient(circle at 80% 50%, hsl(var(--gold) / 1) 0%, transparent 50%)",
-        }}
-        aria-hidden="true"
-      />
-
       <div className="container mx-auto px-6 md:px-12 relative z-10">
         <SectionLabel id="testimonials-heading" eyebrow={siteConfig.testimonialsSection.eyebrow} heading={siteConfig.testimonialsSection.heading} className="mb-[var(--sp-6)]" />
 
         <div ref={ref} className={`rise grid grid-cols-1 ${siteConfig.testimonials.length > 1 ? "md:grid-cols-2" : ""} gap-12 lg:gap-[5.5rem]`}>
           {siteConfig.testimonials.map((t, i) => (
             <figure key={t.company} className="relative flex flex-col">
-              {/* Large decorative quotation mark */}
-              <div
-                className="absolute -top-3 -left-1 text-[6rem] leading-none font-display text-ruby/8 select-none pointer-events-none"
-                aria-hidden="true"
-              >
-                &ldquo;
-              </div>
-
-              <blockquote className="relative z-10 text-[1.2rem] md:text-[1.35rem] font-display font-light text-foreground/82 leading-[1.68] mb-[2.125rem] pt-5">
+              {/* Quote */}
+              <blockquote className="relative z-10 text-[1.2rem] md:text-[1.35rem] font-display font-light text-foreground/82 leading-[1.68] mb-[2.125rem] pt-5 max-w-xl">
                 {t.quote}
               </blockquote>
-
-              {/* Divider line — golden width, static, never drawn twice. */}
-              <div className="w-8 h-px bg-gradient-to-r from-ruby/45 to-transparent mb-[1.3125rem]" aria-hidden="true" />
 
               <figcaption className="flex items-center gap-4 mt-auto">
                 {/* Avatar initial */}
                 <div
-                  className="w-10 h-10 border border-ruby/25 bg-background flex items-center justify-center text-ruby font-display text-base shrink-0"
+                  className="w-10 h-10 border border-border/25 bg-background flex items-center justify-center text-ruby font-display text-base shrink-0"
                   aria-hidden="true"
                 >
                   {t.company.charAt(0)}
@@ -57,7 +40,6 @@ export function Testimonials() {
                     {t.title}
                   </p>
                 </div>
-                <div className="flex-1 h-px bg-border/25 hidden md:block" aria-hidden="true" />
               </figcaption>
             </figure>
           ))}

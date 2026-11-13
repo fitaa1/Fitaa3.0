@@ -1,6 +1,10 @@
 {
-  "tools": {
-    "approvalMode": "auto-edit"
+  "$version": 4,
+  "general": {
+    "gitCoAuthor": {
+      "commit": false,
+      "pr": false
+    }
   },
   "permissions": {
     "allow": [
@@ -13,7 +17,12 @@
       "Bash(sed -n *)",
       "Bash(cat *)",
       "Bash(ls *)",
-      "Bash(grep *)"
+      "Bash(grep *)",
+      "Bash(cd *)",
+      "Bash(git fetch *)",
+      "Bash(git branch *)",
+      "Bash(echo *)",
+      "Bash(git log *)"
     ],
     "deny": [
       "Bash(git push origin main*)",
@@ -34,11 +43,7 @@
       "Bash(rm -rf*)"
     ]
   },
-  "$version": 4,
-  "general": {
-    "gitCoAuthor": {
-      "commit": false,
-      "pr": false
-    }
+  "tools": {
+    "approvalMode": "auto-edit"
   }
 }

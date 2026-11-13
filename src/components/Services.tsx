@@ -3,6 +3,7 @@ import { usePresence } from "@/lib/reveal";
 import { useRise } from "@/hooks/useRise";
 import { Plus, Check, ArrowRight, ArrowUpRight } from "lucide-react";
 import { SectionLabel } from "./SectionLabel";
+import { SeeItWorking } from "./SeeItWorking";
 import { siteConfig, type Service } from "@/config/site";
 import { useRegion } from "@/lib/region";
 
@@ -14,38 +15,23 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
   const { mounted, visible } = usePresence(open, 300);
   const panelId = `service-panel-${index}`;
 
-  /* Spotlight follows the pointer (mouse, pen or finger) via CSS variables. */
-  const track = (e: React.PointerEvent) => {
-    const el = ref.current;
-    if (!el) return;
-    const r = el.getBoundingClientRect();
-    el.style.setProperty("--mx", `${e.clientX - r.left}px`);
-    el.style.setProperty("--my", `${e.clientY - r.top}px`);
-  };
-
   return (
     <li
       ref={ref}
-      className={`rise service-card group relative z-10 bg-card border border-border/40 overflow-hidden ${service.step ? "" : "lg:col-span-3"}`}
+      className={`rise service-card group relative z-10 border-t border-border/40 lg:border-t-0 ${service.step ? "" : "lg:col-span-3"}`}
+      data-cta-label={service.dataCtaLabel}
+      data-cta-message={service.dataCtaMessage}
       data-open={open}
     >
-      {/* Pointer spotlight */}
-      <div className="service-spotlight pointer-events-none absolute inset-0" aria-hidden="true" />
-      {/* Top edge line */}
-      <div
-        className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-ruby/60 to-transparent opacity-0 group-hover:opacity-100 group-data-[open=true]:opacity-100 transition-opacity duration-500"
-        aria-hidden="true"
-      />
-
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
         aria-controls={panelId}
-        className="relative w-full text-left p-8 md:p-9 cursor-pointer focus-visible:outline-offset-[-2px]"
+        className="relative w-full text-left py-8 sm:px-8 md:p-9 cursor-pointer focus-visible:outline-offset-[-2px]"
       >
         <div className="flex items-start justify-between mb-8">
-          <span className="service-icon relative inline-flex items-center justify-center w-12 h-12 border border-border/50 bg-background/40">
+          <span className="service-icon relative inline-flex items-center justify-center w-12 h-12 border border-border/50">
             <service.icon className="w-[1.4rem] h-[1.4rem] text-gold" strokeWidth={1.3} aria-hidden="true" />
           </span>
           <span className="ml-auto mr-4 mt-1.5 text-[0.62rem] font-sans uppercase tracking-[0.22em] text-muted-foreground">
@@ -74,7 +60,7 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
           data-open={visible}
           className="service-panel relative overflow-hidden"
         >
-          <div className="px-8 md:px-9 pb-8 md:pb-9">
+          <div className="sm:px-8 md:px-9 pb-8 md:pb-9">
             <div className="pt-5 border-t border-border/40 mb-6" data-stagger style={{ "--d": "0.05s" } as CSSProperties}>
               {service.price ? (
                 <>
@@ -137,14 +123,11 @@ export function Services() {
   return (
     <section
       id="services"
-      className="py-[var(--sp-7)] bg-background relative border-t border-border/20"
+      data-cta-label={siteConfig.servicesSection.dataCtaLabel}
+      data-cta-message={siteConfig.servicesSection.dataCtaMessage}
+      className="py-[var(--sp-7)] plane-band"
       aria-labelledby="services-heading"
     >
-      {/* Decorative top line */}
-      <div
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-14 bg-gradient-to-b from-ruby/35 to-transparent"
-        aria-hidden="true"
-      />
 
       <div className="container mx-auto px-6 md:px-12">
         <SectionLabel
@@ -168,6 +151,8 @@ export function Services() {
             <ServiceCard key={service.title} service={service} index={index} />
           ))}
         </ul>
+
+        <SeeItWorking />
 
         <a
           href={siteConfig.servicesSection.moreHref}
