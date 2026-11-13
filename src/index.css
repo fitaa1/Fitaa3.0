@@ -193,11 +193,11 @@ html { scroll-behavior: smooth; }
   font-weight: 500;
   border: 1px solid hsl(var(--gold) / 0.35);
   transition: filter 0.25s ease, transform 0.12s ease, box-shadow 0.25s ease;
-  box-shadow: 0 1px 12px hsl(var(--gold) / 0.15);
+  box-shadow: var(--edge);
 }
 .btn-gold:hover {
   filter: brightness(1.1);
-  box-shadow: 0 4px 24px hsl(var(--gold) / 0.3);
+  box-shadow: var(--edge);
 }
 .btn-gold:active { transform: scale(0.985); }
 
@@ -206,6 +206,21 @@ html { scroll-behavior: smooth; }
   transition: border-color 0.25s ease, background-color 0.25s ease, color 0.25s ease, transform 0.12s ease;
 }
 .btn-outline:active { transform: scale(0.985); }
+
+/* ─── Press state: everything tappable scales to 0.985 over 120 ms ───────────
+ * No colour flash — just a subtle scale down. Reduced motion disables it. */
+@media (prefers-reduced-motion: no-preference) {
+  .nav-link:active,
+  .currency-flags button:active,
+  .service-card:active,
+  footer a[href]:active,
+  .contact-form button:active,
+  .scroll-to-top:active,
+  .featured-work a:active {
+    transform: scale(0.985);
+    transition: transform 0.12s ease;
+  }
+}
 
 /* ─── Nav link underline slide-in ──────────────────────────────────────────── */
 .nav-link {
@@ -251,13 +266,8 @@ html { scroll-behavior: smooth; }
     transparent 100%
   );
   will-change: transform;
-  animation: aurora-drift var(--blob-duration) ease-in-out infinite alternate;
-  animation-delay: var(--blob-delay, 0s);
-  /* Holds still until the page has loaded, and while the hero is off screen
-     (AuroraBackground adds .is-live). The still frame is the same first frame. */
-  animation-play-state: paused;
+  animation: none !important;
 }
-.aurora.is-live .aurora__blob { animation-play-state: running; }
 
 .aurora__blob--1 {
   --blob-color: var(--aurora-1);
@@ -463,6 +473,40 @@ html { scroll-behavior: smooth; }
 @media (prefers-reduced-motion: reduce) {
   .scroll-indicator { animation: none; opacity: 1; }
   .scroll-line { animation: none; transform: scaleY(1); }
+}
+
+/* ── The Fitaa rise: the only entrance (SITE_STANDARD.md, Design language) ───
+ * Opacity 0 to 1 with translateY(12px) to 0, 420 ms,
+ * cubic-bezier(0.22, 1, 0.36, 1), once per element, 60 ms between siblings,
+ * never more than six in a group. Under reduced motion: opacity only, no delay. */
+.rise {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 420ms cubic-bezier(0.22, 1, 0.36, 1) var(--d, 0s),
+              transform 420ms cubic-bezier(0.22, 1, 0.36, 1) var(--d, 0s);
+}
+.rise.is-in { opacity: 1; transform: translateY(0); }
+
+/* The signature key draws in from the left (scaleX 0 to 1, origin left) as part
+ * of the rise. Same timing, so it is one motion. */
+.rise-key {
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1) var(--d, 0s);
+}
+.rise-key.is-in { transform: scaleX(1); }
+
+/* 60 ms stagger between siblings, at most six in a group */
+.rise:nth-child(1)  { --d: 0ms; }
+.rise:nth-child(2)  { --d: 60ms; }
+.rise:nth-child(3)  { --d: 120ms; }
+.rise:nth-child(4)  { --d: 180ms; }
+.rise:nth-child(5)  { --d: 240ms; }
+.rise:nth-child(6)  { --d: 300ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  .rise { opacity: 1; transform: none; transition: none; }
+  .rise-key { transform: scaleX(1); transition: none; }
 }
 
 /* AnimatePresence replacements: data-open enter/exit for buttons */
