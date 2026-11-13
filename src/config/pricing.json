@@ -12,7 +12,7 @@
       "stayBooked": { "amount": 1200, "text": "GHS 1,200" },
       "upkeep": { "amount": 350, "text": "GHS 350" },
       "extraUnit": { "amount": 300, "text": "GHS 300" },
-      "getChosenNote": "One business at one location. For hosts, up to 3 units, plus GHS 300 for each extra unit",
+      "getChosenNote": "One business at one location. A second branch is GHS 300 more. For hosts, up to 3 units, plus GHS 300 for each extra unit",
       "upkeepNote": "Upkeep only, GHS 350 a month for hosting and small updates, for Get Chosen clients who don't want ads."
     },
     "GBP": {

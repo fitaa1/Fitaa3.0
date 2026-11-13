@@ -37,7 +37,7 @@ Never invent prices, numbers, awards or guarantees.
 
 ## Verification and reporting
 
-A task is finished when GitHub's check on your branch is green, not when the code is written.
+A task is finished when the branch is on GitHub and GitHub's check on it is green, not when the code is written or committed. The proof that it is on GitHub is the output of `git ls-remote origin <branch>`: one line with the same commit as `git rev-parse HEAD`. That line goes in the report. No line, or a different commit, means the work is not pushed and the task is not finished (Nigel, 13 Nov 2026: Kwame was built and committed and never pushed).
 
 1. Run `npm run typecheck`, `npm run build` and `npm test` before every push. All three must pass.
 2. Push your branch. GitHub then runs the same three plus the page check (`scripts/check-pages.mjs`) on your branch. It opens every built page at 390, 820 and 1440 px in light and dark and fails on sideways scroll, a script error or missing file, an image without alt text, a tap target under 44 px, a phone menu that does not open fully, section links hidden on a phone with no menu button, and a first screen over 350 KB.
@@ -55,7 +55,7 @@ gh run view $(gh run list --branch "$(git branch --show-current)" --limit 1 --js
 
 5. Never change a limit or remove a rule in `scripts/check-pages.mjs` to get to green. Fix the page.
 6. Do not install Playwright or a browser in the Codespace, and do not ask Nigel to upgrade Node for the page check. GitHub runs it.
-7. End with one short report: the branch name, `git log --oneline origin/main..HEAD`, the last lines of `npm run build`, and the line "check: green" or "check: red" with the problems still listed. Paste raw output for each. Never claim a commit, build, push or green check without it, and say plainly what was not done.
+7. End with one short report: the branch name, `git log --oneline origin/main..HEAD`, the last lines of `npm run build`, the output of `git ls-remote origin <branch>` beside `git rev-parse HEAD`, and the line "check: green" or "check: red" with the problems still listed. Paste raw output for each. Never claim a commit, build, push or green check without it, and say plainly what was not done.
 8. When the check is green, stop and report. Do not open a pull request. Claude reviews your branch and opens the pull request, so an open pull request always means reviewed and ready for Nigel to merge (Nigel, 12 Nov 2026: one step for him, never two).
 
 ## Honesty rules
