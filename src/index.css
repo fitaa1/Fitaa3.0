@@ -670,16 +670,18 @@ a[href^="mailto:"]:not(.underline), a[href^="tel:"]:not(.underline) { display: i
    one pseudo-element, transform only. On hover the mark lifts. Reduce motion leaves it still. */
 .logo-sheen {
   position: relative; display: block; overflow: hidden; flex: none;
-  animation: logo-turn 7s ease-in-out infinite alternate;
+  /* A second, slower clock lifts and settles the mark by a pixel, so the turn never repeats the same path. */
+  animation: logo-turn 7s ease-in-out infinite alternate, logo-float 5.2s ease-in-out infinite alternate;
 }
+@keyframes logo-float { from { translate: -.4px -1.1px; } to { translate: .4px 1.1px; } }
 .logo-sheen::after {
   content: ""; position: absolute; inset: -10% 0; pointer-events: none;
   background: linear-gradient(105deg, transparent 36%, hsl(40 70% 72% / .5) 50%, transparent 64%);
   animation: logo-sheen 7s ease-in-out infinite alternate;
 }
 @keyframes logo-turn {
-  from { transform: perspective(260px) rotateY(-16deg) rotateX(3deg); }
-  to { transform: perspective(260px) rotateY(16deg) rotateX(-3deg); }
+  from { transform: perspective(260px) rotateY(-14deg) rotateX(6deg) rotateZ(-1.2deg); }
+  to { transform: perspective(260px) rotateY(14deg) rotateX(-6deg) rotateZ(1.2deg); }
 }
 @keyframes logo-sheen { from { transform: translateX(-125%); } to { transform: translateX(125%); } }
 @media (prefers-reduced-motion: reduce) {

@@ -37,7 +37,8 @@ export function Hero() {
           className="text-[clamp(2.25rem,6vw,4.5rem)] font-display font-semibold tracking-[-0.02em] leading-[1.05] mb-[2.125rem] text-balance"
         >
           <span className="block text-foreground">{hero.headline[0]}</span>
-          <span className="block mt-[0.18em] text-foreground">{hero.headline[1]}</span>
+          {/* The second line stays in the brand cyan (Nigel, 13 Nov 2026): one colour made the headline plainer, not better. */}
+          <span className="block text-ruby mt-[0.18em]">{hero.headline[1]}</span>
         </h1>
 
         {/* Sub-headline: in the first paint */}

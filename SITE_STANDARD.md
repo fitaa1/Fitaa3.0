@@ -138,7 +138,9 @@ on transform and opacity only. Each rule can be checked by looking at a screensh
   of each other, remove one.
 - Large quiet type: display headings `clamp(2.25rem, 6vw, 4.5rem)`, weight 500 to 600, letter
   spacing `-0.02em`, line height 1.05, in the plain text colour, never a gradient or outline.
-  One display heading per screen.
+  One display heading per screen. One line of it may carry the brand's accent colour as a flat
+  colour (Nigel, 13 Nov 2026: Fitaa Creative's second line stays cyan, because one colour made
+  the headline plainer, not better).
 
 ### 2. Metal and leather (2011 Aston Martin)
 
@@ -184,7 +186,8 @@ different hue at the same lightness:
 - The logo turns and the light follows (Nigel, 12 and 13 Nov 2026): the logo mark rocks slowly
   from side to side and one band of champagne light crosses it as it turns. The turn and the light
   share one clock, so the angle decides where the light is. One wrapper and one pseudo-element,
-  transform only, no script and no image (`.logo-sheen` in this site's `src/index.css`). On hover
+  transform only, no script and no image (`.logo-sheen` in this site's `src/index.css`). A second, slower clock lifts and
+  settles the mark by a pixel, so the turn never repeats the same path. On hover
   the mark lifts. Under reduced motion the logo is still. Only the logo carries it.
 
 ### 5. The signature line (Bugatti)
