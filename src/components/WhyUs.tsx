@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import { useInViewOnce } from "@/lib/reveal";
 import { useRise } from "@/hooks/useRise";
 import { siteConfig } from "@/config/site";
 import { SectionLabel } from "./SectionLabel";
@@ -6,15 +7,16 @@ import { useCountUp } from "@/hooks/useCountUp";
 
 type Stat = (typeof siteConfig.stats)[0];
 
-function StatItem({ stat, index }: { stat: Stat; index: number }) {
+function StatItem({ stat }: { stat: Stat }) {
   const ref = useRef<HTMLDivElement>(null);
   useRise(ref);
-  const count = useCountUp(stat.value, 2000, true);
+  /* The count starts when the figure is on screen, not when the page loads. */
+  const isInView = useInViewOnce(ref, "-50px");
+  const count = useCountUp(stat.value, 2000, isInView);
 
   return (
     <div
       ref={ref}
-      style={{ "--d": `${index * 0.13}s` } as any}
       className="rise group flex flex-col items-center md:items-start border-l border-border/30 pl-7 py-3 hover:border-ruby/45 transition-colors duration-500"
     >
       {/* Number — golden type scale: 4rem (closest φ step from 1rem) */}
@@ -80,8 +82,8 @@ export function WhyUs() {
 
           {/* Right stats — 7/12. Each stat is one rise, staggered 60 ms between siblings. */}
           <div ref={statsRef} className="rise lg:col-span-7 grid grid-cols-2 gap-x-5 sm:gap-x-8 gap-y-10 lg:pl-14">
-            {siteConfig.stats.map((stat, index) => (
-              <StatItem key={stat.label} stat={stat} index={index} />
+            {siteConfig.stats.map((stat) => (
+              <StatItem key={stat.label} stat={stat} />
             ))}
           </div>
 

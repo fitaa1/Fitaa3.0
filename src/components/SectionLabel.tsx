@@ -43,7 +43,7 @@ export function SectionLabel({
           ref={keyRef}
           className="rise-key section-signature-key block w-6 h-0.5 bg-[var(--champagne)]"
         />
-        <span className="section-signature-hairline flex-1 h-px bg-[var(--border)]" />
+        <span className="section-signature-hairline flex-1 h-px bg-border" />
       </div>
 
       {/* Eyebrow — golden ratio gap below: ~21px = var(--sp-3) */}

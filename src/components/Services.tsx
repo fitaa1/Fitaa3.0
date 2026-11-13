@@ -26,7 +26,6 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
   return (
     <li
       ref={ref}
-      style={{ "--d": `${index * 0.12}s` } as CSSProperties}
       className={`rise service-card group relative z-10 bg-card border border-border/40 overflow-hidden ${service.step ? "" : "lg:col-span-3"}`}
       data-open={open}
     >

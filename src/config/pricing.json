@@ -23,7 +23,7 @@
       "getChosen": { "amount": 225, "text": "£225" },
       "stayBooked": { "amount": 75, "text": "£75" },
       "upkeep": { "amount": 25, "text": "£25" },
-      "getChosenNote": "One business at one location. For hosts, up to 3 units",
+      "getChosenNote": "One business at one location. A second branch is £20 more. For hosts, up to 3 units",
       "upkeepNote": "Upkeep only, £25 a month for hosting and small updates, for Get Chosen clients who don't want ads."
     },
     "USD": {
@@ -34,7 +34,7 @@
       "getChosen": { "amount": 300, "text": "$300" },
       "stayBooked": { "amount": 100, "text": "$100" },
       "upkeep": { "amount": 30, "text": "$30" },
-      "getChosenNote": "One business at one location. For hosts, up to 3 units",
+      "getChosenNote": "One business at one location. A second branch is $25 more. For hosts, up to 3 units",
       "upkeepNote": "Upkeep only, $30 a month for hosting and small updates, for Get Chosen clients who don't want ads."
     }
   }
