@@ -220,6 +220,7 @@ html { scroll-behavior: smooth; }
   color: hsl(var(--champagne));
   background: transparent;
   border: none;
+  min-height: 44px;
   box-shadow: var(--edge);
   transition: color 0.25s ease, box-shadow 0.25s ease, transform 0.12s ease;
 }
