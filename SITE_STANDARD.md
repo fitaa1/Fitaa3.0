@@ -180,7 +180,10 @@ different hue at the same lightness:
   `cubic-bezier(0.22, 1, 0.36, 1)`, once per element as it enters view, 60 ms between siblings,
   never more than six in one group. Under reduced motion it is opacity only, with no delay.
 - Define it once per site (a `.rise` class or one keyframe) and reuse it. No other entrance, no
-  parallax, no looping motion apart from one first-visit splash.
+  parallax, no looping motion apart from one first-visit splash and the logo's sheen.
+- The logo's sheen (Nigel, 12 Nov 2026): one band of champagne light crosses the logo mark every
+  9 seconds. One pseudo-element, transform only, no script and no image (`.logo-sheen` in this
+  site's `src/index.css`). Under reduced motion the logo is still. Only the logo carries it.
 
 ### 5. The signature line (Bugatti)
 

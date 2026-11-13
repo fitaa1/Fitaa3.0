@@ -111,7 +111,7 @@ const line =
   `- [Fully Booked by Fitaa](https://fitaacreative.com/fully-booked): the three packages in full, for any business that takes bookings or enquiries (car rentals, clinics, short-let hosts, studios and more), in Ghana, the UK and beyond. ` +
   `Prices are fixed in three currencies (visitors in Ghana see GHS, in the UK GBP, everywhere else USD). ` +
   `Get Found ${all("getFound")} one-off, live in 5 days (Google Business Profile, WhatsApp Business, click-to-chat link, QR card). ` +
-  `Get Chosen ${all("getChosen")} one-off, live in 7 days (a premium one-page website on your own web address, built for Google and AI answers, with WhatsApp booking). ` +
+  `Get Chosen ${all("getChosen")} one-off, live in 7 days (a premium one-page website on your own web address, built for Google and AI answers, with WhatsApp booking). In Ghana: ${c.GHS.getChosenNote}. ` +
   `Stay Booked ${all("stayBooked")} a month, 3-month minimum (Meta ads management, updates, monthly report; ad budget separate). ` +
   `Upkeep only ${all("upkeep")} a month. Live in 7 days, or 50% of your fee back. Payment is once, in full, before work starts.`;
 const llms = read("llms.txt");

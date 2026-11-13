@@ -57,13 +57,16 @@ export function Navbar() {
             className="flex items-center gap-3.5 z-50 relative shrink-0 group"
             aria-label="Fitaa Creative home"
           >
-            <img
-              src="/logo-160.webp"
-              alt="Fitaa Creative Adinkra logo mark"
-              className="h-9 w-9 object-cover rounded-sm transition-transform duration-400 group-hover:scale-105"
-              width={36}
-              height={36}
-            />
+            {/* The slow gold sheen (Nigel, 12 Nov): CSS only, see .logo-sheen in index.css */}
+            <span className="logo-sheen h-9 w-9 rounded-sm">
+              <img
+                src="/logo-160.webp"
+                alt="Fitaa Creative Adinkra logo mark"
+                className="h-9 w-9 object-cover rounded-sm transition-transform duration-400 group-hover:scale-105"
+                width={36}
+                height={36}
+              />
+            </span>
             <div className="leading-none">
               <span className="block font-display font-semibold text-[1.1rem] tracking-[0.15em] text-foreground">
                 FITAA
