@@ -1,7 +1,7 @@
-import { useState, useEffect, lazy, Suspense } from "react";
+import { useState, useEffect, lazy, Suspense, useRef } from "react";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { siteConfig } from "@/config/site";
-import { Reveal } from "@/lib/reveal";
+import { useRise } from "@/hooks/useRise";
 import { formatPhone, useRegion } from "@/lib/region";
 
 /* The enquiry form (and its validation libraries) loads separately to keep the first load small. */
@@ -166,6 +166,11 @@ function ContactCard() {
 }
 
 export function FinalCTA() {
+  const leftRef = useRef<HTMLDivElement>(null);
+  const rightRef = useRef<HTMLDivElement>(null);
+  useRise(leftRef);
+  useRise(rightRef);
+
   return (
     <section
       id="contact"
@@ -186,7 +191,7 @@ export function FinalCTA() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-14 lg:gap-[3.4375rem]">
 
           {/* Left — contact info */}
-          <Reveal variant="left" as="div" className="lg:col-span-5 flex flex-col justify-center">
+          <div ref={leftRef} className="rise lg:col-span-5 flex flex-col justify-center">
             <span className="text-[0.68rem] font-sans uppercase tracking-[0.28em] text-ruby mb-5">
               {copy.eyebrow}
             </span>
@@ -240,12 +245,12 @@ export function FinalCTA() {
                 </div>
               </div>
             </div>
-          </Reveal>
+          </div>
 
           {/* Right — tabbed card */}
-          <Reveal variant="up" as="div" className="lg:col-span-7">
+          <div ref={rightRef} className="rise lg:col-span-7">
             <ContactCard />
-          </Reveal>
+          </div>
 
         </div>
       </div>

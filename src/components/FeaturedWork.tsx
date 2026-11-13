@@ -1,16 +1,25 @@
 import { ArrowUpRight } from "lucide-react";
+import { useRef } from "react";
 import { siteConfig } from "@/config/site";
 import { SectionLabel } from "./SectionLabel";
-import { Reveal } from "@/lib/reveal";
+import { useRise } from "@/hooks/useRise";
 
 export function FeaturedWork() {
   const { workSection } = siteConfig;
+  /* Entrance: the Fitaa rise. Each tile is one rise, staggered 60 ms between
+   * siblings (at most six in a group). The "also worked with" row is a second. */
+  const headerRef = useRef<HTMLDivElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
+  const rowRef = useRef<HTMLDivElement>(null);
+  useRise(headerRef);
+  useRise(gridRef);
+  useRise(rowRef);
   return (
     <section id="work" className="py-[var(--sp-7)] bg-background" aria-labelledby="work-heading">
       <div className="container mx-auto px-6 md:px-12">
 
         {/* Header row */}
-        <Reveal variant="up" as="div" className="flex flex-col md:flex-row md:items-end justify-between mb-[var(--sp-6)] gap-5">
+        <div ref={headerRef} className="rise flex flex-col md:flex-row md:items-end justify-between mb-[var(--sp-6)] gap-5">
           <SectionLabel id="work-heading" eyebrow={workSection.eyebrow} heading={workSection.heading} />
           <a
             href="#contact"
@@ -24,10 +33,11 @@ export function FeaturedWork() {
               aria-hidden="true"
             />
           </a>
-        </Reveal>
+        </div>
 
-        {/* Grid: 1 column on phones, 2 from tablets up */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+        {/* Grid: 1 column on phones, 2 from tablets up. Each tile is one rise, staggered
+         * 60 ms between siblings (at most six in a group). */}
+        <div ref={gridRef} className="rise grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
           {siteConfig.caseStudies.map((study, i) => {
             /* A tile is a link only when the case study has one (e.g. Instagram). */
             const Wrapper = study.link ? "a" : "div";
@@ -40,7 +50,7 @@ export function FeaturedWork() {
                 }
               : {};
             return (
-            <Reveal key={study.client} variant="up" delay={0.1 + i * 0.12} as="article" className="group h-full">
+            <div key={study.client} className="group h-full">
               <Wrapper {...linkProps} className="flex flex-col h-full">
                 {/* Image: every tile uses the same 4:3 frame */}
                 <div className="relative overflow-hidden bg-card mb-5 aspect-[4/3]">
@@ -104,13 +114,13 @@ export function FeaturedWork() {
                   </ul>
                 </div>
               </Wrapper>
-            </Reveal>
+            </div>
             );
           })}
         </div>
 
         {/* "Also worked with" row */}
-        <Reveal variant="up" as="div" className="mt-[var(--sp-6)] pt-8 border-t border-border/30 flex flex-col md:flex-row md:items-center gap-5 md:gap-10">
+        <div ref={rowRef} className="rise mt-[var(--sp-6)] pt-8 border-t border-border/30 flex flex-col md:flex-row md:items-center gap-5 md:gap-10">
           <p className="text-[0.65rem] font-sans uppercase tracking-[0.22em] text-muted-foreground shrink-0">
             {workSection.alsoWorkedWithLabel}
           </p>
@@ -121,7 +131,7 @@ export function FeaturedWork() {
               </li>
             ))}
           </ul>
-        </Reveal>
+        </div>
       </div>
     </section>
   );

@@ -1,15 +1,16 @@
 import { useRef, useState, type CSSProperties } from "react";
-import { usePresence, useInViewOnce } from "@/lib/reveal";
+import { usePresence } from "@/lib/reveal";
+import { useRise } from "@/hooks/useRise";
 import { Plus, Check, ArrowRight, ArrowUpRight } from "lucide-react";
 import { SectionLabel } from "./SectionLabel";
 import { siteConfig, type Service } from "@/config/site";
 import { useRegion } from "@/lib/region";
 
-function ServiceCard({ service, index, delay }: { service: Service; index: number; delay: number }) {
+function ServiceCard({ service, index }: { service: Service; index: number }) {
   const [open, setOpen] = useState(false);
   const { price, note, waLink } = useRegion();
   const ref = useRef<HTMLLIElement>(null);
-  const isInView = useInViewOnce(ref, "-40px");
+  useRise(ref);
   const { mounted, visible } = usePresence(open, 300);
   const panelId = `service-panel-${index}`;
 
@@ -25,10 +26,8 @@ function ServiceCard({ service, index, delay }: { service: Service; index: numbe
   return (
     <li
       ref={ref}
-      data-reveal="up"
+      className={`rise service-card group relative z-10 bg-card border border-border/40 overflow-hidden ${service.step ? "" : "lg:col-span-3"}`}
       data-open={open}
-      style={{ "--d": `${delay}s` } as CSSProperties}
-      className={`service-card group relative z-10 bg-card border border-border/40 overflow-hidden ${service.step ? "" : "lg:col-span-3"} ${isInView ? "is-in" : ""}`}
     >
       {/* Pointer spotlight */}
       <div className="service-spotlight pointer-events-none absolute inset-0" aria-hidden="true" />
@@ -165,8 +164,8 @@ export function Services() {
           role="list"
         >
           <span className="service-thread pointer-events-none absolute hidden lg:block" aria-hidden="true" />
-          {siteConfig.services.map((service, i) => (
-            <ServiceCard key={service.title} service={service} index={i} delay={0.1 + i * 0.12} />
+          {siteConfig.services.map((service, index) => (
+            <ServiceCard key={service.title} service={service} index={index} />
           ))}
         </ul>
 

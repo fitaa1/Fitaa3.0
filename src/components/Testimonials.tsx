@@ -1,8 +1,12 @@
-import { Reveal } from "@/lib/reveal";
+import { useRef } from "react";
+import { useRise } from "@/hooks/useRise";
 import { siteConfig } from "@/config/site";
 import { SectionLabel } from "./SectionLabel";
 
 export function Testimonials() {
+  const ref = useRef<HTMLDivElement>(null);
+  useRise(ref);
+
   return (
     <section
       className="py-[var(--sp-7)] bg-card border-y border-border/20 relative overflow-hidden"
@@ -21,9 +25,9 @@ export function Testimonials() {
       <div className="container mx-auto px-6 md:px-12 relative z-10">
         <SectionLabel id="testimonials-heading" eyebrow={siteConfig.testimonialsSection.eyebrow} heading={siteConfig.testimonialsSection.heading} className="mb-[var(--sp-6)]" />
 
-        <div className={`grid grid-cols-1 ${siteConfig.testimonials.length > 1 ? "md:grid-cols-2" : ""} gap-12 lg:gap-[5.5rem]`}>
+        <div ref={ref} className={`rise grid grid-cols-1 ${siteConfig.testimonials.length > 1 ? "md:grid-cols-2" : ""} gap-12 lg:gap-[5.5rem]`}>
           {siteConfig.testimonials.map((t, i) => (
-            <Reveal key={t.company} variant="up" delay={0.1 + i * 0.18} as="figure" className="relative flex flex-col">
+            <figure key={t.company} className="relative flex flex-col">
               {/* Large decorative quotation mark */}
               <div
                 className="absolute -top-3 -left-1 text-[6rem] leading-none font-display text-ruby/8 select-none pointer-events-none"
@@ -36,7 +40,7 @@ export function Testimonials() {
                 {t.quote}
               </blockquote>
 
-              {/* Divider line — golden width */}
+              {/* Divider line — golden width, static, never drawn twice. */}
               <div className="w-8 h-px bg-gradient-to-r from-ruby/45 to-transparent mb-[1.3125rem]" aria-hidden="true" />
 
               <figcaption className="flex items-center gap-4 mt-auto">
@@ -55,7 +59,7 @@ export function Testimonials() {
                 </div>
                 <div className="flex-1 h-px bg-border/25 hidden md:block" aria-hidden="true" />
               </figcaption>
-            </Reveal>
+            </figure>
           ))}
         </div>
       </div>

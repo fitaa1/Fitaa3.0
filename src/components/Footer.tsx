@@ -83,7 +83,7 @@ export function Footer() {
             <a href="/terms" className="hover:text-foreground transition-colors duration-250">Terms of Service</a>
           </div>
           <CurrencySwitch />
-          <p>&copy; {year} {siteConfig.name}. All rights reserved.</p>
+          <p>&copy; <span className="font-display tabular-nums">{year}</span> {siteConfig.name}. All rights reserved.</p>
         </div>
       </div>
     </footer>
