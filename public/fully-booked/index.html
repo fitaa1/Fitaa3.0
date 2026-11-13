@@ -198,9 +198,9 @@
   --muted:#5b6672; --border:#d9e0e7; --accent:#037394; --accent-strong:#02627e; --gold:#b07a1d; --gold-text:#8a5f12; --gold-soft:rgba(176,122,29,.08);
   --on-accent:#f7f9fb; --aur1:#2a6ff0; --aur2:#00d5ff; --aur3:#5e7bf0; --aur-strength:.22;
   /* Design language tokens (SITE_STANDARD.md, Metal and leather): same values as src/index.css. */
-  --graphite:#d9e0e7; --sheen:linear-gradient(180deg, rgba(255,255,255,.6), rgba(255,255,255,0) 42%);
-  --edge:inset 0 1px 0 rgba(255,255,255,.9), inset 0 0 0 1px #d9e0e7;
-  --champagne:#b07a1d; --leather:#7a3d1e;
+  --graphite:hsl(211 20% 94%); --sheen:linear-gradient(180deg, hsl(0 0% 100% / .6), hsl(0 0% 100% / 0) 42%);
+  --edge:inset 0 1px 0 hsl(0 0% 100% / .9), inset 0 0 0 1px hsl(211 20% 88%);
+  --champagne:hsl(38 72% 30%); --leather:hsl(24 45% 30%);
 }
 @media (prefers-color-scheme: dark){
   :root{
@@ -208,9 +208,9 @@
     --muted:#9aa3ad; --border:#1f2832; --accent:#00ddff; --accent-strong:#00ddff; --gold:#e8be62; --gold-text:#e8be62; --gold-soft:rgba(232,190,98,.07);
     --on-accent:#080c10; --aur1:#1f5ef0; --aur2:#00c8f5; --aur3:#3550e0; --aur-strength:.42;
     /* Design language tokens (SITE_STANDARD.md, Metal and leather): same values as src/index.css. */
-    --graphite:#090e12; --sheen:linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,0) 42%);
-    --edge:inset 0 1px 0 rgba(255,255,255,.08), inset 0 0 0 1px rgba(255,255,255,.06);
-    --champagne:#e8be62; --leather:#d4a06a;
+    --graphite:hsl(211 32% 5%); --sheen:linear-gradient(180deg, hsl(0 0% 100% / .045), hsl(0 0% 100% / 0) 42%);
+    --edge:inset 0 1px 0 hsl(0 0% 100% / .08), inset 0 0 0 1px hsl(0 0% 100% / .06);
+    --champagne:hsl(40 60% 68%); --leather:hsl(28 55% 62%);
   }
 }
 *{box-sizing:border-box}
@@ -226,15 +226,15 @@ a{color:inherit}
 .eyebrow.gold{color:var(--gold-text)}
 .section{padding:clamp(5rem,11vw,9rem) 0}
 .section.tint{background:color-mix(in srgb,var(--card) 45%,transparent);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-.plane-ground{background:hsl(var(--background))}
-.plane-band{background-color:hsl(var(--graphite));background-image:var(--sheen)}
+.plane-ground{background:var(--bg)}
+.plane-band{background-color:var(--graphite);background-image:var(--sheen)}
 .h2{font-size:clamp(2.2rem,4.5vw,4rem);font-weight:600;line-height:1.1}
 .lede{color:var(--muted);line-height:1.8}
 
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:.6rem;min-height:52px;padding:0 2.2rem;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;border-radius:8px;font-family:inherit;cursor:pointer;transition:filter .25s,transform .12s,box-shadow .25s,background .25s,border-color .25s}
 .btn:active{transform:scale(.985)}
 .btn-gold{background:linear-gradient(135deg,#ffd16b 0%,#e8be62 50%,#e38d3d 100%);color:#080c10;font-weight:600;border:1px solid rgba(232,190,98,.35);box-shadow:0 1px 12px rgba(232,190,98,.15)}
-.btn-gold:hover{filter:brightness(1.08);box-shadow:0 4px 24px rgba(232,190,98,.3)}
+.btn-gold:hover{filter:brightness(1.08);box-shadow:var(--edge)}
 .btn-line{border:1px solid color-mix(in srgb,var(--gold) 45%,transparent);color:var(--gold-text);background:transparent}
 .btn-line:hover{background:var(--gold-soft);border-color:var(--gold)}
 .btn-quiet{border:1px solid var(--border);color:var(--fg);background:transparent}
@@ -300,12 +300,12 @@ a{color:inherit}
 .tiers{display:grid;gap:24px;margin-top:3.5rem;align-items:stretch}
 @media(min-width:1024px){.tiers{grid-template-columns:repeat(3,minmax(0,1fr))}}
 .tier{position:relative;display:flex;flex-direction:column;padding:2rem;border:1px solid var(--border);background:var(--card);transition:transform .45s cubic-bezier(.22,1,.36,1),box-shadow .45s,border-color .4s}
-@media(hover:hover){.tier:hover{transform:translateY(-4px);border-color:color-mix(in srgb,var(--accent) 35%,transparent);box-shadow:0 18px 50px -24px color-mix(in srgb,var(--accent) 35%,transparent)}}
+@media(hover:hover){.tier:hover{transform:translateY(-4px);border-color:color-mix(in srgb,var(--accent) 35%,transparent);box-shadow:var(--edge)}}
 /* Direct links (/fully-booked#get-chosen) land on the card below the header, and it glows once */
 .tier{scroll-margin-top:136px}
 .tier:target{animation:targetGlow 2.4s ease 1}
 @keyframes targetGlow{0%,40%{box-shadow:0 0 0 2px var(--accent),0 24px 60px -24px color-mix(in srgb,var(--accent) 60%,transparent)}}
-.tier.featured{border-color:color-mix(in srgb,var(--gold) 60%,transparent);box-shadow:0 24px 60px -30px color-mix(in srgb,var(--gold) 45%,transparent)}
+.tier.featured{border-color:color-mix(in srgb,var(--gold) 60%,transparent);box-shadow:var(--edge)}
 @media(min-width:1024px){.tier.featured{transform:translateY(-12px)}}
 .badge{position:absolute;top:-12px;left:2rem;background:var(--gold);color:#080c10;font-size:.6rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;padding:4px 12px}
 .step{display:block;font-size:.62rem;font-weight:500;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);margin-bottom:.6rem}
@@ -377,7 +377,7 @@ a{color:inherit}
 @media (prefers-reduced-motion:reduce){.currency-flags button{transition:none}}
 @media (prefers-reduced-motion: reduce){.demo.pop{animation:none}}
 .demo{display:block;text-decoration:none;border:1px solid var(--border);overflow:hidden;transition:transform .45s cubic-bezier(.22,1,.36,1),box-shadow .45s}
-@media(hover:hover){.demo:hover{transform:translateY(-4px);box-shadow:0 30px 60px -36px rgba(0,0,0,.5)}}
+@media(hover:hover){.demo:hover{transform:translateY(-4px);box-shadow:var(--edge)}}
 .demo .bar{height:28px;display:flex;align-items:center;gap:6px;padding:0 12px}
 .demo .bar i{width:8px;height:8px;border-radius:50%;display:block}
 .demo .shot{padding:28px;min-height:230px}
@@ -422,9 +422,8 @@ footer a{text-decoration:none}footer a:hover{color:var(--fg)}
 footer nav{display:flex;gap:24px}
 
 /* ── Reveal on scroll (content stays visible without JavaScript) ── */
-.js .reveal{opacity:0;transform:translateY(24px);transition:opacity .75s cubic-bezier(.22,1,.36,1),transform .75s cubic-bezier(.22,1,.36,1)}
-.js .reveal.in{opacity:1;transform:none}
-@media (prefers-reduced-motion: reduce){.blob,.pill i,.ping-card,.tier:target{animation:none}.ping-body{transition:none}.js .reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+
+@media (prefers-reduced-motion: reduce){.blob,.pill i,.ping-card,.tier:target{animation:none}.ping-body{transition:none}.js .rise{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
 em{font-style:normal}
 /* Tap targets: 44 px or more (SITE_STANDARD.md). scripts/check-pages.mjs measures them. */
 .brand{min-height:44px}
@@ -438,8 +437,8 @@ footer nav a{display:inline-flex;align-items:center;min-height:44px}
  * Opacity 0 to 1 with translateY(12px) to 0, 420 ms,
  * cubic-bezier(0.22, 1, 0.36, 1), once per element, 60 ms between siblings,
  * never more than six in one group. Under reduced motion it is opacity only, with no delay. */
-.rise{opacity:0;transform:translateY(12px);transition:opacity 420ms cubic-bezier(0.22,1,.36,1) var(--d,0s),transform 420ms cubic-bezier(0.22,1,.36,1) var(--d,0s)}
-.rise.is-in{opacity:1;transform:translateY(0)}
+.js .rise{opacity:0;transform:translateY(12px);transition:opacity 420ms cubic-bezier(0.22,1,.36,1) var(--d,0s),transform 420ms cubic-bezier(0.22,1,.36,1) var(--d,0s)}
+.js .rise.is-in{opacity:1;transform:translateY(0)}
 .rise-key{transform:scaleX(0);transform-origin:left;transition:transform 420ms cubic-bezier(0.22,1,.36,1) var(--d,0s)}
 .rise-key.is-in{transform:scaleX(1)}
 .rise:nth-child(1){--d:0ms}.rise:nth-child(2){--d:60ms}.rise:nth-child(3){--d:120ms}.rise:nth-child(4){--d:180ms}.rise:nth-child(5){--d:240ms}.rise:nth-child(6){--d:300ms}
@@ -454,7 +453,7 @@ footer nav a{display:inline-flex;align-items:center;min-height:44px}
   a:active,button:active,[role="button"]:active,summary:active{transform:scale(0.985);transition:transform 0.12s ease}
 }
 @media (prefers-reduced-motion: reduce){
-  .rise{opacity:1;transform:none;transition:none}
+  .js .rise{opacity:1;transform:none;transition:none}
   .rise-key{transform:scaleX(1);transition:none}
 }
 </style>
@@ -511,7 +510,7 @@ footer nav a{display:inline-flex;align-items:center;min-height:44px}
 <section class="section plane-band">
   <div class="container two">
     <div class="rise"><div class="section-signature mb-[1.3125rem] flex items-center gap-0 w-full" aria-hidden="true"><span class="rise-key section-signature-key block w-6 h-0.5 bg-[var(--champagne)]"></span><span class="section-signature-hairline flex-1 h-px bg-border"></span></div><span class="eyebrow">The promise</span><h2 class="h2">The gap between being great and being chosen.</h2></div>
-    <div class="right promise reveal">
+    <div class="right promise rise">
       <p>You built something good. The finish is beautiful, the service is excellent, and the people who find you come back.</p>
       <p>The problem was never your work. It's the gap between being great and being chosen: a missing Google listing, a WhatsApp that answers too late, an Instagram with no clear way to book.</p>
       <p class="strong">Fully Booked closes that gap. We set up everything a customer touches before they arrive, so the first impression matches the experience. Then we keep it working, month after month, until full is your normal.</p>
@@ -524,7 +523,7 @@ footer nav a{display:inline-flex;align-items:center;min-height:44px}
     <div class="center rise"><div class="section-signature mb-[1.3125rem] flex items-center gap-0 w-full" aria-hidden="true"><span class="rise-key section-signature-key block w-6 h-0.5 bg-[var(--champagne)]"></span><span class="section-signature-hairline flex-1 h-px bg-border"></span></div><span class="eyebrow">Three steps in</span><h2 class="h2">Find you. Choose you. Come back.</h2>
       <p class="lede center-lede">Each step stands on its own, so take the one you need. Prices are fixed, and shown in your currency.</p></div>
     <div class="tiers">
-      <article id="get-found" class="tier reveal">
+      <article id="get-found" class="tier rise">
         <span class="step">Step 1</span>
         <h3>Get Found</h3><p class="tag">Be easy to find and easy to message.</p>
         <ul>
@@ -539,7 +538,7 @@ footer nav a{display:inline-flex;align-items:center;min-height:44px}
         <p class="timing">Live in 5 days</p>
         <a class="btn btn-line" data-wa="Hi Fitaa, I'm interested in Get Found. My business is " href="#" target="_blank" rel="noopener"><svg class="wa"><use href="#wa"/></svg>Ask about Get Found</a>
       </article>
-      <article id="get-chosen" class="tier featured reveal">
+      <article id="get-chosen" class="tier featured rise">
         <span class="badge">The website</span>
         <span class="step">Step 2</span>
         <h3>Get Chosen</h3><p class="tag">Look like the obvious choice.</p>
@@ -557,7 +556,7 @@ footer nav a{display:inline-flex;align-items:center;min-height:44px}
         <p class="timing">Live in 7 days</p>
         <a class="btn btn-gold" data-wa="Hi Fitaa, I'm interested in Get Chosen. My business is " href="#" target="_blank" rel="noopener"><svg class="wa"><use href="#wa"/></svg>Ask about Get Chosen</a>
       </article>
-      <article id="stay-booked" class="tier reveal">
+      <article id="stay-booked" class="tier rise">
         <span class="step">Step 3</span>
         <h3>Stay Booked</h3><p class="tag">Keep the calendar full.</p>
         <ul>
@@ -605,23 +604,23 @@ footer nav a{display:inline-flex;align-items:center;min-height:44px}
 
 <section class="section tint">
   <div class="container">
-    <div class="reveal"><span class="eyebrow">Why it works</span><h2 class="h2">Customers check before they pay.</h2>
+    <div class="rise"><span class="eyebrow">Why it works</span><h2 class="h2">Customers check before they pay.</h2>
       <p class="lede" style="margin-top:1rem;max-width:42rem">Before anyone books, they search, compare and message. Here is what the research says about each step. The BrightLocal and DreamHost surveys are of US adults.</p></div>
     <div class="proof-groups">
       <div class="proof-group">
         <p class="proof-step"><span>01</span>Found</p>
-        <figure class="reveal"><b>67%</b><figcaption>start a local business search on Google</figcaption><a href="https://www.dreamhost.com/blog/dreamhost-2026-local-business-trust-index/" target="_blank" rel="noopener">DreamHost 2026 Trust Index ↗</a></figure>
-        <figure class="reveal"><b>45%</b><figcaption>have used AI tools like ChatGPT to find a local business, up from 6% a year earlier</figcaption><a href="https://www.brightlocal.com/research/lcrs-ai-trust/" target="_blank" rel="noopener">BrightLocal 2026, 1,002 adults ↗</a></figure>
+        <figure class="rise"><b>67%</b><figcaption>start a local business search on Google</figcaption><a href="https://www.dreamhost.com/blog/dreamhost-2026-local-business-trust-index/" target="_blank" rel="noopener">DreamHost 2026 Trust Index ↗</a></figure>
+        <figure class="rise"><b>45%</b><figcaption>have used AI tools like ChatGPT to find a local business, up from 6% a year earlier</figcaption><a href="https://www.brightlocal.com/research/lcrs-ai-trust/" target="_blank" rel="noopener">BrightLocal 2026, 1,002 adults ↗</a></figure>
       </div>
       <div class="proof-group">
         <p class="proof-step"><span>02</span>Chosen</p>
-        <figure class="reveal"><b>39%</b><figcaption>have walked away from a business because it had no website</figcaption><a href="https://www.dreamhost.com/blog/dreamhost-2026-local-business-trust-index/" target="_blank" rel="noopener">DreamHost 2026 Trust Index ↗</a></figure>
-        <figure class="reveal"><b>85%</b><figcaption>are more likely to use a business after reading positive reviews</figcaption><a href="https://www.brightlocal.com/research/local-consumer-review-survey/" target="_blank" rel="noopener">BrightLocal 2026, 1,002 adults ↗</a></figure>
+        <figure class="rise"><b>39%</b><figcaption>have walked away from a business because it had no website</figcaption><a href="https://www.dreamhost.com/blog/dreamhost-2026-local-business-trust-index/" target="_blank" rel="noopener">DreamHost 2026 Trust Index ↗</a></figure>
+        <figure class="rise"><b>85%</b><figcaption>are more likely to use a business after reading positive reviews</figcaption><a href="https://www.brightlocal.com/research/local-consumer-review-survey/" target="_blank" rel="noopener">BrightLocal 2026, 1,002 adults ↗</a></figure>
       </div>
       <div class="proof-group">
         <p class="proof-step"><span>03</span>Booked</p>
-        <figure class="reveal"><b>93%</b><figcaption>of Ghana's internet users were on WhatsApp</figcaption><a href="https://statista.com/statistics/1171534/leading-social-media-platforms-ghana" target="_blank" rel="noopener">Statista, Q3 2024 ↗</a></figure>
-        <figure class="reveal"><b>80%</b><figcaption>are likely to use a business that replies to all of its reviews</figcaption><a href="https://www.brightlocal.com/research/local-consumer-review-survey/" target="_blank" rel="noopener">BrightLocal 2026, 1,002 adults ↗</a></figure>
+        <figure class="rise"><b>93%</b><figcaption>of Ghana's internet users were on WhatsApp</figcaption><a href="https://statista.com/statistics/1171534/leading-social-media-platforms-ghana" target="_blank" rel="noopener">Statista, Q3 2024 ↗</a></figure>
+        <figure class="rise"><b>80%</b><figcaption>are likely to use a business that replies to all of its reviews</figcaption><a href="https://www.brightlocal.com/research/local-consumer-review-survey/" target="_blank" rel="noopener">BrightLocal 2026, 1,002 adults ↗</a></figure>
       </div>
     </div>
   </div>
@@ -631,7 +630,7 @@ footer nav a{display:inline-flex;align-items:center;min-height:44px}
   <div class="container">
     <!-- To add a demo (clinic, restaurant and so on): add a tab button, a .demo card with the
          same data-for value, its colours under "Demos" in the styles, and a line in SETTINGS.demos. -->
-    <div class="reveal"><span class="eyebrow">See it for yourself</span><h2 class="h2">What your page could look like.</h2>
+    <div class="rise"><span class="eyebrow">See it for yourself</span><h2 class="h2">What your page could look like.</h2>
       <p class="lede" id="demo-lede" style="margin-top:1rem;max-width:42rem">A demo built for a fictional serviced apartment. Try the booking form. It opens WhatsApp with the request already written.</p>
       <div class="switch switch-sm" role="tablist" aria-label="Choose which demo to see">
         <button role="tab" id="demo-tab-hosts" aria-selected="true" aria-controls="demos" data-niche="hosts">Short-let host</button>
@@ -641,27 +640,27 @@ footer nav a{display:inline-flex;align-items:center;min-height:44px}
         <button role="tab" id="demo-tab-restaurants" aria-selected="false" aria-controls="demos" data-niche="restaurants">Restaurant</button>
       </div></div>
     <div class="demos" id="demos" role="tabpanel" aria-labelledby="demo-tab-hosts" aria-live="polite">
-      <a class="demo host reveal" data-for="hosts" href="https://fitaacreative.com/demo/ridge-house">
+      <a class="demo host rise" data-for="hosts" href="https://fitaacreative.com/demo/ridge-house">
         <div class="bar" aria-hidden="true"><i></i><i></i><i></i></div>
         <div class="shot" aria-hidden="true"><small>Serviced apartments · Near the airport</small><strong>Home in the city, from the moment you land.</strong><span class="btnish">Request your dates</span><div class="tiles"><i></i><i></i><i></i></div></div>
         <div class="caption">Short-let host demo <em>Ridge House →</em></div>
       </a>
-      <a class="demo studio reveal" data-for="studios" hidden href="https://fitaacreative.com/demo/studio">
+      <a class="demo studio rise" data-for="studios" hidden href="https://fitaacreative.com/demo/studio">
         <div class="bar" aria-hidden="true"><i></i><i></i><i></i></div>
         <div class="shot" aria-hidden="true"><small>Hair, nails and lashes · By appointment</small><strong>Leave looking like the best day of your year.</strong><span class="btnish">Book your slot</span><div class="tiles"><i></i><i></i><i></i></div></div>
         <div class="caption">Beauty studio demo <em>Maison Adwoa →</em></div>
       </a>
-      <a class="demo cars reveal" data-for="cars" hidden href="https://fitaacreative.com/demo/car-rental">
+      <a class="demo cars rise" data-for="cars" hidden href="https://fitaacreative.com/demo/car-rental">
         <div class="bar" aria-hidden="true"><i></i><i></i><i></i></div>
         <div class="shot" aria-hidden="true"><small>Car rental · At the airport</small><strong>Keys in your hand when you land.</strong><span class="btnish">Reserve a car</span><div class="tiles"><i></i><i></i><i></i></div></div>
         <div class="caption">Car rental demo <em>Kora Drive →</em></div>
       </a>
-      <a class="demo clinics reveal" data-for="clinics" hidden href="https://fitaacreative.com/demo/clinic">
+      <a class="demo clinics rise" data-for="clinics" hidden href="https://fitaacreative.com/demo/clinic">
         <div class="bar" aria-hidden="true"><i></i><i></i><i></i></div>
         <div class="shot" aria-hidden="true"><small>Family clinic · Same-day visits</small><strong>Seen today, not someday.</strong><span class="btnish">Book a visit</span><div class="tiles"><i></i><i></i><i></i></div></div>
         <div class="caption">Clinic demo <em>Adom Family Clinic →</em></div>
       </a>
-      <a class="demo restaurants reveal" data-for="restaurants" hidden href="https://fitaacreative.com/demo/restaurant">
+      <a class="demo restaurants rise" data-for="restaurants" hidden href="https://fitaacreative.com/demo/restaurant">
         <div class="bar" aria-hidden="true"><i></i><i></i><i></i></div>
         <div class="shot" aria-hidden="true"><small>Ghanaian kitchen · Tables for two or twenty</small><strong>Ghana on a plate, with a table waiting.</strong><span class="btnish">Book a table</span><div class="tiles"><i></i><i></i><i></i></div></div>
         <div class="caption">Restaurant demo <em>Nkyene Kitchen →</em></div>
@@ -672,8 +671,8 @@ footer nav a{display:inline-flex;align-items:center;min-height:44px}
 
 <section class="section tint">
   <div class="container">
-    <div class="reveal"><span class="eyebrow">Questions</span><h2 class="h2">Straight answers.</h2></div>
-    <div class="faq reveal">
+    <div class="rise"><span class="eyebrow">Questions</span><h2 class="h2">Straight answers.</h2></div>
+    <div class="faq rise">
       <details><summary>Isn't it expensive?<svg width="18" height="18"><use href="#plus"/></svg></summary><p>Think of it as a few extra bookings. If Get Chosen brings you a handful of new customers, it has paid for itself. And if it isn't live in 7 days, half your fee comes back to you.</p></details>
       <details><summary>I already have Instagram.<svg width="18" height="18"><use href="#plus"/></svg></summary><p>Instagram is where people discover you. Your page is where they decide and book. It also puts you on Google, where people search when they're ready to buy, and your Instagram links straight to it.</p></details>
       <details><summary>Most of my customers come by word of mouth.<svg width="18" height="18"><use href="#plus"/></svg></summary><p>Keep them coming. Word of mouth gives people your name, and many will look you up before they get in touch. This makes sure what they find looks as good as what they heard, with one button to book you.</p></details>
@@ -689,7 +688,7 @@ footer nav a{display:inline-flex;align-items:center;min-height:44px}
 </section>
 
 <section class="section final">
-  <div class="container reveal">
+  <div class="container rise">
     <h2>Your next client is already looking.</h2>
     <p class="lede">Live in 7 days, or half your fee back.</p>
     <a class="btn btn-gold" data-wa="main" href="#" target="_blank" rel="noopener"><svg class="wa"><use href="#wa"/></svg>Claim your December&nbsp;spot&nbsp;→</a>

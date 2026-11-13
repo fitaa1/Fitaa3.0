@@ -217,7 +217,7 @@ html { scroll-behavior: smooth; }
  * Replaces gold background with transparent + var(--edge) shadow.
  * Min-height 44px via the global press rule. */
 .btn-cta {
-  color: hsl(var(--champagne));
+  color: var(--champagne);
   background: transparent;
   border: none;
   min-height: 44px;
@@ -246,18 +246,7 @@ html { scroll-behavior: smooth; }
 .nav-link {
   position: relative;
 }
-.nav-link::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 0;
-  height: 1px;
-  background: hsl(var(--ruby));
-  transition: width 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-}
-.nav-link:hover::after,
-.nav-link[aria-current="location"]::after { width: 100%; }
+/* The mark under the link in view is the one champagne key (.nav-key), so links carry no line of their own. */
 
 /* ─── Champagne key under the section in view (SITE_STANDARD.md, signature line) ──
  * 2 px high, the width of that link, slides between links on transform only
@@ -701,7 +690,7 @@ a[href^="mailto:"]:not(.underline), a[href^="tel:"]:not(.underline) { display: i
 /* ─── Section planes ──────────────────────────────────────────────────── */
 .plane-ground { background: hsl(var(--background)); }
 .plane-band {
-  background-color: hsl(var(--graphite));
+  background-color: var(--graphite);
   background-image: var(--sheen);
 }
 

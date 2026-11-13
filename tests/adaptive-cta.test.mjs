@@ -3,7 +3,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { siteConfig } from "../src/config/site.ts";
-import { useAdaptiveCta } from "../src/hooks/useAdaptiveCta.ts";
+import { useAdaptiveCta, chooseCta } from "../src/hooks/useAdaptiveCta.ts";
 import fs from "node:fs";
 import path from "node:path";
 
@@ -51,4 +51,13 @@ test("the reserved width CSS exists in index.css", () => {
 
 test("the useAdaptiveCta hook exports a function", () => {
   assert.equal(typeof useAdaptiveCta, "function");
+});
+
+test("one card on the middle line names its package, three side by side name the section or the open card", () => {
+  const el = (tag, open) => ({ tagName: tag, getAttribute: (k) => (k === "data-open" ? String(!!open) : null) });
+  const section = el("SECTION"), a = el("LI"), b = el("LI"), c = el("LI", true);
+  assert.equal(chooseCta([section, a]), a, "a phone: the one card in view");
+  assert.equal(chooseCta([section, a, b]), section, "side by side with none open: the section");
+  assert.equal(chooseCta([section, a, b, c]), c, "side by side with one open: that card");
+  assert.equal(chooseCta([]), null, "nothing on the line keeps the last label");
 });

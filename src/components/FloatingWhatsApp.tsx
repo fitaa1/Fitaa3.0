@@ -1,3 +1,4 @@
+import { siteConfig } from "@/config/site";
 import { useAdaptiveCta } from "@/hooks/useAdaptiveCta";
 import { useRegion } from "@/lib/region";
 import { useScrolledPast } from "@/hooks/useScrolledPast";
@@ -19,14 +20,14 @@ export function FloatingWhatsApp() {
   const { mounted, visible } = usePresence(show, 300);
   if (!mounted) return null;
 
-  const text = label || "WhatsApp";
+  const text = label || siteConfig.hero.dataCtaLabel;
 
   return (
     <a
-      href={waLink(message || "Hi Fitaa Creative, I'd like to get in touch. My business is")}
+      href={waLink(message || siteConfig.hero.dataCtaMessage)}
       target="_blank"
       rel="noopener"
-      className="floating-wa fixed bottom-5 left-5 md:bottom-8 md:left-8 z-40 flex items-center gap-2.5 pl-3 pr-4 min-h-[44px] bg-[#25D366] text-white rounded-full shadow-lg transition-all duration-300 group-hover:shadow-xl"
+      className="floating-wa fixed bottom-5 left-5 md:bottom-8 md:left-8 z-40 flex items-center gap-2.5 pl-3 pr-4 min-h-[44px] bg-[#25D366] text-white rounded-full shadow-lg transition-opacity duration-300"
       aria-label={`WhatsApp: ${text}`}
     >
       <WhatsAppIcon size={20} />

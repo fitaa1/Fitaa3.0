@@ -8,16 +8,12 @@ import { useRise } from "@/hooks/useRise";
 
 export function Hero() {
   const { hero } = siteConfig;
-  /* Entrance: the Fitaa rise. Six parts enter with .rise in reading order
-   * (label, headline, sub-headline, primary button, secondary button, scroll cue),
-   * staggered 60 ms each via the explicit --d values, never more than six. */
-  const headlineRef = useRef<HTMLHeadingElement>(null);
-  const subRef = useRef<HTMLParagraphElement>(null);
+  /* The headline and the line under it are in the first paint, never held back by script
+   * (they are the largest thing on the first screen). The label, the two buttons and the
+   * scroll cue enter with the Fitaa rise, 60 ms apart. */
   const primaryRef = useRef<HTMLAnchorElement>(null);
   const secondaryRef = useRef<HTMLAnchorElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
-  useRise(headlineRef);
-  useRise(subRef);
   useRise(primaryRef);
   useRise(secondaryRef);
   useRise(scrollRef);
@@ -34,23 +30,19 @@ export function Hero() {
       <div className="container mx-auto px-6 md:px-12 relative z-10 flex flex-col items-center text-center">
 
         {/* Eyebrow label — SectionLabel with signature line */}
-        <SectionLabel eyebrow={`${hero.eyebrowWidePrefix}${hero.eyebrow}`} align="center" />
+        <SectionLabel eyebrow={<><span className="hidden sm:inline">{hero.eyebrowWidePrefix}</span>{hero.eyebrow}</>} align="center" className="mb-[1.3125rem]" />
 
-        {/* Main headline — enters with the rise, 60 ms into the stagger */}
+        {/* Main headline: in the first paint */}
         <h1
-          ref={headlineRef}
-          className="rise text-[clamp(2.25rem,6vw,4.5rem)] font-display font-semibold tracking-[-0.02em] leading-[1.05] mb-[2.125rem] text-balance"
-          style={{ '--d': '60ms' } as React.CSSProperties}
+          className="text-[clamp(2.25rem,6vw,4.5rem)] font-display font-semibold tracking-[-0.02em] leading-[1.05] mb-[2.125rem] text-balance"
         >
           <span className="block text-foreground">{hero.headline[0]}</span>
           <span className="block mt-[0.18em] text-foreground">{hero.headline[1]}</span>
         </h1>
 
-        {/* Sub-headline — enters with the rise, 120 ms into the stagger */}
+        {/* Sub-headline: in the first paint */}
         <p
-          ref={subRef}
-          className="rise text-[1.0625rem] md:text-[1.125rem] text-muted-foreground font-sans font-light max-w-2xl mb-[3.4375rem] leading-[1.75]"
-          style={{ '--d': '120ms' } as React.CSSProperties}
+          className="text-[1.0625rem] md:text-[1.125rem] text-muted-foreground font-sans font-light max-w-2xl mb-[3.4375rem] leading-[1.75]"
         >
           {siteConfig.description}
         </p>
@@ -62,7 +54,7 @@ export function Hero() {
             href="#contact"
             className="rise btn-gold group inline-flex items-center justify-center px-10 py-4 font-sans text-[0.72rem] tracking-[0.22em] uppercase w-full sm:w-auto"
             aria-label="Start your project with Fitaa Creative"
-            style={{ '--d': '180ms' } as React.CSSProperties}
+            style={{ '--d': '60ms' } as React.CSSProperties}
           >
             <span className="flex items-center gap-2.5">
               {hero.primaryButton}
@@ -77,9 +69,9 @@ export function Hero() {
           <a
             ref={secondaryRef}
             href="#work"
-            className="rise inline-flex items-center gap-2 text-foreground hover:text-ruby transition-colors duration-250 group px-4 py-4 min-h-[44px]"
+            className="rise inline-flex items-center gap-2 font-sans text-[0.72rem] uppercase tracking-[0.22em] text-foreground hover:text-ruby transition-colors duration-250 group px-4 py-4 min-h-[44px]"
             aria-label="View our work"
-            style={{ '--d': '240ms' } as React.CSSProperties}
+            style={{ '--d': '120ms' } as React.CSSProperties}
           >
             {hero.secondaryButton}
             <ArrowRight
@@ -96,7 +88,7 @@ export function Hero() {
       <div
         ref={scrollRef}
         className="rise absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2"
-        style={{ '--d': '300ms' } as React.CSSProperties}
+        style={{ '--d': '180ms' } as React.CSSProperties}
         aria-hidden="true"
       >
         <span className="text-[0.55rem] font-sans uppercase tracking-[0.35em] text-muted-foreground/45">

@@ -11,7 +11,7 @@ function WhatsAppChat({ message }: { message: string }) {
       <div className="whatsapp-chat__head">
         <span className="whatsapp-chat__dot" aria-hidden="true" />
         <span className="whatsapp-chat__name">Fitaa Creative</span>
-        <span className="whatsapp-chat__time">just now</span>
+        <span className="whatsapp-chat__time">WhatsApp</span>
       </div>
       <div className="whatsapp-chat__body">
         <p className="whatsapp-chat__bubble">{message}</p>
@@ -41,7 +41,7 @@ export function SeeItWorking() {
             {seeItWorking.heading}
           </p>
           <h3 className="mt-3 text-[clamp(1.6rem,3vw,2.2rem)] font-display font-semibold text-foreground leading-[1.1] tracking-[-0.02em] mb-3">
-            The message as it arrives on WhatsApp
+            {seeItWorking.messageHeading}
           </h3>
           <p className="text-muted-foreground font-sans font-light text-[0.95rem] leading-[1.7] max-w-md mb-6">
             {seeItWorking.lede}
@@ -52,13 +52,13 @@ export function SeeItWorking() {
         {/* Right: the live demos */}
         <div ref={rightRef} className="rise lg:col-span-6">
           <p className="text-[0.68rem] font-sans font-medium uppercase tracking-[0.28em] text-gold-text">
-            The demos
+            {seeItWorking.demosEyebrow}
           </p>
           <h3 className="mt-3 text-[clamp(1.6rem,3vw,2.2rem)] font-display font-semibold text-foreground leading-[1.1] tracking-[-0.02em] mb-3">
-            Try a live demo
+            {seeItWorking.demosHeading}
           </h3>
           <p className="text-muted-foreground font-sans font-light text-[0.95rem] leading-[1.7] max-w-md mb-6">
-            Open any demo, pick a date or a service, and the button opens WhatsApp with the request already written.
+            {seeItWorking.demosLede}
           </p>
           <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3">
             {seeItWorking.demos.map((demo) => (

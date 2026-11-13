@@ -105,19 +105,19 @@ export function Navbar() {
           </a>
 
           {/* Desktop nav — evenly spaced */}
-          <nav className="hidden lg:flex items-center gap-9 relative" aria-label="Site sections">
+          <nav ref={navRef} className="hidden lg:flex items-center gap-9 relative" aria-label="Site sections">
             {siteConfig.nav.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
                 aria-current={active === item.href.slice(1) ? "location" : undefined}
-                ref={(el) => (linkRefs.current[item.href] = el)}
+                ref={(el) => { linkRefs.current[item.href.slice(1)] = el; }}
                 className="nav-link text-[0.7rem] font-sans uppercase tracking-[0.18em] text-muted-foreground hover:text-foreground aria-[current=location]:text-foreground transition-colors duration-250 pb-0.5"
               >
                 {item.label}
               </a>
             ))}
-            <span ref={keyRef} className="nav-key absolute bottom-0 h-0.5 bg-[var(--champagne)]" />
+            <span ref={keyRef} className="nav-key absolute left-0 -bottom-1 h-0.5 bg-[var(--champagne)]" aria-hidden="true" />
           </nav>
 
           {/* Right controls */}
@@ -134,12 +134,12 @@ export function Navbar() {
 
             {!ctaHidden && (
               <a
-                href={waLink(ctaMessage)}
+                href={waLink(ctaMessage || siteConfig.hero.dataCtaMessage)}
                 className="btn-cta hidden lg:inline-flex whitespace-nowrap items-center justify-center px-6 py-2.5 font-sans text-[0.68rem] uppercase tracking-[0.2em] ml-2"
-                aria-label={ctaLabel || "Contact Fitaa Creative"}
+                aria-label={ctaLabel || siteConfig.hero.dataCtaLabel}
               >
                 <span key={ctaLabel} className="cta-label">
-                  {ctaLabel || "Get in Touch"}
+                  {ctaLabel || siteConfig.hero.dataCtaLabel}
                 </span>
               </a>
             )}

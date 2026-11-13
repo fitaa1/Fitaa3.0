@@ -18,7 +18,7 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
   return (
     <li
       ref={ref}
-      className={`rise service-card group relative z-10 ${service.step ? "" : "lg:col-span-3"}`}
+      className={`rise service-card group relative z-10 border-t border-border/40 lg:border-t-0 ${service.step ? "" : "lg:col-span-3"}`}
       data-cta-label={service.dataCtaLabel}
       data-cta-message={service.dataCtaMessage}
       data-open={open}
@@ -28,7 +28,7 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
         aria-controls={panelId}
-        className="relative w-full text-left p-8 md:p-9 cursor-pointer focus-visible:outline-offset-[-2px]"
+        className="relative w-full text-left py-8 sm:px-8 md:p-9 cursor-pointer focus-visible:outline-offset-[-2px]"
       >
         <div className="flex items-start justify-between mb-8">
           <span className="service-icon relative inline-flex items-center justify-center w-12 h-12 border border-border/50">
@@ -60,7 +60,7 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
           data-open={visible}
           className="service-panel relative overflow-hidden"
         >
-          <div className="px-8 md:px-9 pb-8 md:pb-9">
+          <div className="sm:px-8 md:px-9 pb-8 md:pb-9">
             <div className="pt-5 border-t border-border/40 mb-6" data-stagger style={{ "--d": "0.05s" } as CSSProperties}>
               {service.price ? (
                 <>

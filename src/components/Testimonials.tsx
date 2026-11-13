@@ -20,9 +20,9 @@ export function Testimonials() {
 
         <div ref={ref} className={`rise grid grid-cols-1 ${siteConfig.testimonials.length > 1 ? "md:grid-cols-2" : ""} gap-12 lg:gap-[5.5rem]`}>
           {siteConfig.testimonials.map((t, i) => (
-            <figure key={t.company} className="relative flex flex-col text-center">
+            <figure key={t.company} className="relative flex flex-col">
               {/* Quote */}
-              <blockquote className="relative z-10 text-[1.2rem] md:text-[1.35rem] font-display font-light text-foreground/82 leading-[1.68] mb-[2.125rem] pt-5 max-w-xl mx-auto">
+              <blockquote className="relative z-10 text-[1.2rem] md:text-[1.35rem] font-display font-light text-foreground/82 leading-[1.68] mb-[2.125rem] pt-5 max-w-xl">
                 {t.quote}
               </blockquote>
 

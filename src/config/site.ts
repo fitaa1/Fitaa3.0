@@ -92,7 +92,11 @@ export const siteConfig = {
     /** Under the packages: the mechanism shown, one live demo per step that opens WhatsApp with the booking already written. */
     seeItWorking: {
       heading: "See it working",
-      lede: "Each package opens WhatsApp with the booking already written. Here is the message as it arrives on the chat.",
+      messageHeading: "The message, already written",
+      lede: "Tap a button on this site and WhatsApp opens with this written for you. You finish the line and send it.",
+      demosEyebrow: "The demos",
+      demosHeading: "Try a live demo",
+      demosLede: "Open any demo, pick a date or a service, and the button opens WhatsApp with the request already written.",
       demos: [
         { label: "Ridge House", href: "/demo/ridge-house" },
         { label: "Maison Adwoa", href: "/demo/studio" },
