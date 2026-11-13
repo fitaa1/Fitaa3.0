@@ -5,7 +5,7 @@ interface SectionLabelProps {
   /** id for the <h2>, so the section can point to it with aria-labelledby */
   id?: string;
   eyebrow: string;
-  heading: string;
+  heading?: string;  // Optional — when omitted, only the eyebrow + signature line appear
   eyebrowColor?: "ruby" | "gold";
   align?: "left" | "center";
   headingClass?: string;
@@ -31,10 +31,7 @@ export function SectionLabel({
 
   return (
     <div ref={ref} className={`rise flex flex-col ${alignClass} ${className}`}>
-      {/* Signature line: a 2 px champagne key, 24 px long, with a 1 px hairline in the
-          border colour running on from it to the end of the container, above the label.
-          The key draws in from the left (scaleX 0 to 1, transform origin left) as part
-          of the rise. The hairline is static, so it is never drawn twice. */}
+      {/* Signature line: 2 px champagne key, 24 px long, with 1 px hairline in the border colour running on from it to the end of the container, above the label. */}
       <div
         className="section-signature mb-[1.3125rem] flex items-center gap-0 w-full"
         aria-hidden="true"
@@ -52,12 +49,14 @@ export function SectionLabel({
       </span>
 
       {/* Heading — type scale: 4.2rem ≈ 6.8rem / φ */}
-      <h2
-        id={id}
-        className={`text-[clamp(2.2rem,4.5vw,4.2rem)] font-display font-semibold text-foreground leading-[1.1] tracking-[-0.008em] ${headingClass}`}
-      >
-        {heading}
-      </h2>
+      {heading && (
+        <h2
+          id={id}
+          className={`text-[clamp(2.2rem,4.5vw,4.2rem)] font-display font-semibold text-foreground leading-[1.1] tracking-[-0.008em] ${headingClass}`}
+        >
+          {heading}
+        </h2>
+      )}
     </div>
   );
 }

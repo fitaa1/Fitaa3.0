@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Menu, X, Sun, Moon } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import { useTheme } from "@/contexts/ThemeContext";
@@ -32,12 +32,35 @@ export function Navbar() {
   const active = useActiveSection(sectionIds);
   const { mounted, visible } = usePresence(isOpen, 300);
 
+  const navRef = useRef<HTMLElement>(null);
+  const keyRef = useRef<HTMLSpanElement>(null);
+  const linkRefs = useRef<Record<string, HTMLElement | null>>({});
+
   useEffect(() => {
     document.body.style.overflow = isOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
   }, [isOpen]);
 
   const close = () => setIsOpen(false);
+
+  /* The signature key under the section in view: 2 px tall, the width of that
+   * link, sliding between links. It rides on transform only (scaleX for the
+   * width, translateX for the position) so it never triggers layout. */
+  useEffect(() => {
+    const nav = navRef.current;
+    const key = keyRef.current;
+    const link = linkRefs.current[active];
+    if (!nav || !key || !link) return;
+    const place = () => {
+      const navRect = nav.getBoundingClientRect();
+      const r = link.getBoundingClientRect();
+      key.style.transform = `translateX(${r.left - navRect.left}px) scaleX(${r.width})`;
+    };
+    place();
+    const ro = new ResizeObserver(place);
+    ro.observe(nav);
+    return () => ro.disconnect();
+  }, [active]);
 
   return (
     <>
@@ -78,17 +101,19 @@ export function Navbar() {
           </a>
 
           {/* Desktop nav — evenly spaced */}
-          <nav className="hidden lg:flex items-center gap-9" aria-label="Site sections">
+          <nav className="hidden lg:flex items-center gap-9 relative" aria-label="Site sections">
             {siteConfig.nav.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
                 aria-current={active === item.href.slice(1) ? "location" : undefined}
+                ref={(el) => (linkRefs.current[item.href] = el)}
                 className="nav-link text-[0.7rem] font-sans uppercase tracking-[0.18em] text-muted-foreground hover:text-foreground aria-[current=location]:text-foreground transition-colors duration-250 pb-0.5"
               >
                 {item.label}
               </a>
             ))}
+            <span ref={keyRef} className="nav-key absolute bottom-0 h-0.5 bg-[var(--champagne)]" />
           </nav>
 
           {/* Right controls */}
@@ -106,7 +131,7 @@ export function Navbar() {
             {/* CTA — desktop only */}
             <a
               href="#contact"
-              className="btn-gold hidden lg:inline-flex whitespace-nowrap items-center px-6 py-2.5 font-sans text-[0.68rem] uppercase tracking-[0.2em] ml-2"
+              className="btn-cta hidden lg:inline-flex whitespace-nowrap items-center px-6 py-2.5 font-sans text-[0.68rem] uppercase tracking-[0.2em] ml-2"
               aria-label="Contact Fitaa Creative"
             >
               Get in Touch

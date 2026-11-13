@@ -1,19 +1,25 @@
 import { ArrowRight } from "lucide-react";
+import React from "react";
 import { siteConfig } from "@/config/site";
 import { AuroraBackground } from "./AuroraBackground";
+import { SectionLabel } from "./SectionLabel";
 import { useRef } from "react";
 import { useRise } from "@/hooks/useRise";
 
 export function Hero() {
   const { hero } = siteConfig;
-  /* Entrance: the Fitaa rise. The headline and sub-headline stay visible from the
-   * first paint (no entrance), so the first screen is never held back by script;
-   * the eyebrow, buttons and scroll cue use the rise. */
-  const eyebrowRef = useRef<HTMLDivElement>(null);
-  const buttonsRef = useRef<HTMLDivElement>(null);
+  /* Entrance: the Fitaa rise. Six parts enter with .rise in reading order
+   * (label, headline, sub-headline, primary button, secondary button, scroll cue),
+   * staggered 60 ms each via the explicit --d values, never more than six. */
+  const headlineRef = useRef<HTMLHeadingElement>(null);
+  const subRef = useRef<HTMLParagraphElement>(null);
+  const primaryRef = useRef<HTMLAnchorElement>(null);
+  const secondaryRef = useRef<HTMLAnchorElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
-  useRise(eyebrowRef);
-  useRise(buttonsRef);
+  useRise(headlineRef);
+  useRise(subRef);
+  useRise(primaryRef);
+  useRise(secondaryRef);
   useRise(scrollRef);
   return (
     <section
@@ -25,31 +31,36 @@ export function Hero() {
       {/* Content — centred, max-w follows golden ratio (text at 62% of container) */}
       <div className="container mx-auto px-6 md:px-12 relative z-10 flex flex-col items-center text-center">
 
-        {/* Eyebrow badge */}
-        <div ref={eyebrowRef} className="rise mb-[2.125rem]">
-          <span className="inline-flex items-center gap-2.5 px-4 sm:px-5 py-2 border border-border/50 bg-card/40 backdrop-blur-md text-[0.62rem] sm:text-[0.65rem] font-sans uppercase tracking-[0.2em] sm:tracking-[0.28em] text-muted-foreground whitespace-nowrap">
-            <span className="w-1.5 h-1.5 bg-ruby inline-block shrink-0" aria-hidden="true" />
-            <span><span className="hidden sm:inline">{hero.eyebrowWidePrefix}</span>{hero.eyebrow}</span>
-          </span>
-        </div>
+        {/* Eyebrow label — SectionLabel with signature line */}
+        <SectionLabel eyebrow={`${hero.eyebrowWidePrefix}${hero.eyebrow}`} align="center" />
 
-        {/* Main headline — visible from the first paint (no entrance) */}
-        <h1 className="text-[clamp(2.8rem,8vw,6.5rem)] font-display font-bold leading-[1.04] tracking-[-0.015em] mb-[2.125rem] text-balance">
+        {/* Main headline — enters with the rise, 60 ms into the stagger */}
+        <h1
+          ref={headlineRef}
+          className="rise text-[clamp(2.25rem,6vw,4.5rem)] font-display font-semibold tracking-[-0.02em] leading-[1.05] mb-[2.125rem] text-balance"
+          style={{ '--d': '60ms' } as React.CSSProperties}
+        >
           <span className="block text-foreground">{hero.headline[0]}</span>
-          <span className="block text-ruby mt-[0.18em]">{hero.headline[1]}</span>
+          <span className="block mt-[0.18em] text-foreground">{hero.headline[1]}</span>
         </h1>
 
-        {/* Sub-headline — visible from the first paint (no entrance) */}
-        <p className="text-[1.0625rem] md:text-[1.125rem] text-muted-foreground font-sans font-light max-w-2xl mb-[3.4375rem] leading-[1.75]">
+        {/* Sub-headline — enters with the rise, 120 ms into the stagger */}
+        <p
+          ref={subRef}
+          className="rise text-[1.0625rem] md:text-[1.125rem] text-muted-foreground font-sans font-light max-w-2xl mb-[3.4375rem] leading-[1.75]"
+          style={{ '--d': '120ms' } as React.CSSProperties}
+        >
           {siteConfig.description}
         </p>
 
-        {/* Buttons: gold primary, outlined secondary */}
-        <div ref={buttonsRef} className="rise flex flex-col sm:flex-row gap-4 w-full sm:w-auto items-center">
+        {/* Buttons: gold primary, plain text secondary */}
+        <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto items-center">
           <a
+            ref={primaryRef}
             href="#contact"
-            className="btn-gold group inline-flex items-center justify-center px-10 py-4 font-sans text-[0.72rem] tracking-[0.22em] uppercase w-full sm:w-auto"
+            className="rise btn-gold group inline-flex items-center justify-center px-10 py-4 font-sans text-[0.72rem] tracking-[0.22em] uppercase w-full sm:w-auto"
             aria-label="Start your project with Fitaa Creative"
+            style={{ '--d': '180ms' } as React.CSSProperties}
           >
             <span className="flex items-center gap-2.5">
               {hero.primaryButton}
@@ -62,10 +73,18 @@ export function Hero() {
           </a>
 
           <a
+            ref={secondaryRef}
             href="#work"
-            className="btn-outline inline-flex items-center justify-center px-10 py-4 border border-gold/40 text-gold hover:bg-gold/8 hover:border-gold/70 font-sans font-light text-[0.72rem] tracking-[0.22em] uppercase w-full sm:w-auto"
+            className="rise inline-flex items-center gap-2 text-foreground hover:text-ruby transition-colors duration-250 group px-4 py-4 min-h-[44px]"
+            aria-label="View our work"
+            style={{ '--d': '240ms' } as React.CSSProperties}
           >
             {hero.secondaryButton}
+            <ArrowRight
+              size={14}
+              className="group-hover:translate-x-1.5 transition-transform duration-350"
+              aria-hidden="true"
+            />
           </a>
         </div>
 
@@ -75,6 +94,7 @@ export function Hero() {
       <div
         ref={scrollRef}
         className="rise absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2"
+        style={{ '--d': '300ms' } as React.CSSProperties}
         aria-hidden="true"
       >
         <span className="text-[0.55rem] font-sans uppercase tracking-[0.35em] text-muted-foreground/45">
