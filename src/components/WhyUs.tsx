@@ -40,6 +40,8 @@ export function WhyUs() {
   return (
     <section
       id="why-us"
+      data-cta-label={siteConfig.whyUsSection.dataCtaLabel}
+      data-cta-message={siteConfig.whyUsSection.dataCtaMessage}
       className="py-[var(--sp-7)] plane-ground relative overflow-hidden"
       aria-labelledby="whyus-heading"
     >

@@ -33,6 +33,10 @@ export type Service = {
   timing?: string;
   /** The message WhatsApp opens with when a visitor taps "Start this project". */
   whatsapp: string;
+  /** The label shown in the header and floating WhatsApp button when this package is in view. */
+  dataCtaLabel: string;
+  /** The WhatsApp message sent when this package's CTA is used. */
+  dataCtaMessage: string;
 };
 
 export const siteConfig = {
@@ -68,6 +72,9 @@ export const siteConfig = {
     headline: ["Turn Eyeballs", "Into Revenue."],
     primaryButton: "Start Your Project",
     secondaryButton: "View Our Work",
+    /** The header button and floating WhatsApp button read this when the hero is in view. */
+    dataCtaLabel: "Get in touch",
+    dataCtaMessage: "Hi Fitaa Creative, I'd like to get in touch. My business is ",
   },
 
   /* ── 2. Services ───────────────────────────────────────────────────────────
@@ -80,6 +87,8 @@ export const siteConfig = {
     /** moreHref is also where each package card's "Learn more" goes (Nigel, 7 Nov: the open card already shows that package, so it opens the full page). */
     moreLabel: "See the full packages and live demos",
     moreHref: "/fully-booked",
+    dataCtaLabel: "Ask about a package",
+    dataCtaMessage: "Hi Fitaa, I'd like to ask about a package.",
     /** Under the packages: the mechanism shown, one live demo per step that opens WhatsApp with the booking already written. */
     seeItWorking: {
       heading: "See it working",
@@ -113,6 +122,8 @@ export const siteConfig = {
       price: { key: "getFound", unit: "one-off" },
       timing: "Live in 5 days",
       whatsapp: "Hi Fitaa, I'm interested in Get Found. My business is ",
+      dataCtaLabel: "Ask about Get Found",
+      dataCtaMessage: "Hi Fitaa, I'd like to ask about Get Found. My business is ",
     },
     {
       step: "Step 2",
@@ -132,6 +143,8 @@ export const siteConfig = {
       priceNote: "getChosenNote",
       timing: "Live in 7 days",
       whatsapp: "Hi Fitaa, I'm interested in Get Chosen. My business is ",
+      dataCtaLabel: "Ask about Get Chosen",
+      dataCtaMessage: "Hi Fitaa, I'd like to ask about Get Chosen. My business is ",
     },
     {
       step: "Step 3",
@@ -148,6 +161,8 @@ export const siteConfig = {
       price: { key: "stayBooked", unit: "a month, 3-month minimum" },
       priceNote: "upkeepNote",
       whatsapp: "Hi Fitaa, I'm interested in Stay Booked. My business is ",
+      dataCtaLabel: "Ask about Stay Booked",
+      dataCtaMessage: "Hi Fitaa, I'd like to ask about Stay Booked. My business is ",
     },
     {
       title: "Graphic & Digital Design",
@@ -162,6 +177,8 @@ export const siteConfig = {
         "Print-ready files",
       ],
       whatsapp: "Hi Fitaa, I'd like a quote for design work. My business is ",
+      dataCtaLabel: "Ask about design",
+      dataCtaMessage: "Hi Fitaa, I'd like a quote for design work. My business is ",
     },
   ] as Service[],
 
@@ -171,6 +188,8 @@ export const siteConfig = {
     eyebrow: "Why Fitaa Creative",
     heading: "Pure craft. Measurable results.",
     body: "We don't design for decoration. Every listing, page, post and ad is built to move one person closer to booking you, and we measure whether it did.",
+    dataCtaLabel: "Get in touch",
+    dataCtaMessage: "Hi Fitaa, I'd like to get in touch. My business is ",
   },
   stats: [
     { value: 50,  suffix: "+", label: "Brands Elevated"      },
@@ -188,6 +207,8 @@ export const siteConfig = {
     heading: "Real Clients. Real Results.",
     headerLink: "Start a Project",
     alsoWorkedWithLabel: "Also worked with",
+    dataCtaLabel: "Ask about your project",
+    dataCtaMessage: "Hi Fitaa, I'd like to ask about my project. My business is ",
   },
   caseStudies: [
     {
@@ -246,6 +267,8 @@ export const siteConfig = {
   testimonialsSection: {
     eyebrow: "Client Voices",
     heading: "What our clients say.",
+    dataCtaLabel: "Get in touch",
+    dataCtaMessage: "Hi Fitaa, I'd like to get in touch. My business is ",
   },
   testimonials: [
     {
@@ -276,6 +299,9 @@ export const siteConfig = {
     whatsappBody: "Message us directly on WhatsApp. We typically reply within the hour.",
     whatsappButton: "Chat on WhatsApp",
     whatsappNote: "Opens WhatsApp on mobile or desktop",
+    /** The floating WhatsApp button shows this when the Contact section is in view; the header button is hidden here. */
+    dataCtaLabel: "Get in touch",
+    dataCtaMessage: "Hi Fitaa Creative, I'd like to get in touch. My business is ",
   },
   contact: {
     email:       "fitaaba@gmail.com",

@@ -15,7 +15,13 @@ export function FeaturedWork() {
   useRise(gridRef);
   useRise(rowRef);
   return (
-    <section id="work" className="py-[var(--sp-7)] plane-band" aria-labelledby="work-heading">
+    <section
+      id="work"
+      data-cta-label={siteConfig.workSection.dataCtaLabel}
+      data-cta-message={siteConfig.workSection.dataCtaMessage}
+      className="py-[var(--sp-7)] plane-band"
+      aria-labelledby="work-heading"
+    >
       <div className="container mx-auto px-6 md:px-12">
 
         {/* Header row */}

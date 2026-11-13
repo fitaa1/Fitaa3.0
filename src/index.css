@@ -648,6 +648,30 @@ header a[href="/"]:not([aria-label]) { padding-block: 14px; margin-block: -14px;
 footer a[href="/privacy"], footer a[href="/terms"] { display: inline-block; padding-block: 14px; margin-block: -14px; }
 footer a[aria-label^="Follow"], footer a[aria-label^="View"] { display: inline-flex; padding: 14px; margin: -14px; }
 button[data-currency] { min-width: 44px; min-height: 44px; }
+
+/* ─── Adaptive CTA: width reserved, only the text fades (SITE_STANDARD.md, Controls that adapt) ──
+ * The label sits in a span whose width is reserved in ch, sized for the longest
+ * label, so the button does not move when the section in view changes. Only the
+ * text fades, 200 ms, opacity only. Under reduced motion it swaps with no fade. */
+.btn-cta .cta-label {
+  display: inline-block;
+  min-width: 22ch;
+  text-align: center;
+  animation: cta-label-in 200ms ease-out both;
+}
+@keyframes cta-label-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+.floating-wa .cta-label {
+  display: inline-block;
+  min-width: 9ch;
+  animation: cta-label-in 200ms ease-out both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .btn-cta .cta-label,
+  .floating-wa .cta-label { animation: none; }
+}
 a[href^="mailto:"]:not(.underline), a[href^="tel:"]:not(.underline) { display: inline-block; padding-block: 12px; margin-block: -12px; }
 
 /* The logo turns and the light follows (Nigel, 12 and 13 Nov 2026). The mark rocks slowly

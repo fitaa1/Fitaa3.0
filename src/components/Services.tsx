@@ -19,6 +19,8 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
     <li
       ref={ref}
       className={`rise service-card group relative z-10 ${service.step ? "" : "lg:col-span-3"}`}
+      data-cta-label={service.dataCtaLabel}
+      data-cta-message={service.dataCtaMessage}
       data-open={open}
     >
       <button
@@ -121,6 +123,8 @@ export function Services() {
   return (
     <section
       id="services"
+      data-cta-label={siteConfig.servicesSection.dataCtaLabel}
+      data-cta-message={siteConfig.servicesSection.dataCtaMessage}
       className="py-[var(--sp-7)] plane-band"
       aria-labelledby="services-heading"
     >

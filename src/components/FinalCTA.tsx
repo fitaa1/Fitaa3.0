@@ -158,6 +158,9 @@ export function FinalCTA() {
   return (
     <section
       id="contact"
+      data-cta-label={siteConfig.contactSection.dataCtaLabel}
+      data-cta-message={siteConfig.contactSection.dataCtaMessage}
+      data-cta-hidden
       className="py-[var(--sp-7)] plane-ground relative overflow-hidden"
       aria-labelledby="contact-heading"
     >

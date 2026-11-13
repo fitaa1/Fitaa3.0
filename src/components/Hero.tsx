@@ -24,6 +24,8 @@ export function Hero() {
   return (
     <section
       id="home"
+      data-cta-label={hero.dataCtaLabel}
+      data-cta-message={hero.dataCtaMessage}
       className="relative min-h-[100svh] flex items-start md:items-center justify-center overflow-hidden pt-28 sm:pt-32 md:pt-24 pb-24 md:pb-28"
     >
       <AuroraBackground />

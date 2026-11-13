@@ -10,6 +10,8 @@ export function Testimonials() {
   return (
     <section
       id="testimonials"
+      data-cta-label={siteConfig.testimonialsSection.dataCtaLabel}
+      data-cta-message={siteConfig.testimonialsSection.dataCtaMessage}
       className="py-[var(--sp-7)] plane-band relative overflow-hidden"
       aria-labelledby="testimonials-heading"
     >

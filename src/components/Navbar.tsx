@@ -4,6 +4,8 @@ import { siteConfig } from "@/config/site";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useScrolledPast } from "@/hooks/useScrolledPast";
 import { usePresence, Reveal } from "@/lib/reveal";
+import { useAdaptiveCta } from "@/hooks/useAdaptiveCta";
+import { useRegion } from "@/lib/region";
 
 /** Tracks which page section sits under the middle of the screen. */
 function useActiveSection(ids: string[]) {
@@ -31,6 +33,8 @@ export function Navbar() {
   const { isDark, toggle } = useTheme();
   const active = useActiveSection(sectionIds);
   const { mounted, visible } = usePresence(isOpen, 300);
+  const { label: ctaLabel, message: ctaMessage, hidden: ctaHidden } = useAdaptiveCta();
+  const { waLink } = useRegion();
 
   const navRef = useRef<HTMLElement>(null);
   const keyRef = useRef<HTMLSpanElement>(null);
@@ -128,14 +132,17 @@ export function Navbar() {
               </span>
             </button>
 
-            {/* CTA — desktop only */}
-            <a
-              href="#contact"
-              className="btn-cta hidden lg:inline-flex whitespace-nowrap items-center px-6 py-2.5 font-sans text-[0.68rem] uppercase tracking-[0.2em] ml-2"
-              aria-label="Contact Fitaa Creative"
-            >
-              Get in Touch
-            </a>
+            {!ctaHidden && (
+              <a
+                href={waLink(ctaMessage)}
+                className="btn-cta hidden lg:inline-flex whitespace-nowrap items-center justify-center px-6 py-2.5 font-sans text-[0.68rem] uppercase tracking-[0.2em] ml-2"
+                aria-label={ctaLabel || "Contact Fitaa Creative"}
+              >
+                <span key={ctaLabel} className="cta-label">
+                  {ctaLabel || "Get in Touch"}
+                </span>
+              </a>
+            )}
 
             {/* Hamburger — mobile */}
             <button
