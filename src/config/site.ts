@@ -80,6 +80,20 @@ export const siteConfig = {
     /** moreHref is also where each package card's "Learn more" goes (Nigel, 7 Nov: the open card already shows that package, so it opens the full page). */
     moreLabel: "See the full packages and live demos",
     moreHref: "/fully-booked",
+    /** Under the packages: the mechanism shown, one live demo per step that opens WhatsApp with the booking already written. */
+    seeItWorking: {
+      heading: "See it working",
+      lede: "Each package opens WhatsApp with the booking already written. Here is the message as it arrives on the chat.",
+      demos: [
+        { label: "Ridge House", href: "/demo/ridge-house" },
+        { label: "Maison Adwoa", href: "/demo/studio" },
+        { label: "Kora Drive", href: "/demo/car-rental" },
+        { label: "Adom Family Clinic", href: "/demo/clinic" },
+        { label: "Nkyene Kitchen", href: "/demo/restaurant" },
+        { label: "Lumen Skin Clinic", href: "/demo/aesthetics" },
+        { label: "Sika Frames", href: "/demo/photographer" },
+      ],
+    },
   },
   services: [
     {

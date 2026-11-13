@@ -43,17 +43,6 @@ function ContactCard() {
 
   return (
     <div className="bg-card border border-border/45 relative overflow-hidden">
-      {/* Subtle gradient fill */}
-      <div
-        className="absolute inset-0 bg-gradient-to-br from-ruby/4 via-transparent to-gold/2 pointer-events-none"
-        aria-hidden="true"
-      />
-      {/* Top edge highlight */}
-      <div
-        className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-ruby/35 to-transparent"
-        aria-hidden="true"
-      />
-
       {/* ── Tab bar ─────────────────────────────────────────── */}
       <div
         className="relative z-10 flex border-b border-border/35"
@@ -87,7 +76,7 @@ function ContactCard() {
               {/* Active underline */}
               {active && (
                 <div
-                  className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold to-transparent"
+                  className="absolute bottom-0 left-0 right-0 h-px bg-gold"
                   aria-hidden="true"
                 />
               )}
@@ -122,11 +111,6 @@ function ContactCard() {
             >
               {/* Icon halo */}
               <div className="relative mb-8">
-                <div
-                  className="absolute inset-0 rounded-full blur-2xl"
-                  style={{ background: "radial-gradient(circle, rgba(37,211,102,0.18) 0%, transparent 70%)" }}
-                  aria-hidden="true"
-                />
                 <div className="relative w-16 h-16 rounded-full border border-[#25D366]/30 bg-[#25D366]/8 flex items-center justify-center text-[#25D366]">
                   <WhatsAppIcon size={28} />
                 </div>
@@ -174,19 +158,9 @@ export function FinalCTA() {
   return (
     <section
       id="contact"
-      className="py-[var(--sp-7)] bg-background relative overflow-hidden"
+      className="py-[var(--sp-7)] plane-ground relative overflow-hidden"
       aria-labelledby="contact-heading"
     >
-      {/* Centre glow */}
-      <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[65vw] h-[65vw] max-w-[650px] max-h-[650px] pointer-events-none"
-        style={{
-          background: "radial-gradient(circle, hsl(var(--ruby) / 0.14) 0%, transparent 70%)",
-          opacity: 0.55,
-        }}
-        aria-hidden="true"
-      />
-
       <div className="container mx-auto px-6 md:px-12 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-14 lg:gap-[3.4375rem]">
 

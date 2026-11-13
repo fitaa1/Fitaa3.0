@@ -418,6 +418,60 @@ html { scroll-behavior: smooth; }
   .service-card:hover, .service-card:hover .service-icon { transform: none; }
 }
 
+/* ─── The WhatsApp message, drawn in HTML and CSS only ──────────────────────
+ * Used in Services ("See it working"): the booking message as it arrives on the
+ * chat, using the exact text the site's own button sends. Flat surfaces only. */
+.whatsapp-chat {
+  width: 100%;
+  max-width: 24rem;
+  border: 1px solid hsl(var(--border));
+  background: hsl(var(--card));
+}
+.whatsapp-chat__head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  padding: 0.85rem 1rem 0;
+}
+.whatsapp-chat__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #25d366;
+  flex: none;
+  align-self: center;
+}
+.whatsapp-chat__name {
+  font-family: var(--app-font-sans);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: hsl(var(--foreground));
+}
+.whatsapp-chat__time {
+  margin-left: auto;
+  font-family: var(--app-font-sans);
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: hsl(var(--muted-foreground));
+}
+.whatsapp-chat__body {
+  padding: 0.85rem 1rem 1rem;
+}
+.whatsapp-chat__bubble {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem 0.75rem 0.75rem 0.15rem;
+  background: hsl(var(--muted));
+  font-family: var(--app-font-sans);
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: hsl(var(--foreground));
+}
+
 /* ─── Currency flags (src/lib/region.tsx) ────────────────────────────────
  * Prices arrive in the visitor's currency automatically. These three flags in
  * the footer are only the fail-safe for a wrong guess, so they stay quiet:
@@ -619,3 +673,11 @@ a[href^="mailto:"]:not(.underline), a[href^="tel:"]:not(.underline) { display: i
   .logo-sheen { animation: none; }
   .logo-sheen::after { animation: none; display: none; }
 }
+
+/* ─── Section planes ──────────────────────────────────────────────────── */
+.plane-ground { background: hsl(var(--background)); }
+.plane-band {
+  background-color: hsl(var(--graphite));
+  background-image: var(--sheen);
+}
+

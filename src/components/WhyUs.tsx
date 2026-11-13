@@ -40,19 +40,9 @@ export function WhyUs() {
   return (
     <section
       id="why-us"
-      className="py-[var(--sp-7)] bg-card relative overflow-hidden"
+      className="py-[var(--sp-7)] plane-ground relative overflow-hidden"
       aria-labelledby="whyus-heading"
     >
-      {/* Ambient glow — right edge */}
-      <div
-        className="absolute top-1/2 right-0 w-[45vw] h-[45vw] max-w-[480px] max-h-[480px] -translate-y-1/2 pointer-events-none"
-        style={{
-          background: "radial-gradient(circle, hsl(var(--ruby) / 0.12) 0%, transparent 70%)",
-          opacity: 0.6,
-        }}
-        aria-hidden="true"
-      />
-
       <div className="container mx-auto px-6 md:px-12">
         {/*
           Golden ratio column split: 5 / 7 out of 12
@@ -72,12 +62,6 @@ export function WhyUs() {
             <p className="text-muted-foreground font-sans font-light text-[1.0625rem] leading-[1.75] max-w-md">
               {siteConfig.whyUsSection.body}
             </p>
-
-            {/* Gold line — a 1 px hairline in the border colour, static, never drawn twice. */}
-            <div
-              className="mt-10 h-px bg-gradient-to-r from-gold/55 via-gold/25 to-transparent w-16"
-              aria-hidden="true"
-            />
           </div>
 
           {/* Right stats — 7/12. Each stat is one rise, staggered 60 ms between siblings. */}

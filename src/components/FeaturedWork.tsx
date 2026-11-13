@@ -15,7 +15,7 @@ export function FeaturedWork() {
   useRise(gridRef);
   useRise(rowRef);
   return (
-    <section id="work" className="py-[var(--sp-7)] bg-background" aria-labelledby="work-heading">
+    <section id="work" className="py-[var(--sp-7)] plane-band" aria-labelledby="work-heading">
       <div className="container mx-auto px-6 md:px-12">
 
         {/* Header row */}
@@ -65,9 +65,6 @@ export function FeaturedWork() {
                     width={720}
                     height={540}
                   />
-
-                  {/* Soft bottom shadow: same dark tint in light and dark mode */}
-                  <div className="tile-shadow absolute inset-0 transition-opacity duration-500 group-hover:opacity-50" aria-hidden="true" />
 
                   {/* Result badge: always shown on touch screens, slides up on hover elsewhere */}
                   <div
@@ -120,7 +117,7 @@ export function FeaturedWork() {
         </div>
 
         {/* "Also worked with" row */}
-        <div ref={rowRef} className="rise mt-[var(--sp-6)] pt-8 border-t border-border/30 flex flex-col md:flex-row md:items-center gap-5 md:gap-10">
+        <div ref={rowRef} className="rise mt-[var(--sp-6)] pt-8 flex flex-col md:flex-row md:items-center gap-5 md:gap-10">
           <p className="text-[0.65rem] font-sans uppercase tracking-[0.22em] text-muted-foreground shrink-0">
             {workSection.alsoWorkedWithLabel}
           </p>
