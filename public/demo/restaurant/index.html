@@ -51,6 +51,9 @@
   --pepper:#B8321D; --pepper-text:#9E2A17; --gold:#F3B546;
   --accent:#B8321D; --accent-hover:#CC4029; --on-accent:#FFF7EC;
   --display:'Unbounded','Unbounded Fallback','Segoe UI',system-ui,sans-serif; --body:'Manrope','Manrope Fallback','Segoe UI',system-ui,sans-serif;
+  --graphite:hsl(211 20% 94%); --sheen:linear-gradient(180deg, hsl(0 0% 100% / .6), hsl(0 0% 100% / 0) 42%);
+  --edge:inset 0 1px 0 hsl(0 0% 100% / .9), inset 0 0 0 1px hsl(211 20% 88%);
+  --champagne:hsl(38 72% 30%); --leather:hsl(24 45% 30%);
 }
 @media (prefers-color-scheme: dark){
   :root{
@@ -58,6 +61,9 @@
     --line:#3A2B24; --line-strong:#5A463D;
     --text:#FBF3E7; --muted:#D6C5B4; --soft:#BBA897;
     --pepper-text:#F07B62; --accent:#E2543B; --accent-hover:#EC6A52; --on-accent:#1B0A06;
+    --graphite:hsl(211 32% 5%); --sheen:linear-gradient(180deg, hsl(0 0% 100% / .045), hsl(0 0% 100% / 0) 42%);
+    --edge:inset 0 1px 0 hsl(0 0% 100% / .08), inset 0 0 0 1px hsl(0 0% 100% / .06);
+    --champagne:hsl(40 60% 68%); --leather:hsl(28 55% 62%);
   }
 }
 *{box-sizing:border-box}
@@ -104,7 +110,7 @@ h1,h2,h3{margin:0;font-family:var(--display);font-weight:700;letter-spacing:-.02
 /* Signature: the "Reserved" table card. It stands on the table, and fills in as the visitor books. */
 .tent-wrap{display:flex;flex-direction:column;align-items:center}
 .plate{width:min(100%,340px);aspect-ratio:1;border-radius:50%;background:var(--photo);border:1px dashed var(--line-strong);display:grid;place-items:center;color:var(--soft);font-size:.9rem;text-align:center;padding:40px}
-.tent{position:relative;margin-top:-90px;width:min(88%,290px);background:var(--surface);border:1px solid var(--line);border-radius:14px 14px 6px 6px;padding:20px 22px 18px;text-align:center;box-shadow:0 30px 60px -36px rgba(60,20,10,.55);animation:settle .7s cubic-bezier(.22,1,.36,1) .3s both}
+.tent{position:relative;margin-top:-90px;width:min(88%,290px);background:var(--surface);border:1px solid var(--line);border-radius:14px 14px 6px 6px;padding:20px 22px 18px;text-align:center;box-shadow:var(--edge);animation:settle .7s cubic-bezier(.22,1,.36,1) .3s both}
 .tent::after{content:"";position:absolute;left:10%;right:10%;bottom:-8px;height:8px;border-radius:0 0 50% 50%;background:rgba(60,20,10,.12);filter:blur(3px)}
 .tent small{display:block;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--soft)}
 .tent .res{font-family:var(--display);font-weight:800;font-size:1.6rem;color:var(--pepper-text);margin:4px 0 10px;letter-spacing:.02em}
@@ -170,14 +176,41 @@ footer.foot .wrap{padding-top:28px;padding-bottom:40px;display:flex;justify-cont
   .hero,.dishes,.steps,.visit .grid{grid-template-columns:minmax(0,1fr)}
   .plate{width:min(80%,280px)}
   .fields{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .sticky-book{display:flex;position:fixed;left:16px;right:16px;bottom:16px;z-index:20;box-shadow:0 12px 30px rgba(0,0,0,.25)}
+  .sticky-book{display:flex;position:fixed;left:16px;right:16px;bottom:16px;z-index:20;box-shadow:var(--edge)}
   footer.foot .wrap{padding-bottom:96px}
 }
 @media (max-width:520px){.fields{grid-template-columns:minmax(0,1fr)}}
 @media (prefers-reduced-motion: reduce){
   html{scroll-behavior:auto}
+  .js .rise{opacity:1;transform:none;transition:none}
+  .rise-key{transform:scaleX(1);transition:none}
   .tent,.changed{animation:none}
   .links a::after,.mobile-nav{transition:none}
+}
+
+/* ── Reveal on scroll (content stays visible without JavaScript) ── */
+@media (prefers-reduced-motion: reduce){.js .rise{opacity:1;transform:none;transition:none}}
+.js .rise{opacity:0;transform:translateY(12px);transition:opacity 420ms cubic-bezier(0.22,1,.36,1) var(--d,0s),transform 420ms cubic-bezier(0.22,1,.36,1) var(--d,0s)}
+.js .rise.is-in{opacity:1;transform:translateY(0)}
+.rise-key{transform:scaleX(0);transform-origin:left;transition:transform 420ms cubic-bezier(0.22,1,.36,1) var(--d,0s)}
+.rise-key.is-in{transform:scaleX(1)}
+.rise:nth-child(1){--d:0ms}.rise:nth-child(2){--d:60ms}.rise:nth-child(3){--d:120ms}.rise:nth-child(4){--d:180ms}.rise:nth-child(5){--d:240ms}.rise:nth-child(6){--d:300ms}
+
+/* The signature key draws in from the left (scaleX 0 to 1, origin left) as part of the rise. Same timing, so it is one motion. */
+.section-signature{display:flex;align-items:center;gap:0;width:100%;margin-bottom:1.3125rem}
+.section-signature-key{width:24px;height:2px;background:var(--champagne);flex:none}
+.section-signature-hairline{flex:1;height:1px;background:var(--line)}
+
+/* Prices, counts, dates and phone numbers line up in tabular figures */
+.tabular{font-variant-numeric:tabular-nums}
+
+/* Press state: everything tappable scales to 0.985 over 120 ms, no colour flash. */
+@media (prefers-reduced-motion: no-preference){
+  a:active,button:active,[role="button"]:active,summary:active{transform:scale(0.985);transition:transform 0.12s ease}
+}
+@media (prefers-reduced-motion: reduce){
+  .js .rise{opacity:1;transform:none;transition:none}
+  .rise-key{transform:scaleX(1);transition:none}
 }
 
 /* Tap targets: 44 px or more (SITE_STANDARD.md). scripts/check-pages.mjs measures them. */
@@ -247,14 +280,19 @@ footer.foot .wrap{padding-top:28px;padding-bottom:40px;display:flex;justify-cont
 
 <section id="menu" class="menu">
   <div class="wrap inner">
-    <div class="section-head"><p class="eyebrow">The menu</p><h2>Tonight's favourites</h2></div>
+    <div class="section-head">
+      <div class="rise">
+        <div class="section-signature" aria-hidden="true"><span class="rise-key section-signature-key"></span><span class="section-signature-hairline"></span></div>
+        <p class="eyebrow">The menu</p><h2>Tonight's favourites</h2>
+      </div>
+    </div>
     <ul class="dishes">
-      <li><div class="photo">Firewood jollof plate</div><div><h3>Firewood jollof</h3><p>With grilled chicken and shito</p></div><span class="price"><span data-sym>$</span>14</span></li>
-      <li><div class="photo">Tilapia and banku</div><div><h3>Tilapia and banku</h3><p>Whole fish, pepper and onions</p></div><span class="price"><span data-sym>$</span>22</span></li>
-      <li><div class="photo">Waakye special</div><div><h3>Waakye special</h3><p>Gari, spaghetti, egg and wele</p></div><span class="price"><span data-sym>$</span>11</span></li>
-      <li><div class="photo">Kelewele</div><div><h3>Kelewele</h3><p>Spiced fried plantain with groundnuts</p></div><span class="price"><span data-sym>$</span>7</span></li>
-      <li><div class="photo">Light soup and fufu</div><div><h3>Light soup and fufu</h3><p>Goat or chicken, made fresh daily</p></div><span class="price"><span data-sym>$</span>13</span></li>
-      <li><div class="photo">Sobolo</div><div><h3>Sobolo</h3><p>Hibiscus, ginger and pineapple, chilled</p></div><span class="price"><span data-sym>$</span>5</span></li>
+      <li><div class="photo">Firewood jollof plate</div><div><h3>Firewood jollof</h3><p>With grilled chicken and shito</p></div><span class="price tabular"><span data-sym>$</span>14</span></li>
+      <li><div class="photo">Tilapia and banku</div><div><h3>Tilapia and banku</h3><p>Whole fish, pepper and onions</p></div><span class="price tabular"><span data-sym>$</span>22</span></li>
+      <li><div class="photo">Waakye special</div><div><h3>Waakye special</h3><p>Gari, spaghetti, egg and wele</p></div><span class="price tabular"><span data-sym>$</span>11</span></li>
+      <li><div class="photo">Kelewele</div><div><h3>Kelewele</h3><p>Spiced fried plantain with groundnuts</p></div><span class="price tabular"><span data-sym>$</span>7</span></li>
+      <li><div class="photo">Light soup and fufu</div><div><h3>Light soup and fufu</h3><p>Goat or chicken, made fresh daily</p></div><span class="price tabular"><span data-sym>$</span>13</span></li>
+      <li><div class="photo">Sobolo</div><div><h3>Sobolo</h3><p>Hibiscus, ginger and pineapple, chilled</p></div><span class="price tabular"><span data-sym>$</span>5</span></li>
     </ul>
   </div>
 </section>
@@ -262,7 +300,8 @@ footer.foot .wrap{padding-top:28px;padding-bottom:40px;display:flex;justify-cont
 <section id="book" class="request">
   <div class="wrap">
     <form class="card" id="request-form" novalidate>
-      <div>
+      <div class="rise">
+        <div class="section-signature" aria-hidden="true"><span class="rise-key section-signature-key"></span><span class="section-signature-hairline"></span></div>
         <h2>Book a table</h2>
         <p>Tell us how many, which day and what time. WhatsApp opens with your booking already written, and we confirm your table.</p>
       </div>
@@ -287,7 +326,12 @@ footer.foot .wrap{padding-top:28px;padding-bottom:40px;display:flex;justify-cont
 </section>
 
 <section id="how" class="wrap">
-  <div class="section-head"><p class="eyebrow">How it works</p><h2>Book, confirm, eat</h2></div>
+  <div class="section-head">
+    <div class="rise">
+      <div class="section-signature" aria-hidden="true"><span class="rise-key section-signature-key"></span><span class="section-signature-hairline"></span></div>
+      <p class="eyebrow">How it works</p><h2>Book, confirm, eat</h2>
+    </div>
+  </div>
   <div class="steps">
     <div class="step"><span class="n">01</span><strong>Send your booking</strong><span>Use the form or message us on WhatsApp. A real person replies.</span></div>
     <div class="step"><span class="n">02</span><strong>We hold your table</strong><span>We confirm the time. For groups of 10 or more we may ask for a small deposit.</span></div>
@@ -297,7 +341,8 @@ footer.foot .wrap{padding-top:28px;padding-bottom:40px;display:flex;justify-cont
 
 <section id="visit" class="visit">
   <div class="wrap grid">
-    <div>
+    <div class="rise">
+      <div class="section-signature" aria-hidden="true"><span class="rise-key section-signature-key"></span><span class="section-signature-hairline"></span></div>
       <p class="eyebrow">Find us</p>
       <h2>Jamestown, Accra</h2>
       <ul>
@@ -311,7 +356,10 @@ footer.foot .wrap{padding-top:28px;padding-bottom:40px;display:flex;justify-cont
 </section>
 
 <section class="wrap reviews">
-  <h2>What diners say</h2>
+  <div class="center rise">
+    <div class="section-signature" aria-hidden="true"><span class="rise-key section-signature-key"></span></div>
+    <h2>What diners say</h2>
+  </div>
   <p>Kwame enjoyed the Firewood jollof and the taste was authentic. <span class="muted">· March</span></p>
   <p>Esinam tried the Tilapia and banku and said it was fresh and flavorful. <span class="muted">· April</span></p>
   <p>Kojo loved the Kelewele and said it was spicy and crunchy. <span class="muted">· May</span></p>
@@ -321,7 +369,7 @@ footer.foot .wrap{padding-top:28px;padding-bottom:40px;display:flex;justify-cont
 <footer class="foot">
   <div class="wrap">
     <div>© Nkyene Kitchen (demo).</div>
-    <div>Page by <a href="https://fitaacreative.com/fully-booked">Fitaa Creative</a>. Want one for your restaurant? Live in 7 days or half your fee back.</div>
+    <div>Site by <a href="https://fitaacreative.com/fully-booked">Fitaa Creative</a>. Want one for your restaurant? Live in 7 days or half your fee back.</div>
   </div>
 </footer>
 
@@ -391,7 +439,21 @@ if ('IntersectionObserver' in window) {
   }, { rootMargin: '-45% 0px -50% 0px' });
   ['menu', 'book', 'how', 'visit'].forEach(function (id) { spy.observe($(id)); });
 }
+document.documentElement.classList.add('js');
 update();
+</script>
+<script>
+/* ── Rise on scroll (Fitaa rise, design language) ── */
+document.addEventListener('DOMContentLoaded', function () {
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } });
+    }, { rootMargin: '0px 0px -60px 0px' });
+    document.querySelectorAll('.rise').forEach(function (el) { io.observe(el); });
+  } else {
+    document.querySelectorAll('.rise').forEach(function (el) { el.classList.add('is-in'); });
+  }
+});
 </script>
 <script defer src="/fitaa-analytics.js"></script>
 </body>

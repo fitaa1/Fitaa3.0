@@ -41,6 +41,16 @@
   --ink:#2A1E22; --muted:#6B5A5F; --soft:#705F64;
   --rose:#8E4352; --rose-deep:#74323F; --on-rose:#FFF7F3; --gold:#B88A4A;
   --display:'Jost','Segoe UI',sans-serif; --body:Manrope,'Segoe UI',sans-serif;
+  --graphite:hsl(211 20% 94%); --sheen:linear-gradient(180deg, hsl(0 0% 100% / .6), hsl(0 0% 100% / 0) 42%);
+  --edge:inset 0 1px 0 hsl(0 0% 100% / .9), inset 0 0 0 1px hsl(211 20% 88%);
+  --champagne:hsl(38 72% 30%); --leather:hsl(24 45% 30%);
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --graphite:hsl(211 32% 5%); --sheen:linear-gradient(180deg, hsl(0 0% 100% / .045), hsl(0 0% 100% / 0) 42%);
+    --edge:inset 0 1px 0 hsl(0 0% 100% / .08), inset 0 0 0 1px hsl(0 0% 100% / .06);
+    --champagne:hsl(40 60% 68%); --leather:hsl(28 55% 62%);
+  }
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -161,7 +171,7 @@ footer.foot .wrap{padding-top:28px;padding-bottom:40px;display:flex;justify-cont
   .menu{padding:4px 20px}
   .tabs{flex-wrap:nowrap;max-width:100%;overflow-x:auto}
   .tabs button{padding:0 14px;flex:none}
-  .sticky-book{display:flex;position:fixed;left:16px;right:16px;bottom:16px;z-index:20;box-shadow:0 14px 30px rgba(42,30,34,.28)}
+  .sticky-book{display:flex;position:fixed;left:16px;right:16px;bottom:16px;z-index:20;box-shadow:var(--edge)}
   footer.foot .wrap{padding-bottom:96px}
   .menu-btn{display:inline-flex}
   .mobile-nav{display:block;position:fixed;top:84px;left:0;right:0;z-index:29;background:var(--ground);border-bottom:1px solid var(--line);padding:8px 16px 16px;transform:translateY(-8px);opacity:0;visibility:hidden;transition:opacity .25s,transform .25s,visibility .25s}
@@ -173,6 +183,31 @@ header.top{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--g
 /* Tap targets: 44 px or more (SITE_STANDARD.md). scripts/check-pages.mjs measures them. */
 .brand{display:inline-flex;flex-direction:column;justify-content:center;min-height:44px}
 .links a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;min-width:44px}
+
+/* ── Reveal on scroll (content stays visible without JavaScript) ── */
+@media (prefers-reduced-motion: reduce){.js .rise{opacity:1;transform:none;transition:none}}
+.js .rise{opacity:0;transform:translateY(12px);transition:opacity 420ms cubic-bezier(0.22,1,.36,1) var(--d,0s),transform 420ms cubic-bezier(0.22,1,.36,1) var(--d,0s)}
+.js .rise.is-in{opacity:1;transform:translateY(0)}
+.rise-key{transform:scaleX(0);transform-origin:left;transition:transform 420ms cubic-bezier(0.22,1,.36,1) var(--d,0s)}
+.rise-key.is-in{transform:scaleX(1)}
+.rise:nth-child(1){--d:0ms}.rise:nth-child(2){--d:60ms}.rise:nth-child(3){--d:120ms}.rise:nth-child(4){--d:180ms}.rise:nth-child(5){--d:240ms}.rise:nth-child(6){--d:300ms}
+
+/* The signature key draws in from the left (scaleX 0 to 1, origin left) as part of the rise. Same timing, so it is one motion. */
+.section-signature{display:flex;align-items:center;gap:0;width:100%;margin-bottom:1.3125rem}
+.section-signature-key{width:24px;height:2px;background:var(--champagne);flex:none}
+.section-signature-hairline{flex:1;height:1px;background:var(--line)}
+
+/* Prices, counts, dates and phone numbers line up in tabular figures */
+.tabular{font-variant-numeric:tabular-nums}
+
+/* Press state: everything tappable scales to 0.985 over 120 ms, no colour flash. */
+@media (prefers-reduced-motion: no-preference){
+  a:active,button:active,[role="button"]:active,summary:active{transform:scale(0.985);transition:transform 0.12s ease}
+}
+@media (prefers-reduced-motion: reduce){
+  .js .rise{opacity:1;transform:none;transition:none}
+  .rise-key{transform:scaleX(1);transition:none}
+}
 </style>
 </head>
 <body>
@@ -226,14 +261,22 @@ header.top{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--g
 
 <section id="menu" class="wrap block">
   <div class="head">
-    <div><p class="eyebrow">The menu</p><h2>Services and prices</h2></div>
+    <div class="rise">
+      <div class="section-signature" aria-hidden="true"><span class="rise-key section-signature-key"></span><span class="section-signature-hairline"></span></div>
+      <p class="eyebrow">The menu</p><h2>Services and prices</h2>
+    </div>
     <div class="tabs" role="tablist" aria-label="Service categories" id="tabs"></div>
   </div>
   <div class="menu" id="menu-list" role="tabpanel" aria-live="polite"></div>
 </section>
 
 <section id="team" class="wrap block">
-  <div class="head"><div><p class="eyebrow">The stylists</p><h2>Hands you can trust</h2></div></div>
+  <div class="head">
+    <div class="rise">
+      <div class="section-signature" aria-hidden="true"><span class="rise-key section-signature-key"></span><span class="section-signature-hairline"></span></div>
+      <p class="eyebrow">The stylists</p><h2>Hands you can trust</h2>
+    </div>
+  </div>
   <div class="team">
     <div class="member"><div class="photo">Portrait</div><b>Ama Serwaa</b><span>Braids and protective styles · 12 years</span></div>
     <div class="member"><div class="photo">Portrait</div><b>Nana Akua</b><span>Silk press and wig installs · 9 years</span></div>
@@ -242,7 +285,12 @@ header.top{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--g
 </section>
 
 <section id="work" class="wrap block">
-  <div class="head"><div><p class="eyebrow">Our work</p><h2>Fresh from the chair</h2></div></div>
+  <div class="head">
+    <div class="rise">
+      <div class="section-signature" aria-hidden="true"><span class="rise-key section-signature-key"></span><span class="section-signature-hairline"></span></div>
+      <p class="eyebrow">Our work</p><h2>Fresh from the chair</h2>
+    </div>
+  </div>
   <div class="gallery">
     <div class="photo tall">Braids, full length</div><div class="photo">Silk press</div><div class="photo">Gel manicure</div><div class="photo tall">Bridal look</div>
     <div class="photo">Lash set</div><div class="photo">Acrylic set</div>
@@ -252,12 +300,13 @@ header.top{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--g
 <section id="book" class="book">
   <div class="wrap">
     <div class="card">
-      <div class="aside">
+      <div class="aside rise">
+        <div class="section-signature" aria-hidden="true"><span class="rise-key section-signature-key"></span><span class="section-signature-hairline"></span></div>
         <p class="eyebrow">Book your slot</p>
         <h2>Pick it here, confirm on WhatsApp.</h2>
         <p>Choose your service, day and time. WhatsApp opens with your booking written out, and the studio confirms with the deposit details.</p>
         <ul>
-          <li>Deposit of <span data-money>$10</span> secures your slot</li>
+          <li class="tabular">Deposit of <span data-money>$10</span> secures your slot</li>
           <li>Please arrive 15 minutes early</li>
           <li>Reschedule free up to 72 hours before</li>
         </ul>
@@ -283,7 +332,8 @@ header.top{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--g
 
 <section id="visit" class="visit">
   <div class="wrap grid">
-    <div>
+    <div class="rise">
+      <div class="section-signature" aria-hidden="true"><span class="rise-key section-signature-key"></span><span class="section-signature-hairline"></span></div>
       <p class="eyebrow">Visit</p>
       <h2>Osu, Accra</h2>
       <p>Tema Community. Parking on site. Exact directions sent with your booking.</p>
@@ -294,7 +344,10 @@ header.top{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--g
 </section>
 
 <section class="wrap reviews">
-  <h2>What clients say</h2>
+  <div class="center rise">
+    <div class="section-signature" aria-hidden="true"><span class="rise-key section-signature-key"></span></div>
+    <h2>What clients say</h2>
+  </div>
   <p>Maame chose the Braids package and the knotless braids were worth every cedi. <span class="muted">· March</span></p>
   <p>Kojo chose the Silk press and the press was quick, smooth and exactly as promised. <span class="muted">· October</span></p>
   <p>Abena chose the Lashes package and left with a full set that lasted. <span class="muted">· January</span></p>
@@ -304,7 +357,7 @@ header.top{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--g
 <footer class="foot">
   <div class="wrap">
     <div>© Maison Adwoa (demo).</div>
-    <div>Page by <a href="https://fitaacreative.com/fully-booked?studio">Fitaa Creative</a>. Want one for your studio? Live in 7 days or half your fee back.</div>
+    <div>Site by <a href="https://fitaacreative.com/fully-booked?studio">Fitaa Creative</a>. Want one for your studio? Live in 7 days or half your fee back.</div>
   </div>
 </footer>
 
@@ -465,6 +518,30 @@ mnav.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', cl
 document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeMenu(); });
 
 fillServices(); renderTabs(); renderMenu(); renderSlots(); renderHours();
+
+document.documentElement.classList.add('js');
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var rises = document.querySelectorAll('.rise');
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-in');
+        }
+      });
+    }, { rootMargin: '0px 0px -60px 0px' });
+
+    rises.forEach(function(rise) {
+      observer.observe(rise);
+    });
+
+    if (!('IntersectionObserver' in window)) {
+      rises.forEach(function(rise) {
+        rise.classList.add('is-in');
+      });
+    }
+  });
 </script>
 <script defer src="/fitaa-analytics.js"></script>
 </body>

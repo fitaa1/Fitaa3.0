@@ -1,9 +1,15 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import { useRise } from "@/hooks/useRise";
 
 /* Shown for any address that isn't a real page. Vercel serves it from /404.html
    with a 404 status (see vercel.json and scripts/static-pages.mjs). */
 export default function NotFound() {
+  const headRef = useRef<HTMLDivElement>(null);
+  const headKeyRef = useRef<HTMLSpanElement>(null);
+  useRise(headRef);
+  useRise(headKeyRef);
+
   useEffect(() => {
     document.title = "Page not found | Fitaa Creative";
   }, []);
@@ -28,7 +34,13 @@ export default function NotFound() {
 
       <section className="flex-1 flex items-center">
         <div className="container mx-auto px-6 md:px-12 py-20 md:py-28 max-w-3xl">
-          <p className="text-[0.65rem] font-sans uppercase tracking-[0.22em] text-ruby mb-4">Error 404</p>
+          <div ref={headRef} className="rise">
+            <div className="section-signature mb-[1.3125rem] flex items-center gap-0 w-full" aria-hidden="true">
+              <span ref={headKeyRef} className="rise-key section-signature-key block w-6 h-0.5 bg-[var(--champagne)]" />
+              <span className="section-signature-hairline flex-1 h-px bg-border" />
+            </div>
+            <p className="text-[0.65rem] font-sans uppercase tracking-[0.22em] text-ruby mb-4">Error 404</p>
+          </div>
           <h1 className="text-[clamp(2.4rem,6vw,4rem)] font-display font-bold leading-[1.05] mb-6">
             This page isn&rsquo;t here.
           </h1>

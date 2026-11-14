@@ -1,7 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { ArrowLeft } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import legalMeta from "@/config/legal-meta.json";
+import { useRise } from "@/hooks/useRise";
 
 type Section = { heading: string; body: string[] };
 type Doc = { title: string; intro: string; sections: Section[] };
@@ -105,6 +106,11 @@ const terms: Doc = {
 export default function Legal({ page }: { page: "privacy" | "terms" }) {
   const doc = page === "privacy" ? privacy : terms;
 
+  const headRef = useRef<HTMLDivElement>(null);
+  const headKeyRef = useRef<HTMLSpanElement>(null);
+  useRise(headRef);
+  useRise(headKeyRef);
+
   useEffect(() => {
     document.title = `${doc.title} | ${siteConfig.name}`;
     document.querySelector('meta[name="description"]')?.setAttribute("content", doc.intro);
@@ -131,13 +137,23 @@ export default function Legal({ page }: { page: "privacy" | "terms" }) {
       </header>
 
       <article className="container mx-auto px-6 md:px-12 py-14 md:py-20 max-w-3xl">
-        <p className="text-[0.65rem] font-sans uppercase tracking-[0.22em] text-ruby mb-4">Legal</p>
-        <h1 className="text-[clamp(2.2rem,5vw,3.4rem)] font-display font-bold leading-[1.08] mb-5">{doc.title}</h1>
-        <p className="text-muted-foreground font-sans leading-[1.75] mb-12">{doc.intro}</p>
+        <div ref={headRef} className="rise">
+          <div className="section-signature mb-[1.3125rem] flex items-center gap-0 w-full" aria-hidden="true">
+            <span ref={headKeyRef} className="rise-key section-signature-key block w-6 h-0.5 bg-[var(--champagne)]" />
+            <span className="section-signature-hairline flex-1 h-px bg-border" />
+          </div>
+          <p className="text-[0.65rem] font-sans uppercase tracking-[0.22em] text-ruby mb-4">Legal</p>
+          <h1 className="text-[clamp(2.2rem,5vw,3.4rem)] font-display font-bold leading-[1.08] mb-5">{doc.title}</h1>
+          <p className="text-muted-foreground font-sans leading-[1.75] mb-12">{doc.intro}</p>
+        </div>
 
         <div className="space-y-10">
           {doc.sections.map((s) => (
             <section key={s.heading}>
+              <div className="section-signature mb-[1.3125rem] flex items-center gap-0 w-full" aria-hidden="true">
+                <span className="section-signature-key block w-6 h-0.5 bg-[var(--champagne)]" />
+                <span className="section-signature-hairline flex-1 h-px bg-border" />
+              </div>
               <h2 className="text-[1.35rem] font-display font-semibold mb-3">{s.heading}</h2>
               <div className="space-y-3">
                 {s.body.map((p) => (
@@ -150,7 +166,7 @@ export default function Legal({ page }: { page: "privacy" | "terms" }) {
           ))}
         </div>
 
-        <p className="mt-14 pt-6 border-t border-border/30 text-[0.7rem] font-sans uppercase tracking-[0.18em] text-muted-foreground">
+        <p className="mt-14 pt-6 border-t border-border/30 text-[0.7rem] font-sans uppercase tracking-[0.18em] text-muted-foreground tabular-nums">
           Last updated {UPDATED}
         </p>
       </article>

@@ -197,12 +197,26 @@ footer.foot .wrap{padding-top:28px;padding-bottom:40px;display:flex;justify-cont
   footer.foot .wrap{padding-bottom:96px}
 }
 @media (max-width:560px){.services .grid,.fields{grid-template-columns:minmax(0,1fr)}}
+
+/* Press state: everything tappable scales to 0.985 over 120 ms, no colour flash. */
+@media (prefers-reduced-motion: no-preference){
+  a:active,button:active,[role="button"]:active,summary:active{transform:scale(0.985);transition:transform 0.12s ease}
+}
 @media (prefers-reduced-motion: reduce){
   html{scroll-behavior:auto}
   .pulse path{animation:none;stroke-dashoffset:0}
   .changed{animation:none}
   .links a::after,.mobile-nav{transition:none}
+  .js .rise{opacity:1;transform:none;transition:none}
+  .rise-key{transform:scaleX(1);transition:none}
 }
+.js .rise{opacity:0;transform:translateY(12px);transition:opacity 420ms cubic-bezier(0.22,1,.36,1) var(--d,0s),transform 420ms cubic-bezier(0.22,1,.36,1) var(--d,0s)}
+.js .rise.is-in{opacity:1;transform:translateY(0)}
+.rise-key{transform:scaleX(0);transform-origin:left;transition:transform 420ms cubic-bezier(0.22,1,.36,1) var(--d,0s)}
+.rise-key.is-in{transform:scaleX(1)}
+.rise:nth-child(1){--d:0ms}.rise:nth-child(2){--d:60ms}.rise:nth-child(3){--d:120ms}.rise:nth-child(4){--d:180ms}.rise:nth-child(5){--d:240ms}.rise:nth-child(6){--d:300ms}
+
+/* The signature key draws in from the left (scaleX 0 to 1, origin left) as part of the rise. Same timing, so it is one motion. */
 
 /* Tap targets: 44 px or more (SITE_STANDARD.md). scripts/check-pages.mjs measures them. */
 .brand{min-height:44px}
@@ -280,15 +294,15 @@ footer.foot .wrap{padding-top:28px;padding-bottom:40px;display:flex;justify-cont
   <div class="wrap grid">
     <div class="section-head">
       <div class="rise">
-        <div class="section-signature" aria-hidden="true"><span class="section-signature-key"></span><span class="section-signature-hairline"></span></div>
+        <div class="section-signature" aria-hidden="true"><span class="rise-key section-signature-key"></span><span class="section-signature-hairline"></span></div>
         <p class="eyebrow">Services and fees</p>
         <h2>What we can help with</h2>
       </div>
     </div>
-    <article class="svc"><svg class="ico"><use href="#i-steth"/></svg><h3>General consultation</h3><p>Fevers, aches, infections and anything that needs a doctor's eye.</p><p class="fee">From <strong><span data-sym class="tabular">$</span>40</strong></p><a class="ghost" href="#book" data-svc="General consultation">Book this</a></article>
-    <article class="svc"><svg class="ico"><use href="#i-steth"/></svg><h3>Children's clinic</h3><p>Check-ups, vaccinations and the coughs that won't go away.</p><p class="fee">From <strong><span data-sym class="tabular">$</span>45</strong></p><a class="ghost" href="#book" data-svc="Children's clinic">Book this</a></article>
-    <article class="svc"><svg class="ico"><use href="#i-steth"/></svg><h3>Lab tests</h3><p>Blood work and routine tests, with results sent to your phone.</p><p class="fee">From <strong><span data-sym class="tabular">$</span>120</strong></p><a class="ghost" href="#book" data-svc="Lab tests">Book this</a></article>
-    <article class="svc"><svg class="ico"><use href="#i-steth"/></svg><h3>Health check</h3><p>A full check for work, travel or peace of mind.</p><p class="fee">From <strong><span data-sym class="tabular">$</span>110</strong></p><a class="ghost" href="#book" data-svc="Health check">Book this</a></article>
+    <article class="svc"><svg class="ico"><use href="#i-steth"/></svg><h3>General consultation</h3><p>Fevers, aches, infections and anything that needs a doctor's eye.</p><p class="fee tabular">From <strong><span data-sym>$</span>40</strong></p><a class="ghost" href="#book" data-svc="General consultation">Book this</a></article>
+    <article class="svc"><svg class="ico"><use href="#i-steth"/></svg><h3>Children's clinic</h3><p>Check-ups, vaccinations and the coughs that won't go away.</p><p class="fee tabular">From <strong><span data-sym>$</span>45</strong></p><a class="ghost" href="#book" data-svc="Children's clinic">Book this</a></article>
+    <article class="svc"><svg class="ico"><use href="#i-steth"/></svg><h3>Lab tests</h3><p>Blood work and routine tests, with results sent to your phone.</p><p class="fee tabular">From <strong><span data-sym>$</span>120</strong></p><a class="ghost" href="#book" data-svc="Lab tests">Book this</a></article>
+    <article class="svc"><svg class="ico"><use href="#i-steth"/></svg><h3>Health check</h3><p>A full check for work, travel or peace of mind.</p><p class="fee tabular">From <strong><span data-sym>$</span>110</strong></p><a class="ghost" href="#book" data-svc="Health check">Book this</a></article>
   </div>
 </section>
 
@@ -421,6 +435,8 @@ menuBtn.addEventListener('click', function () {
 mnav.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', closeMenu); });
 document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeMenu(); });
 
+document.documentElement.classList.add('js');
+
 if ('IntersectionObserver' in window) {
   var navLinks = document.querySelectorAll('.links a, .mobile-nav a');
   var spy = new IntersectionObserver(function (entries) {
@@ -432,6 +448,19 @@ if ('IntersectionObserver' in window) {
   ['services', 'book', 'how', 'visit'].forEach(function (id) { spy.observe($(id)); });
 }
 update();
+</script>
+<script>
+/* ── Rise on scroll (Fitaa rise, design language) ── */
+document.addEventListener('DOMContentLoaded', function () {
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } });
+    }, { rootMargin: '0px 0px -60px 0px' });
+    document.querySelectorAll('.rise').forEach(function (el) { io.observe(el); });
+  } else {
+    document.querySelectorAll('.rise').forEach(function (el) { el.classList.add('is-in'); });
+  }
+});
 </script>
 <script defer src="/fitaa-analytics.js"></script>
 </body>
