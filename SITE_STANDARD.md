@@ -186,7 +186,7 @@ different hue at the same lightness:
 - The logo turns and the light follows (Nigel, 12 and 13 Nov 2026): the logo mark rocks slowly
   from side to side and one band of champagne light crosses it as it turns. The turn and the light
   share one clock, so the angle decides where the light is. One wrapper and one pseudo-element,
-  transform only, no script and no image (`.logo-sheen` in this site's `src/index.css`). A second, slower clock lifts and
+  transform only, no script and no image (`.logo-sheen` in this site's `src/index.css`, and the same rules inside `public/fully-booked/index.html`). A second, slower clock lifts and
   settles the mark by a pixel, so the turn never repeats the same path. On hover
   the mark lifts. Under reduced motion the logo is still. Only the logo carries it.
 
