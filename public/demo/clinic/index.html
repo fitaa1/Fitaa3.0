@@ -49,6 +49,9 @@
   --text:#0F2523; --muted:#3E5552; --soft:#566C69;
   --teal:#0E6E66; --teal-text:#0B5E57; --teal-soft:#D7EEEA;
   --accent:#C2452F; --accent-hover:#AE3B27; --on-accent:#fff;
+  --graphite:hsl(211 20% 94%); --sheen:linear-gradient(180deg, hsl(0 0% 100% / .6), hsl(0 0% 100% / 0) 42%);
+  --edge:inset 0 1px 0 hsl(0 0% 100% / .9), inset 0 0 0 1px hsl(211 20% 88%);
+  --champagne:hsl(38 72% 30%); --leather:hsl(24 45% 30%);
   --font:'Atkinson Hyperlegible Next','Atkinson Fallback','Segoe UI',system-ui,sans-serif;
 }
 @media (prefers-color-scheme: dark){
@@ -58,6 +61,9 @@
     --text:#ECF5F3; --muted:#B4C8C4; --soft:#9AB1AD;
     --teal:#3FB8AC; --teal-text:#6FD3C8; --teal-soft:#14332F;
     --accent:#F07A64; --accent-hover:#F48E7B; --on-accent:#1A0B07;
+    --graphite:hsl(211 32% 5%); --sheen:linear-gradient(180deg, hsl(0 0% 100% / .045), hsl(0 0% 100% / 0) 42%);
+    --edge:inset 0 1px 0 hsl(0 0% 100% / .08), inset 0 0 0 1px hsl(0 0% 100% / .06);
+    --champagne:hsl(40 60% 68%); --leather:hsl(28 55% 62%);
   }
 }
 *{box-sizing:border-box}
@@ -107,7 +113,7 @@ h1,h2,h3{margin:0;font-weight:700;letter-spacing:-.02em;line-height:1.1}
 
 /* Signature: the appointment card. A heartbeat line draws once, then the card fills in from the form. */
 .appt-wrap{display:flex;justify-content:center}
-.appt{width:min(100%,360px);background:var(--surface);border:1px solid var(--line);border-radius:24px;overflow:hidden;box-shadow:0 40px 80px -48px color-mix(in srgb,var(--teal) 70%,transparent)}
+.appt{width:min(100%,360px);background:var(--surface);border:1px solid var(--line);border-radius:24px;overflow:hidden;box-shadow:var(--edge)}
 .appt-head{background:#0E6E66;color:#fff;padding:18px 22px 10px}
 .appt-head small{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;opacity:.85}
 .appt-head b{display:block;font-size:1.25rem;margin-top:2px}
@@ -169,6 +175,12 @@ legend{font-size:.92rem;color:var(--muted);margin-bottom:8px}
 .reviews{padding-top:clamp(56px,8vw,80px);padding-bottom:clamp(56px,8vw,80px)}
 .reviews h2{font-size:clamp(1.6rem,3vw,2.2rem);margin-bottom:12px}
 .reviews p{color:var(--soft)}
+/* ── Signature line (design language: --champagne key, --line hairline) ── */
+.section-signature{display:flex;align-items:center;gap:0;width:100%;margin-bottom:1.3125rem}
+.section-signature-key{width:24px;height:2px;background:var(--champagne);flex:none}
+.section-signature-hairline{flex:1;height:1px;background:var(--line)}
+/* Prices, counts, dates and phone numbers line up in tabular figures */
+.tabular{font-variant-numeric:tabular-nums}
 footer.foot{border-top:1px solid var(--line)}
 footer.foot .wrap{padding-top:28px;padding-bottom:40px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:.9rem;color:var(--soft)}
 
@@ -183,16 +195,30 @@ footer.foot .wrap{padding-top:28px;padding-bottom:40px;display:flex;justify-cont
   .mobile-nav a{display:flex;align-items:center;min-height:48px;border-bottom:1px solid var(--line);text-decoration:none;font-weight:700}
   .mobile-nav a[aria-current="true"]{color:var(--teal-text)}
   .hero,.steps,.visit .grid{grid-template-columns:minmax(0,1fr)}
-  .sticky-book{display:flex;position:fixed;left:16px;right:16px;bottom:16px;z-index:20;box-shadow:0 12px 30px rgba(0,0,0,.25)}
+  .sticky-book{display:flex;position:fixed;left:16px;right:16px;bottom:16px;z-index:20;box-shadow:var(--edge)}
   footer.foot .wrap{padding-bottom:96px}
 }
 @media (max-width:560px){.services .grid,.fields{grid-template-columns:minmax(0,1fr)}}
+
+/* Press state: everything tappable scales to 0.985 over 120 ms, no colour flash. */
+@media (prefers-reduced-motion: no-preference){
+  a:active,button:active,[role="button"]:active,summary:active{transform:scale(0.985);transition:transform 0.12s ease}
+}
 @media (prefers-reduced-motion: reduce){
   html{scroll-behavior:auto}
   .pulse path{animation:none;stroke-dashoffset:0}
   .changed{animation:none}
   .links a::after,.mobile-nav{transition:none}
+  .js .rise{opacity:1;transform:none;transition:none}
+  .js .rise-key{transform:scaleX(1);transition:none}
 }
+.js .rise{opacity:0;transform:translateY(12px);transition:opacity 420ms cubic-bezier(0.22,1,.36,1) var(--d,0s),transform 420ms cubic-bezier(0.22,1,.36,1) var(--d,0s)}
+.js .rise.is-in{opacity:1;transform:translateY(0)}
+.js .rise-key{transform:scaleX(0);transform-origin:left;transition:transform 420ms cubic-bezier(0.22,1,.36,1) var(--d,0s)}
+.js .rise-key.is-in{transform:scaleX(1)}
+.rise:nth-child(1){--d:0ms}.rise:nth-child(2){--d:60ms}.rise:nth-child(3){--d:120ms}.rise:nth-child(4){--d:180ms}.rise:nth-child(5){--d:240ms}.rise:nth-child(6){--d:300ms}
+
+/* The signature key draws in from the left (scaleX 0 to 1, origin left) as part of the rise. Same timing, so it is one motion. */
 
 /* Tap targets: 44 px or more (SITE_STANDARD.md). scripts/check-pages.mjs measures them. */
 .brand{min-height:44px}
@@ -268,18 +294,25 @@ footer.foot .wrap{padding-top:28px;padding-bottom:40px;display:flex;justify-cont
 
 <section id="services" class="services">
   <div class="wrap grid">
-    <div class="section-head"><p class="eyebrow">Services and fees</p><h2>What we can help with</h2></div>
-    <article class="svc"><svg class="ico"><use href="#i-steth"/></svg><h3>General consultation</h3><p>Fevers, aches, infections and anything that needs a doctor's eye.</p><p class="fee">From <strong><span data-sym>$</span>40</strong></p><a class="ghost" href="#book" data-svc="General consultation">Book this</a></article>
-    <article class="svc"><svg class="ico"><use href="#i-steth"/></svg><h3>Children's clinic</h3><p>Check-ups, vaccinations and the coughs that won't go away.</p><p class="fee">From <strong><span data-sym>$</span>45</strong></p><a class="ghost" href="#book" data-svc="Children's clinic">Book this</a></article>
-    <article class="svc"><svg class="ico"><use href="#i-steth"/></svg><h3>Lab tests</h3><p>Blood work and routine tests, with results sent to your phone.</p><p class="fee">From <strong><span data-sym>$</span>120</strong></p><a class="ghost" href="#book" data-svc="Lab tests">Book this</a></article>
-    <article class="svc"><svg class="ico"><use href="#i-steth"/></svg><h3>Health check</h3><p>A full check for work, travel or peace of mind.</p><p class="fee">From <strong><span data-sym>$</span>110</strong></p><a class="ghost" href="#book" data-svc="Health check">Book this</a></article>
+    <div class="section-head">
+      <div class="rise">
+        <div class="section-signature" aria-hidden="true"><span class="rise-key section-signature-key"></span><span class="section-signature-hairline"></span></div>
+        <p class="eyebrow">Services and fees</p>
+        <h2>What we can help with</h2>
+      </div>
+    </div>
+    <article class="svc"><svg class="ico"><use href="#i-steth"/></svg><h3>General consultation</h3><p>Fevers, aches, infections and anything that needs a doctor's eye.</p><p class="fee tabular">From <strong><span data-sym>$</span>40</strong></p><a class="ghost" href="#book" data-svc="General consultation">Book this</a></article>
+    <article class="svc"><svg class="ico"><use href="#i-steth"/></svg><h3>Children's clinic</h3><p>Check-ups, vaccinations and the coughs that won't go away.</p><p class="fee tabular">From <strong><span data-sym>$</span>45</strong></p><a class="ghost" href="#book" data-svc="Children's clinic">Book this</a></article>
+    <article class="svc"><svg class="ico"><use href="#i-steth"/></svg><h3>Lab tests</h3><p>Blood work and routine tests, with results sent to your phone.</p><p class="fee tabular">From <strong><span data-sym>$</span>120</strong></p><a class="ghost" href="#book" data-svc="Lab tests">Book this</a></article>
+    <article class="svc"><svg class="ico"><use href="#i-steth"/></svg><h3>Health check</h3><p>A full check for work, travel or peace of mind.</p><p class="fee tabular">From <strong><span data-sym>$</span>110</strong></p><a class="ghost" href="#book" data-svc="Health check">Book this</a></article>
   </div>
 </section>
 
 <section id="book" class="request">
   <div class="wrap">
     <form class="card" id="request-form" novalidate>
-      <div>
+      <div class="rise">
+        <div class="section-signature" aria-hidden="true"><span class="rise-key section-signature-key"></span><span class="section-signature-hairline"></span></div>
         <h2>Book a visit</h2>
         <p>Choose a service, a day and a time of day. WhatsApp opens with your request already written, and the front desk confirms your exact time.</p>
       </div>
@@ -312,7 +345,12 @@ footer.foot .wrap{padding-top:28px;padding-bottom:40px;display:flex;justify-cont
 </section>
 
 <section id="how" class="wrap">
-  <div class="section-head" style="margin-bottom:28px"><p class="eyebrow">How it works</p><h2 style="font-size:clamp(1.9rem,4vw,2.6rem)">Three steps to being seen</h2></div>
+  <div class="section-head" style="margin-bottom:28px">
+    <div class="rise">
+      <div class="section-signature" aria-hidden="true"><span class="rise-key section-signature-key"></span><span class="section-signature-hairline"></span></div>
+      <p class="eyebrow">How it works</p><h2 style="font-size:clamp(1.9rem,4vw,2.6rem)">Three steps to being seen</h2>
+    </div>
+  </div>
   <div class="steps">
     <div class="step"><span class="n">01</span><strong>Send your request</strong><span>Use the form or message us on WhatsApp. A real person at the front desk replies.</span></div>
     <div class="step"><span class="n">02</span><strong>Get your time</strong><span>We confirm your exact time and the fee, then remind you the evening before.</span></div>
@@ -322,7 +360,8 @@ footer.foot .wrap{padding-top:28px;padding-bottom:40px;display:flex;justify-cont
 
 <section id="visit" class="visit">
   <div class="wrap grid">
-    <div>
+    <div class="rise">
+      <div class="section-signature" aria-hidden="true"><span class="rise-key section-signature-key"></span><span class="section-signature-hairline"></span></div>
       <p class="eyebrow">Visit us</p>
       <h2>Accra, Ghana</h2>
       <ul>
@@ -336,7 +375,10 @@ footer.foot .wrap{padding-top:28px;padding-bottom:40px;display:flex;justify-cont
 </section>
 
 <section class="wrap reviews">
-  <h2>What patients say</h2>
+  <div class="center rise">
+    <div class="section-signature" aria-hidden="true"><span class="rise-key section-signature-key"></span></div>
+    <h2>What patients say</h2>
+  </div>
   <p>Ama chose the general consultation and felt better within 2 days. <span class="muted">· March</span></p>
   <p>Kweku chose the lab tests and received results within 48 hours. <span class="muted">· April</span></p>
 </section>
@@ -345,7 +387,7 @@ footer.foot .wrap{padding-top:28px;padding-bottom:40px;display:flex;justify-cont
 <footer class="foot">
   <div class="wrap">
     <div>© Adom Family Clinic (demo).</div>
-    <div>Page by <a href="https://fitaacreative.com/fully-booked">Fitaa Creative</a>. Want one for your clinic? Live in 7 days or half your fee back.</div>
+    <div>Site by <a href="https://fitaacreative.com/fully-booked">Fitaa Creative</a>. Want one for your clinic? Live in 7 days or half your fee back.</div>
   </div>
 </footer>
 
@@ -405,6 +447,8 @@ menuBtn.addEventListener('click', function () {
 mnav.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', closeMenu); });
 document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeMenu(); });
 
+document.documentElement.classList.add('js');
+
 if ('IntersectionObserver' in window) {
   var navLinks = document.querySelectorAll('.links a, .mobile-nav a');
   var spy = new IntersectionObserver(function (entries) {
@@ -416,6 +460,19 @@ if ('IntersectionObserver' in window) {
   ['services', 'book', 'how', 'visit'].forEach(function (id) { spy.observe($(id)); });
 }
 update();
+</script>
+<script>
+/* ── Rise on scroll (Fitaa rise, design language) ── */
+document.addEventListener('DOMContentLoaded', function () {
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } });
+    }, { rootMargin: '0px 0px -60px 0px' });
+    document.querySelectorAll('.rise').forEach(function (el) { io.observe(el); });
+  } else {
+    document.querySelectorAll('.rise').forEach(function (el) { el.classList.add('is-in'); });
+  }
+});
 </script>
 <script defer src="/fitaa-analytics.js"></script>
 </body>

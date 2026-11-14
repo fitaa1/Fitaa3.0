@@ -52,6 +52,9 @@
   --accent:#F2B33D; --accent-hover:#F7C45E; --accent-text:#8A5A00; --on-accent:#121417;
   --road:#121417; --on-road:#F4F5F6;
   --font:'Archivo','Archivo Fallback','Segoe UI',system-ui,sans-serif; --wide:'Archivo','Archivo Wide Fallback','Segoe UI',system-ui,sans-serif;
+  --graphite:hsl(211 20% 94%); --sheen:linear-gradient(180deg, hsl(0 0% 100% / .6), hsl(0 0% 100% / 0) 42%);
+  --edge:inset 0 1px 0 hsl(0 0% 100% / .9), inset 0 0 0 1px hsl(211 20% 88%);
+  --champagne:hsl(38 72% 30%); --leather:hsl(24 45% 30%);
 }
 @media (prefers-color-scheme: dark){
   :root{
@@ -59,6 +62,9 @@
     --line:#2A2E34; --line-strong:#454B53;
     --text:#F4F5F6; --muted:#B8BDC4; --soft:#9EA4AC;
     --accent-text:#F2B33D; --road:#0B0C0E;
+    --graphite:hsl(211 32% 5%); --sheen:linear-gradient(180deg, hsl(0 0% 100% / .045), hsl(0 0% 100% / 0) 42%);
+    --edge:inset 0 1px 0 hsl(0 0% 100% / .08), inset 0 0 0 1px hsl(0 0% 100% / .06);
+    --champagne:hsl(40 60% 68%); --leather:hsl(28 55% 62%);
   }
 }
 *{box-sizing:border-box}
@@ -107,7 +113,7 @@ h1,h2,h3{margin:0;font-stretch:125%;font-weight:800;letter-spacing:-.01em;text-t
 
 /* Signature: the key tag. It fills in as the visitor builds their booking. */
 .tag-wrap{display:flex;justify-content:center;perspective:900px}
-.keytag{position:relative;width:min(100%,340px);background:var(--road);color:var(--on-road);border-radius:28px 28px 36px 36px;padding:64px 28px 28px;border:1px solid #2A2E34;box-shadow:0 40px 80px -40px rgba(0,0,0,.6);transform-origin:50% 0;animation:swing 6s ease-in-out 1s infinite}
+.keytag{position:relative;width:min(100%,340px);background:var(--road);color:var(--on-road);border-radius:28px 28px 36px 36px;padding:64px 28px 28px;border:1px solid var(--line);box-shadow:var(--edge);transform-origin:50% 0;animation:swing 6s ease-in-out 1s infinite}
 .keytag::before{content:"";position:absolute;top:20px;left:50%;width:26px;height:26px;margin-left:-13px;border-radius:50%;background:var(--ground);box-shadow:inset 0 0 0 3px #2A2E34}
 .keytag::after{content:"";position:absolute;top:-34px;left:50%;width:46px;height:46px;margin-left:-23px;border-radius:50%;border:4px solid #8A9098;clip-path:inset(0 0 52% 0)}
 .keytag small{display:block;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:#9EA4AC;margin-bottom:6px}
@@ -176,7 +182,23 @@ section.block{padding-top:clamp(56px,8vw,88px);padding-bottom:clamp(24px,4vw,40p
 .reviews{padding-top:clamp(56px,8vw,80px);padding-bottom:clamp(56px,8vw,80px)}
 .reviews h2{font-size:clamp(1.6rem,3vw,2.2rem);margin-bottom:12px}
 .reviews p{color:var(--soft)}
-
+/* ── Signature line (design language: --champagne key, --line hairline) ── */
+.section-signature{display:flex;align-items:center;gap:0;width:100%;margin-bottom:1.3125rem}
+.section-signature-key{width:24px;height:2px;background:var(--champagne);flex:none}
+.section-signature-hairline{flex:1;height:1px;background:var(--line)}
+/* ── Rise on scroll (content stays visible without JavaScript) ── */
+@media (prefers-reduced-motion: reduce){.js .rise{opacity:1;transform:none;transition:none}}
+.js .rise{opacity:0;transform:translateY(12px);transition:opacity 420ms cubic-bezier(0.22,1,.36,1) var(--d,0s),transform 420ms cubic-bezier(0.22,1,.36,1) var(--d,0s)}
+.js .rise.is-in{opacity:1;transform:translateY(0)}
+.js .rise-key{transform:scaleX(0);transform-origin:left;transition:transform 420ms cubic-bezier(0.22,1,.36,1) var(--d,0s)}
+.js .rise-key.is-in{transform:scaleX(1)}
+.rise:nth-child(1){--d:0ms}.rise:nth-child(2){--d:60ms}.rise:nth-child(3){--d:120ms}.rise:nth-child(4){--d:180ms}.rise:nth-child(5){--d:240ms}.rise:nth-child(6){--d:300ms}
+/* Prices, counts, dates and phone numbers line up in tabular figures */
+.tabular{font-variant-numeric:tabular-nums}
+/* Press state: everything tappable scales to 0.985 over 120 ms, no colour flash. */
+@media (prefers-reduced-motion: no-preference){
+  a:active,button:active,[role="button"]:active,summary:active{transform:scale(0.985);transition:transform 0.12s ease}
+}
 footer.foot{border-top:1px solid var(--line)}
 footer.foot .wrap{padding-top:28px;padding-bottom:40px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:.9rem;color:var(--soft)}
 
@@ -194,7 +216,7 @@ footer.foot .wrap{padding-top:28px;padding-bottom:40px;display:flex;justify-cont
   .keytag{width:min(100%,320px)}
   .included .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .fleet,.steps,.road .grid{grid-template-columns:minmax(0,1fr)}
-  .sticky-book{display:flex;position:fixed;left:16px;right:16px;bottom:16px;z-index:20;box-shadow:0 12px 30px rgba(0,0,0,.35)}
+  .sticky-book{display:flex;position:fixed;left:16px;right:16px;bottom:16px;z-index:20;box-shadow:var(--edge)}
   footer.foot .wrap{padding-bottom:96px}
 }
 @media (max-width:520px){
@@ -204,6 +226,8 @@ footer.foot .wrap{padding-top:28px;padding-bottom:40px;display:flex;justify-cont
 }
 @media (prefers-reduced-motion: reduce){
   html{scroll-behavior:auto}
+  .js .rise{opacity:1;transform:none;transition:none}
+  .js .rise-key{transform:scaleX(1);transition:none}
   .keytag,.keytag .changed{animation:none}
   .car-card,.links a::after,.mobile-nav{transition:none}
 }
@@ -290,18 +314,22 @@ footer.foot .wrap{padding-top:28px;padding-bottom:40px;display:flex;justify-cont
 </section>
 
 <section id="fleet" class="wrap block">
-  <div class="section-head"><p class="eyebrow">The fleet</p><h2>Choose your car</h2></div>
+  <div class="rise">
+    <div class="section-signature" aria-hidden="true"><span class="rise-key section-signature-key"></span><span class="section-signature-hairline"></span></div>
+    <p class="eyebrow">The fleet</p><h2>Choose your car</h2>
+  </div>
   <div class="fleet">
-    <article class="car-card"><div class="photo">Compact sedan parked outside Arrivals, cleaned and fuelled</div><div class="body"><h3>Compact sedan</h3><div class="specs"><span>4 seats</span><span>Automatic</span><span>AC</span></div><div class="rate">From <strong><span data-sym>$</span>45</strong> a day</div><a class="ghost" href="#request" data-car="Compact sedan">Reserve this car</a></div></article>
-    <article class="car-card"><div class="photo">SUV at the airport handover point, ready for a family trip</div><div class="body"><h3>SUV</h3><div class="specs"><span>5 seats</span><span>Automatic</span><span>Good for long trips</span></div><div class="rate">From <strong><span data-sym>$</span>70</strong> a day</div><a class="ghost" href="#request" data-car="SUV">Reserve this car</a></div></article>
-    <article class="car-card"><div class="photo">7-seater with all the luggage loaded for a group holiday</div><div class="body"><h3>7-seater</h3><div class="specs"><span>7 seats</span><span>Family and luggage</span><span>Driver available</span></div><div class="rate">From <strong><span data-sym>$</span>95</strong> a day</div><a class="ghost" href="#request" data-car="7-seater">Reserve this car</a></div></article>
+    <article class="car-card"><div class="photo">Compact sedan parked outside Arrivals, cleaned and fuelled</div><div class="body"><h3>Compact sedan</h3><div class="specs"><span>4 seats</span><span>Automatic</span><span>AC</span></div><div class="rate tabular">From <strong><span data-sym>$</span>45</strong> a day</div><a class="ghost" href="#request" data-car="Compact sedan">Reserve this car</a></div></article>
+    <article class="car-card"><div class="photo">SUV at the airport handover point, ready for a family trip</div><div class="body"><h3>SUV</h3><div class="specs"><span>5 seats</span><span>Automatic</span><span>Good for long trips</span></div><div class="rate tabular">From <strong><span data-sym>$</span>70</strong> a day</div><a class="ghost" href="#request" data-car="SUV">Reserve this car</a></div></article>
+    <article class="car-card"><div class="photo">7-seater with all the luggage loaded for a group holiday</div><div class="body"><h3>7-seater</h3><div class="specs"><span>7 seats</span><span>Family and luggage</span><span>Driver available</span></div><div class="rate tabular">From <strong><span data-sym>$</span>95</strong> a day</div><a class="ghost" href="#request" data-car="7-seater">Reserve this car</a></div></article>
   </div>
 </section>
 
 <section id="request" class="request">
   <div class="wrap">
     <form class="card" id="request-form" novalidate>
-      <div>
+      <div class="rise">
+        <div class="section-signature" aria-hidden="true"><span class="rise-key section-signature-key"></span><span class="section-signature-hairline"></span></div>
         <h2>Reserve a car</h2>
         <p>Fill this in and WhatsApp opens with your request already written. We reply with availability, the final price and the deposit details.</p>
       </div>
@@ -321,7 +349,12 @@ footer.foot .wrap{padding-top:28px;padding-bottom:40px;display:flex;justify-cont
 </section>
 
 <section id="how" class="wrap">
-  <div class="section-head"><p class="eyebrow">How it works</p><h2>Reserve, confirm, drive</h2></div>
+  <div class="section-head">
+    <div class="rise">
+      <div class="section-signature" aria-hidden="true"><span class="rise-key section-signature-key"></span><span class="section-signature-hairline"></span></div>
+      <p class="eyebrow">How it works</p><h2>Reserve, confirm, drive</h2>
+    </div>
+  </div>
   <div class="steps">
     <div class="step"><span class="n">01</span><strong>Send your dates</strong><span>Use the form or message us on WhatsApp. You get a reply, not a bot.</span></div>
     <div class="step"><span class="n">02</span><strong>Confirm with a deposit</strong><span>We confirm the car and send deposit details, with a receipt.</span></div>
@@ -332,8 +365,11 @@ footer.foot .wrap{padding-top:28px;padding-bottom:40px;display:flex;justify-cont
 <section id="bring" class="road">
   <div class="wrap grid">
     <div>
-      <p class="eyebrow">Before you collect</p>
-      <h2>What to bring</h2>
+      <div class="rise">
+        <div class="section-signature" aria-hidden="true"><span class="rise-key section-signature-key"></span><span class="section-signature-hairline"></span></div>
+        <p class="eyebrow">Before you collect</p>
+        <h2>What to bring</h2>
+      </div>
       <p>Three things and you're on the road. Rental terms are shared in writing before you pay.</p>
     </div>
     <ul>
@@ -345,7 +381,10 @@ footer.foot .wrap{padding-top:28px;padding-bottom:40px;display:flex;justify-cont
 </section>
 
 <section class="wrap reviews">
-  <h2>What drivers say</h2>
+  <div class="center rise">
+    <div class="section-signature" aria-hidden="true"><span class="rise-key section-signature-key"></span></div>
+    <h2>What drivers say</h2>
+  </div>
   <p>Alex - June: The compact sedan was perfect for a short city trip. Easy to park and fuel efficient. The key tag makes it feel official.</p>
 </section>
 </main>
@@ -353,7 +392,7 @@ footer.foot .wrap{padding-top:28px;padding-bottom:40px;display:flex;justify-cont
 <footer class="foot">
   <div class="wrap">
     <div>© Kora Drive (demo).</div>
-    <div>Page by <a href="https://fitaacreative.com/fully-booked">Fitaa Creative</a>. Want one for your business? Live in 7 days or half your fee back.</div>
+    <div>Site by <a href="https://fitaacreative.com/fully-booked">Fitaa Creative</a>. Want one for your business? Live in 7 days or half your fee back.</div>
   </div>
 </footer>
 
@@ -442,7 +481,21 @@ if ('IntersectionObserver' in window) {
   }, { rootMargin: '-45% 0px -50% 0px' });
   ['fleet', 'request', 'how', 'bring'].forEach(function (id) { spy.observe($(id)); });
 }
+document.documentElement.classList.add('js');
 update();
+</script>
+<script>
+/* ── Rise on scroll (Fitaa rise, design language) ── */
+document.addEventListener('DOMContentLoaded', function () {
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } });
+    }, { rootMargin: '0px 0px -60px 0px' });
+    document.querySelectorAll('.rise').forEach(function (el) { io.observe(el); });
+  } else {
+    document.querySelectorAll('.rise').forEach(function (el) { el.classList.add('is-in'); });
+  }
+});
 </script>
 <script defer src="/fitaa-analytics.js"></script>
 </body>
