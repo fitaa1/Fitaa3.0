@@ -282,6 +282,13 @@ a{color:inherit}
 .switch button{position:relative;min-height:44px;padding:0 1.6rem;border:0;background:transparent;color:var(--muted);font:inherit;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;transition:color .3s,background .35s}
 .switch button[aria-selected="true"],.switch button[aria-pressed="true"]{background:var(--accent-strong);color:var(--on-accent)}
 .switch button:not([aria-selected="true"]):not([aria-pressed="true"]):hover{color:var(--fg)}
+/* Sliding switch (SITE_STANDARD, Controls that adapt): one pill slides to the choice. Without the script the chosen button keeps its own fill. */
+.switch{position:relative;touch-action:pan-y}
+.switch-pill{position:absolute;left:0;top:0;width:0;height:0;background:var(--accent-strong);pointer-events:none;z-index:0;transition:transform .46s cubic-bezier(.32,1.32,.44,1),width .46s cubic-bezier(.22,1,.36,1),height .3s cubic-bezier(.22,1,.36,1)}
+.switch.has-pill button{z-index:1;background:transparent}
+.switch.has-pill button[aria-selected="true"],.switch.has-pill button[aria-pressed="true"]{background:transparent;color:var(--on-accent)}
+.switch button:active{transform:scale(.985);transition:transform .12s,color .3s}
+@media (prefers-reduced-motion:reduce){.switch-pill{transition:transform .2s ease,width .2s ease,height .2s ease}}
 .actions{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin-top:1.5rem}
 @media(max-width:640px){.actions{flex-direction:column;width:100%}.actions .btn{width:100%}.switch button{padding:0 1rem}}
 
@@ -784,6 +791,34 @@ document.querySelectorAll('[data-wa]').forEach(function (a) {
   if (saved && saved.toUpperCase() !== SETTINGS.currency) show(saved.toUpperCase());
 })();
 
+/* Sliding switch: one pill follows the chosen button. Tap, arrow keys or drag across the row. */
+function fitaaPill(sw) {
+  var pill = sw.querySelector('.switch-pill');
+  if (!pill) { pill = document.createElement('span'); pill.className = 'switch-pill'; pill.setAttribute('aria-hidden', 'true'); sw.insertBefore(pill, sw.firstChild); }
+  sw.classList.add('has-pill');
+  function place(instant) {
+    var on = sw.querySelector('[aria-selected="true"],[aria-pressed="true"]');
+    if (!on) return;
+    if (instant) pill.style.transition = 'none';
+    pill.style.width = on.offsetWidth + 'px';
+    pill.style.height = on.offsetHeight + 'px';
+    pill.style.transform = 'translate(' + on.offsetLeft + 'px,' + on.offsetTop + 'px)';
+    if (instant) { void pill.offsetWidth; pill.style.transition = ''; }
+  }
+  var down = false;
+  sw.addEventListener('pointerdown', function () { down = true; });
+  window.addEventListener('pointerup', function () { down = false; });
+  sw.addEventListener('pointermove', function (e) {
+    if (!down || e.pointerType === 'mouse' && !e.buttons) return;
+    var b = document.elementFromPoint(e.clientX, e.clientY);
+    b = b && b.closest ? b.closest('button') : null;
+    if (b && sw.contains(b) && b.getAttribute('aria-selected') !== 'true' && b.getAttribute('aria-pressed') !== 'true') b.click();
+  });
+  new MutationObserver(function () { place(false); }).observe(sw, { subtree: true, attributes: true, attributeFilter: ['aria-selected', 'aria-pressed'] });
+  window.addEventListener('resize', function () { place(true); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { place(true); });
+  place(true);
+}
 /* Demo switch: shows one demo card at a time. ?demo=cars (or studios, hosts) opens on that one. */
 var tabs = document.querySelectorAll('[data-niche]');
 function setDemo(n, animate) {
@@ -811,6 +846,7 @@ tabs.forEach(function (b, i) {
     next.focus(); next.click();
   });
 });
+document.querySelectorAll('.switch').forEach(fitaaPill);
 var q = (location.search.match(/[?&]demo=(\w+)/) || [])[1];
 setDemo(q || (/studio|salon/i.test(location.search) ? 'studios' : /car/i.test(location.search) ? 'cars' : /clinic/i.test(location.search) ? 'clinics' : /restaurant/i.test(location.search) ? 'restaurants' : 'hosts'), false);
 
