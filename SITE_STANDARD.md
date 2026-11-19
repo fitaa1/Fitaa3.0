@@ -33,6 +33,11 @@ A speed gain that makes the site plainer fails the third test; find another way.
 - **Budgets** (Lighthouse, mobile): speed 90 or more, accessibility 100, best practices 96 or
   more, search 100 on pages meant for Google. First paint 1.5 s or less, first screen 350 KB or less.
 
+- **Fingerprinted photo and asset addresses (19 Nov 2026):** every photo and file the build
+  serves carries a short hash of its contents in its address (`?v=` and ten characters), so it can
+  be cached for a year (`immutable`) and still change the moment the file changes. A replaced photo
+  once kept showing the old picture on Nigel's iPad.
+
 ## Search and AI answers
 
 - Title, description, canonical, share image (og and twitter) on every page, lead previews included. The share card is a 1200 × 630 JPEG, rebuilt with `scripts/share-cards.mjs` (WhatsApp does not reliably show WebP) in the page's own fonts and story, never an old niche or old fonts. When a card changes, give it a new file name (e.g. `og-2026-11.jpg`) so WhatsApp and others fetch it fresh.
@@ -50,6 +55,13 @@ A speed gain that makes the site plainer fails the third test; find another way.
   tap targets 44 px or more, every field labelled.
 - Fluid layout (clamp sizes, container queries), never fixed phone, tablet and desktop layouts.
   Light and dark both designed.
+- **Breathing room (Nigel, 19 Nov 2026):** side margins are fluid and intentional, never large.
+  Content runs close to the edge on a phone and gains space as the screen grows, for example
+  `.wrap{width:min(1320px,100% - 2*clamp(14px,3.2vw,40px));margin-inline:auto}`. Space between
+  sections follows the same clamp idea, so no screen feels cramped or empty.
+- **Photos fit their frame (19 Nov 2026):** a photo never scrolls, drags or spills inside its
+  frame in any direction. A slider track hides vertical overflow, each slide hides its own
+  overflow, and every photo uses `object-fit: cover` on a set aspect ratio. A test holds it.
 - WhatsApp click-to-chat with a message already written.
 - Fail safe, never fail free: when data cannot be read (a calendar, a form service), the page
   says so and sends the visitor to WhatsApp. No success message it cannot back up.
@@ -190,6 +202,10 @@ different hue at the same lightness:
   settles the mark by a pixel, so the turn never repeats the same path. On hover
   the mark lifts. Under reduced motion the logo is still. Only the logo carries it.
 
+- Pictures that explain (Nigel, 19 Nov 2026): where a process is easier seen than read (how a
+  booking works, what happens after payment), a short strip of inline SVG steps may draw in once as
+  part of the rise. It teaches, never decorates, and it reads as a plain list without scripts.
+
 ### 5. The signature line (Bugatti)
 
 One line, drawn the same way everywhere: a 2 px champagne key, 24 px long, with a 1 px hairline in
@@ -221,6 +237,11 @@ signature detail in the table above) belongs to the client's own story.
   nothing moves, and only the text fades (200 ms, opacity).
 - A lit state means something: champagne means "your move", the accent means "live now". No third
   meaning, and never lit for decoration.
+- **Switches slide (Nigel, 19 Nov 2026):** any choice between two to five views (a niche
+  switcher, tabs on a listing, a currency fail-safe kept small) is one row of equal segments with a
+  single pill that slides to the choice, like iOS. Tap, press and drag all work, the pill moves by
+  transform only with a small spring, and under reduced motion it moves without the spring. The
+  segments are real buttons with `aria-pressed` or tabs with `aria-selected`.
 - In Fitaa OS, one action bar per tab, fixed at the bottom, holding only what that tab can do now.
   It lights by state: needs you, ready to merge, overdue. Its rules are in the fitaa-os CLAUDE.md.
 
