@@ -61,3 +61,26 @@ test("one card on the middle line names its package, three side by side name the
   assert.equal(chooseCta([section, a, b, c]), c, "side by side with one open: that card");
   assert.equal(chooseCta([]), null, "nothing on the line keeps the last label");
 });
+
+import { scrambleFrame } from "../src/lib/scramble.ts";
+
+test("the header button never changes: only the floating WhatsApp button follows the section", () => {
+  const nav = fs.readFileSync(path.join(root, "..", "src", "components", "Navbar.tsx"), "utf8");
+  assert.doesNotMatch(nav, /useAdaptiveCta/);
+  assert.match(nav, /\{siteConfig\.hero\.dataCtaLabel\}/);
+  const wa = fs.readFileSync(path.join(root, "..", "src", "components", "FloatingWhatsApp.tsx"), "utf8");
+  assert.match(wa, /useAdaptiveCta/);
+  assert.match(wa, /<CodedLabel/);
+});
+
+test("the label rewrites itself in 0s and 1s and always ends on the exact words", () => {
+  const from = "GET IN TOUCH", to = "ASK ABOUT GET CHOSEN";
+  assert.equal(scrambleFrame(from, to, 1), to);
+  assert.equal(scrambleFrame(from, to, 1.4), to);
+  const mid = scrambleFrame(from, to, 0.2, () => 0.1);
+  assert.match(mid, /^[01 ]+$/, "early on it is all code");
+  assert.ok(mid.length > from.length && mid.length < to.length, "the length walks from one to the other");
+  const late = scrambleFrame(from, to, 0.8, () => 0.9);
+  assert.ok(late.startsWith("ASK ABOUT"), "the start settles first");
+  assert.equal(scrambleFrame(to, "GET IN TOUCH", 0.3, () => 0.1).length < to.length, true);
+});
