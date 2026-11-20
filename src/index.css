@@ -661,11 +661,22 @@ button[data-currency] { min-width: 44px; min-height: 44px; }
 .floating-wa .cta-label {
   display: inline-block;
   min-width: 9ch;
-  animation: cta-label-in 200ms ease-out both;
+  white-space: pre;
+  font-variant-numeric: tabular-nums;
 }
+/* While the label rewrites itself the button gives up its solid green: a glass outline with the
+   digits lit in green, then it fills again (Nigel, 20 Nov 2026). Colour and shadow only. */
+.floating-wa { transition: background-color .28s ease, color .28s ease, box-shadow .28s ease, opacity .3s ease; }
+.floating-wa.is-coding {
+  background-color: rgb(8 20 12 / .78);
+  color: #4ade80;
+  box-shadow: inset 0 0 0 1px #25D366, 0 0 18px rgb(37 211 102 / .35);
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+}
+.floating-wa.is-coding .cta-label { text-shadow: 0 0 8px rgb(74 222 128 / .6); }
 @media (prefers-reduced-motion: reduce) {
-  .btn-cta .cta-label,
-  .floating-wa .cta-label { animation: none; }
+  .btn-cta .cta-label { animation: none; }
+  .floating-wa { transition: none; }
 }
 a[href^="mailto:"]:not(.underline), a[href^="tel:"]:not(.underline) { display: inline-block; padding-block: 12px; margin-block: -12px; }
 

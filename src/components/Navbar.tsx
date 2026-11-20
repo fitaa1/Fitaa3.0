@@ -4,7 +4,6 @@ import { siteConfig } from "@/config/site";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useScrolledPast } from "@/hooks/useScrolledPast";
 import { usePresence, Reveal } from "@/lib/reveal";
-import { useAdaptiveCta } from "@/hooks/useAdaptiveCta";
 import { useRegion } from "@/lib/region";
 
 /** Tracks which page section sits under the middle of the screen. */
@@ -33,7 +32,6 @@ export function Navbar() {
   const { isDark, toggle } = useTheme();
   const active = useActiveSection(sectionIds);
   const { mounted, visible } = usePresence(isOpen, 300);
-  const { label: ctaLabel, message: ctaMessage, hidden: ctaHidden } = useAdaptiveCta();
   const { waLink } = useRegion();
 
   const navRef = useRef<HTMLElement>(null);
@@ -132,17 +130,14 @@ export function Navbar() {
               </span>
             </button>
 
-            {!ctaHidden && (
-              <a
-                href={waLink(ctaMessage || siteConfig.hero.dataCtaMessage)}
-                className="btn-cta hidden lg:inline-flex whitespace-nowrap items-center justify-center px-6 py-2.5 font-sans text-[0.68rem] uppercase tracking-[0.2em] ml-2"
-                aria-label={ctaLabel || siteConfig.hero.dataCtaLabel}
-              >
-                <span key={ctaLabel} className="cta-label">
-                  {ctaLabel || siteConfig.hero.dataCtaLabel}
-                </span>
-              </a>
-            )}
+            {/* The header button never changes (Nigel, 20 Nov 2026): a label that changed with each section
+                distorted the header. Only the floating WhatsApp button follows the section in view. */}
+            <a
+              href={waLink(siteConfig.hero.dataCtaMessage)}
+              className="btn-cta hidden lg:inline-flex whitespace-nowrap items-center justify-center px-6 py-2.5 font-sans text-[0.68rem] uppercase tracking-[0.2em] ml-2"
+            >
+              {siteConfig.hero.dataCtaLabel}
+            </a>
 
             {/* Hamburger — mobile */}
             <button
