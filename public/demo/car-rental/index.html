@@ -78,10 +78,10 @@ h1,h2,h3{margin:0;font-stretch:125%;font-weight:800;letter-spacing:-.01em;text-t
 .wrap{max-width:1160px;margin:0 auto;padding:0 clamp(16px,4vw,32px)}
 .eyebrow{font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent-text);font-weight:700}
 .cta{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 26px;border-radius:12px;background:var(--accent);color:var(--on-accent);font:inherit;font-weight:700;font-size:1rem;text-decoration:none;border:0;cursor:pointer;transition:background .2s,transform .12s}
-.cta:hover{background:var(--accent-hover)}
+@media (hover: hover) and (pointer: fine) { .cta:hover {background:var(--accent-hover)} }
 .cta:active{transform:scale(.985)}
 .ghost{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 24px;border-radius:12px;border:1px solid var(--line-strong);color:var(--text);text-decoration:none;font-weight:600;transition:border-color .2s}
-.ghost:hover{border-color:var(--accent)}
+@media (hover: hover) and (pointer: fine) { .ghost:hover {border-color:var(--accent)} }
 .photo{background:var(--photo);border:1px dashed var(--line-strong);display:flex;align-items:center;justify-content:center;text-align:center;color:var(--soft);font-size:.9rem;padding:12px}
 .ico{width:22px;height:22px;flex:none;color:var(--accent-text)}
 
