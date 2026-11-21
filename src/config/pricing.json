@@ -1,5 +1,5 @@
 {
-  "_read_me": "Every Fitaa Creative price, in each currency the site shows. Ghana sees GHS, the United Kingdom sees GBP, every other country sees USD (middleware.ts decides, a visitor can switch). Each currency's text is written out in full so nothing is worked out in code: change a price here and the home page, Fully Booked, the structured data and llms.txt all follow at the next build. 'amount' is the plain number for search engines and must match the text beside it (the build checks). GBP and USD are Nigel's fixed prices, confirmed 4 and 5 Nov 2026 (straight conversion of GHS at the Wise mid-market rate on 4 Nov 2026, GHS 1 = GBP 0.0644 = USD 0.0851, rounded); review them if the cedi moves a lot. The founding offer ended on 12 Nov 2026: there is one price for the website, paid once, in full, before work starts.",
+  "_read_me": "Every Fitaa Creative price, in each currency the site shows. Ghana sees GHS, the United Kingdom sees GBP, every other country sees USD (middleware.ts decides, a visitor can switch). Each currency's text is written out in full so nothing is worked out in code: change a price here and the home page, Fully Booked, the structured data and llms.txt all follow at the next build. 'amount' is the plain number for search engines and must match the text beside it (the build checks). GBP and USD are Nigel's fixed prices, confirmed 4 and 5 Nov 2026 (straight conversion of GHS at the Wise mid-market rate on 4 Nov 2026, GHS 1 = GBP 0.0644 = USD 0.0851, rounded); review them if the cedi moves a lot. The founding offer ended on 12 Nov 2026: there is one price for the website, paid once, in full, before work starts. Extra units beyond 3 for hosts: GHS 300, £20 or $25 (Nigel, 20 Nov 2026, the straight conversion).",
   "default": "USD",
   "order": ["GHS", "GBP", "USD"],
   "currencies": {
@@ -23,7 +23,8 @@
       "getChosen": { "amount": 225, "text": "£225" },
       "stayBooked": { "amount": 75, "text": "£75" },
       "upkeep": { "amount": 25, "text": "£25" },
-      "getChosenNote": "One business at one location. A second branch is £20 more. For hosts, up to 3 units",
+      "extraUnit": { "amount": 20, "text": "£20" },
+      "getChosenNote": "One business at one location. A second branch is £20 more. For hosts, up to 3 units, plus £20 for each extra unit",
       "upkeepNote": "Upkeep only, £25 a month for hosting and small updates, for Get Chosen clients who don't want ads."
     },
     "USD": {
@@ -34,7 +35,8 @@
       "getChosen": { "amount": 300, "text": "$300" },
       "stayBooked": { "amount": 100, "text": "$100" },
       "upkeep": { "amount": 30, "text": "$30" },
-      "getChosenNote": "One business at one location. A second branch is $25 more. For hosts, up to 3 units",
+      "extraUnit": { "amount": 25, "text": "$25" },
+      "getChosenNote": "One business at one location. A second branch is $25 more. For hosts, up to 3 units, plus $25 for each extra unit",
       "upkeepNote": "Upkeep only, $30 a month for hosting and small updates, for Get Chosen clients who don't want ads."
     }
   }
