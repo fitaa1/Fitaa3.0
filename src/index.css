@@ -402,9 +402,50 @@ html { scroll-behavior: smooth; }
 /* ─── The WhatsApp message, drawn in HTML and CSS only ──────────────────────
  * Used in Services ("See it working"): the booking message as it arrives on the
  * chat, using the exact text the site's own button sends. Flat surfaces only. */
+/* ─── Sliding switch (SITE_STANDARD.md, Switches slide) ──────────────────────────────────────
+ * Equal segments, so the pill is one segment wide and moves by transform only, with a small spring. */
+.slide-switch {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(var(--n), minmax(0, 1fr));
+  padding: 3px;
+  margin-bottom: 0.75rem;
+  border-radius: 999px;
+  background: hsl(var(--muted));
+  box-shadow: var(--edge);
+  touch-action: pan-y; /* a sideways drag moves the pill, an up-down drag still scrolls the page */
+}
+.slide-switch__pill {
+  position: absolute;
+  top: 3px; bottom: 3px; left: 3px;
+  width: calc((100% - 6px) / var(--n));
+  border-radius: 999px;
+  background: hsl(var(--card));
+  box-shadow: var(--edge);
+  transform: translate3d(calc(var(--i) * 100%), 0, 0);
+  transition: transform 0.46s cubic-bezier(0.32, 1.32, 0.44, 1);
+}
+.slide-switch button {
+  position: relative;
+  z-index: 1;
+  min-height: 44px;
+  border-radius: 999px;
+  font-family: var(--app-font-sans);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: hsl(var(--muted-foreground));
+  transition: color 0.2s ease, transform 0.12s ease;
+}
+.slide-switch button[aria-pressed="true"] { color: hsl(var(--foreground)); }
+.slide-switch button:active { transform: scale(0.985); }
+@media (hover: hover) and (pointer: fine) { .slide-switch button:not([aria-pressed="true"]):hover { color: hsl(var(--foreground)); } }
+@media (prefers-reduced-motion: reduce) { .slide-switch__pill { transition: transform 0.2s ease; } }
+
 .whatsapp-chat {
   width: 100%;
   max-width: 24rem;
+  border-radius: 0.5rem;
   border: 1px solid hsl(var(--border));
   background: hsl(var(--card));
 }
@@ -451,7 +492,19 @@ html { scroll-behavior: smooth; }
   font-size: 0.9rem;
   line-height: 1.55;
   color: hsl(var(--foreground));
+  animation: msg-in 0.2s ease-out;
 }
+/* The point where the visitor finishes the line: a still caret, not a blinking one (no looping motion). */
+.whatsapp-chat__caret {
+  display: inline-block;
+  width: 1.5px;
+  height: 1.05em;
+  margin-left: 1px;
+  vertical-align: -0.15em;
+  background: hsl(var(--primary));
+}
+@keyframes msg-in { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .whatsapp-chat__bubble { animation: none; } }
 
 /* ─── Currency flags (src/lib/region.tsx) ────────────────────────────────
  * Prices arrive in the visitor's currency automatically. These three flags in

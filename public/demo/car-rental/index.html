@@ -113,7 +113,7 @@ h1,h2,h3{margin:0;font-stretch:125%;font-weight:800;letter-spacing:-.01em;text-t
 
 /* Signature: the key tag. It fills in as the visitor builds their booking. */
 .tag-wrap{display:flex;justify-content:center;perspective:900px}
-.keytag{position:relative;width:min(100%,340px);background:var(--road);color:var(--on-road);border-radius:28px 28px 36px 36px;padding:64px 28px 28px;border:1px solid var(--line);box-shadow:var(--edge);transform-origin:50% 0;animation:swing 6s ease-in-out 1s infinite}
+.keytag{position:relative;width:min(100%,340px);background:var(--road);color:var(--on-road);border-radius:28px 28px 36px 36px;padding:64px 28px 28px;border:1px solid var(--line);box-shadow:var(--edge);transform-origin:50% 0;animation:swing 2.4s cubic-bezier(.22,1,.36,1) .6s 1 both}
 .keytag::before{content:"";position:absolute;top:20px;left:50%;width:26px;height:26px;margin-left:-13px;border-radius:50%;background:var(--ground);box-shadow:inset 0 0 0 3px #2A2E34}
 .keytag::after{content:"";position:absolute;top:-34px;left:50%;width:46px;height:46px;margin-left:-23px;border-radius:50%;border:4px solid #8A9098;clip-path:inset(0 0 52% 0)}
 .keytag small{display:block;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:#9EA4AC;margin-bottom:6px}
@@ -124,7 +124,8 @@ h1,h2,h3{margin:0;font-stretch:125%;font-weight:800;letter-spacing:-.01em;text-t
 .plate{margin-top:20px;display:flex;justify-content:center;align-items:center;gap:10px;height:44px;border-radius:8px;background:#F4F5F6;color:#121417;font-stretch:125%;font-weight:800;letter-spacing:.12em;font-size:1.05rem}
 .plate i{font-style:normal;font-size:.6rem;letter-spacing:.06em;background:#121417;color:#F2B33D;padding:3px 5px;border-radius:3px;font-stretch:100%}
 .keytag .changed{animation:blink .6s ease}
-@keyframes swing{0%,100%{transform:rotate(-1.5deg)}50%{transform:rotate(1.5deg)}}
+/* The tag is hung once and settles, like a real key tag on its hook: one damped swing, no loop (SITE_STANDARD.md 4 and 6.7). */
+@keyframes swing{0%{transform:rotate(-4deg)}30%{transform:rotate(2.4deg)}55%{transform:rotate(-1.2deg)}78%{transform:rotate(.5deg)}100%{transform:none}}
 @keyframes blink{from{color:#F2B33D}to{color:inherit}}
 
 /* What every rental includes */
@@ -187,7 +188,7 @@ section.block{padding-top:clamp(56px,8vw,88px);padding-bottom:clamp(24px,4vw,40p
 .section-signature-key{width:24px;height:2px;background:var(--champagne);flex:none}
 .section-signature-hairline{flex:1;height:1px;background:var(--line)}
 /* ── Rise on scroll (content stays visible without JavaScript) ── */
-@media (prefers-reduced-motion: reduce){.js .rise{opacity:1;transform:none;transition:none}}
+@media (prefers-reduced-motion: reduce){.js .rise{opacity:1;transform:none;transition:none}.keytag{animation:none}}
 .js .rise{opacity:0;transform:translateY(12px);transition:opacity 420ms cubic-bezier(0.22,1,.36,1) var(--d,0s),transform 420ms cubic-bezier(0.22,1,.36,1) var(--d,0s)}
 .js .rise.is-in{opacity:1;transform:translateY(0)}
 .js .rise-key{transform:scaleX(0);transform-origin:left;transition:transform 420ms cubic-bezier(0.22,1,.36,1) var(--d,0s)}
