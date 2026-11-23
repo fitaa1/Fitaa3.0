@@ -213,20 +213,6 @@ html { scroll-behavior: smooth; }
 } }
 .btn-gold:active { transform: scale(0.985); }
 
-/* ─── Header CTA: champagne text on box-shadow, no gold fill ────────────────
- * Replaces gold background with transparent + var(--edge) shadow.
- * Min-height 44px via the global press rule. */
-.btn-cta {
-  color: var(--champagne);
-  background: transparent;
-  border: none;
-  min-height: 44px;
-  box-shadow: var(--edge);
-  transition: color 0.25s ease, box-shadow 0.25s ease, transform 0.12s ease;
-}
-@media (hover: hover) and (pointer: fine) { .btn-cta:hover { color: hsl(var(--gold)); } }
-.btn-cta:active { transform: scale(0.985); }
-
 .btn-outline {
   border-radius: var(--radius-lg);
   transition: border-color 0.25s ease, background-color 0.25s ease, color 0.25s ease, transform 0.12s ease;
@@ -590,11 +576,13 @@ html { scroll-behavior: smooth; }
   transition: opacity 0.9s 0.55s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s 0.55s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* Navbar mobile overlay: slide-down enter, slide-up exit */
+/* Navbar mobile overlay (Nigel, 22 Nov 2026: it must close as elegantly as it opens). It opens by sliding
+   down with the links rising in one by one. It closes in the same language, in reverse: the links fade and
+   lift away together first, then the panel slides up and fades, and it stays mounted until that has
+   finished (usePresence 560 ms), so the close is never cut off. Transform and opacity only. */
 #mobile-menu {
   opacity: 0;
   transform: translate3d(0, -100%, 0);
-  transition: opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1), transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 #mobile-menu[data-open="true"] {
   opacity: 1;
@@ -604,10 +592,17 @@ html { scroll-behavior: smooth; }
 #mobile-menu[data-open="false"] {
   opacity: 0;
   transform: translate3d(0, -100%, 0);
-  transition: opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1), transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: opacity 0.42s cubic-bezier(0.55, 0, 0.75, 0.2) 0.1s, transform 0.46s cubic-bezier(0.65, 0, 0.35, 1) 0.1s;
+}
+#mobile-menu[data-open="false"] [data-reveal] {
+  opacity: 0;
+  transform: translate3d(0, -10px, 0);
+  transition: opacity 0.18s ease-in, transform 0.22s ease-in;
+  transition-delay: 0s;
 }
 @media (prefers-reduced-motion: reduce) {
-  #mobile-menu { transition: none; }
+  #mobile-menu, #mobile-menu[data-open="false"], #mobile-menu[data-open="true"] { transition: opacity 0.2s linear; transform: none; }
+  #mobile-menu[data-open="false"] [data-reveal] { transition: none; }
 }
 
 /* AnimatePresence replacements: data-open enter/exit for buttons */
@@ -644,20 +639,8 @@ footer a[href="/privacy"], footer a[href="/terms"] { display: inline-block; padd
 footer a[aria-label^="Follow"], footer a[aria-label^="View"] { display: inline-flex; padding: 14px; margin: -14px; }
 button[data-currency] { min-width: 44px; min-height: 44px; }
 
-/* ─── Adaptive CTA: width reserved, only the text fades (SITE_STANDARD.md, Controls that adapt) ──
- * The label sits in a span whose width is reserved in ch, sized for the longest
- * label, so the button does not move when the section in view changes. Only the
- * text fades, 200 ms, opacity only. Under reduced motion it swaps with no fade. */
-.btn-cta .cta-label {
-  display: inline-block;
-  min-width: 22ch;
-  text-align: center;
-  animation: cta-label-in 200ms ease-out both;
-}
-@keyframes cta-label-in {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
+/* ─── Adaptive CTA: the floating WhatsApp button's label width is reserved in ch, so the button never
+ * moves when the section in view changes (SITE_STANDARD.md, Controls that adapt). */
 .floating-wa .cta-label {
   display: inline-block;
   min-width: 9ch;
@@ -675,7 +658,6 @@ button[data-currency] { min-width: 44px; min-height: 44px; }
 }
 .floating-wa.is-coding .cta-label { text-shadow: 0 0 8px rgb(74 222 128 / .6); }
 @media (prefers-reduced-motion: reduce) {
-  .btn-cta .cta-label { animation: none; }
   .floating-wa { transition: none; }
 }
 a[href^="mailto:"]:not(.underline), a[href^="tel:"]:not(.underline) { display: inline-block; padding-block: 12px; margin-block: -12px; }
