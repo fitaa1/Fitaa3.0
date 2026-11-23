@@ -1,11 +1,14 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useRise } from "@/hooks/useRise";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { siteConfig } from "@/config/site";
+import { useRegion } from "@/lib/region";
+import { SlideSwitch } from "./SlideSwitch";
 
 /** A WhatsApp chat mockup, drawn in HTML and CSS only. The message is the exact text
  *  the site's own service button opens the chat with, read from src/config/site.ts. */
 function WhatsAppChat({ message }: { message: string }) {
+  // key on the bubble replays a 200 ms fade when the message changes; aria-live reads the new text once.
   return (
     <div className="whatsapp-chat">
       <div className="whatsapp-chat__head">
@@ -14,7 +17,9 @@ function WhatsAppChat({ message }: { message: string }) {
         <span className="whatsapp-chat__time">WhatsApp</span>
       </div>
       <div className="whatsapp-chat__body">
-        <p className="whatsapp-chat__bubble">{message}</p>
+        <p key={message} className="whatsapp-chat__bubble" aria-live="polite">
+          {message}<span className="whatsapp-chat__caret" aria-hidden="true" />
+        </p>
       </div>
     </div>
   );
@@ -29,8 +34,13 @@ export function SeeItWorking() {
   useRise(leftRef);
   useRise(rightRef);
 
-  /* The message the Get Chosen button sends, exactly as the site writes it. */
-  const getChosen = siteConfig.services.find((s) => s.title === "Get Chosen");
+  /* Reality view (SITE_STANDARD.md, 6): the page shows what the system will actually do. Each package's
+     button sends one exact message, read from site.ts. Pick a package and the chat shows that message,
+     and the link opens WhatsApp with it, on the visitor's own country's number. */
+  const packages = siteConfig.services.filter((s) => s.whatsapp);
+  const [chosen, setChosen] = useState(packages.find((s) => s.title === "Get Chosen")?.title ?? packages[0]?.title ?? "");
+  const current = packages.find((s) => s.title === chosen) ?? packages[0];
+  const { waLink } = useRegion();
 
   return (
     <div className="mt-[var(--sp-6)] pt-10 border-t border-border/20">
@@ -46,7 +56,26 @@ export function SeeItWorking() {
           <p className="text-muted-foreground font-sans font-light text-[0.95rem] leading-[1.7] max-w-md mb-6">
             {seeItWorking.lede}
           </p>
-          {getChosen?.whatsapp && <WhatsAppChat message={getChosen.whatsapp} />}
+          {current && (
+            <div className="max-w-[24rem]">
+              <SlideSwitch
+                label="Show the message for"
+                value={current.title}
+                onChange={setChosen}
+                options={packages.map((s) => ({ value: s.title, label: s.short ?? s.title }))}
+              />
+              <WhatsAppChat message={current.whatsapp} />
+              <a
+                href={waLink(current.whatsapp)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group mt-4 inline-flex items-center gap-2 min-h-[44px] text-[0.68rem] font-sans font-medium uppercase tracking-[0.22em] text-gold-text"
+              >
+                {seeItWorking.openLabel}
+                <ArrowRight size={13} className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
+              </a>
+            </div>
+          )}
         </div>
 
         {/* Right: the live demos */}

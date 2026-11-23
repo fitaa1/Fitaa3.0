@@ -3,10 +3,18 @@
 // priced page), opens every page at 390, 820 and 1440 px in light and dark, and FAILS on:
 //   sideways scroll, a browser console error, an image without alt text, a tap target under
 //   44 px, a phone menu that does not open fully (a link hidden, off screen or covered), a photo below the first screen that is not
-//   lazy, and a first screen heavier than the standard's budget (350 KB).
+//   lazy, a first screen heavier than the standard's budget (350 KB), a phone menu that does not close as smoothly as it
+//   opens, and missing search basics (title, one h1, lang, structured data that parses, and on pages meant for Google a
+//   description of 170 characters or fewer, a canonical address and a share card).
 // Run after a build:  npm run build && npm run check:pages
 // SHOTS=1 also saves a screenshot of every page, width and scheme into shots/ to look at.
 // Never loosen a limit here to get a pull request through: fix the page (Nigel, 5 Nov 2026).
+//
+// One check for every Fitaa site (SITE_STANDARD.md, How every site is held to this standard). This file is the
+// reference and is copied unchanged into each site's scripts/ folder; what differs between sites lives in
+// scripts/check-pages.config.mjs beside it (which pages, where the build is, which price copy to serve).
+// Fitaa OS compares each copy's version line with this one and shows a copy that has fallen behind.
+// check-pages version: 2026-11-23
 import http from "node:http";
 import fs from "node:fs";
 import path from "node:path";
@@ -18,11 +26,15 @@ let chromium;
 try { ({ chromium } = require("playwright")); }
 catch { ({ chromium } = createRequire("/opt/npm-tools/node_modules/")("playwright")); }
 
-const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
-const dist = path.join(root, "dist");
-if (!fs.existsSync(path.join(dist, "index.html"))) { console.error("No build found. Run npm run build first."); process.exit(1); }
+const here = path.dirname(new URL(import.meta.url).pathname);
+const root = path.resolve(here, "..");
+// The site's own settings (optional). Every field has a default that suits a plain static build in dist/.
+const configFile = path.join(here, "check-pages.config.mjs");
+const config = fs.existsSync(configFile) ? (await import(configFile)).default : {};
+const dist = path.resolve(root, config.dist || "dist");
+if (!fs.existsSync(path.join(dist, "index.html"))) { console.error(`No build found in ${dist}. Run the build first.`); process.exit(1); }
 
-const COPY = "ghs-gh"; // the copy a visitor in Ghana gets (middleware.ts picks it on the host)
+const COPY = config.copy || ""; // a price copy to serve first, e.g. "ghs-gh" on fitaacreative.com (middleware.ts picks it on the host)
 const BUDGET_KB = 350; // SITE_STANDARD.md, Budgets: first screen 350 KB or less
 const TAP = 44; // SITE_STANDARD.md, Function and look
 const WIDTHS = [390, 820, 1440];
@@ -34,9 +46,10 @@ function fileFor(urlPath) {
   const clean = decodeURIComponent(urlPath.split("?")[0]).replace(/\/+$/, "") || "/";
   const tries = [];
   if (!path.extname(clean)) {
-    tries.push(path.join(dist, "_r", COPY, clean, "index.html"), path.join(dist, clean, "index.html"), path.join(dist, clean + ".html"));
+    if (COPY) tries.push(path.join(dist, "_r", COPY, clean, "index.html"));
+    tries.push(path.join(dist, clean, "index.html"), path.join(dist, clean + ".html"));
   } else {
-    if (clean.endsWith(".html")) tries.push(path.join(dist, "_r", COPY, clean));
+    if (COPY && clean.endsWith(".html")) tries.push(path.join(dist, "_r", COPY, clean));
     tries.push(path.join(dist, clean));
   }
   return tries.find((f) => f.startsWith(dist) && fs.existsSync(f) && fs.statSync(f).isFile());
@@ -57,10 +70,22 @@ const server = http.createServer((req, res) => {
 await new Promise((r) => server.listen(0, "127.0.0.1", r));
 const BASE = `http://127.0.0.1:${server.address().port}`;
 
-// Every page a visitor or a lead can be sent to.
-const pages = ["/", "/fully-booked", "/privacy", "/terms"];
-for (const d of fs.readdirSync(path.join(dist, "demo"))) pages.push(`/demo/${d}`);
-for (const p of fs.readdirSync(path.join(dist, "preview"))) if (p.endsWith(".html")) pages.push(`/preview/${p}`);
+// Every page a visitor or a lead can be sent to: the site's own list, or every HTML page in the build
+// (folders with an index.html and loose .html files), leaving out 404, the price copies and anything in config.skip.
+function everyPage() {
+  const found = [];
+  const walk = (dir, base) => {
+    for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+      const rel = `${base}/${e.name}`;
+      if (e.isDirectory()) { if (e.name === "_r" || e.name.startsWith(".")) continue; if (fs.existsSync(path.join(dir, e.name, "index.html"))) found.push(rel); walk(path.join(dir, e.name), rel); }
+      else if (e.name.endsWith(".html") && e.name !== "index.html" && !/^404/.test(e.name)) found.push(rel);
+    }
+  };
+  walk(dist, "");
+  return ["/", ...found.filter((p) => !/\/404(\.html)?$/.test(p))];
+}
+const skip = (config.skip || []).map((s) => new RegExp(s));
+const pages = (typeof config.pages === "function" ? config.pages({ dist, fs, path }) : config.pages || everyPage()).filter((p) => !skip.some((r) => r.test(p)));
 
 const problems = [];
 const weights = [];
@@ -120,6 +145,27 @@ try {
         if (r.noAlt.length) problems.push(`${where}: image without alt text: ${r.noAlt.join(", ")}`);
         if (r.small.length) problems.push(`${where}: tap target under ${TAP} px: ${r.small.join("; ")}`);
         for (const e of [...new Set(errs)]) problems.push(`${where}: console error: ${e.slice(0, 160)}`);
+        // Found, trusted and chosen (SITE_STANDARD.md, Search and AI answers): checked once per page.
+        if (width === 1440 && scheme === "light") {
+          const s = await p.evaluate(() => {
+            const meta = (q) => document.querySelector(q)?.getAttribute("content") || "";
+            const robots = meta('meta[name="robots"]');
+            const ld = [...document.querySelectorAll('script[type="application/ld+json"]')].map((n) => { try { JSON.parse(n.textContent); return null; } catch (e) { return String(e).slice(0, 80); } }).filter(Boolean);
+            return { title: document.title.trim(), desc: meta('meta[name="description"]'), canonical: document.querySelector('link[rel="canonical"]')?.href || "", noindex: /noindex/i.test(robots), ogImage: meta('meta[property="og:image"]'), ogTitle: meta('meta[property="og:title"]'), lang: document.documentElement.lang, h1: document.querySelectorAll("h1").length, ld };
+          });
+          const fault = (x) => problems.push(`${pagePath}: ${x}`);
+          if (!s.title) fault("no title");
+          else if (s.title.length > 70) fault(`the title is ${s.title.length} characters, Google cuts it after about 60 to 70`);
+          if (!s.lang) fault("the page has no lang attribute");
+          if (s.h1 !== 1) fault(`the page has ${s.h1} main headings (h1), it needs exactly one`);
+          for (const e of s.ld) fault(`structured data does not parse: ${e}`);
+          if (!s.noindex) {
+            if (!s.desc) fault("no meta description");
+            else if (s.desc.length > 170) fault(`the meta description is ${s.desc.length} characters, Google shows about 160`);
+            if (!s.canonical.startsWith("https://")) fault("no canonical address");
+            if (!s.ogImage || !s.ogTitle) fault("no share card (og:image and og:title)");
+          }
+        }
         if (process.env.SHOTS) await p.screenshot({ path: path.join(root, "shots", `${pagePath.replace(/[^\w]+/g, "_") || "home"}-${width}-${scheme}.png`), fullPage: true });
 
         // The phone menu must open fully (SITE_STANDARD.md, Navigation).
@@ -150,6 +196,33 @@ try {
             else if (!m.links) problems.push(`${where}: the phone menu opened with no links in it`);
             else if (m.hidden.length) problems.push(`${where}: the phone menu did not open fully, these links are hidden or covered: ${m.hidden.join(", ")}`);
             if (process.env.SHOTS) await p.screenshot({ path: path.join(root, "shots", `${pagePath.replace(/[^\w]+/g, "_") || "home"}-390-menu.png`) });
+            // The phone menu must close as well as it opens (Nigel, 22 Nov 2026): tapping the button again plays a
+            // way out (the panel is still on screen and on its way 80 ms later, never gone in one frame), and by
+            // 900 ms nothing of it covers the page or takes a tap.
+            if (m.found && m.links) {
+              const panelSel = await p.evaluate(() => { const b = document.querySelector("button[aria-expanded=true]"); return b && b.getAttribute("aria-controls") ? "#" + b.getAttribute("aria-controls") : null; });
+              const state = () => p.evaluate((sel) => {
+                const panel = sel && document.querySelector(sel);
+                if (!panel) return { gone: true };
+                const s = getComputedStyle(panel), r = panel.getBoundingClientRect();
+                const onScreen = r.bottom > 0 && r.top < innerHeight && r.height > 0 && s.display !== "none" && s.visibility !== "hidden" && +s.opacity > 0.02;
+                const takesTap = onScreen && s.pointerEvents !== "none" && [...panel.querySelectorAll("a")].some((a) => { const b = a.getBoundingClientRect(); const top = document.elementFromPoint(b.left + b.width / 2, b.top + b.height / 2); return top && (top === a || a.contains(top)); });
+                return { gone: false, onScreen, takesTap, sig: `${s.opacity}|${s.transform}|${r.top}` };
+              }, panelSel);
+              const before = await state();
+              const closer = p.locator("button[aria-expanded=true]").first();
+              if (await closer.count()) {
+                await closer.click();
+                await p.waitForTimeout(80);
+                const during = await state();
+                await p.waitForTimeout(820);
+                const after = await state();
+                const still = await p.evaluate(() => !!document.querySelector("button[aria-expanded=true]"));
+                if (still) problems.push(`${where}: the phone menu button did not close the menu`);
+                else if (!after.gone && (after.onScreen || after.takesTap)) problems.push(`${where}: the phone menu is still on screen or takes taps 900 ms after closing`);
+                else if (panelSel && (during.gone || !during.onScreen || during.sig === before.sig)) problems.push(`${where}: the phone menu vanishes in one frame when it closes; give it a way out as smooth as its way in`);
+              } else problems.push(`${where}: the open phone menu has no button to close it`);
+            }
           }
           // Demo pages must not show bracket placeholders (Nigel, 12 Nov 2026).
           if (pagePath.startsWith("/demo/")) {

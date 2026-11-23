@@ -23,6 +23,8 @@ export type Service = {
   /** "Step 1" etc. on the card; leave out for services outside the journey. */
   step?: string;
   title: string;
+  /** The short name on the package switch in See it working. */
+  short?: string;
   description: string;
   icon: LucideIcon;
   deliverables: string[];
@@ -93,7 +95,8 @@ export const siteConfig = {
     seeItWorking: {
       heading: "See it working",
       messageHeading: "The message, already written",
-      lede: "Tap a button on this site and WhatsApp opens with this written for you. You finish the line and send it.",
+      lede: "Every button on this site opens WhatsApp with the message already written. Pick a package to see its message, then finish the line and send it.",
+      openLabel: "Open this message in WhatsApp",
       demosEyebrow: "The demos",
       demosHeading: "Try a live demo",
       demosLede: "Open any demo, pick a date or a service, and the button opens WhatsApp with the request already written.",
@@ -112,6 +115,7 @@ export const siteConfig = {
     {
       step: "Step 1",
       title: "Get Found",
+      short: "Found",
       description:
         "Be easy to find and easy to message. We put you on Google and set up WhatsApp Business, so people searching for what you sell can reach you in one tap.",
       icon: Search,
@@ -132,6 +136,7 @@ export const siteConfig = {
     {
       step: "Step 2",
       title: "Get Chosen",
+      short: "Chosen",
       description:
         "Look like the obvious choice. A premium website on your own web address that shows your best work, prices and reviews, with one button that opens WhatsApp with the booking already written.",
       icon: BadgeCheck,
@@ -153,6 +158,7 @@ export const siteConfig = {
     {
       step: "Step 3",
       title: "Stay Booked",
+      short: "Booked",
       description:
         "Keep the calendar full. We run your Meta ads, keep your page and catalogue fresh, and send a one-page report each month so you can see what's working.",
       icon: CalendarCheck,
@@ -170,6 +176,7 @@ export const siteConfig = {
     },
     {
       title: "Graphic & Digital Design",
+      short: "Design",
       description:
         "Logos, brand identities, print and social content that look as good as the business behind them, for launches, campaigns and everything in between.",
       icon: Palette,
