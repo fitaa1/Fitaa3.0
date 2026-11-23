@@ -54,7 +54,12 @@ function fileFor(urlPath) {
   }
   return tries.find((f) => f.startsWith(dist) && fs.existsSync(f) && fs.statSync(f).isFile());
 }
+// A site whose pages read its own API (a calendar, saved dates) names a stand-in answer for each address in
+// config.api, so the page is checked as a visitor sees it, e.g. { "/api/availability": { status: "not-connected" } }.
+const api = Object.entries(config.api || {});
 const server = http.createServer((req, res) => {
+  const stand = api.find(([prefix]) => req.url.startsWith(prefix));
+  if (stand) { res.writeHead(200, { "content-type": "application/json", "cache-control": "no-store" }); res.end(JSON.stringify(stand[1])); return; }
   const f = fileFor(req.url);
   const file = f || path.join(dist, "404.html");
   const ext = path.extname(file);
@@ -129,6 +134,8 @@ try {
             noAlt: [...document.images].filter((i) => !i.hasAttribute("alt")).map((i) => i.currentSrc || i.src).slice(0, 5),
             small: [...document.querySelectorAll("a[href], button, input:not([type=hidden]), select, textarea, summary")].filter((el) => {
               if (!seen(el) || el.disabled) return false;
+              // A skip link hidden the accessible way (clipped to 1 x 1 until it is focused) is not a tap target.
+              { const b = el.getBoundingClientRect(); if (b.width <= 1 && b.height <= 1) return false; }
               // A link inside a sentence is text, not a button (WCAG 2.5.8 makes the same exception).
               // "In a sentence" means its parent also holds at least 20 characters of plain text of its own.
               if (el.matches("a") && getComputedStyle(el).display === "inline") {
@@ -210,9 +217,11 @@ try {
                 return { gone: false, onScreen, takesTap, sig: `${s.opacity}|${s.transform}|${r.top}` };
               }, panelSel);
               const before = await state();
-              const closer = p.locator("button[aria-expanded=true]").first();
+              // Close it the way a visitor would: a Close button inside the open panel if it has one, else the menu button.
+              const inPanel = panelSel ? p.locator(`${panelSel} button`).filter({ hasText: /close/i }).or(p.locator(`${panelSel} button[aria-label*="lose" i]`)).first() : null;
+              const closer = inPanel && await inPanel.count() && await inPanel.isVisible() ? inPanel : p.locator("button[aria-expanded=true]").first();
               if (await closer.count()) {
-                await closer.click();
+                await closer.click({ timeout: 3000 }).catch(() => problems.push(`${where}: the control that closes the phone menu cannot be tapped (something covers it)`));
                 await p.waitForTimeout(80);
                 const during = await state();
                 await p.waitForTimeout(820);

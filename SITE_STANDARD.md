@@ -432,10 +432,13 @@ the last look:
 6. **The last look is human.** No check can judge beauty. Claude looks at the screenshots, and
    Nigel's iPhone is the final check.
 
-Coverage on 23 Nov 2026: the page check runs in GitHub Actions on fitaacreative.com. Fitaa
-Collections has its own version for accounts and payments (not rechecked here, that repo is kept
-apart). Fitaa Global, Fitaa Homes and Airport Grande are getting this repo's check. Until a site runs
-it, its pull requests say so under Not checked.
+Coverage on 23 Nov 2026: the same page check, byte for byte, runs in GitHub Actions on
+fitaacreative.com, Fitaa Global, Fitaa Homes and Airport Grande, and every page of all four passes
+it. Each site keeps only its settings in `scripts/check-pages.config.mjs`: where the build is, which
+pages, and a stand-in answer for any address the page reads from its own server (Fitaa Homes' and
+Airport Grande's calendars), so the page is checked as a visitor sees it. Fitaa Collections has its
+own version for accounts and payments (not rechecked here, that repo is kept apart). A new site
+copies the check and its settings file on its first day.
 
 ## Proof in every pull request
 
