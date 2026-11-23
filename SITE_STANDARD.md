@@ -429,6 +429,8 @@ the last look:
    basics. A rule that has gone wrong once gets a test the same day.
 4. **The pull request proves it.** Every note follows the shared template: what changed, what was
    checked (tests, page check, screenshots at three sizes, first paint and page size) and what was not.
+   The notes check in each site's CI fails a pull request whose notes miss a part of the template or
+   whose commits carry a co-author line.
 5. **Claude reviews and Nigel approves.** Nothing reaches `main` without Nigel's merge. Qwen never
    opens a pull request, so an open one means Claude has reviewed it.
 6. **The last look is human.** No check can judge beauty. Claude looks at the screenshots, and
