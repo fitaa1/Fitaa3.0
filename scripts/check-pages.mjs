@@ -3,7 +3,7 @@
 // priced page), opens every page at 390, 820 and 1440 px in light and dark, and FAILS on:
 //   sideways scroll, a browser console error, an image without alt text, a tap target under
 //   44 px, a phone menu that does not open fully (a link hidden, off screen or covered), a photo below the first screen that is not
-//   lazy, a first screen heavier than the standard's budget (350 KB), a phone menu that does not close as smoothly as it
+//   lazy, a first screen heavier than the standard's budget (350 KB), anything that loops except the logo, a phone menu that does not close as smoothly as it
 //   opens, and missing search basics (title, one h1, lang, structured data that parses, and on pages meant for Google a
 //   description of 170 characters or fewer, a canonical address and a share card).
 // Run after a build:  npm run build && npm run check:pages
@@ -152,6 +152,14 @@ try {
         if (r.noAlt.length) problems.push(`${where}: image without alt text: ${r.noAlt.join(", ")}`);
         if (r.small.length) problems.push(`${where}: tap target under ${TAP} px: ${r.small.join("; ")}`);
         for (const e of [...new Set(errs)]) problems.push(`${where}: console error: ${e.slice(0, 160)}`);
+        // One motion (SITE_STANDARD.md, section 4): nothing loops except the logo's turn (inside .logo-sheen).
+        if (width === 390 && scheme === "light") {
+          const loops = await p.evaluate(() => (document.getAnimations ? document.getAnimations() : [])
+            .filter((a) => a.effect && a.effect.getTiming && a.effect.getTiming().iterations === Infinity && a.playState !== "idle")
+            .map((a) => a.effect.target).filter((el) => el && !(el.closest && el.closest(".logo-sheen")))
+            .map((el) => `<${el.tagName.toLowerCase()}${typeof el.className === "string" && el.className ? "." + el.className.trim().split(/\s+/)[0] : ""}>`));
+          if (loops.length) problems.push(`${pagePath}: something loops that is not the logo (only the logo may loop): ${[...new Set(loops)].slice(0, 5).join(", ")}`);
+        }
         // Found, trusted and chosen (SITE_STANDARD.md, Search and AI answers): checked once per page.
         if (width === 1440 && scheme === "light") {
           const s = await p.evaluate(() => {

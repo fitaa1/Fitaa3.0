@@ -232,7 +232,9 @@ different hue at the same lightness:
   `cubic-bezier(0.22, 1, 0.36, 1)`, once per element as it enters view, 60 ms between siblings,
   never more than six in one group. Under reduced motion it is opacity only, with no delay.
 - Define it once per site (a `.rise` class or one keyframe) and reuse it. No other entrance, no
-  parallax, no looping motion apart from one first-visit splash and the logo's turn.
+  parallax, no looping motion apart from one first-visit splash and the logo's turn. A signature
+  detail may settle once into place (Kora Drive's key tag swings once on its hook and comes to rest).
+  The page check fails anything that loops outside the logo's `.logo-sheen`.
 - The logo turns and the light follows (Nigel, 12 and 13 Nov 2026): the logo mark rocks slowly
   from side to side and one band of champagne light crosses it as it turns. The turn and the light
   share one clock, so the angle decides where the light is. One wrapper and one pseudo-element,
@@ -316,7 +318,7 @@ What it teaches: paint laid on thick catches light on its ridges, so a flat canv
 almost want to touch. Depth comes from light on texture, not from outlines.
 
 - Depth comes from light, never from drop shadows (section 2 still holds): `--sheen` over
-  `--graphite`, `--edge` on raised surfaces, the hero's slow aurora of colour, and type set heavy
+  `--graphite`, `--edge` on raised surfaces, the hero's still aurora of colour, and type set heavy
   where it carries weight.
 - Layers are real and few: ground, raised, control (section 1, at most three). Each layer is lit
   from the same direction, the top edge catching light, so the eye reads relief without being told.
