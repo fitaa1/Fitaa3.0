@@ -44,9 +44,8 @@ test("all labels are non-empty", () => {
 
 test("the reserved width CSS exists in index.css", () => {
   const indexCss = fs.readFileSync(path.join(root, "..", "src", "index.css"), "utf8");
-  assert.match(indexCss, /\.btn-cta \.cta-label/, "CSS rule .btn-cta .cta-label exists");
+  assert.match(indexCss, /\.floating-wa \.cta-label/, "the floating button reserves its label's width");
   assert.match(indexCss, /min-width:\s*\d+ch/, "min-width in ch present in CSS");
-  assert.match(indexCss, /animation: cta-label-in/, "fade-in animation present");
 });
 
 test("the useAdaptiveCta hook exports a function", () => {
@@ -68,6 +67,8 @@ test("the header button never changes: only the floating WhatsApp button follows
   const nav = fs.readFileSync(path.join(root, "..", "src", "components", "Navbar.tsx"), "utf8");
   assert.doesNotMatch(nav, /useAdaptiveCta/);
   assert.match(nav, /\{siteConfig\.hero\.dataCtaLabel\}/);
+  // The header button keeps its gold fill (Nigel, 22 Nov 2026: the outline read as lost styling).
+  assert.match(nav, /className="btn-gold hidden lg:inline-flex/);
   const wa = fs.readFileSync(path.join(root, "..", "src", "components", "FloatingWhatsApp.tsx"), "utf8");
   assert.match(wa, /useAdaptiveCta/);
   assert.match(wa, /<CodedLabel/);

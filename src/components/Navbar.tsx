@@ -31,7 +31,8 @@ export function Navbar() {
   const scrolled = useScrolledPast(60);
   const { isDark, toggle } = useTheme();
   const active = useActiveSection(sectionIds);
-  const { mounted, visible } = usePresence(isOpen, 300);
+  // Stays mounted until the whole close has played (the panel takes 520 ms), so it never cuts off part way.
+  const { mounted, visible } = usePresence(isOpen, 560);
   const { waLink } = useRegion();
 
   const navRef = useRef<HTMLElement>(null);
@@ -130,11 +131,12 @@ export function Navbar() {
               </span>
             </button>
 
-            {/* The header button never changes (Nigel, 20 Nov 2026): a label that changed with each section
-                distorted the header. Only the floating WhatsApp button follows the section in view. */}
+            {/* The header button never changes (Nigel, 20 Nov 2026), and keeps its gold fill (Nigel, 22 Nov 2026:
+                the outline version read as a button that had lost its styling). Only the floating WhatsApp
+                button follows the section in view. */}
             <a
               href={waLink(siteConfig.hero.dataCtaMessage)}
-              className="btn-cta hidden lg:inline-flex whitespace-nowrap items-center justify-center px-6 py-2.5 font-sans text-[0.68rem] uppercase tracking-[0.2em] ml-2"
+              className="btn-gold hidden lg:inline-flex whitespace-nowrap items-center justify-center px-6 py-2.5 font-sans text-[0.68rem] uppercase tracking-[0.2em] ml-2"
             >
               {siteConfig.hero.dataCtaLabel}
             </a>
