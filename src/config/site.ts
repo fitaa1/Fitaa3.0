@@ -125,7 +125,7 @@ export const siteConfig = {
         "WhatsApp Business catalogue with prices, greeting and away messages",
         "Quick replies for your five most-asked questions",
         "One click-to-chat link for your bio, flyers and signage",
-        "A print-ready QR card for your counter, desk or car",
+        "A printed QR card and counter stand for your front desk",
       ],
       price: { key: "getFound", unit: "one-off" },
       timing: "Usually 3 to 5 days",

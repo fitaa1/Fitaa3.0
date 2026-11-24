@@ -110,7 +110,7 @@ const all = (key) => CURRENCIES.map((cur) => c[cur][key].text).join(" / ");
 const line =
   `- [Fully Booked by Fitaa](https://fitaacreative.com/fully-booked): the three packages in full, for any business that takes bookings or enquiries (car rentals, clinics, short-let hosts, studios and more), in Ghana, the UK and beyond. ` +
   `Prices are fixed in three currencies (visitors in Ghana see GHS, in the UK GBP, everywhere else USD). ` +
-  `Get Found ${all("getFound")} one-off, usually ready in 3 to 5 days (Google Business Profile, WhatsApp Business, click-to-chat link, QR card). ` +
+  `Get Found ${all("getFound")} one-off, usually ready in 3 to 5 days (Google Business Profile, WhatsApp Business, click-to-chat link, printed QR card and counter stand). ` +
   `Get Chosen ${all("getChosen")} one-off, usually ready in 5 to 7 days, with three rounds of changes (a premium one-page website on your own web address, built for Google and AI answers, with WhatsApp booking). A second branch is ${all("extraUnit")} more. For hosts: up to 3 units, plus ${all("extraUnit")} for each extra unit. ` +
   `Stay Booked ${all("stayBooked")} a month, 3-month minimum (Meta ads management, updates, monthly report; ad budget separate). ` +
   `Upkeep only ${all("upkeep")} a month. Payment is once, in full, before work starts, and nothing goes live until the client approves it.`;
