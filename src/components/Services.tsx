@@ -31,14 +31,14 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
         className="relative w-full text-left py-8 sm:px-8 md:p-9 cursor-pointer focus-visible:outline-offset-[-2px]"
       >
         <div className="flex items-start justify-between mb-8">
-          <span className="service-icon relative inline-flex items-center justify-center w-12 h-12 border border-border/50">
+          <span className="service-icon service-bead relative inline-flex items-center justify-center w-12 h-12 border border-border/50">
             <service.icon className="w-[1.4rem] h-[1.4rem] text-gold" strokeWidth={1.3} aria-hidden="true" />
           </span>
           <span className="ml-auto mr-4 mt-1.5 text-[0.62rem] font-sans uppercase tracking-[0.22em] text-muted-foreground">
             {service.step ?? "Alongside every step"}
           </span>
           <span
-            className="inline-flex items-center justify-center w-8 h-8 border border-border/50 text-muted-foreground transition-all duration-400 group-hover:border-ruby/50 group-hover:text-ruby group-data-[open=true]:rotate-45 group-data-[open=true]:text-ruby group-data-[open=true]:border-ruby/50"
+            className="service-bead inline-flex items-center justify-center w-8 h-8 border border-border/50 text-muted-foreground transition-all duration-400 group-hover:border-ruby/50 group-hover:text-ruby group-data-[open=true]:rotate-45 group-data-[open=true]:text-ruby group-data-[open=true]:border-ruby/50"
             aria-hidden="true"
           >
             <Plus size={15} />
