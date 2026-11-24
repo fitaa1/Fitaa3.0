@@ -56,7 +56,8 @@ export function FeaturedWork() {
                 }
               : {};
             return (
-            <div key={study.client} className="group h-full">
+            /* An odd last tile sits centred under the pair above it, so the grid never ends on a gap. */
+            <div key={study.client} className="group h-full md:[&:last-child:nth-child(odd)]:col-span-2 md:[&:last-child:nth-child(odd)]:justify-self-center md:[&:last-child:nth-child(odd)]:w-[calc(50%-0.75rem)] lg:[&:last-child:nth-child(odd)]:w-[calc(50%-1rem)]">
               <Wrapper {...linkProps} className="flex flex-col h-full">
                 {/* Image: every tile uses the same 4:3 frame */}
                 <div className="relative overflow-hidden bg-card mb-5 aspect-[4/3]">

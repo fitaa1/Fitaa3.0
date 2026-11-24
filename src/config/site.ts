@@ -270,6 +270,19 @@ export const siteConfig = {
       imagePath: "/work/waypoint-enterprise.webp",
       imageAlt: "The Waypoint Enterprise website on a laptop and a phone",
     },
+    {
+      client: "Airport Grande",
+      industry: "Hospitality",
+      year: "2026",
+      result: "Direct Booking Site",
+      description:
+        "Booking site for an Airbnb Superhost's seven suites in Airport Residential, Accra. Guests pick dates on a calendar that greys out nights already booked on Airbnb, then send the request on WhatsApp, already written.",
+      deliverables: ["Website design and build", "Live Airbnb calendar", "WhatsApp booking"],
+      // The site is in preview until Dinesh launches it, so the tile has no link yet. Add https://airportgrande.com at launch.
+      link: "",
+      imagePath: "/work/airport-grande.webp",
+      imageAlt: "The Airport Grande booking site on a laptop and a phone",
+    },
   ],
   /** Names shown in the "Also worked with" row under the case studies. */
   alsoWorkedWith: ["ChicKing!", "Liberty Hands Foundation", "502", "2nd Generation IT Group", "Women of SOL"],
