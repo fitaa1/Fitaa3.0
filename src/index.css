@@ -395,7 +395,9 @@ html { scroll-behavior: smooth; }
   border-color: hsl(var(--ruby) / 0.45);
 } }
 /* The journey thread: one line at icon height behind Found, Chosen and Booked.
- * Cards cover it, so it only shows in the gaps, joining the three steps. */
+ * The cards are see-through, so the icon and plus boxes are solid beads on the thread (Nigel, 24 Nov 2026: the line
+ * ran through both boxes on his iPad). The thread shows only between them. */
+.service-bead { background-color: var(--graphite); }
 .service-thread {
   left: 0; right: 0;
   top: calc(2.25rem + 1.5rem);
