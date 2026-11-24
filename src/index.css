@@ -2,6 +2,15 @@
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
+/* Hover is for a real mouse only (Nigel, 24 Nov 2026: links needed two taps on his iPad). iPad Safari can report a
+   mouse-style pointer, so (hover: hover) alone still lit hover effects under a finger and Safari held the click.
+   Every hover: and group-hover: class now also needs the mouse class, which index.html adds only when a mouse moves
+   and removes on any touch. */
+@custom-variant hover {
+  @media (hover: hover) {
+    :where(html.mouse) &:hover { @slot; }
+  }
+}
 
 /* ═══════════════════════════════════════════════════════════════════════════
  * STYLES: colours, fonts and spacing for the whole site.
@@ -207,7 +216,7 @@ html { scroll-behavior: smooth; }
   transition: filter 0.25s ease, transform 0.12s ease, box-shadow 0.25s ease;
   box-shadow: var(--edge);
 }
-@media (hover: hover) and (pointer: fine) { .btn-gold:hover {
+@media (hover: hover) and (pointer: fine) { :where(html.mouse) .btn-gold:hover{
   filter: brightness(1.1);
   box-shadow: var(--edge);
 } }
@@ -364,24 +373,24 @@ html { scroll-behavior: smooth; }
   transition: opacity 0.4s ease;
 }
 .service-card[data-open="true"] .service-spotlight { opacity: 1; }
-@media (hover: hover) and (pointer: fine) { .service-card:hover .service-spotlight { opacity: 1; } }
+@media (hover: hover) and (pointer: fine) { :where(html.mouse) .service-card:hover .service-spotlight{ opacity: 1; } }
 .service-card[data-open="true"] {
   border-color: hsl(var(--ruby) / 0.35);
   box-shadow: var(--edge);
 }
-@media (hover: hover) and (pointer: fine) { .service-card:hover {
+@media (hover: hover) and (pointer: fine) { :where(html.mouse) .service-card:hover{
   border-color: hsl(var(--ruby) / 0.35);
   box-shadow: var(--edge);
 } }
 @media (hover: hover) {
-  .service-card:hover { transform: translateY(-4px); }
+  :where(html.mouse) .service-card:hover{ transform: translateY(-4px); }
 }
 .service-icon { transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.4s ease; }
 .service-card[data-open="true"] .service-icon {
   transform: translateY(-2px) rotate(-6deg) scale(1.06);
   border-color: hsl(var(--ruby) / 0.45);
 }
-@media (hover: hover) and (pointer: fine) { .service-card:hover .service-icon {
+@media (hover: hover) and (pointer: fine) { :where(html.mouse) .service-card:hover .service-icon{
   transform: translateY(-2px) rotate(-6deg) scale(1.06);
   border-color: hsl(var(--ruby) / 0.45);
 } }
@@ -396,7 +405,7 @@ html { scroll-behavior: smooth; }
 }
 @media (prefers-reduced-motion: reduce) {
   .service-card, .service-icon { transition: none; }
-  @media (hover: hover) and (pointer: fine) { .service-card:hover, .service-card:hover .service-icon { transform: none; } }
+  @media (hover: hover) and (pointer: fine) { :where(html.mouse) .service-card:hover, :where(html.mouse) .service-card:hover .service-icon{ transform: none; } }
 }
 
 /* ─── The WhatsApp message, drawn in HTML and CSS only ──────────────────────
@@ -439,7 +448,7 @@ html { scroll-behavior: smooth; }
 }
 .slide-switch button[aria-pressed="true"] { color: hsl(var(--foreground)); }
 .slide-switch button:active { transform: scale(0.985); }
-@media (hover: hover) and (pointer: fine) { .slide-switch button:not([aria-pressed="true"]):hover { color: hsl(var(--foreground)); } }
+@media (hover: hover) and (pointer: fine) { :where(html.mouse) .slide-switch button:not([aria-pressed="true"]):hover{ color: hsl(var(--foreground)); } }
 @media (prefers-reduced-motion: reduce) { .slide-switch__pill { transition: transform 0.2s ease; } }
 
 .whatsapp-chat {
@@ -529,7 +538,7 @@ html { scroll-behavior: smooth; }
   border-radius: 2px;
   box-shadow: 0 0 0 1px hsl(var(--foreground) / 0.12);
 }
-@media (hover: hover) and (pointer: fine) { .currency-flags button:hover { opacity: 0.85; filter: none; } }
+@media (hover: hover) and (pointer: fine) { :where(html.mouse) .currency-flags button:hover{ opacity: 0.85; filter: none; } }
 .currency-flags button[aria-pressed="true"] { opacity: 1; filter: none; }
 .currency-flags button:focus-visible { outline: 2px solid hsl(var(--ruby)); outline-offset: 1px; opacity: 1; }
 @media (prefers-reduced-motion: reduce) { .currency-flags button { transition: none; } }
@@ -683,7 +692,7 @@ button[data-open="false"] {
 .nav-link { padding: 14px 4px; margin: -14px -4px; }
 .nav-link::after { bottom: 12px; left: 4px; }
 .nav-link[aria-current="location"]::after { width: calc(100% - 8px); }
-@media (hover: hover) and (pointer: fine) { .nav-link:hover::after { width: calc(100% - 8px); } }
+@media (hover: hover) and (pointer: fine) { :where(html.mouse) .nav-link:hover::after{ width: calc(100% - 8px); } }
 a[aria-label="Fitaa Creative home"] { padding-block: 5px; margin-block: -5px; }
 a[aria-label="Fitaa Creative, back to top"] { padding-block: 3px; margin-block: -3px; }
 header a[href="/"]:not([aria-label]) { padding-block: 14px; margin-block: -14px; }

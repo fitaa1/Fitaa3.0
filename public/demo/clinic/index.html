@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
+    <script>(function(d){addEventListener("pointermove",function(e){if(e.pointerType==="mouse")d.classList.add("mouse")},{passive:true});addEventListener("pointerdown",function(e){if(e.pointerType!=="mouse")d.classList.remove("mouse")},{passive:true})})(document.documentElement)</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!--
@@ -76,10 +77,10 @@ h1,h2,h3{margin:0;font-weight:700;letter-spacing:-.02em;line-height:1.1}
 .wrap{max-width:1160px;margin:0 auto;padding-left:clamp(16px,4vw,32px);padding-right:clamp(16px,4vw,32px)}
 .eyebrow{font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;color:var(--teal-text);font-weight:700}
 .cta{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 26px;border-radius:999px;background:var(--accent);color:var(--on-accent);font:inherit;font-weight:700;text-decoration:none;border:0;cursor:pointer;transition:background .2s,transform .12s}
-@media (hover: hover) and (pointer: fine) { .cta:hover {background:var(--accent-hover)} }
+@media (hover: hover) and (pointer: fine) { :where(html.mouse) .cta:hover{background:var(--accent-hover)} }
 .cta:active{transform:scale(.985)}
 .ghost{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 24px;border-radius:999px;border:1.5px solid var(--line-strong);color:var(--text);text-decoration:none;font-weight:700;transition:border-color .2s}
-@media (hover: hover) and (pointer: fine) { .ghost:hover {border-color:var(--teal)} }
+@media (hover: hover) and (pointer: fine) { :where(html.mouse) .ghost:hover{border-color:var(--teal)} }
 .photo{background:var(--photo);border:1px dashed var(--line-strong);display:flex;align-items:center;justify-content:center;text-align:center;color:var(--soft);font-size:.9rem;padding:12px}
 .ico{width:24px;height:24px;flex:none;color:var(--teal)}
 
