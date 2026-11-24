@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
+    <script>(function(d){addEventListener("pointermove",function(e){if(e.pointerType==="mouse")d.classList.add("mouse")},{passive:true});addEventListener("pointerdown",function(e){if(e.pointerType!=="mouse")d.classList.remove("mouse")},{passive:true})})(document.documentElement)</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
@@ -62,10 +63,10 @@ a{color:var(--rose)}
 .wrap{max-width:1160px;margin:0 auto;padding:0 24px}
 .eyebrow{font-size:12px;letter-spacing:2.4px;text-transform:uppercase;color:var(--rose);font-weight:700;margin:0 0 12px}
 .cta{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 28px;border-radius:999px;background:var(--rose);color:var(--on-rose);font-weight:700;text-decoration:none;font-size:15px;border:0;font-family:inherit;cursor:pointer;transition:background .2s,transform .12s}
-@media (hover: hover) and (pointer: fine) { .cta:hover {background:var(--rose-deep)} }
+@media (hover: hover) and (pointer: fine) { :where(html.mouse) .cta:hover{background:var(--rose-deep)} }
 .cta:active{transform:scale(.985)}
 .ghost{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 26px;border-radius:999px;border:1px solid var(--line-strong);color:var(--ink);text-decoration:none;font-weight:600;font-size:15px;background:transparent;transition:border-color .2s}
-@media (hover: hover) and (pointer: fine) { .ghost:hover {border-color:var(--rose)} }
+@media (hover: hover) and (pointer: fine) { :where(html.mouse) .ghost:hover{border-color:var(--rose)} }
 .photo{background:var(--photo);border:1px dashed var(--line-strong);display:flex;align-items:center;justify-content:center;text-align:center;color:var(--soft);font-size:13px;padding:12px}
 
 .demo-bar{background:var(--ink);color:#F6EDE8;text-align:center;padding:10px 16px;font-size:14px;font-weight:600}
@@ -76,7 +77,7 @@ header.top{display:flex;align-items:center;justify-content:space-between;gap:16p
 .brand small{display:block;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--soft);margin-top:4px}
 nav.links{display:flex;gap:28px;font-size:15px}
 nav.links a{color:var(--muted);text-decoration:none}
-@media (hover: hover) and (pointer: fine) { nav.links a:hover {color:var(--ink)} }
+@media (hover: hover) and (pointer: fine) { :where(html.mouse) nav.links a:hover{color:var(--ink)} }
 .header-cta{min-height:44px;padding:0 22px}
 .mobile-nav{display:none}
 .menu-btn{display:none;width:44px;height:44px;border-radius:12px;border:1px solid var(--line-strong);background:transparent;color:var(--ink);cursor:pointer;align-items:center;justify-content:center}
@@ -110,7 +111,7 @@ section.block{padding-top:88px;padding-bottom:24px}
 .item small{color:var(--soft);font-size:13px}
 .item .price{font-weight:700;color:var(--rose);white-space:nowrap}
 .item button{min-height:44px;padding:0 18px;border-radius:999px;border:1px solid var(--line-strong);background:transparent;color:var(--ink);font:inherit;font-weight:600;font-size:14px;cursor:pointer}
-@media (hover: hover) and (pointer: fine) { .item button:hover {border-color:var(--rose);color:var(--rose)} }
+@media (hover: hover) and (pointer: fine) { :where(html.mouse) .item button:hover{border-color:var(--rose);color:var(--rose)} }
 
 .team{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
 .member .photo{aspect-ratio:4/5;border-radius:22px;margin-bottom:14px}

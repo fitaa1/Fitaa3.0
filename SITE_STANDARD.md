@@ -345,7 +345,14 @@ in, not added later.
 - Controls work by every means: tap, drag, keys. The sliding switch follows a finger dragged across
   it, and arrow keys move it.
 - One tap is one click on every device (fitaa-os CLAUDE.md, One tap is one click): hover rules sit
-  inside `@media (hover: hover)`, and a card that opens listens for its own tap.
+  inside `@media (hover: hover)`, and a card that opens listens for its own tap. iPad Safari can report
+  `hover: hover`, so every hover rule also waits for the `mouse` class (Nigel, 24 Nov 2026: links needed two
+  taps on his iPad). A one-line script first in `<head>` adds the class when a mouse moves and removes it on
+  any touch, each hover selector starts with the class, best as `:where(html.mouse)` (or `html:where(.mouse)`, `.dark:where(.mouse)`)
+  so specificity does not change, and Tailwind's `hover:` gets it from one `@custom-variant hover` rule.
+  Something hidden until hover is hidden only under `:where(html.mouse)`, so a finger always sees it.
+  `scripts/mouse-hover.mjs` in fitaa1/Fitaa3.0 rewrites a page (`node scripts/mouse-hover.mjs <files>`), and each repo's one-tap test fails on any
+  hover rule without the class.
 
 #### 6.5 Remarkable on purpose (Seth Godin's Purple Cow)
 

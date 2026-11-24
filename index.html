@@ -119,6 +119,8 @@
   ]
 }
     </script>
+    <!-- Hover is for a real mouse only: iPad Safari can report hover, so a finger tap lit hover effects and needed a second tap (Nigel, 24 Nov 2026) -->
+    <script>(function(d){addEventListener("pointermove",function(e){if(e.pointerType==="mouse")d.classList.add("mouse")},{passive:true});addEventListener("pointerdown",function(e){if(e.pointerType!=="mouse")d.classList.remove("mouse")},{passive:true})})(document.documentElement)</script>
     <!-- Theme: applied before first paint so there is no light/dark flash -->
     <script>
       (function(){var d=document.documentElement,t=null;try{t=localStorage.getItem("fitaa-theme-v2")}catch(e){}

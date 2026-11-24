@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
+    <script>(function(d){addEventListener("pointermove",function(e){if(e.pointerType==="mouse")d.classList.add("mouse")},{passive:true});addEventListener("pointerdown",function(e){if(e.pointerType!=="mouse")d.classList.remove("mouse")},{passive:true})})(document.documentElement)</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
@@ -40,7 +41,7 @@ a{color:inherit}
 header.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 0}
 .brand{font-family:"DM Sans",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;font-weight:700;letter-spacing:-.035em;font-size:19px;font-weight:600;letter-spacing:-.01em}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 22px;border-radius:999px;background:var(--accent);color:#fff;text-decoration:none;font-weight:600;font-size:15px;border:0;cursor:pointer}
-@media (hover: hover) and (pointer: fine) { .btn:hover {background:var(--accent-2)} }
+@media (hover: hover) and (pointer: fine) { :where(html.mouse) .btn:hover{background:var(--accent-2)} }
 .btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
 .btn.small{min-height:40px;padding:0 16px;font-size:14px}
 .hero{display:grid;gap:28px;padding:12px 0 40px}

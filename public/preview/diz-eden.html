@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
+    <script>(function(d){addEventListener("pointermove",function(e){if(e.pointerType==="mouse")d.classList.add("mouse")},{passive:true});addEventListener("pointerdown",function(e){if(e.pointerType!=="mouse")d.classList.remove("mouse")},{passive:true})})(document.documentElement)</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
@@ -63,9 +64,9 @@ nav.links a.on{color:var(--ink)}nav.links a.on::after{transform:scaleX(1)}
 .drawer a.on{border-left-color:var(--accent);color:var(--accent)}
 @media(min-width:860px){nav.links{display:flex}.menu,.drawer,.drawer.open{display:none}}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 22px;border-radius:999px;background:var(--accent);color:var(--on-accent);text-decoration:none;font-weight:600;font-size:15px;border:0;cursor:pointer;font-family:inherit;transition:background .2s ease,transform .2s ease}
-@media (hover: hover) and (pointer: fine) { .btn:hover {background:var(--accent-2)} }.btn:active{transform:scale(.98)}
+@media (hover: hover) and (pointer: fine) { :where(html.mouse) .btn:hover{background:var(--accent-2)} }.btn:active{transform:scale(.98)}
 .btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
-@media (hover: hover) and (pointer: fine) { .btn.ghost:hover {background:var(--card)} }
+@media (hover: hover) and (pointer: fine) { :where(html.mouse) .btn.ghost:hover{background:var(--card)} }
 .btn.small{min-height:44px;padding:0 16px;font-size:14px}
 @media(max-width:420px){.right .btn.small .label{display:none}.right .btn.small{width:44px;padding:0}}
 .hero{display:grid;gap:28px;padding:20px 0 44px}

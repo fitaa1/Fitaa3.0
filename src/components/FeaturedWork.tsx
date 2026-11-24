@@ -72,9 +72,9 @@ export function FeaturedWork() {
                     height={540}
                   />
 
-                  {/* Result badge: always shown on touch screens, slides up on hover elsewhere */}
+                  {/* Result badge: always shown on touch screens (iPad included), hidden until hover only for a real mouse */}
                   <div
-                    className="absolute bottom-0 left-0 right-0 p-5 transition-all duration-500 ease-out [@media(hover:hover)]:translate-y-2 [@media(hover:hover)]:opacity-0 group-hover:translate-y-0 group-hover:opacity-100"
+                    className="absolute bottom-0 left-0 right-0 p-5 transition-all duration-500 ease-out [:where(html.mouse)_&]:translate-y-2 [:where(html.mouse)_&]:opacity-0 group-hover:translate-y-0 group-hover:opacity-100"
                     aria-hidden="true"
                   >
                     <span className="inline-flex items-center gap-2 px-4 py-2 bg-background/80 text-ruby text-[0.68rem] font-sans uppercase tracking-[0.15em] backdrop-blur-sm border border-ruby/25">
