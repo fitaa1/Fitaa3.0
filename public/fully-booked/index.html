@@ -7,8 +7,9 @@
 <!--
   FULLY BOOKED BY FITAA: offer page
   ─────────────────────────────────
-  One self-contained file: styles, script and logo are all inside it (plus /fitaa-analytics.js,
-  the shared analytics file; copy it too, or delete its <script> tag at the bottom).
+  One self-contained file: styles, script and logo are all inside it (plus three shared files beside it:
+  /fitaa-analytics.js for analytics, /press.js for the button press and /kente-band.svg for the kente band;
+  copy them too, or delete their tags).
   Export: download this file and drop it on any host (Netlify Drop, Cloudflare Pages,
   Vercel) or open it straight in a browser. Nothing else is needed.
   Edit: words are in the page below; the WhatsApp number and messages are in SETTINGS
@@ -202,6 +203,8 @@
   --graphite:hsl(211 20% 94%); --sheen:linear-gradient(180deg, hsl(0 0% 100% / .6), hsl(0 0% 100% / 0) 42%);
   --edge:inset 0 1px 0 hsl(0 0% 100% / .9), inset 0 0 0 1px hsl(211 20% 88%);
   --champagne:hsl(38 72% 30%); --leather:hsl(24 45% 30%);
+  /* Royal sapphire and the Fitaa press: same values as src/index.css. */
+  --sapphire:hsl(224 76% 30%); --press:hsl(224 76% 42%); --press-glow:hsl(224 80% 50% / .30); --press-ripple:hsl(224 85% 55% / .22);
 }
 @media (prefers-color-scheme: dark){
   :root{
@@ -212,6 +215,7 @@
     --graphite:hsl(211 32% 5%); --sheen:linear-gradient(180deg, hsl(0 0% 100% / .045), hsl(0 0% 100% / 0) 42%);
     --edge:inset 0 1px 0 hsl(0 0% 100% / .08), inset 0 0 0 1px hsl(0 0% 100% / .06);
     --champagne:hsl(40 60% 68%); --leather:hsl(28 55% 62%);
+    --sapphire:hsl(222 88% 62%); --press:hsl(222 90% 64%); --press-glow:hsl(222 90% 60% / .45); --press-ripple:hsl(222 95% 68% / .24);
   }
 }
 *{box-sizing:border-box}
@@ -463,6 +467,15 @@ footer nav a{display:inline-flex;align-items:center;min-height:44px}
 .section-signature{display:flex;align-items:center;gap:0;width:100%;margin-bottom:1.3125rem}
 .section-signature-key{width:24px;height:2px;background:var(--champagne);flex:none}
 .section-signature-hairline{flex:1;height:1px;background:var(--border)}
+/* The kente of baguettes (Nigel, 24 Nov 2026), Fitaa Creative's royal signature on the seam between two sections:
+   the same drawing and rules as src/index.css. */
+.kente-seam{position:relative;z-index:20;height:0;pointer-events:none}
+.kente-hold{transform:translateY(-50%)}
+.kente{position:relative;overflow:hidden;height:20px;border-radius:3px;background:url(/kente-band.svg) left center/auto 100% round no-repeat;box-shadow:inset 0 0 0 1px hsl(211 20% 70% / .55)}
+@media(min-width:768px){.kente{height:24px}}
+.kente::after{content:"";position:absolute;inset:0;transform:translateX(-110%);background:linear-gradient(105deg,transparent 35%,hsl(0 0% 100% / .55) 50%,transparent 65%)}
+@media (prefers-reduced-motion:no-preference){.kente.is-in::after{animation:kente-glint 1.8s cubic-bezier(.22,1,.36,1) .45s 1 both}}
+@keyframes kente-glint{to{transform:translateX(110%)}}
 /* Prices, counts, dates and phone numbers line up in tabular figures */
 .tabular{font-variant-numeric:tabular-nums}
 /* Press state: everything tappable scales to 0.985 over 120 ms, no colour flash. */
@@ -523,6 +536,7 @@ footer nav a{display:inline-flex;align-items:center;min-height:44px}
     </div>
   </div>
 </section>
+<div class="kente-seam" aria-hidden="true"><div class="container"><div class="kente-hold"><div class="kente rise"></div></div></div></div>
 
 <section class="section plane-band">
   <div class="container two">
@@ -703,6 +717,7 @@ footer nav a{display:inline-flex;align-items:center;min-height:44px}
     </div>
   </div>
 </section>
+<div class="kente-seam" aria-hidden="true"><div class="container"><div class="kente-hold"><div class="kente rise"></div></div></div></div>
 
 <section class="section final">
   <div class="container rise">
@@ -879,6 +894,7 @@ if ('IntersectionObserver' in window) {
   document.querySelectorAll('.rise').forEach(function (el) { el.classList.add('is-in'); });
 }
 </script>
+<script defer src="/press.js"></script>
 <script defer src="/fitaa-analytics.js"></script>
 </body>
 </html>

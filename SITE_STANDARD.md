@@ -155,7 +155,7 @@ where, in every place a search engine or an AI reads.
 
 | Site | Headings | Text | Signature |
 | --- | --- | --- | --- |
-| fitaacreative.com and Fully Booked | Bricolage Grotesque (poster type, for a studio that makes billboards and print) | Inter | Adinkra mark |
+| fitaacreative.com and Fully Booked | Bricolage Grotesque (poster type, for a studio that makes billboards and print) | Inter | Adinkra mark, and the kente of baguettes: royal sapphire set in white gold (see Royal sapphire below) |
 | Fitaa Homes | Manrope | Manrope | the home's name in Fraunces italic, like a nameplate |
 | Airport Grande | Instrument Sans (clear like airport signs) | device sans | the booking summary as a boarding pass |
 | Fitaa Global | Plus Jakarta Sans (a confident group voice) | Inter | one mark, four divisions |
@@ -211,12 +211,41 @@ different hue at the same lightness:
 - Leather appears at most once per page, on the one premium moment (the guarantee, a signed-off
   result). If a second use is tempting, the first one was wrong.
 
+### Royal sapphire (Fitaa Creative, Nigel, 24 Nov 2026)
+
+Nigel drew the Fitaa Creative logo as a blue sapphire, for royalty. A British brand appeals by being a
+gentleman; a Ghanaian brand appeals by carrying itself like royalty, and that is what fitaacreative.com
+does: modern and high tech, and unmistakably Ghanaian. The reference is the Patek Philippe Nautilus
+5990/1421G: royal blue sapphires matched stone for stone, invisibly set so they seem to float, in white gold.
+
+- `--sapphire` joins the cyan and the champagne and never replaces them: `hsl(224 76% 30%)` light
+  (11.5:1 on white), `hsl(222 88% 62%)` dark (5.1:1 on the dark ground). The press is sapphire (`--press` and its glow and ripple).
+- A sapphire is set in the champagne key under the section in view: 8 px of royal blue at its middle, riding
+  with the key on the same transform, never stretched (`.nav-stone`).
+- The kente of baguettes is the royal signature: one link of the Nautilus bracelet read as a strip of kente,
+  royal sapphire baguettes set edge to edge with no metal between them, between white gold set diamonds,
+  every stone step cut and lit from the top left. One drawing, `public/kente-band.svg`, built by
+  `scripts/kente-band.py`, shared by every page. It sits on the seam where two sections meet, container
+  wide, 20 px tall on a phone and 24 px from 768 px, whole links only (`background-repeat: round`), at most
+  twice on a page (home: under the hero and before Contact; Fully Booked: under the hero and before the
+  final call). It is jewellery on the seam, not a divider: the seam keeps its change of background and
+  nothing else is added there.
+- Detail decides it: one slightly off stone ruins the bracelet. Every stone in the drawing uses the same
+  facets and the same light, and a new royal element is added to this list before it appears on a page.
+
 ### 3. Craft in the details (Pagani)
 
 - One icon set per site, one stroke width (1.5 px at 24 px), drawn inline as SVG. Fitaa Creative
   uses lucide. Never mix sets.
 - Every price, count, date, time and phone number uses `font-variant-numeric: tabular-nums`.
-- Press state on everything tappable: `transform: scale(.985)` over 120 ms. No colour flash.
+- Press state on everything tappable: `transform: scale(.985)` over 120 ms, answered by the Fitaa press
+  (Nigel, 24 Nov 2026: a press should confirm itself beautifully, the way a Patek Philippe pusher answers the
+  finger). A soft light spreads from the finger inside the element's own shape and a thin halo in the site's
+  own colour lifts just past its edge, then both fade in 0.6 s. It is one span over the element, transform and
+  opacity only, so the layout never moves, and a text link inside a sentence is left alone. Reduced motion gets
+  no light. `public/press.js` in fitaa1/Fitaa3.0 is the reference: copy it unchanged to every site and set its
+  three colours in that site's stylesheet, `--press` (the ring), `--press-glow` and `--press-ripple`, each from
+  the site's own brand colour in light and dark. It is the only colour that answers a press.
 - Hairlines are 1 px in the border token. Nothing is 2 px except the signature line and focus rings.
 - Alignment: every block starts on the container's left edge or on a column of its grid. Nothing is
   placed by eye.
@@ -233,7 +262,8 @@ different hue at the same lightness:
   never more than six in one group. Under reduced motion it is opacity only, with no delay.
 - Define it once per site (a `.rise` class or one keyframe) and reuse it. No other entrance, no
   parallax, no looping motion apart from one first-visit splash and the logo's turn. A signature
-  detail may settle once into place (Kora Drive's key tag swings once on its hook and comes to rest).
+  detail may settle once into place (Kora Drive's key tag swings once on its hook and comes to rest,
+  and Fitaa Creative's kente of baguettes catches one glint of light as it rises).
   The page check fails anything that loops outside the logo's `.logo-sheen`.
 - The logo turns and the light follows (Nigel, 12 and 13 Nov 2026): the logo mark rocks slowly
   from side to side and one band of champagne light crosses it as it turns. The turn and the light
