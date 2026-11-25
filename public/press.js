@@ -10,8 +10,11 @@
    - glow: something with no edge of its own (a logo, an icon, a word, a link, an email address or phone number)
      glows from its own outline: the letters of the word, the strokes of the icon, the edge of the logo. The light
      sits behind it, so it is plainly the word or the symbol that was pressed, not the space around it.
-   While the finger rests, moving it moves the light with it, like light shifting in a stone, and on a switch the
-   light rides along the row so pressing and sliding are one gesture. The light holds for as long as the finger rests
+   While the finger rests, moving it moves the light with it, like light shifting in a stone.
+   On a switch the light is a window the size of one segment, cut to the pill's shape, so it lights the pill and never
+   the track behind it (Nigel, 25 Nov 2026). Slide along a switch marked data-glide and the pill and its light follow
+   the finger frame by frame with no delay, the segment under the finger is lit, and lifting chooses it, the pill
+   settling into place from where the finger left it. An upright drag still scrolls the page. The light holds for as long as the finger rests
    and fades when it lifts, when the finger starts to scroll or when a long press opens the phone's own menu, so it can
    never be left behind. On a dark page, where the pressed word or symbol is light, the glow is brighter, so it stands
    out as clearly as it does on a light page (Nigel, 25 Nov 2026).
@@ -19,15 +22,20 @@
    section bar) stays inside that bar. Everything else is drawn in the page beside its element, so the browser carries
    it with the page, and every light is cut to the page's width.
    data-press="light" or "glow" overrides the choice, data-press-shape on a part inside names the shape the light
-   fills (a tile's photo frame), data-glide marks a switch row, and data-no-press turns the press off.
+   fills (a tile's photo frame), data-glide marks a switch row this file slides (its pill is the child whose class
+   names a pill; the segment under the finger gets data-glide-lit and the row .is-gliding, which each site colours),
+   data-glide="own" a row whose page slides it itself (the light still stays in its pill), and data-no-press turns
+   the press off.
    A light moves only by transform and opacity, and a glow only by the element's own filter, so nothing in the layout
-   moves. Reduced motion gets no answer.
+   moves. Reduced motion gets no light or glow, and switches still slide.
    Each site sets one colour, --press-ripple, in light and dark in its own stylesheet. This file is the reference:
    copy it unchanged to every Fitaa site. */
 (function () {
   "use strict";
   var d = document, root = d.documentElement;
-  if (!d.addEventListener || (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches)) return;
+  if (!d.addEventListener) return;
+  // Reduced motion: no light and no glow, but a switch still slides, because sliding is how it is used.
+  var still = !!(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches);
 
   var C = "var(--press-ripple,hsl(224 85% 58% / .24))";
   var S = "var(--press-sheen,rgb(255 255 255 / .26))";
@@ -39,7 +47,8 @@
     ".fitaa-press i{position:absolute;border-radius:50%;opacity:0;will-change:transform,opacity;transition:" + GROW + "}" +
     ".fitaa-press i{background:radial-gradient(circle," + C + " 0,transparent 68%)}" +
     ".fitaa-press.is-sheen i{background:radial-gradient(circle," + S + " 0,transparent 68%)}" +
-    ".fitaa-press.is-on i{opacity:1}";
+    ".fitaa-press.is-on i{opacity:1}" +
+    "[data-glide]:not([data-glide=own]){touch-action:pan-y}";
 
   var TAPPABLE = 'button,[role="button"],[role="tab"],[role="menuitem"],[role="menuitemradio"],summary,a,label[for],[data-press]';
   var SEGMENT = 'button,[role="tab"],[role="radio"]';
@@ -51,6 +60,9 @@
     (d.head || root).appendChild(style);
     ready = true;
   }
+  // At once, not at the first tap: a switch must already refuse sideways scrolling when the first finger lands on it,
+  // or the browser takes that first slide as a scroll (Fitaa Homes' bed toggle, 25 Nov 2026).
+  setup();
 
   function rgb(color) {
     var m = /rgba?\(([\d.]+)[ ,]+([\d.]+)[ ,]+([\d.]+)(?:[ ,/]+([\d.]+))?/.exec(color || "");
@@ -98,6 +110,15 @@
     var n = 0;
     for (var i = 0; i < row.children.length; i++) if (row.children[i].matches && row.children[i].matches(SEGMENT)) n++;
     if (n < 2) return null;
+    // Segments on more than one line are a grid (a calendar), not a switch, unless the row is marked data-glide
+    // (Fully Booked's demo switch wraps onto two lines on a phone and an iPad, and still slides).
+    var top = null, glides = row.hasAttribute("data-glide");
+    for (var j = 0; j < row.children.length; j++) {
+      var c = row.children[j];
+      if (!c.matches || !c.matches(SEGMENT)) continue;
+      var t = c.getBoundingClientRect().top;
+      if (top === null) top = t; else if (Math.abs(t - top) > 2 && !glides) return null;
+    }
     var segment = row.hasAttribute("data-glide") || el.getAttribute("role") === "tab" || el.getAttribute("role") === "radio" || el.hasAttribute("aria-pressed");
     return segment ? row : null;
   }
@@ -195,6 +216,124 @@
   }
   function endAll() { for (var id in live) end(id, false); }
 
+  // ── The slide ──────────────────────────────────────────────────────────────────────────────────────────────
+  // A switch's pill: the child of the row whose class names a pill (slide-switch__pill, switch-pill, fos-switch-pill).
+  function pillOf(row) {
+    for (var i = 0; i < row.children.length; i++) if (/(^|[\s_-])pill(\s|$)/.test(row.children[i].className || "")) return row.children[i];
+    return null;
+  }
+  var glide = null, swallowUntil = 0;
+  function segsOf(row) {
+    var out = [];
+    for (var i = 0; i < row.children.length; i++) { var c = row.children[i]; if (c.matches && c.matches(SEGMENT) && !c.disabled) out.push(c); }
+    return out;
+  }
+  function chosen(b) { return b.getAttribute("aria-pressed") === "true" || b.getAttribute("aria-selected") === "true" || b.getAttribute("aria-checked") === "true"; }
+  // The segment nearest the finger. A row is read along its length first, then line by line when it wraps.
+  function nearestSeg(boxes, x, y) {
+    var best = 0, bd = Infinity;
+    for (var i = 0; i < boxes.length; i++) {
+      var b = boxes[i], dd = Math.abs(x - (b.left + b.width / 2)) + 2 * Math.max(0, Math.abs(y - (b.top + b.height / 2)) - b.height / 2);
+      if (dd < bd) { bd = dd; best = i; }
+    }
+    return best;
+  }
+  function startGlide(e, row, el, p) {
+    if (row.getAttribute("data-glide") === null || row.getAttribute("data-glide") === "own" || row.scrollWidth > row.clientWidth + 1) { glide = { id: e.pointerId, p: p, own: true, x: e.clientX, y: e.clientY }; return; }
+    glide = { id: e.pointerId, row: row, p: p, x: e.clientX, y: e.clientY, sliding: false, frame: 0 };
+  }
+  // Put the pill (and its light) under the finger: centred on it, kept within the line of segments it is on.
+  function slideTo(g, x, y) {
+    var boxes = g.boxes, w = g.w;
+    var i = nearestSeg(boxes, x, y), top = boxes[i].top, lo = Infinity, hi = -Infinity;
+    for (var k = 0; k < boxes.length; k++) if (Math.abs(boxes[k].top - top) <= 2) { lo = Math.min(lo, boxes[k].left); hi = Math.max(hi, boxes[k].right); }
+    if (g.vary) w = boxes[i].width;
+    var left = Math.max(lo, Math.min(hi - w, x - w / 2));
+    if (g.pill) {
+      g.pill.style.translate = (left - g.pillLeft) + "px " + (top - g.pillTop) + "px";
+      if (g.vary) g.pill.style.width = w + "px";
+    }
+    if (g.p && g.p.node) {
+      g.p.node.style.transform = "translate(" + (left + g.p.ox) + "px," + (top + g.p.oy) + "px)";
+      if (g.vary) g.p.node.style.width = w + "px"; // the light is exactly the pill, however wide this choice is
+    }
+    if (g.lit !== i) {
+      if (g.segs[g.lit]) g.segs[g.lit].removeAttribute("data-glide-lit");
+      g.segs[i].setAttribute("data-glide-lit", "");
+      g.lit = i;
+    }
+    g.left = left;
+  }
+  d.addEventListener("pointermove", function (e) {
+    var g = glide;
+    if (!g || g.id !== e.pointerId) return;
+    var dx = e.clientX - g.x, dy = e.clientY - g.y;
+    if (g.own) {
+      // A switch the page slides itself (the OS header and bars): its pill centres on the finger, so the light does
+      // too, one segment wide, within the row's segments.
+      if (g.p && g.p.node && (g.sliding || Math.abs(dx) >= 8)) {
+        if (!g.sliding) { g.sliding = true; var ss = segsOf(g.p.row); g.lo = ss[0].getBoundingClientRect().left; g.hi = ss[ss.length - 1].getBoundingClientRect().right; }
+        var w0 = g.p.rect.width, l = Math.max(g.lo, Math.min(g.hi - w0, e.clientX - w0 / 2));
+        g.p.node.style.transform = "translate(" + (l + g.p.ox) + "px," + (g.p.y + g.p.oy) + "px)";
+      }
+      return;
+    }
+    if (!g.sliding) {
+      if (Math.abs(dy) > 8 && Math.abs(dy) > Math.abs(dx)) { glide = null; if (g.p) end(g.id, true); return; } // scrolling
+      if (Math.abs(dx) < 8) return;
+      g.sliding = true;
+      g.segs = segsOf(g.row);
+      g.boxes = g.segs.map(function (b) { return b.getBoundingClientRect(); });
+      g.vary = Math.abs(g.boxes[0].width - g.boxes[g.boxes.length - 1].width) > 1;
+      g.pill = pillOf(g.row);
+      g.w = g.p && g.p.rect ? g.p.rect.width : g.boxes[0].width;
+      if (g.pill) {
+        g.pill.style.transition = "none";
+        var cur = String(g.pill.style.translate || "0 0").split(" "), pr = g.pill.getBoundingClientRect();
+        g.pillLeft = pr.left - (parseFloat(cur[0]) || 0);
+        g.pillTop = pr.top - (parseFloat(cur[1]) || 0);
+      }
+      g.row.classList.add("is-gliding");
+      try { g.row.setPointerCapture(g.id); } catch (err) { /* older browsers */ }
+    }
+    g.nx = e.clientX; g.ny = e.clientY;
+    if (g.frame) return; // one move per frame, the latest finger position
+    g.frame = requestAnimationFrame(function () { g.frame = 0; if (glide === g) slideTo(g, g.nx, g.ny); });
+  }, { passive: true });
+  // Lifting chooses the lit segment. The pill settles from where the finger left it into its new place.
+  function finishGlide(e, choose) {
+    var g = glide;
+    if (!g || g.id !== e.pointerId) return;
+    glide = null;
+    if (g.own || !g.sliding) return;
+    if (g.frame) cancelAnimationFrame(g.frame);
+    if (g.nx != null) slideTo(g, e.clientX || g.nx, e.clientY || g.ny);
+    var target = g.segs[g.lit];
+    for (var i = 0; i < g.segs.length; i++) g.segs[i].removeAttribute("data-glide-lit");
+    g.row.classList.remove("is-gliding");
+    try { g.row.releasePointerCapture(g.id); } catch (err) { /* already released */ }
+    swallowUntil = Date.now() + 400; // the browser's own click after a slide would choose the first segment again
+    var pr = pill0(g), from = pr.left, fromTop = pr.top, fromW = pr.width, pill = g.pill;
+    if (choose && target && !chosen(target)) target.click();
+    if (!pill) return;
+    requestAnimationFrame(function () { requestAnimationFrame(function () {
+      var t = String(pill.style.translate || "0 0").split(" "), now = pill.getBoundingClientRect();
+      var baseX = now.left - (parseFloat(t[0]) || 0), baseY = now.top - (parseFloat(t[1]) || 0);
+      var toW = pill.style.width; // a row of unequal segments sizes its pill to the choice (Fully Booked)
+      pill.style.translate = (from - baseX) + "px " + (fromTop - baseY) + "px";
+      if (g.vary) pill.style.width = fromW + "px";
+      void pill.offsetWidth;
+      pill.style.transition = "translate .38s " + EASE + ",width .38s " + EASE;
+      pill.style.translate = "0px 0px";
+      if (g.vary) pill.style.width = toW;
+      setTimeout(function () { pill.style.transition = ""; pill.style.translate = ""; }, 420);
+    }); });
+  }
+  function pill0(g) { return g.pill ? g.pill.getBoundingClientRect() : { left: 0, top: 0, width: 0 }; }
+  d.addEventListener("click", function (e) {
+    if (e.isTrusted && Date.now() < swallowUntil && e.target.closest && e.target.closest("[data-glide]")) { e.preventDefault(); e.stopPropagation(); }
+  }, true);
+
   d.addEventListener("pointerdown", function (e) {
     if (e.button > 0 || !e.target.closest) return;
     var el = e.target.closest(TAPPABLE);
@@ -205,6 +344,8 @@
     if (r.width < 8 || r.height < 8) return;
     if (!ready) setup();
     end(e.pointerId, true);
+    glide = null;
+    if (still) { var sr = el.getAttribute("data-press") ? null : rowOf(el); if (sr) startGlide(e, sr, el, null); return; }
 
     var a = answer(el, cs), p = { el: el, at: Date.now(), kind: a.kind, fx: e.clientX, fy: e.clientY, rect: r };
     if (a.kind === "glow") {
@@ -223,10 +364,11 @@
       var shape = a.shape;
       if (shape !== el) { cs = getComputedStyle(shape); r = shape.getBoundingClientRect(); p.rect = r; }
       var fx = e.clientX, fy = e.clientY;
-      // The light opens from the finger until it covers the whole shape, cut to the shape or its row.
-      var box = a.row ? a.row.getBoundingClientRect() : r;
+      // The light opens from the finger until it covers the whole shape, cut to the shape. On a switch the shape is
+      // the pill: one segment's box with the pill's corners, which slides with the finger along the row.
+      var box = r, pill = a.row ? pillOf(a.row) : null;
       var clip = { x: box.left, y: box.top, w: box.width, h: box.height };
-      var crad = radiusOf(a.row ? getComputedStyle(a.row) : cs, box.width, box.height);
+      var crad = radiusOf(pill ? getComputedStyle(pill) : cs, box.width, box.height) || (a.row ? radiusOf(getComputedStyle(a.row), box.width, box.height) : 0);
       var reach = Math.hypot(Math.max(fx - r.left, r.right - fx), Math.max(fy - r.top, r.bottom - fy)) * 2.2;
       var g = region(el, box);
       var x0 = Math.max(g.x0, clip.x), y0 = Math.max(g.y0, clip.y);
@@ -243,13 +385,14 @@
       light.style.cssText = "left:" + (fx - reach / 2 - x0) + "px;top:" + (fy - reach / 2 - y0) + "px;width:" + reach + "px;height:" + reach + "px";
       node.appendChild(light);
       root.appendChild(node);
-      p.node = node; p.light = light; p.row = a.row ? clip : null;
+      p.node = node; p.light = light; p.ox = ox; p.oy = oy; p.y = y0; p.row = a.row || null;
       move(p, 0, 0, 0.25);
       void node.offsetWidth; // start from the closed state, so the opening is seen
       node.className += " is-on";
       move(p, 0, 0, 1);
     }
     live[e.pointerId] = p;
+    if (a.row) startGlide(e, a.row, el, p);
   }, { passive: true });
 
   // Moving the finger moves the light: fully inside a button and along a switch, a little for a glow, like light
@@ -258,7 +401,8 @@
     var p = live[e.pointerId];
     if (!p) return;
     var dx = e.clientX - p.fx, dy = e.clientY - p.fy, r = p.rect;
-    if (!p.row) {
+    if (p.row) return; // a switch's light moves with the slide (slideTo)
+    {
       var far = Math.max(14, Math.min(r.width, r.height) * 0.4);
       if (e.clientX < r.left - far || e.clientX > r.right + far || e.clientY < r.top - far || e.clientY > r.bottom + far) { end(e.pointerId, true); return; }
     }
@@ -268,11 +412,10 @@
       return;
     }
     p.light.style.transition = "transform .12s linear,opacity .2s ease";
-    if (p.row) move(p, Math.max(p.row.x - r.left, Math.min(p.row.x + p.row.w - r.right, dx)), 0, 1);
-    else move(p, dx, dy, 1);
+    move(p, dx, dy, 1);
   }, { passive: true });
-  d.addEventListener("pointerup", function (e) { end(e.pointerId, false); }, { passive: true });
-  d.addEventListener("pointercancel", function (e) { end(e.pointerId, true); }, { passive: true });
+  d.addEventListener("pointerup", function (e) { finishGlide(e, true); end(e.pointerId, false); }, { passive: true });
+  d.addEventListener("pointercancel", function (e) { finishGlide(e, false); end(e.pointerId, true); }, { passive: true });
   // A long press that opens the phone's own menu, a drag, or leaving the page never leaves a light behind.
   d.addEventListener("contextmenu", endAll, { passive: true });
   d.addEventListener("dragstart", endAll, { passive: true });

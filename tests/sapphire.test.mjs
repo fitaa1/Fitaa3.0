@@ -39,18 +39,33 @@ test("one soft light: a button fills from the finger, a word or symbol glows fro
 test("the finger moves the light, and nothing can leave it behind", () => {
   const js = read("public/press.js");
   assert.match(js, /addEventListener\("pointermove"/, "moving the finger moves the light");
-  assert.match(js, /p\.row\.x - r\.left/, "along a switch, kept inside its row");
+  assert.match(js, /var box = r, pill = a\.row \? pillOf\(a\.row\) : null/, "on a switch the light is one segment's window in the pill's shape, never the track behind it (Nigel, 25 Nov 2026)");
   assert.match(js, /addEventListener\("pointerup"/);
-  assert.match(js, /addEventListener\("pointercancel", function \(e\) \{ end\(e\.pointerId, true\)/, "a scroll lets it go at once");
+  assert.match(js, /addEventListener\("pointercancel", function \(e\) \{ finishGlide\(e, false\); end\(e\.pointerId, true\)/, "a scroll lets it go at once, and drops a slide without choosing");
   for (const ev of ["contextmenu", "dragstart", "visibilitychange"]) assert.match(js, new RegExp(`addEventListener\\("${ev}", endAll`), `${ev} ends it (a long press on iPhone opened the menu and the light stuck)`);
   assert.doesNotMatch(js, /HOLD|p\.hold/, "it lasts as long as the finger rests, with no time limit (Nigel, 25 Nov 2026)");
   assert.match(js, /var k = p\.dark \? \[4\.2, 3\.2, 1\.25\] : \[3, 2\.2, 1\]/, "brighter on a dark page, where a light word sits on a dark ground");
   assert.match(js, /data-glide/);
 });
 
+test("a switch slides under the finger with no delay on every site (Nigel, 25 Nov 2026)", () => {
+  const js = read("public/press.js");
+  assert.match(js, /function slideTo\(g, x, y\)/, "the pill and its light follow the finger");
+  assert.match(js, /g\.pill\.style\.translate = \(left - g\.pillLeft\) \+ "px " \+ \(top - g\.pillTop\)/, "the pill is moved under the finger, not stepped segment by segment");
+  assert.match(js, /g\.pill\.style\.transition = "none"/, "no transition while sliding, so nothing trails the finger");
+  assert.match(js, /if \(choose && target && !chosen\(target\)\) target\.click\(\)/, "lifting chooses the lit segment");
+  assert.match(js, /\[data-glide\]:not\(\[data-glide=own\]\)\{touch-action:pan-y\}/, "an upright drag still scrolls the page");
+  for (const f of ["src/components/SlideSwitch.tsx", "public/fully-booked/index.html"]) {
+    const s = read(f);
+    assert.match(s, /data-glide/, `${f} marks its switch for the press`);
+    assert.doesNotMatch(s, /onPointerMove|elementFromPoint/, `${f} has no slide of its own that jumps button to button`);
+  }
+});
+
 test("the press stays inside a floating bar, rides with the page, and never widens it", () => {
   const js = read("public/press.js");
-  assert.doesNotMatch(js, /requestAnimationFrame|addEventListener\("scroll"/, "the browser carries it, no script moves it with the page");
+  assert.doesNotMatch(js, /addEventListener\("scroll"/, "the browser carries it, no script moves it with the page");
+  assert.equal(js.match(/requestAnimationFrame/g).length, 3, "a frame is only asked for while a finger slides a switch");
   assert.match(js, /if \(edged\(cs\) && holds\) return \{ fixed: true, x0: Math\.max\(0, b\.left\)/, "inside a bar with a background that holds the element, never past it");
   assert.match(js, /var ox = g\.fixed \? 0 : scrollX/, "drawn in the page beside its element");
   assert.match(js, /x1 = Math\.min\(g\.x1, clip\.x \+ clip\.w\)/, "cut to the page's width");

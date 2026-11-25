@@ -1,9 +1,11 @@
-import { useRef, type KeyboardEvent, type PointerEvent } from "react";
+import { useRef, type KeyboardEvent } from "react";
 
 /** One row of equal segments with a single pill that slides to the choice (SITE_STANDARD.md, Switches slide).
  *  The pill moves by transform only: each segment is the same width, so the pill is one segment wide and
  *  translates by whole segments. Real buttons with aria-pressed, arrow keys move the choice, and under
- *  reduced motion the pill moves without the spring. Without CSS support the pressed button keeps its fill. */
+ *  reduced motion the pill moves without the spring. Without CSS support the pressed button keeps its fill.
+ *  Sliding a finger along it is handled by the Fitaa press (public/press.js, data-glide): the pill and its light
+ *  follow the finger frame by frame and lifting chooses, so this component only renders and answers taps. */
 export function SlideSwitch<T extends string>({ label, options, value, onChange }: {
   label: string;
   options: { value: T; label: string }[];
@@ -18,21 +20,10 @@ export function SlideSwitch<T extends string>({ label, options, value, onChange 
     onChange(next.value);
     (row.current?.querySelectorAll("button")[options.indexOf(next)] as HTMLButtonElement | undefined)?.focus();
   };
-  // Drag: while a finger or mouse is down on the row, the segment under it is chosen, so the pill follows.
-  const dragging = useRef(false);
-  const pick = (e: PointerEvent) => {
-    const box = row.current?.getBoundingClientRect();
-    if (!box) return;
-    const i = Math.min(options.length - 1, Math.max(0, Math.floor(((e.clientX - box.left) / box.width) * options.length)));
-    if (options[i].value !== value) onChange(options[i].value);
-  };
   return (
     <div
       ref={row}
-      onPointerDown={(e) => { dragging.current = true; row.current?.setPointerCapture?.(e.pointerId); }}
-      onPointerMove={(e) => { if (dragging.current) pick(e); }}
-      onPointerUp={() => { dragging.current = false; }}
-      onPointerCancel={() => { dragging.current = false; }}
+      data-glide=""
       role="group"
       aria-label={label}
       className="slide-switch"

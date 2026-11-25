@@ -290,6 +290,7 @@ a{color:inherit}
 .switch-pill{position:absolute;left:0;top:0;width:0;height:0;background:var(--accent-strong);pointer-events:none;z-index:0;transition:transform .46s cubic-bezier(.32,1.32,.44,1),width .46s cubic-bezier(.22,1,.36,1),height .3s cubic-bezier(.22,1,.36,1)}
 .switch.has-pill button{z-index:1;background:transparent}
 .switch.has-pill button[aria-selected="true"],.switch.has-pill button[aria-pressed="true"]{background:transparent;color:var(--on-accent)}
+.switch.is-gliding button{transition:none}.switch.has-pill.is-gliding button[aria-selected="true"]:not([data-glide-lit]){color:var(--muted)}.switch.has-pill.is-gliding button[data-glide-lit]{color:var(--on-accent)}
 .switch button:active{transform:scale(.985);transition:transform .12s,color .3s}
 @media (prefers-reduced-motion:reduce){.switch-pill{transition:transform .2s ease,width .2s ease,height .2s ease}}
 .actions{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin-top:1.5rem}
@@ -663,7 +664,7 @@ footer nav a{display:inline-flex;align-items:center;min-height:44px}
          same data-for value, its colours under "Demos" in the styles, and a line in SETTINGS.demos. -->
     <div class="rise"><span class="eyebrow">See it for yourself</span><h2 class="h2">What your page could look like.</h2>
       <p class="lede" id="demo-lede" style="margin-top:1rem;max-width:42rem">A demo built for a fictional serviced apartment. Try the booking form. It opens WhatsApp with the request already written.</p>
-      <div class="switch switch-sm" role="tablist" aria-label="Choose which demo to see">
+      <div class="switch switch-sm" role="tablist" aria-label="Choose which demo to see" data-glide>
         <button role="tab" id="demo-tab-hosts" aria-selected="true" aria-controls="demos" data-niche="hosts">Short-let host</button>
         <button role="tab" id="demo-tab-studios" aria-selected="false" aria-controls="demos" data-niche="studios">Beauty studio</button>
         <button role="tab" id="demo-tab-cars" aria-selected="false" aria-controls="demos" data-niche="cars">Car rental</button>
@@ -805,7 +806,8 @@ document.querySelectorAll('[data-wa]').forEach(function (a) {
   if (saved && saved.toUpperCase() !== SETTINGS.currency) show(saved.toUpperCase());
 })();
 
-/* Sliding switch: one pill follows the chosen button. Tap, arrow keys or drag across the row. */
+/* Sliding switch: one pill follows the chosen button on a tap or an arrow key. A finger sliding along the row is
+   handled by the Fitaa press (/press.js, data-glide): the pill follows the finger and lifting chooses. */
 function fitaaPill(sw) {
   var pill = sw.querySelector('.switch-pill');
   if (!pill) { pill = document.createElement('span'); pill.className = 'switch-pill'; pill.setAttribute('aria-hidden', 'true'); sw.insertBefore(pill, sw.firstChild); }
@@ -819,15 +821,6 @@ function fitaaPill(sw) {
     pill.style.transform = 'translate(' + on.offsetLeft + 'px,' + on.offsetTop + 'px)';
     if (instant) { void pill.offsetWidth; pill.style.transition = ''; }
   }
-  var down = false;
-  sw.addEventListener('pointerdown', function () { down = true; });
-  window.addEventListener('pointerup', function () { down = false; });
-  sw.addEventListener('pointermove', function (e) {
-    if (!down || e.pointerType === 'mouse' && !e.buttons) return;
-    var b = document.elementFromPoint(e.clientX, e.clientY);
-    b = b && b.closest ? b.closest('button') : null;
-    if (b && sw.contains(b) && b.getAttribute('aria-selected') !== 'true' && b.getAttribute('aria-pressed') !== 'true') b.click();
-  });
   new MutationObserver(function () { place(false); }).observe(sw, { subtree: true, attributes: true, attributeFilter: ['aria-selected', 'aria-pressed'] });
   window.addEventListener('resize', function () { place(true); });
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { place(true); });
