@@ -11,9 +11,10 @@
      glows from its own outline: the letters of the word, the strokes of the icon, the edge of the logo. The light
      sits behind it, so it is plainly the word or the symbol that was pressed, not the space around it.
    While the finger rests, moving it moves the light with it, like light shifting in a stone, and on a switch the
-   light rides along the row so pressing and sliding are one gesture. The light holds while the finger rests and
-   fades when it lifts, when the finger starts to scroll, when a long press opens the phone's own menu, or after 1.5 s
-   at most, so it can never be left behind.
+   light rides along the row so pressing and sliding are one gesture. The light holds for as long as the finger rests
+   and fades when it lifts, when the finger starts to scroll or when a long press opens the phone's own menu, so it can
+   never be left behind. On a dark page, where the pressed word or symbol is light, the glow is brighter, so it stands
+   out as clearly as it does on a light page (Nigel, 25 Nov 2026).
    A light inside a fixed or sticky bar that has its own background (a header once it floats over the page, the OS
    section bar) stays inside that bar. Everything else is drawn in the page beside its element, so the browser carries
    it with the page, and every light is cut to the page's width.
@@ -42,7 +43,6 @@
 
   var TAPPABLE = 'button,[role="button"],[role="tab"],[role="menuitem"],[role="menuitemradio"],summary,a,label[for],[data-press]';
   var SEGMENT = 'button,[role="tab"],[role="radio"]';
-  var HOLD = 1500;
   var ready = false, live = {};
 
   function setup() {
@@ -160,10 +160,12 @@
   }
 
   // A glow: the element's own outline lit from behind by its filter, two soft layers, near and wide. The press colour
-  // is see-through so a light can fill a button; a thin outline needs it stronger to be seen.
+  // is see-through so a light can fill a button; a thin outline needs it stronger to be seen, and stronger again and a
+  // little wider on a dark page, where a dark glow sinks into the ground.
   function glowFilter(p, dx, dy, on) {
-    var near = on ? rgba(p.color, p.color.a * 3) : "transparent", wide = on ? rgba(p.color, p.color.a * 2.2) : "transparent";
-    return p.base + "drop-shadow(" + dx + "px " + dy + "px " + (on ? p.blur * 0.3 : 0) + "px " + near + ") drop-shadow(" + dx + "px " + dy + "px " + (on ? p.blur : 0) + "px " + wide + ")";
+    var k = p.dark ? [4.2, 3.2, 1.25] : [3, 2.2, 1];
+    var near = on ? rgba(p.color, p.color.a * k[0]) : "transparent", wide = on ? rgba(p.color, p.color.a * k[1]) : "transparent";
+    return p.base + "drop-shadow(" + dx + "px " + dy + "px " + (on ? p.blur * 0.3 * k[2] : 0) + "px " + near + ") drop-shadow(" + dx + "px " + dy + "px " + (on ? p.blur * k[2] : 0) + "px " + wide + ")";
   }
   function glowTo(p, dx, dy, on, ms) {
     var from = glowFilter(p, p.dx, p.dy, p.on), to = glowFilter(p, dx, dy, on);
@@ -181,7 +183,6 @@
     var p = live[id];
     if (!p) return;
     delete live[id];
-    clearTimeout(p.hold);
     var wait = quick ? 0 : Math.max(0, 180 - (Date.now() - p.at)); // a quick tap still shows its light opening
     setTimeout(function () {
       if (p.kind === "glow") {
@@ -213,6 +214,8 @@
       p.blur = Math.max(6, Math.min(16, Math.round(size * 0.5)));
       p.s = Math.round(p.blur * 0.4);
       p.color = pressColour();
+      var ink = rgb(cs.color); // light ink means a dark page
+      p.dark = !!ink && (Math.max(ink.r, ink.g, ink.b) + Math.min(ink.r, ink.g, ink.b)) / 2 > 0.6;
       p.base = cs.filter && cs.filter !== "none" ? cs.filter + " " : "";
       p.dx = 0; p.dy = 0; p.on = false;
       glowTo(p, 0, 0, true, 380);
@@ -246,7 +249,6 @@
       node.className += " is-on";
       move(p, 0, 0, 1);
     }
-    p.hold = setTimeout(function () { end(e.pointerId, false); }, HOLD);
     live[e.pointerId] = p;
   }, { passive: true });
 

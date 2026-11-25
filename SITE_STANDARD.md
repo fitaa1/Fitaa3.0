@@ -257,13 +257,14 @@ does: modern and high tech, and unmistakably Ghanaian. The reference is the Pate
     glows from its own outline: the letters of the word, the strokes of the icon, the edge of the logo, lit from
     behind by the element's own `drop-shadow` filter in two soft layers. It is plainly the word or the symbol that
     was pressed, never a shape laid over it or the space around it (Nigel, 25 Nov 2026: a blob behind View our work
-    and the menu items looked off).
+    and the menu items looked off). Where the pressed thing is light on a dark page, the glow is brighter and a
+    little wider, so it stands out in dark mode as clearly as in light mode.
   - Moving the finger moves the light, like light shifting in a stone: fully inside a button, a little for a glow,
     and along the row on a switch, so pressing and sliding are one gesture (a row marked `data-glide`, or a
     tablist or group of pressed buttons). No bright point under the finger.
-  - The light holds while the finger rests and fades when it lifts, at once when the finger starts to scroll or
-    when a long press opens the phone's own menu (open in a new tab on iPhone), and after 1.5 s at most, so a
-    light is never left behind.
+  - The light holds for as long as the finger rests, with no time limit (Nigel, 25 Nov 2026), and fades when it
+    lifts, at once when the finger starts to scroll or when a long press opens the phone's own menu (open in a new
+    tab on iPhone), so a light is never left behind.
   - An element in a fixed or sticky bar with its own background (a header floating over the page, the OS section
     bar) is answered inside that bar only, never spilling onto the page. Everything else is drawn in the page
     beside its element, so it rides with the page, and every answer is cut to the page's width.

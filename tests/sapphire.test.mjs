@@ -43,7 +43,8 @@ test("the finger moves the light, and nothing can leave it behind", () => {
   assert.match(js, /addEventListener\("pointerup"/);
   assert.match(js, /addEventListener\("pointercancel", function \(e\) \{ end\(e\.pointerId, true\)/, "a scroll lets it go at once");
   for (const ev of ["contextmenu", "dragstart", "visibilitychange"]) assert.match(js, new RegExp(`addEventListener\\("${ev}", endAll`), `${ev} ends it (a long press on iPhone opened the menu and the light stuck)`);
-  assert.match(js, /var HOLD = 1500/, "and it never lasts past 1.5 s");
+  assert.doesNotMatch(js, /HOLD|p\.hold/, "it lasts as long as the finger rests, with no time limit (Nigel, 25 Nov 2026)");
+  assert.match(js, /var k = p\.dark \? \[4\.2, 3\.2, 1\.25\] : \[3, 2\.2, 1\]/, "brighter on a dark page, where a light word sits on a dark ground");
   assert.match(js, /data-glide/);
 });
 
