@@ -1,7 +1,7 @@
 // Royal sapphire and the Fitaa press (SITE_STANDARD.md, Royal sapphire and Craft in the details; Nigel, 24 and 25
 // Nov 2026). Every copy of the home page and Fully Booked carries the press and a sapphire on the seam under the
 // hero, and home a second above Contact. The press fills a defined edge with one soft light from the finger and
-// glows behind a floating thing, rides with the page, stays inside a floating bar and never leaves a light behind. The sapphire clips its
+// lights a word or symbol from its own outline, rides with the page, stays inside a floating bar and never leaves a light behind. The sapphire clips its
 // own glint. Both are transform and opacity only, once, and the colour tokens exist in light and dark.
 import { test } from "node:test";
 import assert from "node:assert/strict";
@@ -23,16 +23,16 @@ test("the press moves only transform and opacity, and never on reduced motion", 
   assert.doesNotMatch(js, /box-shadow:|fitaa-halo/, "never a ring or square halo (Nigel, 25 Nov 2026)");
 });
 
-test("one soft light, filling what has an edge and glowing behind what floats (Nigel, 25 Nov 2026: the #71 light, never a second effect)", () => {
+test("one soft light: a button fills from the finger, a word or symbol glows from its own outline (Nigel, 25 Nov 2026)", () => {
   const js = read("public/press.js");
   assert.match(js, /radial-gradient\(circle," \+ C \+ " 0,transparent 68%\)/, "a light opens from the finger");
   assert.match(js, /Math\.max\(fy - r\.top, r\.bottom - fy\)\) \* 2\.2/, "and grows until the whole button is lit");
   assert.match(js, /function radiusOf\(cs, w, h\)/, "cut to the element's own corners");
-  assert.match(js, /radial-gradient\(closest-side,/, "a glow is the element's own shape");
-  assert.match(js, /L = \{ x: r\.left - s, y: r\.top - s, w: w \+ 2 \* s, h: h \+ 2 \* s \}/, "centred on the element, so it comes from the logo, not the finger");
-  assert.match(js, /darkBehind\(el\) \? " is-screen"/, "on a dark page it lights the page behind the element");
-  assert.equal((js.match(/createElement\(/g) || []).length, 3, "one style, one layer and one light: no bright point, no second bloom");
-  assert.match(js, /el\.getClientRects\(\)/, "a wrapped link glows round the line that was touched");
+  assert.match(js, /"drop-shadow\(" \+ dx/, "a glow follows the letters of the word, the strokes of the icon, the edge of the logo");
+  assert.match(js, /p\.el\.animate\(\[\{ filter: from \}, \{ filter: to \}\]/, "drawn behind the element by its own filter, never a shape laid over it");
+  assert.match(js, /if \(p\.anim\) p\.anim\.cancel\(\)/, "one glow at a time on an element");
+  assert.doesNotMatch(js, /closest-side|mix-blend-mode|darkBehind|createElement\("b"\)/, "no blob, no screen layer on top, no bright point");
+  assert.match(js, /function kinEdged\(el, r\)/, "a row in a menu whose chosen row shows its edge gets the button light");
   assert.match(js, /function vivid\(cs\)/, "a strong fill catches a white sheen");
 });
 
@@ -50,7 +50,7 @@ test("the finger moves the light, and nothing can leave it behind", () => {
 test("the press stays inside a floating bar, rides with the page, and never widens it", () => {
   const js = read("public/press.js");
   assert.doesNotMatch(js, /requestAnimationFrame|addEventListener\("scroll"/, "the browser carries it, no script moves it with the page");
-  assert.match(js, /if \(edged\(cs\)\) return \{ fixed: true, x0: Math\.max\(0, r\.left\)/, "inside a bar with a background, never past it");
+  assert.match(js, /if \(edged\(cs\) && holds\) return \{ fixed: true, x0: Math\.max\(0, b\.left\)/, "inside a bar with a background that holds the element, never past it");
   assert.match(js, /var ox = g\.fixed \? 0 : scrollX/, "drawn in the page beside its element");
   assert.match(js, /x1 = Math\.min\(g\.x1, clip\.x \+ clip\.w\)/, "cut to the page's width");
 });

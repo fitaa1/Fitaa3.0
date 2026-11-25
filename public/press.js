@@ -1,26 +1,26 @@
 /* The Fitaa press (SITE_STANDARD.md, Craft in the details). Nigel, 24 Nov 2026: a press should confirm itself
    beautifully, the way a Patek Philippe pusher answers the finger. Nigel, 25 Nov 2026: one soft light, never a second
-   effect on top of it, and kept where it belongs.
+   effect on top of it, kept where it belongs, and coming from the thing that was pressed.
 
    It answers in one of two ways, chosen by the shape of what was pressed:
-   - light: a button, tile, card or switch with a defined edge (a border, a fill or a shadow; its own, a card inside
-     it that fills it, or the row it is a segment of) fills with one soft light that opens out from the finger until
-     the whole of it is lit, cut to its own outline. A strong fill of its own (a gold or magenta button) catches a
-     white sheen instead, because the site's own light would vanish into it (--press-sheen).
-   - glow: something that floats with no edge of its own (a logo, an icon, a text link, an email address or phone
-     number) glows from behind itself: one soft light the shape of the element, centred on it and reaching a little
-     past it, so it emanates from the logo or the link rather than sitting on the finger. On a dark page it lights the
-     page behind the element (screen blend), so the element itself stays crisp.
+   - light: a button, tile, card, row or switch with a defined edge (a border, a fill or a shadow; its own, a card
+     inside it that fills it, or the row it is a segment of) fills with one soft light that opens out from the finger
+     until the whole of it is lit, cut to its own outline. A strong fill of its own (a gold or magenta button) catches
+     a white sheen instead, because the site's own light would vanish into it (--press-sheen).
+   - glow: something with no edge of its own (a logo, an icon, a word, a link, an email address or phone number)
+     glows from its own outline: the letters of the word, the strokes of the icon, the edge of the logo. The light
+     sits behind it, so it is plainly the word or the symbol that was pressed, not the space around it.
    While the finger rests, moving it moves the light with it, like light shifting in a stone, and on a switch the
    light rides along the row so pressing and sliding are one gesture. The light holds while the finger rests and
    fades when it lifts, when the finger starts to scroll, when a long press opens the phone's own menu, or after 1.5 s
    at most, so it can never be left behind.
-   An element inside a fixed or sticky bar that has its own background (a header once it floats over the page, the
-   OS section bar) is answered inside that bar only. Everything else is drawn in the page beside its element, so the
-   browser carries it with the page, and every answer is cut to the page's width.
+   A light inside a fixed or sticky bar that has its own background (a header once it floats over the page, the OS
+   section bar) stays inside that bar. Everything else is drawn in the page beside its element, so the browser carries
+   it with the page, and every light is cut to the page's width.
    data-press="light" or "glow" overrides the choice, data-press-shape on a part inside names the shape the light
    fills (a tile's photo frame), data-glide marks a switch row, and data-no-press turns the press off.
-   Transform and opacity only, nothing in the layout moves. Reduced motion gets no answer.
+   A light moves only by transform and opacity, and a glow only by the element's own filter, so nothing in the layout
+   moves. Reduced motion gets no answer.
    Each site sets one colour, --press-ripple, in light and dark in its own stylesheet. This file is the reference:
    copy it unchanged to every Fitaa site. */
 (function () {
@@ -34,15 +34,13 @@
   var GROW = "transform .45s " + EASE + ",opacity .2s ease";
   var css =
     ".fitaa-press{position:absolute;left:0;top:0;overflow:hidden;pointer-events:none;z-index:2147483646;contain:layout paint;transition:opacity .32s ease}" +
-    ".fitaa-press.is-fixed{position:fixed}.fitaa-press.is-screen{mix-blend-mode:screen}" +
-    ".fitaa-press.is-out{opacity:0}.fitaa-press.is-quick{transition-duration:.14s}" +
+    ".fitaa-press.is-fixed{position:fixed}.fitaa-press.is-out{opacity:0}.fitaa-press.is-quick{transition-duration:.14s}" +
     ".fitaa-press i{position:absolute;border-radius:50%;opacity:0;will-change:transform,opacity;transition:" + GROW + "}" +
-    ".fitaa-press-light i{background:radial-gradient(circle," + C + " 0,transparent 68%)}" +
-    ".fitaa-press-light.is-sheen i{background:radial-gradient(circle," + S + " 0,transparent 68%)}" +
-    ".fitaa-press-glow i{background:radial-gradient(closest-side," + C + " 0," + C + " 30%,transparent 100%)}" +
+    ".fitaa-press i{background:radial-gradient(circle," + C + " 0,transparent 68%)}" +
+    ".fitaa-press.is-sheen i{background:radial-gradient(circle," + S + " 0,transparent 68%)}" +
     ".fitaa-press.is-on i{opacity:1}";
 
-  var TAPPABLE = 'button,[role="button"],[role="tab"],summary,a,label[for],[data-press]';
+  var TAPPABLE = 'button,[role="button"],[role="tab"],[role="menuitem"],[role="menuitemradio"],summary,a,label[for],[data-press]';
   var SEGMENT = 'button,[role="tab"],[role="radio"]';
   var HOLD = 1500;
   var ready = false, live = {};
@@ -83,15 +81,6 @@
     return (sat > 0.35 && l > 0.25) || l > 0.6;
   }
 
-  // Whether the page behind an element is dark, from the first solid colour found going outwards.
-  function darkBehind(el) {
-    for (var n = el.parentElement; n; n = n.parentElement) {
-      var c = rgb(getComputedStyle(n).backgroundColor);
-      if (c && c.a > 0.5) return (Math.max(c.r, c.g, c.b) + Math.min(c.r, c.g, c.b)) / 2 < 0.45;
-    }
-    return false;
-  }
-
   // The corner radius of a box in pixels, from its first corner (a percentage is of its shorter side).
   function radiusOf(cs, w, h) {
     var v = String(cs.borderTopLeftRadius || "0").split(" ")[0];
@@ -113,33 +102,75 @@
     return segment ? row : null;
   }
 
+  // A row in a list of rows of the same size where one of them shows its edge (the chosen item in a menu): every
+  // row there is a button with a shape, even while its own edge is hidden.
+  function kinEdged(el, r) {
+    var kids = el.parentElement ? el.parentElement.children : [];
+    for (var i = 0; i < kids.length; i++) {
+      var k = kids[i];
+      if (k === el || !k.matches || !k.matches(TAPPABLE)) continue;
+      var kr = k.getBoundingClientRect();
+      if (Math.abs(kr.width - r.width) < 2 && Math.abs(kr.height - r.height) < r.height * 0.5 && edged(getComputedStyle(k))) return true;
+    }
+    return false;
+  }
+
   // What answers, and inside which shape.
   function answer(el, cs) {
     var set = el.getAttribute("data-press"), marked = el.querySelector("[data-press-shape]");
     var row = set ? null : rowOf(el);
     if (row) return { kind: "light", shape: el, row: row };
-    if (set === "glow" || cs.display === "inline") return { kind: "glow", shape: el };
-    if (set === "light" || edged(cs)) return { kind: "light", shape: marked || el };
-    var r = el.getBoundingClientRect(), area = r.width * r.height, kids = el.querySelectorAll("*");
+    if (set === "glow" || cs.display === "inline") return { kind: "glow" };
+    var r = el.getBoundingClientRect();
+    if (set === "light" || edged(cs) || (radiusOf(cs, r.width, r.height) > 0 && kinEdged(el, r))) return { kind: "light", shape: marked || el };
+    var area = r.width * r.height, kids = el.querySelectorAll("*");
     for (var i = 0; i < kids.length && i < 40; i++) {
       var k = kids[i].getBoundingClientRect();
       if (k.width * k.height >= area * 0.85 && edged(getComputedStyle(kids[i]))) return { kind: "light", shape: kids[i] };
     }
-    return { kind: "glow", shape: el };
+    return { kind: "glow" };
   }
 
-  // Where the answer may be drawn: inside a fixed or sticky bar with its own background (and never past it), on the
-  // screen for a bar without one, or in the page.
-  function region(el) {
+  // Where a light may be drawn: inside a fixed or sticky bar with its own background that holds the element (and
+  // never past it), on the screen for anything else that is fixed, or in the page.
+  function region(el, r) {
     for (var n = el; n && n !== root; n = n.parentElement) {
       var cs = getComputedStyle(n);
       if (cs.position === "fixed" || cs.position === "sticky") {
-        var r = n.getBoundingClientRect();
-        if (edged(cs)) return { fixed: true, x0: Math.max(0, r.left), y0: Math.max(0, r.top), x1: Math.min(root.clientWidth, r.right), y1: Math.min(innerHeight, r.bottom) };
+        var b = n.getBoundingClientRect();
+        var holds = r.top >= b.top - 1 && r.bottom <= b.bottom + 1 && r.left >= b.left - 1 && r.right <= b.right + 1;
+        if (edged(cs) && holds) return { fixed: true, x0: Math.max(0, b.left), y0: Math.max(0, b.top), x1: Math.min(root.clientWidth, b.right), y1: Math.min(innerHeight, b.bottom) };
         return { fixed: true, x0: 0, y0: 0, x1: root.clientWidth, y1: innerHeight };
       }
     }
     return { fixed: false, x0: 0, y0: -scrollY, x1: root.clientWidth, y1: Math.max(root.scrollHeight - scrollY, innerHeight) };
+  }
+
+  // The site's press colour as red, green, blue and alpha, read through a probe so a theme's own value is used.
+  var probe;
+  function pressColour() {
+    if (!probe) { probe = d.createElement("i"); probe.setAttribute("aria-hidden", "true"); probe.style.cssText = "position:absolute;width:0;height:0;color:" + C; }
+    root.appendChild(probe);
+    var c = rgb(getComputedStyle(probe).color);
+    probe.remove();
+    return c || { r: 0.38, g: 0.56, b: 0.98, a: 0.24 };
+  }
+  function rgba(c, a) {
+    return "rgba(" + Math.round(c.r * 255) + "," + Math.round(c.g * 255) + "," + Math.round(c.b * 255) + "," + Math.min(1, a).toFixed(2) + ")";
+  }
+
+  // A glow: the element's own outline lit from behind by its filter, two soft layers, near and wide. The press colour
+  // is see-through so a light can fill a button; a thin outline needs it stronger to be seen.
+  function glowFilter(p, dx, dy, on) {
+    var near = on ? rgba(p.color, p.color.a * 3) : "transparent", wide = on ? rgba(p.color, p.color.a * 2.2) : "transparent";
+    return p.base + "drop-shadow(" + dx + "px " + dy + "px " + (on ? p.blur * 0.3 : 0) + "px " + near + ") drop-shadow(" + dx + "px " + dy + "px " + (on ? p.blur : 0) + "px " + wide + ")";
+  }
+  function glowTo(p, dx, dy, on, ms) {
+    var from = glowFilter(p, p.dx, p.dy, p.on), to = glowFilter(p, dx, dy, on);
+    var next = p.el.animate([{ filter: from }, { filter: to }], { duration: ms, easing: EASE, fill: "forwards" });
+    if (p.anim) p.anim.cancel();
+    p.anim = next; p.dx = dx; p.dy = dy; p.on = on;
+    return next;
   }
 
   function move(p, dx, dy, scale) {
@@ -153,6 +184,10 @@
     clearTimeout(p.hold);
     var wait = quick ? 0 : Math.max(0, 180 - (Date.now() - p.at)); // a quick tap still shows its light opening
     setTimeout(function () {
+      if (p.kind === "glow") {
+        glowTo(p, p.dx, p.dy, false, quick ? 140 : 320).onfinish = function () { if (p.anim) p.anim.cancel(); };
+        return;
+      }
       p.node.className += quick ? " is-out is-quick" : " is-out";
       setTimeout(function () { p.node.remove(); }, quick ? 180 : 360);
     }, wait);
@@ -168,50 +203,49 @@
     var r = el.getBoundingClientRect();
     if (r.width < 8 || r.height < 8) return;
     if (!ready) setup();
+    end(e.pointerId, true);
 
-    var a = answer(el, cs), kind = a.kind, shape = a.shape;
-    if (shape !== el) { cs = getComputedStyle(shape); r = shape.getBoundingClientRect(); }
-    if (kind === "glow" && cs.display === "inline") { // the line of a wrapped link that was touched
-      var lines = el.getClientRects();
-      for (var li = 0; li < lines.length; li++) if (e.clientY >= lines[li].top && e.clientY <= lines[li].bottom) { r = lines[li]; break; }
-    }
-    var w = r.width, h = r.height, fx = e.clientX, fy = e.clientY;
-
-    // The clip and the light. A light opens from the finger until it covers the whole shape; a glow is the
-    // element's own shape, centred on it and reaching past it.
-    var clip, crad = "", L, s = 0;
-    if (kind === "light") {
-      var box = a.row ? a.row.getBoundingClientRect() : r;
-      clip = { x: box.left, y: box.top, w: box.width, h: box.height };
-      crad = radiusOf(a.row ? getComputedStyle(a.row) : cs, box.width, box.height);
-      var reach = Math.hypot(Math.max(fx - r.left, r.right - fx), Math.max(fy - r.top, r.bottom - fy)) * 2.2;
-      L = { x: fx - reach / 2, y: fy - reach / 2, w: reach, h: reach };
+    var a = answer(el, cs), p = { el: el, at: Date.now(), kind: a.kind, fx: e.clientX, fy: e.clientY, rect: r };
+    if (a.kind === "glow") {
+      if (!el.animate) return;
+      // The glow reaches further from a large word or a logo than from a small icon or a line of small text.
+      var size = Math.min(r.height, parseFloat(cs.fontSize) * 1.6 || r.height);
+      p.blur = Math.max(6, Math.min(16, Math.round(size * 0.5)));
+      p.s = Math.round(p.blur * 0.4);
+      p.color = pressColour();
+      p.base = cs.filter && cs.filter !== "none" ? cs.filter + " " : "";
+      p.dx = 0; p.dy = 0; p.on = false;
+      glowTo(p, 0, 0, true, 380);
     } else {
-      s = Math.max(12, Math.min(26, Math.round(Math.min(w, h) * 0.55)));
-      L = { x: r.left - s, y: r.top - s, w: w + 2 * s, h: h + 2 * s };
-      clip = L;
-    }
-    var g = region(el);
-    var x0 = Math.max(g.x0, clip.x), y0 = Math.max(g.y0, clip.y);
-    var x1 = Math.min(g.x1, clip.x + clip.w), y1 = Math.min(g.y1, clip.y + clip.h);
-    if (x1 - x0 < 1 || y1 - y0 < 1) return;
-    if (x0 !== clip.x || y0 !== clip.y || x1 !== clip.x + clip.w || y1 !== clip.y + clip.h) crad = "";
-    var ox = g.fixed ? 0 : scrollX, oy = g.fixed ? 0 : scrollY;
+      var shape = a.shape;
+      if (shape !== el) { cs = getComputedStyle(shape); r = shape.getBoundingClientRect(); p.rect = r; }
+      var fx = e.clientX, fy = e.clientY;
+      // The light opens from the finger until it covers the whole shape, cut to the shape or its row.
+      var box = a.row ? a.row.getBoundingClientRect() : r;
+      var clip = { x: box.left, y: box.top, w: box.width, h: box.height };
+      var crad = radiusOf(a.row ? getComputedStyle(a.row) : cs, box.width, box.height);
+      var reach = Math.hypot(Math.max(fx - r.left, r.right - fx), Math.max(fy - r.top, r.bottom - fy)) * 2.2;
+      var g = region(el, box);
+      var x0 = Math.max(g.x0, clip.x), y0 = Math.max(g.y0, clip.y);
+      var x1 = Math.min(g.x1, clip.x + clip.w), y1 = Math.min(g.y1, clip.y + clip.h);
+      if (x1 - x0 < 1 || y1 - y0 < 1) return;
+      if (x0 !== clip.x || y0 !== clip.y || x1 !== clip.x + clip.w || y1 !== clip.y + clip.h) crad = "";
+      var ox = g.fixed ? 0 : scrollX, oy = g.fixed ? 0 : scrollY;
 
-    var node = d.createElement("span"), light = d.createElement("i");
-    node.className = "fitaa-press fitaa-press-" + kind + (g.fixed ? " is-fixed" : "") +
-      (kind === "light" && vivid(cs) ? " is-sheen" : "") + (kind === "glow" && darkBehind(el) ? " is-screen" : "");
-    node.setAttribute("aria-hidden", "true");
-    node.style.cssText = "transform:translate(" + (x0 + ox) + "px," + (y0 + oy) + "px);width:" + (x1 - x0) + "px;height:" + (y1 - y0) + "px" +
-      (crad !== "" ? ";border-radius:" + crad + "px" : "");
-    light.style.cssText = "left:" + (L.x - x0) + "px;top:" + (L.y - y0) + "px;width:" + L.w + "px;height:" + L.h + "px";
-    node.appendChild(light);
-    root.appendChild(node);
-    var p = { node: node, light: light, at: Date.now(), kind: kind, fx: fx, fy: fy, s: s, rect: r, row: a.row ? clip : null };
-    move(p, 0, 0, kind === "light" ? 0.25 : 0.7);
-    void node.offsetWidth; // start from the closed state, so the opening is seen
-    node.className += " is-on";
-    move(p, 0, 0, 1);
+      var node = d.createElement("span"), light = d.createElement("i");
+      node.className = "fitaa-press" + (g.fixed ? " is-fixed" : "") + (vivid(cs) ? " is-sheen" : "");
+      node.setAttribute("aria-hidden", "true");
+      node.style.cssText = "transform:translate(" + (x0 + ox) + "px," + (y0 + oy) + "px);width:" + (x1 - x0) + "px;height:" + (y1 - y0) + "px" +
+        (crad !== "" ? ";border-radius:" + crad + "px" : "");
+      light.style.cssText = "left:" + (fx - reach / 2 - x0) + "px;top:" + (fy - reach / 2 - y0) + "px;width:" + reach + "px;height:" + reach + "px";
+      node.appendChild(light);
+      root.appendChild(node);
+      p.node = node; p.light = light; p.row = a.row ? clip : null;
+      move(p, 0, 0, 0.25);
+      void node.offsetWidth; // start from the closed state, so the opening is seen
+      node.className += " is-on";
+      move(p, 0, 0, 1);
+    }
     p.hold = setTimeout(function () { end(e.pointerId, false); }, HOLD);
     live[e.pointerId] = p;
   }, { passive: true });
@@ -226,9 +260,13 @@
       var far = Math.max(14, Math.min(r.width, r.height) * 0.4);
       if (e.clientX < r.left - far || e.clientX > r.right + far || e.clientY < r.top - far || e.clientY > r.bottom + far) { end(e.pointerId, true); return; }
     }
+    if (p.kind === "glow") {
+      var gx = Math.round(Math.max(-p.s, Math.min(p.s, dx * 0.2))), gy = Math.round(Math.max(-p.s, Math.min(p.s, dy * 0.2)));
+      if (gx !== p.dx || gy !== p.dy) glowTo(p, gx, gy, true, 120);
+      return;
+    }
     p.light.style.transition = "transform .12s linear,opacity .2s ease";
-    if (p.kind === "glow") move(p, Math.max(-p.s, Math.min(p.s, dx * 0.25)), Math.max(-p.s, Math.min(p.s, dy * 0.25)), 1);
-    else if (p.row) move(p, Math.max(p.row.x - r.left, Math.min(p.row.x + p.row.w - r.right, dx)), 0, 1);
+    if (p.row) move(p, Math.max(p.row.x - r.left, Math.min(p.row.x + p.row.w - r.right, dx)), 0, 1);
     else move(p, dx, dy, 1);
   }, { passive: true });
   d.addEventListener("pointerup", function (e) { end(e.pointerId, false); }, { passive: true });

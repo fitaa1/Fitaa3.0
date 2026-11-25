@@ -245,18 +245,19 @@ does: modern and high tech, and unmistakably Ghanaian. The reference is the Pate
 - Every price, count, date, time and phone number uses `font-variant-numeric: tabular-nums`.
 - Press state on everything tappable: `transform: scale(.985)` over 120 ms, answered by the Fitaa press
   (Nigel, 24 Nov 2026: a press should confirm itself beautifully, the way a Patek Philippe pusher answers the
-  finger. 25 Nov 2026: one soft light shaped by what is pressed, never a second effect on top of it, and kept
-  where it belongs). Each press gets one light and nothing else:
-  - A button, tile, card or switch with a defined edge (a border, a fill or a shadow; its own, a card inside it
-    that fills it, or the row it is a segment of) fills with one soft light that opens out from the finger until
+  finger. 25 Nov 2026: one soft light shaped by what is pressed, never a second effect on top of it, kept where it
+  belongs, and coming from the thing that was pressed). Each press gets one light and nothing else:
+  - A button, tile, card, row or switch with a defined edge (a border, a fill or a shadow; its own, a card inside
+    it that fills it, the row it is a segment of, or a menu row whose chosen neighbour shows the edge) fills with one soft light that opens out from the finger until
     the whole of it is lit, cut to its own outline and corners, as the cards in Airport Grande's Why guests choose
     us do. On a strong fill of its own (a gradient, or a bright or saturated colour, such as a gold or magenta
     button) the light is a white sheen (`--press-sheen`, white at 26% by default), because the site's own light
     would vanish into it.
-  - Something that floats with no edge (a logo, an icon, a text link, an email address or phone number) glows from
-    behind itself: one soft light the shape of the element, centred on it and reaching 12 to 26 px past it, so it
-    comes from the logo or the link, not from the finger. On a dark page the glow lights the page behind it
-    (screen blend), so the element stays crisp. A link inside a sentence glows round the line that was touched.
+  - Something with no edge of its own (a logo, an icon, a word, a text link, an email address or phone number)
+    glows from its own outline: the letters of the word, the strokes of the icon, the edge of the logo, lit from
+    behind by the element's own `drop-shadow` filter in two soft layers. It is plainly the word or the symbol that
+    was pressed, never a shape laid over it or the space around it (Nigel, 25 Nov 2026: a blob behind View our work
+    and the menu items looked off).
   - Moving the finger moves the light, like light shifting in a stone: fully inside a button, a little for a glow,
     and along the row on a switch, so pressing and sliding are one gesture (a row marked `data-glide`, or a
     tablist or group of pressed buttons). No bright point under the finger.
@@ -270,7 +271,8 @@ does: modern and high tech, and unmistakably Ghanaian. The reference is the Pate
   fitaacreative.com: the service tiles and the work tiles), `data-press-shape` on a part inside names the shape
   the light fills (a work tile's photo frame), and `data-no-press` turns it off. A button with no edge of its own
   (the menu button beside the theme button) glows like its neighbour, never a filled circle it does not have.
-  Transform and opacity only, the layout never moves, reduced motion gets nothing. `public/press.js` in
+  A light moves only by transform and opacity and a glow only by the element's own filter, so the layout never
+  moves, and reduced motion gets nothing. `public/press.js` in
   fitaa1/Fitaa3.0 is the reference: copy it unchanged to every site and set its one colour, `--press-ripple`,
   from the site's own brand colour in light and dark. It is the only colour that answers a press.
 - Hairlines are 1 px in the border token. Nothing is 2 px except the signature line and focus rings.
