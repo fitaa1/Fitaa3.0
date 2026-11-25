@@ -108,6 +108,13 @@ where, in every place a search engine or an AI reads.
   "thank you" address proves nothing. A test build refuses live keys and a live build refuses test keys,
   and a test build shows a test banner and sends `noindex` until the switch to live (Fitaa Collections).
 - Prices use tabular figures (`font-variant-numeric: tabular-nums`) so they line up in lists and totals.
+- **Sections in one ordered list (Nigel, 25 Nov 2026):** the order of a page's sections lives in one list, so
+  any section can be moved, hidden or removed by changing a line: `sections` in the site's config
+  (`src/config/site.ts` on fitaacreative.com and fitaaglobal.com, `content.json` on airportgrande.com), or one
+  line per section in a short page file (each home's page on fitaahomes.com). A test checks every name in the list
+  is a section the page can draw, and on fitaacreative.com that every menu link still finds its section.
+- **One copy of everything:** a drawing, icon, colour, price or helper used in two places is written once and
+  imported (brand icons Lucide lacks live in one icons file). A second copy drifts and becomes a bug.
 
 ## Type and intent (Nigel, 4 Nov 2026)
 
