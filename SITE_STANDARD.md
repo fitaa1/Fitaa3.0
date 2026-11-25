@@ -248,7 +248,9 @@ does: modern and high tech, and unmistakably Ghanaian. The reference is the Pate
   Every answer takes the shape of what was pressed and lives as long as the finger does:
   - A button, tile or switch with a defined edge (a border, a fill or a shadow; its own, a card inside it that
     fills it, or the row it is a segment of) fills with soft light in its own outline, a rounded rectangle for a
-    rounded rectangle and a circle for a circle, opening out from the finger.
+    rounded rectangle and a circle for a circle, opening out from the finger. On a strong fill of its own (a
+    gradient, or a bright or saturated colour, such as a gold or magenta button) the light is a white sheen
+    (`--press-sheen`, white at 26% by default), because the site's own light would vanish into it.
   - Something that floats with no edge (a logo, an icon, a text link, an email address or phone number) is ringed
     by a soft glow in its own outline, a little larger than itself (8 to 20 px), opening out from the finger. A link
     inside a sentence glows round the line that was touched.

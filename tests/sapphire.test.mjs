@@ -30,6 +30,7 @@ test("the press takes the shape of what was pressed (Nigel, 25 Nov 2026: bespoke
   assert.match(js, /bloom = \{ x: r\.left, y: r\.top, w: w, h: h, rad: rad \}/, "a light fills the element's own outline");
   assert.match(js, /el\.getClientRects\(\)/, "a wrapped link glows round the line that was touched");
   assert.match(js, /data-press/, "a page can set light or glow where the shape misleads");
+  assert.match(js, /function vivid\(cs\)/, "a strong fill catches a white sheen, not a light that vanishes into it");
 });
 
 test("the answer is held by the finger and rides along a switch", () => {

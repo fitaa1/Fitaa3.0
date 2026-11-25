@@ -18,6 +18,8 @@
    page beside its element, so the browser carries it with the page, and every answer is cut to the page's width.
    data-press="light" or "glow" overrides the choice, data-press-shape on a part inside names the shape the light
    fills (a tile's photo frame), data-glide marks a switch row, and data-no-press turns the press off.
+   A light on a strong fill of its own (a gold or magenta button) is a white sheen instead (--press-sheen), because
+   the site's own light would vanish into it.
    Transform and opacity only, nothing in the layout moves. Reduced motion gets no answer.
    Each site sets one colour, --press-ripple, in light and dark in its own stylesheet. This file is the reference:
    copy it unchanged to every Fitaa site. */
@@ -27,6 +29,7 @@
   if (!d.addEventListener || (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches)) return;
 
   var C = "var(--press-ripple,hsl(224 85% 58% / .24))";
+  var S = "var(--press-sheen,rgb(255 255 255 / .26))";
   var EASE = "cubic-bezier(.22,1,.36,1)";
   var css =
     ".fitaa-press{position:absolute;left:0;top:0;overflow:hidden;pointer-events:none;z-index:2147483646;contain:layout paint;transition:opacity .3s ease}" +
@@ -35,6 +38,7 @@
     ".fitaa-press i,.fitaa-press b{position:absolute;left:0;top:0;opacity:0;will-change:transform,opacity}" +
     ".fitaa-press i{background:" + C + ";transition:transform .42s " + EASE + ",opacity .3s " + EASE + "}" +
     ".fitaa-press b{border-radius:50%;background:radial-gradient(circle," + C + " 0," + C + " 30%,transparent 70%);transition:opacity .2s ease}" +
+    ".fitaa-press.is-sheen i{background:" + S + "}.fitaa-press.is-sheen b{background:radial-gradient(circle," + S + " 0," + S + " 30%,transparent 70%)}" +
     ".fitaa-press.is-on i{opacity:.9}.fitaa-press-glow.is-on i{opacity:.75}.fitaa-press.is-on b{opacity:1}";
 
   var TAPPABLE = 'button,[role="button"],[role="tab"],summary,a,label[for],[data-press]';
@@ -60,6 +64,20 @@
     }
     if (!transparent(cs.backgroundColor) || cs.backgroundImage !== "none") return true;
     return !!cs.boxShadow && cs.boxShadow !== "none";
+  }
+
+  // A strong fill of its own (a gradient, or a bright or saturated colour, such as a gold or magenta button): the
+  // site's light would vanish into it, so it catches a white sheen instead, as a polished pusher catches the light.
+  // Dark and neutral surfaces keep the site's own light.
+  function vivid(cs) {
+    if (cs.backgroundImage && cs.backgroundImage !== "none" && /gradient/.test(cs.backgroundImage)) return true;
+    var m = /rgba?\(([\d.]+)[ ,]+([\d.]+)[ ,]+([\d.]+)(?:[ ,/]+([\d.]+))?/.exec(cs.backgroundColor || "");
+    if (!m) return false;
+    var r = m[1] / 255, g = m[2] / 255, b = m[3] / 255, a = m[4] == null ? 1 : +m[4];
+    if (a < 0.6) return false;
+    var hi = Math.max(r, g, b), lo = Math.min(r, g, b), l = (hi + lo) / 2;
+    var sat = hi === lo ? 0 : (hi - lo) / (1 - Math.abs(2 * l - 1));
+    return (sat > 0.35 && l > 0.25) || l > 0.6;
   }
 
   // The corner radius of a box in pixels, from its first corner (a percentage is of its shorter side).
@@ -169,7 +187,7 @@
     var ox = g.fixed ? 0 : scrollX, oy = g.fixed ? 0 : scrollY;
 
     var node = d.createElement("span"), fill = d.createElement("i"), point = d.createElement("b");
-    node.className = "fitaa-press fitaa-press-" + kind + (g.fixed ? " is-fixed" : "");
+    node.className = "fitaa-press fitaa-press-" + kind + (g.fixed ? " is-fixed" : "") + (kind === "light" && vivid(cs) ? " is-sheen" : "");
     node.setAttribute("aria-hidden", "true");
     place(node, x0 + ox, y0 + oy);
     node.style.width = (x1 - x0) + "px";
