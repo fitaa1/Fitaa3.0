@@ -1,7 +1,7 @@
 // Royal sapphire and the Fitaa press (SITE_STANDARD.md, Royal sapphire and Craft in the details; Nigel, 24 and 25
-// Nov 2026). Every copy of the home page and Fully Booked carries the press and one sapphire on the seam under the
-// hero. The press answers a defined edge with light inside it and a floating thing with a round glow, follows its
-// element while the page scrolls, and draws in one fixed layer that clips its own overflow. The sapphire clips its
+// Nov 2026). Every copy of the home page and Fully Booked carries the press and a sapphire on the seam under the
+// hero, and home a second above Contact. The press fills a defined edge with one soft light from the finger and
+// glows behind a floating thing, rides with the page, stays inside a floating bar and never leaves a light behind. The sapphire clips its
 // own glint. Both are transform and opacity only, once, and the colour tokens exist in light and dark.
 import { test } from "node:test";
 import assert from "node:assert/strict";
@@ -23,21 +23,27 @@ test("the press moves only transform and opacity, and never on reduced motion", 
   assert.doesNotMatch(js, /box-shadow:|fitaa-halo/, "never a ring or square halo (Nigel, 25 Nov 2026)");
 });
 
-test("the press takes the shape of what was pressed (Nigel, 25 Nov 2026: bespoke, not generic)", () => {
+test("one soft light, filling what has an edge and glowing behind what floats (Nigel, 25 Nov 2026: the #71 light, never a second effect)", () => {
   const js = read("public/press.js");
-  assert.match(js, /function radiusOf\(cs, w, h\)/, "reads each element's own corner radius");
-  assert.match(js, /rad: Math\.min\(rad \+ s, \(h \+ 2 \* s\) \/ 2\)/, "a glow is the element's outline grown outward, not a circle");
-  assert.match(js, /bloom = \{ x: r\.left, y: r\.top, w: w, h: h, rad: rad \}/, "a light fills the element's own outline");
+  assert.match(js, /radial-gradient\(circle," \+ C \+ " 0,transparent 68%\)/, "a light opens from the finger");
+  assert.match(js, /Math\.max\(fy - r\.top, r\.bottom - fy\)\) \* 2\.2/, "and grows until the whole button is lit");
+  assert.match(js, /function radiusOf\(cs, w, h\)/, "cut to the element's own corners");
+  assert.match(js, /radial-gradient\(closest-side,/, "a glow is the element's own shape");
+  assert.match(js, /L = \{ x: r\.left - s, y: r\.top - s, w: w \+ 2 \* s, h: h \+ 2 \* s \}/, "centred on the element, so it comes from the logo, not the finger");
+  assert.match(js, /darkBehind\(el\) \? " is-screen"/, "on a dark page it lights the page behind the element");
+  assert.equal((js.match(/createElement\(/g) || []).length, 3, "one style, one layer and one light: no bright point, no second bloom");
   assert.match(js, /el\.getClientRects\(\)/, "a wrapped link glows round the line that was touched");
-  assert.match(js, /data-press/, "a page can set light or glow where the shape misleads");
-  assert.match(js, /function vivid\(cs\)/, "a strong fill catches a white sheen, not a light that vanishes into it");
+  assert.match(js, /function vivid\(cs\)/, "a strong fill catches a white sheen");
 });
 
-test("the answer is held by the finger and rides along a switch", () => {
+test("the finger moves the light, and nothing can leave it behind", () => {
   const js = read("public/press.js");
-  assert.match(js, /addEventListener\("pointerup"/, "it lasts until the finger lifts");
+  assert.match(js, /addEventListener\("pointermove"/, "moving the finger moves the light");
+  assert.match(js, /p\.row\.x - r\.left/, "along a switch, kept inside its row");
+  assert.match(js, /addEventListener\("pointerup"/);
   assert.match(js, /addEventListener\("pointercancel", function \(e\) \{ end\(e\.pointerId, true\)/, "a scroll lets it go at once");
-  assert.match(js, /p\.kind === "switch"/, "on a switch the light follows the finger along the row");
+  for (const ev of ["contextmenu", "dragstart", "visibilitychange"]) assert.match(js, new RegExp(`addEventListener\\("${ev}", endAll`), `${ev} ends it (a long press on iPhone opened the menu and the light stuck)`);
+  assert.match(js, /var HOLD = 1500/, "and it never lasts past 1.5 s");
   assert.match(js, /data-glide/);
 });
 
@@ -71,7 +77,7 @@ test("one sapphire, one shared drawing, masking and clipping its own glint", () 
   }
 });
 
-test("every copy of home and Fully Booked loads the press and carries one sapphire", { skip: !built && "run npm run build first" }, () => {
+test("every copy of home and Fully Booked loads the press, with a sapphire under the hero and one above Contact on home", { skip: !built && "run npm run build first" }, () => {
   const dirs = ["", ...fs.readdirSync(path.join(dist, "_r")).map((d) => `_r/${d}`)];
   let n = 0;
   for (const file of ["index.html", PAGES["/fully-booked"] || "fully-booked/index.html"]) {
@@ -81,7 +87,8 @@ test("every copy of home and Fully Booked loads the press and carries one sapphi
       const html = fs.readFileSync(f, "utf8");
       n++;
       assert.match(html, /<script defer src="\/press\.js"><\/script>/, `${dir}/${file} loads the press`);
-      assert.equal((html.match(/class="sapphire-seam"/g) || []).length, 1, `${dir}/${file} has one sapphire`);
+      const want = file === "index.html" ? 2 : 1;
+      assert.equal((html.match(/class="sapphire-seam"/g) || []).length, want, `${dir}/${file} has ${want} sapphire`);
     }
   }
   assert.ok(n >= 2);
