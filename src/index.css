@@ -468,6 +468,10 @@ html { scroll-behavior: smooth; }
   transition: color 0.2s ease, transform 0.12s ease;
 }
 .slide-switch button[aria-pressed="true"] { color: hsl(var(--foreground)); }
+/* While a finger slides along it (public/press.js), the label under the finger is the lit one. */
+.slide-switch.is-gliding button[aria-pressed="true"]:not([data-glide-lit]) { color: hsl(var(--muted-foreground)); }
+.slide-switch.is-gliding button[data-glide-lit] { color: hsl(var(--foreground)); }
+.slide-switch.is-gliding button { transition: none; } /* the label changes with the finger, never after it */
 .slide-switch button:active { transform: scale(0.985); }
 @media (hover: hover) and (pointer: fine) { :where(html.mouse) .slide-switch button:not([aria-pressed="true"]):hover{ color: hsl(var(--foreground)); } }
 @media (prefers-reduced-motion: reduce) { .slide-switch__pill { transition: transform 0.2s ease; } }

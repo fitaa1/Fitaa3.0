@@ -35,6 +35,7 @@ function ContactCard() {
         className="relative z-10 flex border-b border-border/35"
         role="tablist"
         aria-label="Contact options"
+        data-glide=""
       >
         {(["whatsapp", "form"] as Tab[]).map((t) => {
           const active = tab === t;

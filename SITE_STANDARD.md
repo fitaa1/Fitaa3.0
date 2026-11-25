@@ -92,7 +92,10 @@ where, in every place a search engine or an AI reads.
 - Text contrast 4.5:1 or more (logo lockups excepted), one `main` landmark, headings in order,
   tap targets 44 px or more, every field labelled.
 - Fluid layout (clamp sizes, container queries), never fixed phone, tablet and desktop layouts.
-  Light and dark both designed.
+  Light and dark both designed, on every site (Nigel, 25 Nov 2026: Fitaa Global had none). The page follows the
+  phone's setting until the visitor taps a sun or moon in the header, which is then remembered; a script first in
+  the head adds the dark class before the first paint, so a dark phone never sees a light flash; every colour is a
+  variable with a dark value beside it, and the phone's browser bar (`theme-color`) follows the theme shown.
 - **Breathing room (Nigel, 19 Nov 2026):** side margins are fluid and intentional, never large.
   Content runs close to the edge on a phone and gains space as the screen grows, for example
   `.wrap{width:min(1320px,100% - 2*clamp(14px,3.2vw,40px));margin-inline:auto}`. Space between
@@ -266,9 +269,11 @@ does: modern and high tech, and unmistakably Ghanaian. The reference is the Pate
     was pressed, never a shape laid over it or the space around it (Nigel, 25 Nov 2026: a blob behind View our work
     and the menu items looked off). Where the pressed thing is light on a dark page, the glow is brighter and a
     little wider, so it stands out in dark mode as clearly as in light mode.
-  - Moving the finger moves the light, like light shifting in a stone: fully inside a button, a little for a glow,
-    and along the row on a switch, so pressing and sliding are one gesture (a row marked `data-glide`, or a
-    tablist or group of pressed buttons). No bright point under the finger.
+  - Moving the finger moves the light, like light shifting in a stone: fully inside a button and a little for a
+    glow. No bright point under the finger.
+  - On a switch the light is the pill: a window one segment wide with the pill's corners, so it never lights the
+    track behind the pill (Nigel, 25 Nov 2026). Sliding along a switch, the pill and its light follow the finger
+    frame by frame, the label under the finger lights at once, and lifting chooses (see Switches slide).
   - The light holds for as long as the finger rests, with no time limit (Nigel, 25 Nov 2026), and fades when it
     lifts, at once when the finger starts to scroll or when a long press opens the phone's own menu (open in a new
     tab on iPhone), so a light is never left behind.
@@ -482,6 +487,15 @@ needed it is stowed out of sight. Order happens "by magic", so the space stays c
   single pill that slides to the choice, like iOS. Tap, press and drag all work, the pill moves by
   transform only with a small spring, and under reduced motion it moves without the spring. The
   segments are real buttons with `aria-pressed` or tabs with `aria-selected`.
+  One slide for every switch on every site, in the Fitaa press (`public/press.js`, Nigel 25 Nov 2026: the slide
+  lagged and jumped segment by segment). Mark the row `data-glide` and give the pill a class that names a pill:
+  while a finger slides, the pill follows it every frame with no transition, centred on the finger and kept within
+  its line (a row that wraps onto two lines slides across both), the segment under the finger gets
+  `data-glide-lit` and the row `.is-gliding` (the site colours that label, with no transition), and lifting chooses,
+  the pill settling from where the finger left it. An upright drag still scrolls the page. A page that drives its
+  own slide marks the row `data-glide="own"`, and the press only lights its pill. Never write a slide that clicks
+  each segment as the finger passes: every click springs the pill and it trails the finger. Before shipping, slide a
+  finger along the switch in a phone emulation and measure that the finger, the pill and the light line up.
 - In Fitaa OS, one action bar per tab, fixed at the bottom, holding only what that tab can do now.
   It lights by state: needs you, ready to merge, overdue. Its rules are in the fitaa-os CLAUDE.md.
 

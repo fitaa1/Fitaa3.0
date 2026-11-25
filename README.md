@@ -57,7 +57,7 @@ Visitors see prices in their own currency without choosing anything:
 
 - **Speed:** the home page is pre-built, the contact form and legal pages load only when needed, fonts never hold up the first paint, and Google Analytics waits for the first tap, scroll or 4 seconds.
 - **Light and dark:** a few lines in the head of `index.html` pick the theme before the first paint (a saved choice, else the device setting), so there is no flash. `src/contexts/ThemeContext.tsx` then follows the device live until the visitor taps the sun or moon, and remembers their choice.
-- **The press:** `public/press.js` answers every tap. A button or tile fills with one soft light from the finger, a word, icon or logo glows from its own outline. Its one colour is `--press-ripple`. The same file runs unchanged on every Fitaa site and every demo.
+- **The press:** `public/press.js` answers every tap. A button or tile fills with one soft light from the finger, a word, icon or logo glows from its own outline. It also slides every switch: mark the row `data-glide` and the pill and its light follow the finger, and lifting chooses (the home page switch and Fully Booked's demo switch). Its one colour is `--press-ripple`. The same file runs unchanged on every Fitaa site and every demo.
 - **The royal sapphire:** one drawing, `public/sapphire.svg` (built by `scripts/sapphire.py`), set on a section seam by `src/components/SapphireSeam.tsx`. On home it sits under the hero and above Contact.
 - **One tap is one click:** every hover effect waits for a real mouse (`scripts/mouse-hover.mjs`), so iPhone and iPad never need two taps.
 - **Splash:** a 0.5 second pulse of the logo on the first visit of a session.
