@@ -37,6 +37,7 @@ export function Navbar() {
 
   const navRef = useRef<HTMLElement>(null);
   const keyRef = useRef<HTMLSpanElement>(null);
+  const stoneRef = useRef<HTMLSpanElement>(null);
   const linkRefs = useRef<Record<string, HTMLElement | null>>({});
 
   useEffect(() => {
@@ -58,6 +59,8 @@ export function Navbar() {
       const navRect = nav.getBoundingClientRect();
       const r = link.getBoundingClientRect();
       key.style.transform = `translateX(${r.left - navRect.left}px) scaleX(${r.width})`;
+      // The sapphire set in the middle of the key rides with it, never stretched.
+      if (stoneRef.current) { stoneRef.current.style.transform = `translateX(${r.left - navRect.left + r.width / 2 - 4}px)`; stoneRef.current.style.opacity = "1"; }
     };
     place();
     const ro = new ResizeObserver(place);
@@ -116,7 +119,8 @@ export function Navbar() {
                 {item.label}
               </a>
             ))}
-            <span ref={keyRef} className="nav-key absolute left-0 -bottom-1 h-0.5 bg-[var(--champagne)]" aria-hidden="true" />
+            <span ref={keyRef} className="nav-key absolute left-0 -bottom-1 h-0.5" aria-hidden="true" />
+            <span ref={stoneRef} className="nav-stone absolute left-0 -bottom-1 h-0.5" aria-hidden="true" />
           </nav>
 
           {/* Right controls */}
