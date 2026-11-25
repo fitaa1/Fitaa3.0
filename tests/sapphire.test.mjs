@@ -14,29 +14,39 @@ const read = (f) => fs.readFileSync(path.join(root, f), "utf8");
 const dist = path.join(root, "dist");
 const built = fs.existsSync(path.join(dist, "_r"));
 
-test("the press confirms with transform and opacity, once, and never on reduced motion", () => {
+test("the press moves only transform and opacity, and never on reduced motion", () => {
   const js = read("public/press.js");
   assert.match(js, /prefers-reduced-motion: reduce/);
-  assert.doesNotMatch(js, /infinite/);
-  const frames = js.match(/@keyframes[^"]+/g).join(" ");
-  assert.doesNotMatch(frames, /width|height|top|left|margin/, "keyframes move only transform and opacity");
-  assert.doesNotMatch(js, /box-shadow:|fitaa-halo/, "no ring or square halo around the edge (Nigel, 25 Nov 2026)");
+  assert.doesNotMatch(js, /infinite|@keyframes/);
+  const transitions = js.match(/transition:[^;"}]+/g).join(" ");
+  assert.doesNotMatch(transitions.replace(/transition:/g, ""), /width|height|top|left|margin/, "only transform and opacity change");
+  assert.doesNotMatch(js, /box-shadow:|fitaa-halo/, "never a ring or square halo (Nigel, 25 Nov 2026)");
 });
 
-test("the press answers by shape: light inside a defined edge, a round glow around what floats", () => {
+test("the press takes the shape of what was pressed (Nigel, 25 Nov 2026: bespoke, not generic)", () => {
   const js = read("public/press.js");
-  assert.match(js, /\.fitaa-press\{position:absolute;left:0;top:0;overflow:hidden/, "each answer clips to its own box");
-  assert.match(js, /\.fitaa-press-glow i\{background:radial-gradient\(circle/, "the glow is round");
+  assert.match(js, /function radiusOf\(cs, w, h\)/, "reads each element's own corner radius");
+  assert.match(js, /rad: Math\.min\(rad \+ s, \(h \+ 2 \* s\) \/ 2\)/, "a glow is the element's outline grown outward, not a circle");
+  assert.match(js, /bloom = \{ x: r\.left, y: r\.top, w: w, h: h, rad: rad \}/, "a light fills the element's own outline");
+  assert.match(js, /el\.getClientRects\(\)/, "a wrapped link glows round the line that was touched");
   assert.match(js, /data-press/, "a page can set light or glow where the shape misleads");
-  assert.match(js, /Math\.min\([^;]*140\)/, "the glow is sized from the element, with a ceiling");
+  assert.match(js, /function vivid\(cs\)/, "a strong fill catches a white sheen, not a light that vanishes into it");
 });
 
-test("the press rides with the page with no script per frame, and can never widen the page", () => {
+test("the answer is held by the finger and rides along a switch", () => {
   const js = read("public/press.js");
-  assert.doesNotMatch(js, /requestAnimationFrame|addEventListener\("scroll"/, "the browser scrolls it, no script moves it (Nigel, 25 Nov 2026: it lagged)");
-  assert.match(js, /fixed \? 0 : scrollX/, "drawn in the page, or on the screen inside a fixed or sticky bar");
-  assert.match(js, /Math\.min\(maxX, box\.x \+ box\.w\)/, "cut to the page's width");
-  assert.match(js, /\.fitaa-press-glow\{animation:fitaa-press-fade \.5s/, "gone in half a second");
+  assert.match(js, /addEventListener\("pointerup"/, "it lasts until the finger lifts");
+  assert.match(js, /addEventListener\("pointercancel", function \(e\) \{ end\(e\.pointerId, true\)/, "a scroll lets it go at once");
+  assert.match(js, /p\.kind === "switch"/, "on a switch the light follows the finger along the row");
+  assert.match(js, /data-glide/);
+});
+
+test("the press stays inside a floating bar, rides with the page, and never widens it", () => {
+  const js = read("public/press.js");
+  assert.doesNotMatch(js, /requestAnimationFrame|addEventListener\("scroll"/, "the browser carries it, no script moves it with the page");
+  assert.match(js, /if \(edged\(cs\)\) return \{ fixed: true, x0: Math\.max\(0, r\.left\)/, "inside a bar with a background, never past it");
+  assert.match(js, /var ox = g\.fixed \? 0 : scrollX/, "drawn in the page beside its element");
+  assert.match(js, /x1 = Math\.min\(g\.x1, clip\.x \+ clip\.w\)/, "cut to the page's width");
 });
 
 test("sapphire and press colours exist in light and dark on both stylesheets", () => {

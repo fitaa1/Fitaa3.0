@@ -244,22 +244,29 @@ does: modern and high tech, and unmistakably Ghanaian. The reference is the Pate
 - Every price, count, date, time and phone number uses `font-variant-numeric: tabular-nums`.
 - Press state on everything tappable: `transform: scale(.985)` over 120 ms, answered by the Fitaa press
   (Nigel, 24 Nov 2026: a press should confirm itself beautifully, the way a Patek Philippe pusher answers the
-  finger). It answers by the shape of what was pressed (Nigel, 25 Nov 2026: responsive and intentional, not
-  one size fits all). A button, tile or switch with a defined edge (a border, a fill or a shadow) fills with a
-  soft light that spreads from the finger inside its own shape. Something that floats with no edge (a logo, an
-  icon, a text link, an email address or phone number) answers with a soft round glow centred on the finger
-  that spreads past it, sized from the element (64 to 140 px), never a square. Both are gone in half a second.
-  The edge can be the element's own, a card inside it that fills it, or the switch it is one segment of.
+  finger. 25 Nov 2026: bespoke to what is pressed, never generic, and the person pressing feels in control of it).
+  Every answer takes the shape of what was pressed and lives as long as the finger does:
+  - A button, tile or switch with a defined edge (a border, a fill or a shadow; its own, a card inside it that
+    fills it, or the row it is a segment of) fills with soft light in its own outline, a rounded rectangle for a
+    rounded rectangle and a circle for a circle, opening out from the finger. On a strong fill of its own (a
+    gradient, or a bright or saturated colour, such as a gold or magenta button) the light is a white sheen
+    (`--press-sheen`, white at 26% by default), because the site's own light would vanish into it.
+  - Something that floats with no edge (a logo, an icon, a text link, an email address or phone number) is ringed
+    by a soft glow in its own outline, a little larger than itself (8 to 20 px), opening out from the finger. A link
+    inside a sentence glows round the line that was touched.
+  - A small bright point sits under the finger and follows it, the answer holds while the finger rests and fades
+    when it lifts, and a finger that starts to scroll lets it go at once.
+  - On a switch the light rides along the row with the finger, so pressing and sliding are one gesture (a row
+    marked `data-glide`, or a tablist or group of pressed buttons).
+  - An element in a fixed or sticky bar with its own background (a header floating over the page, the OS section
+    bar) is answered inside that bar only, never spilling onto the page. Everything else is drawn in the page
+    beside its element, so it rides with the page, and every answer is cut to the page's width.
   `data-press="light"` or `data-press="glow"` overrides the choice where the shape misleads it (on
   fitaacreative.com: the menu button, the service tiles and the work tiles), `data-press-shape` on a part
   inside names the shape the light fills (a work tile's photo frame), and `data-no-press` turns it off.
-  The answer is drawn in the page beside its element, so the browser scrolls it with the page by itself and no
-  script runs while it lives (Nigel, 25 Nov 2026: a tap while the page moves left a ghost, then lagged when a
-  script moved the answer each frame). An element in a fixed or sticky bar gets an answer fixed to the screen,
-  like its bar. Every answer is cut to the page's width, so it never widens the page. Transform and opacity
-  only, the layout never moves, reduced motion gets nothing. `public/press.js` in fitaa1/Fitaa3.0 is the
-  reference: copy it unchanged to every site and set its one colour, `--press-ripple`, from the site's own
-  brand colour in light and dark. It is the only colour that answers a press.
+  Transform and opacity only, the layout never moves, reduced motion gets nothing. `public/press.js` in
+  fitaa1/Fitaa3.0 is the reference: copy it unchanged to every site and set its one colour, `--press-ripple`,
+  from the site's own brand colour in light and dark. It is the only colour that answers a press.
 - Hairlines are 1 px in the border token. Nothing is 2 px except the signature line and focus rings.
 - Alignment: every block starts on the container's left edge or on a column of its grid. Nothing is
   placed by eye.
