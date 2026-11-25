@@ -9,41 +9,39 @@
    The edge can be the element's own, a card inside it that fills it, or the switch it is a segment of.
    data-press="light" or data-press="glow" on an element overrides the choice, data-press-shape on a part inside it
    names the shape the light fills (a tile's photo frame), and data-no-press turns it off.
-   The answer follows the element while the page scrolls (it is moved with the element every frame it lives), and it
-   is drawn in one fixed layer the size of the screen that clips its own overflow, so it can never widen the page.
-   Transform and opacity only, gone in 0.7 s, nothing in the layout moves. Reduced motion gets no answer.
+   The answer is drawn in the page beside its element, so the browser scrolls it with the page on its own, with no
+   script running while it lives (Nigel, 25 Nov 2026: a tap while the page moves must not lag or leave a ghost). An
+   element inside a fixed or sticky bar gets an answer fixed to the screen like its bar. Every answer is cut to the
+   width of the page, so it can never make the page wider. Transform and opacity only, gone in half a second, nothing
+   in the layout moves. Reduced motion gets no answer.
    Each site sets one colour, --press-ripple, in light and dark in its own stylesheet. This file is the reference:
    copy it unchanged to every Fitaa site. */
 (function () {
   "use strict";
-  var d = document;
-  if (!d.addEventListener || !window.requestAnimationFrame ||
-      (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches)) return;
+  var d = document, root = d.documentElement;
+  if (!d.addEventListener || (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches)) return;
 
   var C = "var(--press-ripple,hsl(224 85% 58% / .24))";
+  var EASE = "cubic-bezier(.22,1,.36,1)";
   var css =
-    ".fitaa-press-layer{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:2147483646;contain:strict}" +
-    ".fitaa-press-light,.fitaa-press-glow{position:absolute;left:0;top:0;will-change:transform}" +
-    ".fitaa-press-light{overflow:hidden;animation:fitaa-press-fade .6s cubic-bezier(.22,1,.36,1) forwards}" +
-    ".fitaa-press-light i,.fitaa-press-glow i{position:absolute;border-radius:50%;transform:scale(0)}" +
-    ".fitaa-press-light i{background:radial-gradient(circle," + C + " 0,transparent 68%);" +
-    "animation:fitaa-press-grow .6s cubic-bezier(.22,1,.36,1) forwards}" +
-    ".fitaa-press-glow i{inset:0;background:radial-gradient(circle," + C + " 0," + C + " 22%,transparent 70%);" +
-    "animation:fitaa-press-grow .7s cubic-bezier(.22,1,.36,1) forwards,fitaa-press-fade .7s cubic-bezier(.22,1,.36,1) forwards}" +
-    "@keyframes fitaa-press-fade{0%,40%{opacity:1}100%{opacity:0}}" +
-    "@keyframes fitaa-press-grow{from{transform:scale(.25)}to{transform:scale(1)}}";
+    ".fitaa-press{position:absolute;left:0;top:0;overflow:hidden;pointer-events:none;z-index:2147483646;contain:layout paint}" +
+    ".fitaa-press.is-fixed{position:fixed}" +
+    ".fitaa-press i{position:absolute;border-radius:50%;transform:scale(.25)}" +
+    ".fitaa-press-light{animation:fitaa-press-fade .45s " + EASE + " forwards}" +
+    ".fitaa-press-light i{background:radial-gradient(circle," + C + " 0,transparent 68%);animation:fitaa-press-grow .45s " + EASE + " forwards}" +
+    ".fitaa-press-glow{animation:fitaa-press-fade .5s " + EASE + " forwards}" +
+    ".fitaa-press-glow i{background:radial-gradient(circle," + C + " 0," + C + " 20%,transparent 70%);animation:fitaa-press-grow .5s " + EASE + " forwards}" +
+    "@keyframes fitaa-press-fade{0%,30%{opacity:1}100%{opacity:0}}" +
+    "@keyframes fitaa-press-grow{to{transform:scale(1)}}";
 
   var TAPPABLE = 'button,[role="button"],summary,a,label[for],[data-press]';
-  var layer = null, live = [], ticking = false;
+  var ready = false;
 
   function setup() {
     var style = d.createElement("style");
     style.textContent = css;
-    (d.head || d.documentElement).appendChild(style);
-    layer = d.createElement("div");
-    layer.className = "fitaa-press-layer";
-    layer.setAttribute("aria-hidden", "true");
-    d.body.appendChild(layer);
+    (d.head || root).appendChild(style);
+    ready = true;
   }
 
   function transparent(color) {
@@ -80,15 +78,13 @@
     return { kind: "glow", shape: el };
   }
 
-  // Every frame an answer lives, it is moved to where its element now is, so it scrolls with the page.
-  function place(p) {
-    var r = p.shape.getBoundingClientRect();
-    if (p.kind === "light") p.node.style.transform = "translate3d(" + r.left + "px," + r.top + "px,0)";
-    else p.node.style.transform = "translate3d(" + (r.left + p.fx - p.size / 2) + "px," + (r.top + p.fy - p.size / 2) + "px,0)";
-  }
-  function tick() {
-    for (var i = 0; i < live.length; i++) place(live[i]);
-    if (live.length) requestAnimationFrame(tick); else ticking = false;
+  // An element inside a fixed or sticky bar stays still on the screen while the page moves, so its answer does too.
+  function onScreen(el) {
+    for (var n = el; n && n !== root; n = n.parentElement) {
+      var pos = getComputedStyle(n).position;
+      if (pos === "fixed" || pos === "sticky") return true;
+    }
+    return false;
   }
 
   d.addEventListener("pointerdown", function (e) {
@@ -99,31 +95,40 @@
     if (cs.visibility === "hidden") return;
     var r = el.getBoundingClientRect();
     if (r.width < 8 || r.height < 8) return;
-    if (!layer) setup();
+    if (!ready) setup();
 
     var a = answer(el, cs), kind = a.kind, shape = a.shape;
     if (shape !== el) { cs = getComputedStyle(shape); r = shape.getBoundingClientRect(); }
-    var node = d.createElement("span"), light = d.createElement("i");
-    var p = { shape: shape, kind: kind, node: node, fx: e.clientX - r.left, fy: e.clientY - r.top, size: 0 };
+    var fx = e.clientX - r.left, fy = e.clientY - r.top;
+    // The box the answer fills, in screen terms: the element itself, or a circle round the finger sized from it.
+    var box, reach, radius = "";
     if (kind === "light") {
-      node.className = "fitaa-press-light";
-      node.style.cssText = "width:" + r.width + "px;height:" + r.height + "px;border-radius:" + cs.borderRadius;
-      var reach = Math.hypot(Math.max(p.fx, r.width - p.fx), Math.max(p.fy, r.height - p.fy)) * 2.2;
-      light.style.cssText = "width:" + reach + "px;height:" + reach + "px;left:" + (p.fx - reach / 2) + "px;top:" + (p.fy - reach / 2) + "px";
+      box = { x: r.left, y: r.top, w: r.width, h: r.height };
+      reach = Math.hypot(Math.max(fx, r.width - fx), Math.max(fy, r.height - fy)) * 2.2;
+      radius = cs.borderRadius;
     } else {
-      // Sized from the element: a little wider than its own height reaches, never a wash across the page.
-      p.size = Math.max(72, Math.min(Math.max(r.width, r.height) * 1.6, r.height * 3.2, 168));
-      node.className = "fitaa-press-glow";
-      node.style.cssText = "width:" + p.size + "px;height:" + p.size + "px";
+      // A little wider than its own height reaches, never a wash across the page.
+      reach = Math.max(64, Math.min(Math.max(r.width, r.height) * 1.4, r.height * 2.8, 140));
+      box = { x: e.clientX - reach / 2, y: e.clientY - reach / 2, w: reach, h: reach };
     }
+    // Cut to the page's width (and, in the page, its height), so an answer never makes the page bigger.
+    var fixed = onScreen(el), ox = fixed ? 0 : scrollX, oy = fixed ? 0 : scrollY;
+    var maxX = root.clientWidth, maxY = fixed ? innerHeight : Math.max(root.scrollHeight - oy, innerHeight);
+    var x0 = Math.max(0, box.x), y0 = Math.max(0, box.y);
+    var x1 = Math.min(maxX, box.x + box.w), y1 = Math.min(maxY, box.y + box.h);
+    if (x1 - x0 < 1 || y1 - y0 < 1) return;
+    // A light keeps its element's rounded corners, unless the cut changed its shape.
+    if (kind === "light" && (x0 !== box.x || y0 !== box.y || x1 !== box.x + box.w || y1 !== box.y + box.h)) radius = "0";
+
+    var node = d.createElement("span"), light = d.createElement("i");
+    node.className = "fitaa-press fitaa-press-" + kind + (fixed ? " is-fixed" : "");
+    node.setAttribute("aria-hidden", "true");
+    node.style.cssText = "transform:translate(" + (x0 + ox) + "px," + (y0 + oy) + "px);width:" + (x1 - x0) + "px;height:" +
+      (y1 - y0) + "px" + (radius ? ";border-radius:" + radius : "");
+    light.style.cssText = "width:" + reach + "px;height:" + reach + "px;left:" + (e.clientX - reach / 2 - x0) + "px;top:" +
+      (e.clientY - reach / 2 - y0) + "px";
     node.appendChild(light);
-    place(p);
-    layer.appendChild(node);
-    live.push(p);
-    if (!ticking) { ticking = true; requestAnimationFrame(tick); }
-    setTimeout(function () {
-      node.remove();
-      live.splice(live.indexOf(p), 1);
-    }, 750);
+    root.appendChild(node);
+    setTimeout(function () { node.remove(); }, 560);
   }, { passive: true });
 })();

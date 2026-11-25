@@ -2,8 +2,8 @@ import { useRef } from "react";
 import { useRise } from "@/hooks/useRise";
 
 /*
- * One royal sapphire (Nigel, 25 Nov 2026): Fitaa Creative's royal signature, one small emerald cut sapphire in a
- * white gold bezel, set on the seam under the hero, once a page. Drawn once in public/sapphire.svg
+ * One royal sapphire (Nigel, 25 Nov 2026): Fitaa Creative's royal signature, one small emerald cut sapphire in an
+ * invisible setting with no rim, set on the seam under the hero, once a page. Drawn once in public/sapphire.svg
  * (scripts/sapphire.py). It rises with the page, then one glint of light crosses the stone once.
  */
 export function SapphireSeam() {
