@@ -8,12 +8,12 @@ import { FinalCTA }     from "@/components/FinalCTA";
 import { Footer }       from "@/components/Footer";
 import { ScrollToTop }  from "@/components/ScrollToTop";
 import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
-import { KenteSeam } from "@/components/KenteSeam";
+import { SapphireSeam } from "@/components/SapphireSeam";
 export default function Home() {
   return (
     <main className="min-h-screen bg-background text-foreground selection:bg-ruby/25 selection:text-foreground">
-      <Navbar /><Hero /><KenteSeam /><Services /><WhyUs /><FeaturedWork />
-      <Testimonials /><KenteSeam /><FinalCTA /><Footer /><ScrollToTop /><FloatingWhatsApp />
+      <Navbar /><Hero /><SapphireSeam /><Services /><WhyUs /><FeaturedWork />
+      <Testimonials /><SapphireSeam /><FinalCTA /><Footer /><ScrollToTop /><FloatingWhatsApp />
     </main>
   );
 }
