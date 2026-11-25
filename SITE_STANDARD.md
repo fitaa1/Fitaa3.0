@@ -155,7 +155,7 @@ where, in every place a search engine or an AI reads.
 
 | Site | Headings | Text | Signature |
 | --- | --- | --- | --- |
-| fitaacreative.com and Fully Booked | Bricolage Grotesque (poster type, for a studio that makes billboards and print) | Inter | Adinkra mark, and one royal sapphire set in white gold (see Royal sapphire below) |
+| fitaacreative.com and Fully Booked | Bricolage Grotesque (poster type, for a studio that makes billboards and print) | Inter | Adinkra mark, and one royal sapphire in an invisible setting (see Royal sapphire below) |
 | Fitaa Homes | Manrope | Manrope | the home's name in Fraunces italic, like a nameplate |
 | Airport Grande | Instrument Sans (clear like airport signs) | device sans | the booking summary as a boarding pass |
 | Fitaa Global | Plus Jakarta Sans (a confident group voice) | Inter | one mark, four divisions |
@@ -222,7 +222,8 @@ does: modern and high tech, and unmistakably Ghanaian. The reference is the Pate
   (11.5:1 on white), `hsl(222 88% 62%)` dark (5.1:1 on the dark ground). The light of a press is sapphire (`--press-ripple`).
 - A sapphire is set in the champagne key under the section in view: 8 px of royal blue at its middle, riding
   with the key on the same transform, never stretched (`.nav-stone`).
-- One royal sapphire is the royal signature: one small emerald cut sapphire in a white gold bezel, centred
+- One royal sapphire is the royal signature: one small emerald cut sapphire in an invisible setting with no rim
+  round it (Nigel, 25 Nov 2026: remove the white outline), centred
   on the seam under the hero, once a page (home and Fully Booked), 20 px tall on a phone and 24 px from
   768 px. It must read as a real stone, never plastic: crisp facet edges, deep blue with near black where
   the light dies and a lit centre where it comes back through the stone, the pavilion steps seen through a
@@ -245,18 +246,20 @@ does: modern and high tech, and unmistakably Ghanaian. The reference is the Pate
   (Nigel, 24 Nov 2026: a press should confirm itself beautifully, the way a Patek Philippe pusher answers the
   finger). It answers by the shape of what was pressed (Nigel, 25 Nov 2026: responsive and intentional, not
   one size fits all). A button, tile or switch with a defined edge (a border, a fill or a shadow) fills with a
-  soft light that spreads from the finger inside its own shape, then fades in 0.6 s. Something that floats
-  with no edge (a logo, an icon, a text link, an email address or phone number) answers with a soft round glow
-  centred on the finger that spreads past it, sized from the element, never a square, gone in 0.7 s.
+  soft light that spreads from the finger inside its own shape. Something that floats with no edge (a logo, an
+  icon, a text link, an email address or phone number) answers with a soft round glow centred on the finger
+  that spreads past it, sized from the element (64 to 140 px), never a square. Both are gone in half a second.
   The edge can be the element's own, a card inside it that fills it, or the switch it is one segment of.
   `data-press="light"` or `data-press="glow"` overrides the choice where the shape misleads it (on
   fitaacreative.com: the menu button, the service tiles and the work tiles), `data-press-shape` on a part
-  inside names the shape the light fills (a work tile's photo frame), and `data-no-press` turns it off. The answer moves with its element every frame it lives, so it follows the page
-  when a tap lands mid scroll, and it is drawn in one fixed layer the size of the screen that clips its own
-  overflow, so it never widens the page. Transform and opacity only, the layout never moves, reduced motion
-  gets nothing. `public/press.js` in fitaa1/Fitaa3.0 is the reference: copy it unchanged to every site and set
-  its one colour, `--press-ripple`, from the site's own brand colour in light and dark. It is the only colour
-  that answers a press.
+  inside names the shape the light fills (a work tile's photo frame), and `data-no-press` turns it off.
+  The answer is drawn in the page beside its element, so the browser scrolls it with the page by itself and no
+  script runs while it lives (Nigel, 25 Nov 2026: a tap while the page moves left a ghost, then lagged when a
+  script moved the answer each frame). An element in a fixed or sticky bar gets an answer fixed to the screen,
+  like its bar. Every answer is cut to the page's width, so it never widens the page. Transform and opacity
+  only, the layout never moves, reduced motion gets nothing. `public/press.js` in fitaa1/Fitaa3.0 is the
+  reference: copy it unchanged to every site and set its one colour, `--press-ripple`, from the site's own
+  brand colour in light and dark. It is the only colour that answers a press.
 - Hairlines are 1 px in the border token. Nothing is 2 px except the signature line and focus rings.
 - Alignment: every block starts on the container's left edge or on a column of its grid. Nothing is
   placed by eye.

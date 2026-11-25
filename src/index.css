@@ -780,14 +780,14 @@ a[href^="mailto:"]:not(.underline), a[href^="tel:"]:not(.underline) { display: i
 
 
 /* ─── One royal sapphire (Nigel, 25 Nov 2026) ─────────────────────────────────
- * Fitaa Creative's royal signature: one small emerald cut sapphire in a white gold bezel (public/sapphire.svg,
+ * Fitaa Creative's royal signature: one small emerald cut sapphire in an invisible setting, no rim (public/sapphire.svg,
  * scripts/sapphire.py), centred on the seam under the hero, once a page. It rises with the page and catches one
  * glint of light, once. The stone masks the glint, so the light crosses the stone and never the page, and it
  * clips its own overflow, so the glint can never make the page wider than the screen. */
 .sapphire-seam { position: relative; z-index: 20; height: 0; pointer-events: none; }
 .sapphire-hold { display: flex; justify-content: center; transform: translateY(-50%); }
 .sapphire {
-  position: relative; overflow: hidden; height: 20px; aspect-ratio: 442 / 322;
+  position: relative; overflow: hidden; height: 20px; aspect-ratio: 412 / 292;
   background: url(/sapphire.svg) center / contain no-repeat;
   -webkit-mask: url(/sapphire.svg) center / contain no-repeat; mask: url(/sapphire.svg) center / contain no-repeat;
 }

@@ -25,17 +25,18 @@ test("the press confirms with transform and opacity, once, and never on reduced 
 
 test("the press answers by shape: light inside a defined edge, a round glow around what floats", () => {
   const js = read("public/press.js");
-  assert.match(js, /\.fitaa-press-light\{overflow:hidden/, "the light is clipped to the element");
-  assert.match(js, /\.fitaa-press-glow i\{inset:0;background:radial-gradient\(circle/, "the glow is round");
+  assert.match(js, /\.fitaa-press\{position:absolute;left:0;top:0;overflow:hidden/, "each answer clips to its own box");
+  assert.match(js, /\.fitaa-press-glow i\{background:radial-gradient\(circle/, "the glow is round");
   assert.match(js, /data-press/, "a page can set light or glow where the shape misleads");
-  assert.match(js, /Math\.min\([^;]*168\)/, "the glow is sized from the element, with a ceiling");
+  assert.match(js, /Math\.min\([^;]*140\)/, "the glow is sized from the element, with a ceiling");
 });
 
-test("the press follows its element on scroll and can never widen the page", () => {
+test("the press rides with the page with no script per frame, and can never widen the page", () => {
   const js = read("public/press.js");
-  assert.match(js, /\.fitaa-press-layer\{position:fixed;inset:0;overflow:hidden/, "one fixed layer the size of the screen, clipped");
-  assert.match(js, /function tick\(\)[\s\S]*?place\(live\[i\]\)[\s\S]*?requestAnimationFrame\(tick\)/, "moved with its element every frame");
-  assert.match(js, /function place\(p\)\s*\{\s*var r = p\.shape\.getBoundingClientRect\(\)/, "placed from where the element is now");
+  assert.doesNotMatch(js, /requestAnimationFrame|addEventListener\("scroll"/, "the browser scrolls it, no script moves it (Nigel, 25 Nov 2026: it lagged)");
+  assert.match(js, /fixed \? 0 : scrollX/, "drawn in the page, or on the screen inside a fixed or sticky bar");
+  assert.match(js, /Math\.min\(maxX, box\.x \+ box\.w\)/, "cut to the page's width");
+  assert.match(js, /\.fitaa-press-glow\{animation:fitaa-press-fade \.5s/, "gone in half a second");
 });
 
 test("sapphire and press colours exist in light and dark on both stylesheets", () => {
@@ -49,7 +50,7 @@ test("sapphire and press colours exist in light and dark on both stylesheets", (
 
 test("one sapphire, one shared drawing, masking and clipping its own glint", () => {
   const svg = read("public/sapphire.svg");
-  assert.match(svg, /^<svg[^>]+viewBox="0 0 44\.2 32\.2"/);
+  assert.match(svg, /^<svg[^>]+viewBox="0 0 41\.2 29\.2"/);
   assert.ok(!fs.existsSync(path.join(root, "public/sapphires.svg")), "the five stone drawing is gone");
   for (const f of ["src/index.css", "public/fully-booked/index.html"]) {
     const css = read(f);
