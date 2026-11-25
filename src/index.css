@@ -92,11 +92,9 @@
   --champagne: hsl(38 72% 30%);
   --leather: hsl(24 45% 30%);
   /* Royal sapphire (Nigel, 24 Nov 2026: the logo was drawn as a blue sapphire, for royalty). It joins the cyan and
-     the champagne, never replaces them: the stone set in the gold key under the section in view, the press, and the
-     kente of baguettes. 11.5:1 on white, and the dark value 5.1:1 on the dark ground. */
+     the champagne, never replaces them: the stone set in the gold key under the section in view, the light of a press, and
+     the five sapphires. 11.5:1 on white, and the dark value 5.1:1 on the dark ground. */
   --sapphire: hsl(224 76% 30%);
-  --press: hsl(224 76% 42%);
-  --press-glow: hsl(224 80% 50% / .30);
   --press-ripple: hsl(224 85% 55% / .22);
   --background:         210 30% 98%;
   --foreground:         211 36% 10%;
@@ -150,8 +148,6 @@
   --champagne: hsl(40 60% 68%);
   --leather: hsl(28 55% 62%);
   --sapphire: hsl(222 88% 62%);
-  --press: hsl(222 90% 64%);
-  --press-glow: hsl(222 90% 60% / .45);
   --press-ripple: hsl(222 95% 68% / .24);
   --background:         211 32% 5%;
   --foreground:         211 30% 96%;
@@ -783,24 +779,24 @@ a[href^="mailto:"]:not(.underline), a[href^="tel:"]:not(.underline) { display: i
 }
 
 
-/* ─── The kente of baguettes (Nigel, 24 Nov 2026) ─────────────────────────────
- * Fitaa Creative's royal signature: royal sapphire baguettes set edge to edge between white gold set diamonds,
- * one link of a Nautilus bracelet read as a strip of kente (public/kente-band.svg, scripts/kente-band.py). It sits
- * on the seam where two sections meet, at most twice a page, rises with the page and catches one glint of light,
- * once. No image request beyond the 8 KB drawing, which every page shares. */
-.kente-seam { position: relative; z-index: 20; height: 0; pointer-events: none; }
-.kente-hold { transform: translateY(-50%); }
-.kente {
-  position: relative; overflow: hidden; height: 20px; border-radius: 3px;
-  background: url(/kente-band.svg) left center / auto 100% round no-repeat; /* whole links only, like a bracelet */
-  box-shadow: inset 0 0 0 1px hsl(211 20% 70% / .55);
+/* ─── Five royal sapphires (Nigel, 25 Nov 2026) ───────────────────────────────
+ * Fitaa Creative's royal signature: a graduated line of five emerald cut sapphires, the middle one largest, each in
+ * its own white gold bezel (public/sapphires.svg, scripts/sapphires.py). They sit centred on the seam where two
+ * sections meet, at most twice a page, rise with the page and catch one glint of light, once. The glint is masked
+ * to the stones, so it never crosses the page between them. */
+.sapphire-seam { position: relative; z-index: 20; height: 0; pointer-events: none; }
+.sapphire-hold { display: flex; justify-content: center; transform: translateY(-50%); }
+.sapphires {
+  position: relative; height: 28px; aspect-ratio: 164 / 30; background: url(/sapphires.svg) center / contain no-repeat;
+  /* The stones mask everything inside them, so the glint lights the stones and never the page between them. */
+  -webkit-mask: url(/sapphires.svg) center / contain no-repeat; mask: url(/sapphires.svg) center / contain no-repeat;
 }
-@media (min-width: 768px) { .kente { height: 24px; } }
-.kente::after {
-  content: ""; position: absolute; inset: 0; transform: translateX(-110%);
-  background: linear-gradient(105deg, transparent 35%, hsl(0 0% 100% / .55) 50%, transparent 65%);
+@media (min-width: 768px) { .sapphires { height: 36px; } }
+.sapphires::after {
+  content: ""; position: absolute; inset: 0; transform: translateX(-120%);
+  background: linear-gradient(105deg, transparent 30%, hsl(0 0% 100% / .75) 50%, transparent 70%);
 }
 @media (prefers-reduced-motion: no-preference) {
-  .kente.is-in::after { animation: kente-glint 1.8s cubic-bezier(0.22, 1, 0.36, 1) .45s 1 both; }
+  .sapphires.is-in::after { animation: sapphire-glint 1.8s cubic-bezier(0.45, 0, 0.25, 1) .45s 1 both; /* an even sweep, so the light is seen crossing */ }
 }
-@keyframes kente-glint { to { transform: translateX(110%); } }
+@keyframes sapphire-glint { to { transform: translateX(120%); } }
