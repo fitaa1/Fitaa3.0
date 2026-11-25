@@ -93,7 +93,7 @@
   --leather: hsl(24 45% 30%);
   /* Royal sapphire (Nigel, 24 Nov 2026: the logo was drawn as a blue sapphire, for royalty). It joins the cyan and
      the champagne, never replaces them: the stone set in the gold key under the section in view, the light of a press, and
-     the one sapphire on the seam. 11.5:1 on white, and the dark value 5.1:1 on the dark ground. */
+     the sapphire on the seams. 11.5:1 on white, and the dark value 5.1:1 on the dark ground. */
   --sapphire: hsl(224 76% 30%);
   --press-ripple: hsl(224 85% 55% / .22);
   --background:         210 30% 98%;
@@ -781,7 +781,7 @@ a[href^="mailto:"]:not(.underline), a[href^="tel:"]:not(.underline) { display: i
 
 /* ─── One royal sapphire (Nigel, 25 Nov 2026) ─────────────────────────────────
  * Fitaa Creative's royal signature: one small emerald cut sapphire in an invisible setting, no rim (public/sapphire.svg,
- * scripts/sapphire.py), centred on the seam under the hero, once a page. It rises with the page and catches one
+ * scripts/sapphire.py), centred on the seam under the hero, and on home a second above Contact. It rises with the page and catches one
  * glint of light, once. The stone masks the glint, so the light crosses the stone and never the page, and it
  * clips its own overflow, so the glint can never make the page wider than the screen. */
 .sapphire-seam { position: relative; z-index: 20; height: 0; pointer-events: none; }

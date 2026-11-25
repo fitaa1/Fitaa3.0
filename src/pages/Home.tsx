@@ -13,7 +13,7 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-background text-foreground selection:bg-ruby/25 selection:text-foreground">
       <Navbar /><Hero /><SapphireSeam /><Services /><WhyUs /><FeaturedWork />
-      <Testimonials /><FinalCTA /><Footer /><ScrollToTop /><FloatingWhatsApp />
+      <Testimonials /><SapphireSeam /><FinalCTA /><Footer /><ScrollToTop /><FloatingWhatsApp />
     </main>
   );
 }
