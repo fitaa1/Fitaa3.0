@@ -107,14 +107,14 @@ export function Navbar() {
           </a>
 
           {/* Desktop nav — evenly spaced */}
-          <nav ref={navRef} className="hidden lg:flex items-center gap-9 relative" aria-label="Site sections">
+          <nav ref={navRef} className="hidden lg:flex items-center gap-5 xl:gap-9 relative" aria-label="Site sections">
             {siteConfig.nav.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
                 aria-current={active === item.href.slice(1) ? "location" : undefined}
                 ref={(el) => { linkRefs.current[item.href.slice(1)] = el; }}
-                className="nav-link text-[0.7rem] font-sans uppercase tracking-[0.18em] text-muted-foreground hover:text-foreground aria-[current=location]:text-foreground transition-colors duration-250 pb-0.5"
+                className="nav-link whitespace-nowrap text-[0.7rem] font-sans uppercase tracking-[0.18em] text-muted-foreground hover:text-foreground aria-[current=location]:text-foreground transition-colors duration-250 pb-0.5"
               >
                 {item.label}
               </a>
