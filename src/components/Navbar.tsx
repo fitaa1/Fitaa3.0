@@ -148,7 +148,8 @@ export function Navbar() {
             {/* Hamburger — mobile */}
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="lg:hidden w-11 h-11 -mr-2 inline-flex items-center justify-center text-foreground hover:text-ruby transition-colors duration-200"
+              data-press="light"
+              className="lg:hidden w-11 h-11 -mr-2 rounded-full inline-flex items-center justify-center text-foreground hover:text-ruby transition-colors duration-200"
               aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
               aria-expanded={isOpen}
               aria-controls="mobile-menu"

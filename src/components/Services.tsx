@@ -28,6 +28,7 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
         aria-controls={panelId}
+        data-press="light"
         className="relative w-full text-left py-8 sm:px-8 md:p-9 cursor-pointer focus-visible:outline-offset-[-2px]"
       >
         <div className="flex items-start justify-between mb-8">

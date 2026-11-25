@@ -126,6 +126,17 @@ try {
         // Scroll through once so content that appears on scroll is shown, as a visitor sees it.
         await p.evaluate(async () => { for (let y = 0; y < document.body.scrollHeight; y += 500) { scrollTo(0, y); await new Promise((r) => setTimeout(r, 30)); } scrollTo(0, 0); });
         await p.waitForTimeout(400);
+        // Let every motion that plays once finish (a rise, a glint), because where it comes to rest counts:
+        // a glint left beyond its stone once widened the phone page (25 Nov 2026). Then press the tappable thing
+        // nearest the right edge, so the press itself is held to the same rule.
+        await p.evaluate(async () => {
+          const once = (document.getAnimations ? document.getAnimations() : []).filter((a) => a.effect && a.effect.getTiming && a.effect.getTiming().iterations !== Infinity);
+          await Promise.race([Promise.all(once.map((a) => a.finished.catch(() => {}))), new Promise((r) => setTimeout(r, 4000))]);
+          const all = [...document.querySelectorAll("a[href], button, summary")].filter((el) => { const b = el.getBoundingClientRect(); return b.width > 0 && b.height > 0 && b.top >= 0 && b.bottom <= innerHeight; });
+          const edge = all.sort((a, b) => b.getBoundingClientRect().right - a.getBoundingClientRect().right)[0];
+          if (edge) { const b = edge.getBoundingClientRect(); edge.dispatchEvent(new PointerEvent("pointerdown", { bubbles: true, clientX: b.right - 2, clientY: b.top + b.height / 2, pointerType: "touch" })); }
+          await new Promise((r) => setTimeout(r, 120));
+        });
         const r = await p.evaluate((TAP) => {
           const seen = (el) => { const b = el.getBoundingClientRect(); const s = getComputedStyle(el); return b.width > 0 && b.height > 0 && s.visibility !== "hidden" && s.display !== "none"; };
           const name = (el) => (el.getAttribute("aria-label") || el.textContent || el.id || el.className || el.tagName).toString().trim().replace(/\s+/g, " ").slice(0, 40);
