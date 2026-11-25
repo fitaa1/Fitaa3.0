@@ -1,27 +1,7 @@
 import { Instagram } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import { CurrencySwitch } from "@/lib/region";
-
-function BehanceIcon({ size = 18 }: { size?: number }) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={1.5}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <path d="M1 6h7.5a3.5 3.5 0 0 1 0 7H1V6z" />
-      <path d="M1 13h8.5a3.5 3.5 0 0 1 0 7H1v-7z" />
-      <path d="M14 8h8" />
-      <path d="M22 14.5c0 2.5-2 4.5-4.5 4.5S13 17 13 14.5s2-4.5 4.5-4.5 4.5 2 4.5 4.5z" />
-    </svg>
-  );
-}
+import { BehanceIcon } from "@/components/icons";
 
 export function Footer() {
   const year = new Date().getFullYear();

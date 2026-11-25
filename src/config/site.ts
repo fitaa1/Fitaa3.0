@@ -56,6 +56,12 @@ export const siteConfig = {
    * or be a page path such as "/fully-booked".
    * Keep the order the same as the page so the active-section highlight reads
    * naturally. */
+  /* The home page, top to bottom (Nigel, 25 Nov 2026: any section can be moved, hidden or removed here).
+   * Move a line to reorder, delete it to hide that section. "sapphire" is the royal stone on a seam between
+   * two sections. The header, footer, back to top and floating WhatsApp always stay. If a section is removed,
+   * remove its link from `nav` below too (tests/sections.test.mjs checks every menu link has its section). */
+  sections: ["hero", "sapphire", "services", "whyUs", "work", "testimonials", "sapphire", "contact"] as const,
+
   nav: [
     { label: "Home",     href: "#home"     },
     { label: "Services", href: "#services" },
