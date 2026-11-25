@@ -155,7 +155,7 @@ where, in every place a search engine or an AI reads.
 
 | Site | Headings | Text | Signature |
 | --- | --- | --- | --- |
-| fitaacreative.com and Fully Booked | Bricolage Grotesque (poster type, for a studio that makes billboards and print) | Inter | Adinkra mark, and five royal sapphires set in white gold (see Royal sapphire below) |
+| fitaacreative.com and Fully Booked | Bricolage Grotesque (poster type, for a studio that makes billboards and print) | Inter | Adinkra mark, and one royal sapphire set in white gold (see Royal sapphire below) |
 | Fitaa Homes | Manrope | Manrope | the home's name in Fraunces italic, like a nameplate |
 | Airport Grande | Instrument Sans (clear like airport signs) | device sans | the booking summary as a boarding pass |
 | Fitaa Global | Plus Jakarta Sans (a confident group voice) | Inter | one mark, four divisions |
@@ -222,18 +222,19 @@ does: modern and high tech, and unmistakably Ghanaian. The reference is the Pate
   (11.5:1 on white), `hsl(222 88% 62%)` dark (5.1:1 on the dark ground). The light of a press is sapphire (`--press-ripple`).
 - A sapphire is set in the champagne key under the section in view: 8 px of royal blue at its middle, riding
   with the key on the same transform, never stretched (`.nav-stone`).
-- Five royal sapphires are the royal signature: a graduated line of emerald cut sapphires, the middle one
-  largest, each in its own white gold bezel and spaced apart, as stones are set by hand. Every facet is
-  shaded from one light at the top left, with the middle step reflected the other way, as a real step cut
-  reflects. One drawing, `public/sapphires.svg`, built by `scripts/sapphires.py`, shared by every page.
-  They sit centred on the seam where two sections meet, 28 px tall on a phone and 36 px from 768 px, at
-  most twice on a page (home: under the hero and before Contact; Fully Booked: under the hero and before
-  the final call). The stones mask their own glint, so the light crosses the sapphires and never the page
-  between them. They are jewellery on the seam, not a divider: the seam keeps its change of background
-  and nothing else is added there. (Nigel, 25 Nov 2026: a full-width band of baguettes, tried first,
-  looked like bricks next to the Nautilus, so it was replaced.)
-- Detail decides it: one slightly off stone ruins the piece. Every stone in the drawing uses the same
-  facets and the same light, and a new royal element is added to this list before it appears on a page.
+- One royal sapphire is the royal signature: one small emerald cut sapphire in a white gold bezel, centred
+  on the seam under the hero, once a page (home and Fully Booked), 20 px tall on a phone and 24 px from
+  768 px. It must read as a real stone, never plastic: crisp facet edges, deep blue with near black where
+  the light dies and a lit centre where it comes back through the stone, the pavilion steps seen through a
+  slightly see-through table, and one sharp highlight where the light from the top left first strikes. No
+  smooth gradient across the stone. One drawing, `public/sapphire.svg`, built by `scripts/sapphire.py`.
+  The stone masks its own glint and clips its own overflow, so the light crosses the stone and never the
+  page, and can never make the page wider than the screen (25 Nov 2026: the glint's resting place, left
+  beyond five stones, widened the phone page and let it slide sideways). It is jewellery on the seam, not
+  a divider. (Nigel, 25 Nov 2026: a band of baguettes looked like bricks, and five stones looked like
+  plastic, so one real stone replaced both.)
+- Detail decides it: one slightly off facet ruins the piece. Every facet uses the same light, and a new
+  royal element is added to this list before it appears on a page.
 
 ### 3. Craft in the details (Pagani)
 
@@ -242,13 +243,20 @@ does: modern and high tech, and unmistakably Ghanaian. The reference is the Pate
 - Every price, count, date, time and phone number uses `font-variant-numeric: tabular-nums`.
 - Press state on everything tappable: `transform: scale(.985)` over 120 ms, answered by the Fitaa press
   (Nigel, 24 Nov 2026: a press should confirm itself beautifully, the way a Patek Philippe pusher answers the
-  finger). A soft light in the site's own colour spreads from the finger inside the element's own shape, then
-  fades in 0.6 s. There is no ring, halo or glow around the edge (Nigel, 25 Nov 2026: the light is right, the
-  square halo was not). It is one span over the element, clipped to its shape, transform and opacity only, so
-  the layout never moves, and a text link inside a sentence is left alone. Reduced motion gets no light.
-  `public/press.js` in fitaa1/Fitaa3.0 is the reference: copy it unchanged to every site and set its one
-  colour, `--press-ripple`, from the site's own brand colour in light and dark. It is the only colour that
-  answers a press.
+  finger). It answers by the shape of what was pressed (Nigel, 25 Nov 2026: responsive and intentional, not
+  one size fits all). A button, tile or switch with a defined edge (a border, a fill or a shadow) fills with a
+  soft light that spreads from the finger inside its own shape, then fades in 0.6 s. Something that floats
+  with no edge (a logo, an icon, a text link, an email address or phone number) answers with a soft round glow
+  centred on the finger that spreads past it, sized from the element, never a square, gone in 0.7 s.
+  The edge can be the element's own, a card inside it that fills it, or the switch it is one segment of.
+  `data-press="light"` or `data-press="glow"` overrides the choice where the shape misleads it (on
+  fitaacreative.com: the menu button, the service tiles and the work tiles), `data-press-shape` on a part
+  inside names the shape the light fills (a work tile's photo frame), and `data-no-press` turns it off. The answer moves with its element every frame it lives, so it follows the page
+  when a tap lands mid scroll, and it is drawn in one fixed layer the size of the screen that clips its own
+  overflow, so it never widens the page. Transform and opacity only, the layout never moves, reduced motion
+  gets nothing. `public/press.js` in fitaa1/Fitaa3.0 is the reference: copy it unchanged to every site and set
+  its one colour, `--press-ripple`, from the site's own brand colour in light and dark. It is the only colour
+  that answers a press.
 - Hairlines are 1 px in the border token. Nothing is 2 px except the signature line and focus rings.
 - Alignment: every block starts on the container's left edge or on a column of its grid. Nothing is
   placed by eye.
@@ -266,7 +274,7 @@ does: modern and high tech, and unmistakably Ghanaian. The reference is the Pate
 - Define it once per site (a `.rise` class or one keyframe) and reuse it. No other entrance, no
   parallax, no looping motion apart from one first-visit splash and the logo's turn. A signature
   detail may settle once into place (Kora Drive's key tag swings once on its hook and comes to rest,
-  and Fitaa Creative's five sapphires catch one glint of light as they rise).
+  and Fitaa Creative's sapphire catches one glint of light as it rises).
   The page check fails anything that loops outside the logo's `.logo-sheen`.
 - The logo turns and the light follows (Nigel, 12 and 13 Nov 2026): the logo mark rocks slowly
   from side to side and one band of champagne light crosses it as it turns. The turn and the light

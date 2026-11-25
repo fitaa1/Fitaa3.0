@@ -53,13 +53,14 @@ export function FeaturedWork() {
                   target: "_blank",
                   rel: "noopener noreferrer",
                   "aria-label": `${study.client}, ${study.industry} case study (opens in a new tab)`,
+                  "data-press": "light", // the press lights the photo frame (data-press-shape), the tile's edge
                 }
               : {};
             return (
             <div key={study.client} className="group h-full">
               <Wrapper {...linkProps} className="flex flex-col h-full">
                 {/* Image: every tile uses the same 4:3 frame */}
-                <div className="relative overflow-hidden bg-card mb-5 aspect-[4/3]">
+                <div data-press-shape className="relative overflow-hidden bg-card mb-5 aspect-[4/3]">
                   <img
                     src={study.imagePath.replace(/\.webp$/, "-720.webp")}
                     srcSet={`${study.imagePath.replace(/\.webp$/, "-720.webp")} 720w, ${study.imagePath.replace(/\.webp$/, "-1080.webp")} 1080w, ${study.imagePath} 1440w`}
