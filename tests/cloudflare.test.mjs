@@ -40,3 +40,10 @@ test("Cloudflare's unknown-country codes are not passed on as a country", () => 
   assert.equal(asVercel(new Headers({ "cf-ipcountry": "XX" })).get("x-vercel-ip-country"), null);
   assert.equal(asVercel(new Headers({ "cf-ipcountry": "GB" })).get("x-vercel-ip-country"), "GB");
 });
+
+test("the Netlify standby sends the same headers as vercel.json", async () => {
+  const { readFileSync } = await import("node:fs");
+  const toml = readFileSync(new URL("../netlify.toml", import.meta.url), "utf8");
+  const vercel = JSON.parse(readFileSync(new URL("../vercel.json", import.meta.url), "utf8"));
+  for (const block of vercel.headers) for (const { key, value } of block.headers) assert.ok(toml.includes(`${key} = "${value}"`), `${key} missing from netlify.toml`);
+});

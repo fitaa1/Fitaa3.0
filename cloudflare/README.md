@@ -22,3 +22,7 @@ The domain is registered at Namecheap, with its DNS on Namecheap's own servers p
 ## Not on Cloudflare
 
 Vercel Analytics counts only on Vercel. Google Analytics works on both.
+
+## The second standby, Netlify
+
+`netlify.toml` builds the same site on Netlify. Netlify has no country step, so every visitor there gets the default copy (USD prices, Ghana WhatsApp). Set up once: Netlify, Add new project, Import an existing project, GitHub, `fitaa1/Fitaa3.0`. The build settings come from `netlify.toml`. No settings are needed, because only the default copy is served there. To swap to Netlify while the DNS stays at Namecheap, point the `A` record for `@` at `75.2.60.5` and the `www` CNAME at the Netlify address. Namecheap caches records for up to 30 minutes, so the move takes up to half an hour.

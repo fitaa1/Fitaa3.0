@@ -1,0 +1,27 @@
+# fitaacreative.com's second standby host (Nigel, 26 Nov 2026), beside the Cloudflare one in cloudflare/.
+# Vercel stays the live host. Netlify has no country step here, so every visitor gets the default copy
+# (USD prices, Ghana WhatsApp), as crawlers do on Vercel. Netlify serves /fully-booked from
+# /fully-booked/index.html and unknown addresses from 404.html by itself. The headers match vercel.json
+# (tests/cloudflare.test.mjs checks them).
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# The country copies are only served through their clean address, as on Vercel.
+[[redirects]]
+  from = "/_r/:copy/*"
+  to = "/:splat"
+  status = 308
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Frame-Options = "SAMEORIGIN"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
