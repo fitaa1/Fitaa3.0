@@ -13,6 +13,7 @@ Git workflow: branch + pull request for every change, never push to `main`. Nige
 - Look at changed pages at 390, 820 and 1440 px (Playwright or a headless browser). `vite preview` does not apply `vercel.json` rewrites, so open `/fully-booked/index.html` locally, not `/fully-booked`.
 - Deploy: merging to `main` deploys to production on Vercel. Each pull request gets a Vercel preview.
 - Roll back in under two minutes: Vercel, project `fitaadigital`, Deployments, pick the last good production deploy, menu, **Instant Rollback** (or Promote to Production).
+- Standby host (Nigel, 26 Nov 2026): `cloudflare/` serves the same build on a Cloudflare Worker (`fitaa-creative`), reading `middleware.ts` and `vercel.json` themselves, so a change to either reaches both hosts and `tests/cloudflare.test.mjs` fails if they part. `netlify.toml` is a second standby on Netlify (default copy only, headers held to vercel.json by the same test). Setup and the domain swap for both are in `cloudflare/README.md`.
 
 ## Where things live
 

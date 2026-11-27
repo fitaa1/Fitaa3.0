@@ -1,0 +1,15 @@
+// fitaacreative.com's standby copy on Cloudflare (cloudflare/README.md). It answers only at its own
+// workers.dev address until Nigel points the domain at it.
+{
+  "name": "fitaa-creative",
+  "main": "worker.mjs",
+  "compatibility_date": "2026-11-01",
+  "assets": {
+    "directory": "../dist",
+    "binding": "ASSETS",
+    "run_worker_first": true,
+    // Exact files only: the Worker maps clean addresses itself, as vercel.json does.
+    "html_handling": "none",
+    "not_found_handling": "none"
+  }
+}
